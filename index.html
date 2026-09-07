@@ -162,6 +162,105 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .gifts-cta .cta-body { font-size: 16px; line-height: 1.5; }
 .gifts-cta:hover { background: #dde9dd; }
 
+
+/* ---- numbers, charts and tiles ---- */
+.numrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: clamp(14px, 1.8vw, 22px); margin-top: 42px; }
+.numcard { background: var(--tan-light); border-radius: 4px; padding: 26px 24px; }
+.numcard.pale { background: var(--green-pale); }
+.numcard .n { font-family: var(--serif); font-size: clamp(30px, 3.6vw, 42px); line-height: 1; color: var(--green-dark); }
+.numcard .l { font-size: 14px; line-height: 1.45; color: var(--text-mid); margin-top: 10px; }
+.numcard .delta { display: inline-block; margin-top: 12px; font-size: 12.5px; line-height: 1.35; color: var(--green-mid); background: var(--white); border-radius: 4px; padding: 7px 10px; }
+
+.panel { background: var(--tan-light); border-radius: 4px; padding: 28px 26px; }
+.panel.pale { background: var(--green-pale); }
+.panel h3 { font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.1vw, 25px); color: var(--green-dark); margin: 0 0 12px; }
+.panel .kicker { font-size: 11.5px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--green-light); margin: 0 0 14px; }
+.band-deep .panel { background: rgba(255,255,255,.07); }
+.band-deep .panel h3 { color: #fff; }
+
+.donut-wrap { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; margin-top: 18px; }
+.donut { position: relative; width: 168px; height: 168px; border-radius: 50%; flex: none; }
+.donut::after { content: ''; position: absolute; inset: 26%; background: var(--tan-light); border-radius: 50%; }
+.panel.pale .donut::after, .band-cream .donut::after { background: var(--green-pale); }
+.donut .mid { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; z-index: 1; }
+.donut .mid b { font-family: var(--serif); font-size: 26px; color: var(--green-dark); display: block; line-height: 1; }
+.donut .mid span { font-size: 11.5px; color: var(--text-mid); }
+.legend { list-style: none; margin: 0; padding: 0; font-size: 13.5px; line-height: 1.45; }
+.legend li { display: flex; gap: 9px; margin-bottom: 9px; align-items: flex-start; }
+.legend i { width: 9px; height: 9px; border-radius: 50%; margin-top: 6px; flex: none; }
+.legend b { font-weight: 600; }
+
+.barlist { margin-top: 18px; }
+.barrow { margin-bottom: 18px; }
+.barrow .top { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; margin-bottom: 7px; }
+.barrow .top b { font-weight: 600; }
+.barrow .top span { color: var(--text-mid); white-space: nowrap; }
+.track { height: 12px; background: var(--white); border-radius: 2px; overflow: hidden; }
+.track i { display: block; height: 100%; border-radius: 2px; }
+
+.yearchart { margin-top: 12px; }
+.bars { display: flex; align-items: flex-end; gap: clamp(6px, 1.2vw, 16px); height: 160px; }
+.bars .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+.bars .v { font-size: 12px; color: var(--text-mid); margin-bottom: 6px; white-space: nowrap; }
+.bars .bar { width: 100%; background: var(--tan); border-radius: 2px 2px 0 0; }
+.bars .col.now .bar { background: var(--green-dark); }
+.bars .col.now .v { color: var(--green-dark); font-weight: 600; }
+.xaxis { display: flex; gap: clamp(6px, 1.2vw, 16px); margin-top: 8px; }
+.xaxis span { flex: 1; text-align: center; font-size: 12px; color: var(--text-light); }
+.chart-title { font-size: 11.5px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--green-mid); margin: 0 0 14px; }
+
+.imgstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(14px, 1.8vw, 22px); margin-top: 22px; }
+.imgstat { position: relative; border-radius: 4px; overflow: hidden; min-height: 190px; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; color: #fff; }
+.imgstat img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.imgstat::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,28,16,.18), rgba(15,28,16,.82)); }
+.imgstat > * { position: relative; z-index: 1; }
+.imgstat .eyebrow { font-size: 10.5px; letter-spacing: .14em; color: #cbd8c9; margin: 0 0 6px; }
+.imgstat .n { font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); line-height: 1; }
+.imgstat .l { font-size: 13px; line-height: 1.45; color: #dbe4d9; margin-top: 8px; }
+.imgstat.tall { min-height: 240px; }
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(14px, 1.8vw, 22px); margin-top: 34px; }
+.step { background: var(--white); border-radius: 4px; padding: 24px; }
+.step .no { font-family: var(--serif); font-size: 27px; color: var(--tan); line-height: 1; }
+.step .t { font-size: 13px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; margin: 12px 0 7px; }
+.step p { font-size: 14px; line-height: 1.5; color: var(--text-mid); margin: 0; }
+
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; margin-top: 30px; }
+.principle { background: var(--green-pale); padding: 26px 24px; }
+.principle .no { font-family: var(--serif); font-size: 24px; color: var(--tan); line-height: 1; }
+.principle h4 { font-size: 16px; font-weight: 600; margin: 12px 0 8px; }
+.principle p { font-size: 14px; line-height: 1.5; color: var(--text-mid); margin: 0; }
+.summary-band { background: #b9b878; border-radius: 4px; padding: 22px 26px; margin-top: 18px; }
+.summary-band .kicker { color: var(--green-dark); }
+.summary-band p { margin: 0; font-size: 14.5px; line-height: 1.55; color: #23331f; }
+
+.purposes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(20px, 3vw, 40px); margin-top: 30px; }
+.purpose { border-top: 3px solid var(--green-dark); padding-top: 16px; }
+.purpose.edu { border-top-color: #8faa5c; }
+.purpose.health { border-top-color: #b07d5a; }
+.purpose h4 { font-family: var(--serif); font-size: 20px; color: var(--green-dark); margin: 0 0 8px; font-weight: 400; }
+.purpose p { font-size: 14px; line-height: 1.55; color: var(--text-mid); margin: 0; }
+
+.tl-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: clamp(16px, 2.4vw, 30px); margin-top: 30px; }
+.tl-item { border-top: 2px solid var(--tan); padding-top: 12px; }
+.tl-item .y { font-size: 12.5px; font-weight: 600; letter-spacing: .12em; color: var(--green-mid); }
+.tl-item p { font-size: 13.5px; line-height: 1.5; color: var(--text-mid); margin: 8px 0 0; }
+
+.obs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(20px, 3vw, 40px); margin-top: 28px; }
+.ob { border-top: 2px solid var(--tan); padding-top: 14px; }
+.ob h4 { font-size: 15.5px; font-weight: 600; margin: 0 0 8px; }
+.ob p { font-size: 14px; line-height: 1.55; color: var(--text-mid); margin: 0; }
+
+.place-lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: clamp(20px, 3vw, 38px); margin-top: 34px; }
+.place h4 { font-size: 12px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--tan); margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,.22); }
+.place ul { list-style: none; margin: 0; padding: 0; font-size: 14.5px; line-height: 1.7; }
+.place li span { color: #b9c7b7; font-size: 13px; }
+
+.fine { font-size: 12.5px; line-height: 1.5; color: var(--text-light); margin-top: 16px; }
+.band-deep .fine { color: #93a691; }
+.logo-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; }
+.logo-row img { height: 44px; width: auto; }
+
 /* ---- principle tiles ---- */
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(16px, 2vw, 26px); margin-top: 44px; }
 .tile { background: var(--tan-light); border-radius: 4px; padding: 26px 24px; }
@@ -203,7 +302,7 @@ footer a { color: var(--tan); }
       <img src="img/biome-trust-logo.png" alt="Biome Trust">
     </div>
     <h1><em>Rewilding</em><br>Resources</h1>
-    <p class="sub">Biome Trust · Impact Report 2026</p>
+    <p class="sub">Impact Report · Year ended 31 March 2026</p>
   </div>
 </header>
 
@@ -213,44 +312,117 @@ footer a { color: var(--tan); }
     <div>
       <p class="eyebrow">A word from the trustees</p>
       <h2>Kia ora,</h2>
+      <p class="lede">You are reading Biome Trust Aotearoa's first impact report. It shares some of the work we supported during the year ended 31 March 2026, and what we learned along the way.</p>
     </div>
     <div class="measure">
-      <p class="lede"><span class="tk">[Placeholder — opening paragraph from the Figma "Kia ora" letter.]</span></p>
-      <p><span class="tk">[Placeholder — body of the trustees' letter. Pull the approved copy from the DRAFT&nbsp;-&nbsp;LATEST page in Figma; do not paraphrase it here.]</span></p>
-      <p><span class="tk">[Placeholder — closing line and signature.]</span></p>
+      <p>This report reflects a year of continued evolution for Biome Trust Aotearoa: growing our giving, deepening relationships with the people and organisations we support, and becoming clearer about the role we can play beyond individual grants.</p>
+      <p>The year also marked an important transition for Ma Earth, which became an independent charitable foundation after growing out of Biome Trust's experience in grantmaking and land stewardship.</p>
+      <p>We remain a learning organisation. In the year ahead, we will continue giving, listening and collaborating, while looking for places where Biome Trust can make a useful contribution to a healthier and more flourishing future.</p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:56px">
+    <p class="eyebrow">Acknowledgements</p>
+    <div class="two-col">
+      <div>
+        <p>We are deeply grateful to the people and organisations who contributed to Biome Trust's work this year. In particular, we thank our partners for the work they lead, the knowledge and experience they share, and the trust that underpins our relationships.</p>
+        <p>We acknowledge tangata whenua and the wider people of Aotearoa New Zealand, and our shared interest in a healthy and flourishing society.</p>
+      </div>
+      <div>
+        <p>We also thank our trustees, team, advisers, collaborators and community members for their care, skill and practical support. The progress reflected in this report is collective, and we are grateful to everyone who helped make it possible.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============ GIVING BY NUMBERS (solid deep band — no image, by design) ============ -->
-<section class="band band-deep" id="numbers">
+<section class="band band-cream" id="numbers">
   <div class="wrap">
     <p class="eyebrow">The year in figures</p>
     <h2>Giving by numbers</h2>
-    <p class="lede measure">A summary of what moved through the Trust this year, and where it landed.</p>
-    <div class="stats">
-      <div class="stat">
-        <div class="n"><span class="tk">$TK</span></div>
-        <div class="l">Total granted</div>
-        <div class="src">Verified by <span class="tk">TK</span></div>
+    <p class="lede measure">A small number of large, direct gifts led to an increase in giving.</p>
+
+    <div class="numrow">
+      <div class="numcard">
+        <div class="n">NZ$1.1m</div>
+        <div class="l">given to external partners in FY26</div>
+        <div class="delta"><strong>+39%</strong> by value on FY25</div>
       </div>
-      <div class="stat">
-        <div class="n"><span class="tk">TK</span></div>
-        <div class="l">Partners backed</div>
-        <div class="src">Verified by <span class="tk">TK</span></div>
+      <div class="numcard pale">
+        <div class="n">22</div>
+        <div class="l">gifts made</div>
       </div>
-      <div class="stat">
-        <div class="n"><span class="tk">TK</span></div>
-        <div class="l">Regions reached</div>
-        <div class="src">Verified by <span class="tk">TK</span></div>
-      </div>
-      <div class="stat">
-        <div class="n"><span class="tk">$TK</span></div>
-        <div class="l">Endowment at year end</div>
-        <div class="src">Verified by <span class="tk">TK</span></div>
+      <div class="numcard pale">
+        <div class="n">16</div>
+        <div class="l">different initiatives</div>
       </div>
     </div>
-    <p class="note">Every figure above is a placeholder. Fill each from the "Giving by numbers" page in Figma, and either name the source in the "verified by" line or delete that line — a stat with no source carries none.</p>
+
+    <div class="two-col" style="margin-top:26px">
+      <div class="panel">
+        <p class="kicker">Gift value by charitable purpose</p>
+        <h3>Environment at the heart</h3>
+        <p style="font-size:14.5px;line-height:1.55;color:var(--text-mid);margin:0">More than 80% of value supported environmental outcomes</p>
+        <div class="donut-wrap">
+          <div class="donut" style="background:conic-gradient(var(--green-dark) 0 80%, #b9b878 80% 100%)">
+            <div class="mid"><b>80%+</b><span>environmental</span></div>
+          </div>
+          <ul class="legend">
+            <li><i style="background:var(--green-dark)"></i><span><b>80%+</b> environment-related, including initiatives also advancing health and education</span></li>
+            <li><i style="background:#b9b878"></i><span><b>Under 20%</b> education or health only</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel">
+        <p class="kicker">Gift value by size of gift</p>
+        <h3>Ten gifts of $50,000 or more carried 83% of the value.</h3>
+        <div class="barlist">
+          <div class="barrow">
+            <div class="top"><b>$100,000 and over</b><span>$605k · 5 gifts</span></div>
+            <div class="track"><i style="width:100%;background:var(--green-dark)"></i></div>
+          </div>
+          <div class="barrow">
+            <div class="top"><b>$50,000 – 100,000</b><span>$292k · 5 gifts</span></div>
+            <div class="track"><i style="width:48%;background:#b9b878"></i></div>
+          </div>
+          <div class="barrow">
+            <div class="top"><b>Under $50,000</b><span>$183k · 12 gifts</span></div>
+            <div class="track"><i style="width:30%;background:var(--tan)"></i></div>
+          </div>
+        </div>
+        <p style="font-size:14px;line-height:1.55;color:var(--text-mid);margin:16px 0 0">Fewer, larger gifts reflect deepening relationships with partners we've backed before — and smaller gifts remain how new relationships usually begin.</p>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:44px">
+      <div class="yearchart">
+        <p class="chart-title">Number of gifts by year</p>
+        <div class="bars">
+          <div class="col"><div class="v">11</div><div class="bar" style="height:41%"></div></div>
+          <div class="col"><div class="v">27</div><div class="bar" style="height:100%"></div></div>
+          <div class="col"><div class="v">14</div><div class="bar" style="height:52%"></div></div>
+          <div class="col"><div class="v">19</div><div class="bar" style="height:70%"></div></div>
+          <div class="col"><div class="v">22</div><div class="bar" style="height:81%"></div></div>
+          <div class="col now"><div class="v">22</div><div class="bar" style="height:81%"></div></div>
+        </div>
+        <div class="xaxis"><span>FY21</span><span>FY22</span><span>FY23</span><span>FY24</span><span>FY25</span><span>FY26</span></div>
+      </div>
+      <div class="yearchart">
+        <p class="chart-title">Total giving by year, NZD</p>
+        <div class="bars">
+          <div class="col"><div class="v">$500k</div><div class="bar" style="height:43%"></div></div>
+          <div class="col"><div class="v">$620k</div><div class="bar" style="height:54%"></div></div>
+          <div class="col"><div class="v">$1.15m</div><div class="bar" style="height:100%"></div></div>
+          <div class="col"><div class="v">$850k</div><div class="bar" style="height:74%"></div></div>
+          <div class="col"><div class="v">$780k</div><div class="bar" style="height:68%"></div></div>
+          <div class="col now"><div class="v">$1.1m</div><div class="bar" style="height:96%"></div></div>
+        </div>
+        <div class="xaxis"><span>FY21</span><span>FY22</span><span>FY23</span><span>FY24</span><span>FY25</span><span>FY26</span></div>
+        <p class="fine">FY21–FY25 values approximate — confirm actuals.</p>
+      </div>
+    </div>
+
+    <p class="fine">Charts include gifts made directly and through The Gift Trust, and exclude funding for Mangaroa Farms and Biome Trust-led initiatives. All figures in NZD.</p>
   </div>
 </section>
 
@@ -456,54 +628,78 @@ footer a { color: var(--tan); }
 <!-- ============ OUR APPROACH ============ -->
 <section class="band band-cream" id="approach">
   <div class="wrap">
-    <p class="eyebrow">How we give</p>
+    <p class="eyebrow">How we work</p>
     <h2>Our approach</h2>
-    <p class="lede measure"><span class="tk">[Placeholder — the framing paragraph from the "Our Approach" page.]</span></p>
-    <div class="tiles">
-      <div class="tile">
-        <h3><span class="tk">Principle one</span></h3>
-        <p><span class="tk">Short explanation, two or three lines.</span></p>
-      </div>
-      <div class="tile">
-        <h3><span class="tk">Principle two</span></h3>
-        <p><span class="tk">Short explanation, two or three lines.</span></p>
-      </div>
-      <div class="tile">
-        <h3><span class="tk">Principle three</span></h3>
-        <p><span class="tk">Short explanation, two or three lines.</span></p>
-      </div>
-      <div class="tile">
-        <h3><span class="tk">Principle four</span></h3>
-        <p><span class="tk">Short explanation, two or three lines.</span></p>
-      </div>
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.2vw,26px);color:var(--green-dark);margin:0">Three ways we create impact</h3>
+
+    <div class="steps">
+      <div class="step"><div class="no">01</div><div class="t">Give</div><p>to partners doing great work</p></div>
+      <div class="step"><div class="no">02</div><div class="t">Develop</div><p>initiatives we help create and lead</p></div>
+      <div class="step"><div class="no">03</div><div class="t">Invest</div><p>our endowment to advance our mission</p></div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.2vw,26px);color:var(--green-dark);margin:52px 0 0">Four principles that guide our giving</h3>
+    <div class="principles">
+      <div class="principle"><div class="no">01</div><h4>Trust people close to the work</h4><p>Give capable leaders room to lead and keep funding processes simple and appropriate to the work.</p></div>
+      <div class="principle"><div class="no">02</div><h4>Build relationships beyond the grant</h4><p>Invest in relationships, shared learning and useful connections — not only funding.</p></div>
+      <div class="principle"><div class="no">03</div><h4>Stay curious</h4><p>Be open to promising ideas that do not always fit neatly into conventional categories, and approach the work with humility.</p></div>
+      <div class="principle"><div class="no">04</div><h4>Value depth as well as scale</h4><p>Look for evidence and honest reflection, while recognising that meaningful, place-based change is not always easy to measure.</p></div>
+    </div>
+    <div class="summary-band">
+      <p class="kicker">In summary</p>
+      <p>We believe good funding starts with trusting people close to the work. We aim to give capable leaders room to lead, build strong relationships and keep learning alongside them.</p>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.2vw,26px);color:var(--green-dark);margin:52px 0 0">Three charitable purposes</h3>
+    <div class="purposes">
+      <div class="purpose"><h4>Environment</h4><p>Healthy land and waterways, biodiversity, regenerative food systems and thriving communities.</p></div>
+      <div class="purpose edu"><h4>Education</h4><p>Knowledge and practical skills through research, new ideas, hands-on learning and different ways of seeing the world.</p></div>
+      <div class="purpose health"><h4>Health</h4><p>Healthier communities through stronger connections between people, food, nature and culture, and places that help people thrive.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ============ MANGAROA (image band) ============ -->
-<section class="image-band" id="mangaroa">
-  <div class="bg" style="background-image: url('img/mangaroa.jpg')"></div>
+<!-- ============ MANGAROA (solid deep band; the aerial runs as a banner inside it) ============ -->
+<section class="band band-deep" id="mangaroa">
   <div class="wrap">
-    <p class="eyebrow">The whenua</p>
+    <img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air" style="width:100%;border-radius:4px;margin-bottom:34px">
+    <p class="eyebrow">Our own initiatives</p>
     <h2>Mangaroa Farms</h2>
-    <p class="lede measure"><span class="tk">[Placeholder — the two-column intro from the Mangaroa page: what the farm is, where it sits, and how it relates to the Trust.]</span></p>
-    <div class="stats">
-      <div class="stat">
-        <div class="n"><span class="tk">TK</span></div>
-        <div class="l">Hectares</div>
+    <div class="two-col" style="margin-top:8px">
+      <div class="measure">
+        <p class="lede">Wholly owned by Biome Trust, Mangaroa Farms is a charitable entity spanning 1,222 hectares in the Mangaroa river catchment, 40 minutes north of Wellington. With a growing team, this <em>living laboratory</em> focuses on ecological resilience, accessible kai and community education.</p>
+        <p style="color:#cdd8cb">This year, Mangaroa Farms built its first ecological baseline, and measured the impact of a decade of work.</p>
+        <p class="fine">Learn more at <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" style="color:var(--tan)">impact.mangaroa.org</a></p>
       </div>
-      <div class="stat">
-        <div class="n"><span class="tk">TK</span></div>
-        <div class="l">Trees planted</div>
+      <div class="panel">
+        <p class="kicker">Current land cover</p>
+        <div class="donut-wrap">
+          <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, var(--tan) 90% 100%)">
+          </div>
+          <ul class="legend" style="color:#dbe4d9">
+            <li><i style="background:#2f5c33"></i><span><b>40%</b> Old-growth native forest</span></li>
+            <li><i style="background:#6f8f5a"></i><span><b>30%</b> Pine</span></li>
+            <li><i style="background:#c3c48a"></i><span><b>20%</b> Pasture</span></li>
+            <li><i style="background:var(--tan)"></i><span><b>10%</b> Peat, waterways, plantings &amp; homes</span></li>
+          </ul>
+        </div>
       </div>
-      <div class="stat">
-        <div class="n"><span class="tk">TK</span></div>
-        <div class="l">People on the land</div>
-      </div>
-      <div class="stat">
-        <div class="n"><span class="tk">TK</span></div>
-        <div class="l">Hectares in restoration</div>
-      </div>
+    </div>
+
+    <p class="chart-title" style="color:var(--tan);margin-top:46px">FY26 at Mangaroa</p>
+    <div class="imgstats">
+      <div class="imgstat"><img src="img/mang-trees.jpg" alt=""><p class="eyebrow">Restoring the land</p><div class="n">8,546</div><div class="l">native trees planted across 3.3 ha. One third by volunteers</div></div>
+      <div class="imgstat"><img src="img/mang-predator.jpg" alt=""><p class="eyebrow">Predator control</p><div class="n">242</div><div class="l">predators removed across 78 monitored traps, plus 95 deer and goats</div></div>
+      <div class="imgstat"><img src="img/mang-kiwi.jpg" alt=""><p class="eyebrow">A first in a century</p><div class="n">1 Kiwi</div><div class="l">recorded in the Mangaroa catchment</div></div>
+      <div class="imgstat"><img src="img/mang-food.jpg" alt=""><p class="eyebrow">Growing healthy food</p><div class="n">7,012 m²</div><div class="l">of food landscape in cultivation; 48 families picked their own kai</div></div>
+      <div class="imgstat"><img src="img/mang-gate.jpg" alt=""><p class="eyebrow">Through the gate</p><div class="n">2,500+</div><div class="l">guests across 86 events</div></div>
+      <div class="imgstat"><img src="img/mang-learning.jpg" alt=""><p class="eyebrow">Hands-on learning</p><div class="n">536</div><div class="l">people through 41 hands-on sessions</div></div>
+    </div>
+
+    <p class="chart-title" style="color:var(--tan);margin-top:46px">Beyond grantmaking</p>
+    <div class="two-col">
+      <div class="imgstat tall"><img src="img/mang-fellows.jpg" alt=""><p class="eyebrow">Launched with Mangaroa Farms</p><div class="n">10 Earth Fellows</div><div class="l">Backed by 10 × NZ$10,000 in grants. An inaugural weekend retreat kicked off a year-long fellowship for regenerative leaders across land, food systems &amp; community housing.</div></div>
+      <div class="imgstat tall"><img src="img/mang-hui.jpg" alt=""><p class="eyebrow">Convened by Biome Trust</p><div class="n">Education Hui</div><div class="l">Education leaders from across Aotearoa gathered at Mangaroa Farms for a multi-day hui on alternative learning, AI and place-based education.</div></div>
     </div>
   </div>
 </section>
@@ -511,47 +707,176 @@ footer a { color: var(--tan); }
 <!-- ============ MA EARTH ============ -->
 <section class="band band-paper" id="ma-earth">
   <div class="wrap">
-    <p class="eyebrow">Regenerative investing</p>
-    <h2>Ma Earth</h2>
-    <p class="lede measure"><span class="tk">[Placeholder — what Ma Earth is and why the Trust backs it, from the Ma Earth page.]</span></p>
-    <div class="timeline">
-      <div class="tl"><div class="y">FY24</div><div class="d"><span class="tk">Milestone</span></div></div>
-      <div class="tl"><div class="y">FY25</div><div class="d"><span class="tk">Milestone</span></div></div>
-      <div class="tl"><div class="y">FY26</div><div class="d"><span class="tk">Milestone</span></div></div>
-      <div class="tl"><div class="y">FY27</div><div class="d"><span class="tk">Milestone</span></div></div>
+    <img src="img/maearth-band.jpg" alt="Ma Earth projects" style="width:100%;border-radius:4px;margin-bottom:34px">
+    <p class="eyebrow">Our own initiatives</p>
+    <div class="logo-row"><img src="img/ma-earth-logo.png" alt="Ma Earth"></div>
+    <div class="two-col">
+      <div>
+        <p>Ma Earth grew out of Biome Trust's experience of a persistent funding gap: major funders struggle to find and confidently support high-quality grassroots nature regeneration and conservation projects, while those projects struggle to access major donors.</p>
+        <p>Ma Earth is building simpler infrastructure for both. It helps funders discover strong projects that have passed due diligence and selection, and support them without building bilateral relationships with each project.</p>
+      </div>
+      <div>
+        <p>For grassroots projects, Ma Earth opens access to new funding, including community crowdfunding amplified by philanthropic matching, and lets them share information once with multiple funders while retaining control of their data.</p>
+      </div>
     </div>
-    <p class="note">The Figma page carries two bar charts — funds distributed and projects funded, pilot rounds vs Round 3. Those want rebuilding as web charts rather than flat images; leaving that until the copy is settled.</p>
+
+    <div class="tl-row">
+      <div class="tl-item"><div class="y">FY2024</div><p>Started within Biome Trust; began educational activity</p></div>
+      <div class="tl-item"><div class="y">FY2025</div><p>Ran Funding Round 1 and Funding Round 2, both on a third-party platform (Gitcoin), administered by Biome Trust Aotearoa.</p></div>
+      <div class="tl-item"><div class="y">FY2026</div><p>Round 2; own funding platform and operating infrastructure built; Ma Earth Foundation established in Switzerland</p></div>
+      <div class="tl-item"><div class="y">FY2027</div><p>Funding Round 3 — the first round on Ma Earth's own platform</p></div>
+    </div>
+
+    <p class="chart-title" style="margin-top:46px">Funding Round 3</p>
+    <div class="imgstats">
+      <div class="imgstat"><img src="img/me-projects.jpg" alt=""><div class="n">201</div><div class="l">nature projects funded</div></div>
+      <div class="imgstat"><img src="img/me-countries.jpg" alt=""><div class="n">56</div><div class="l">countries, across six continents</div></div>
+      <div class="imgstat"><img src="img/me-participants.jpg" alt=""><div class="n">11,700+</div><div class="l">crowdfunding participants</div></div>
+      <div class="imgstat"><img src="img/me-distributed.jpg" alt=""><div class="n">$2.19M</div><div class="l">distributed (USD)</div></div>
+    </div>
+    <p class="fine">All Ma Earth figures are USD; every other currency figure in this report is NZD. Round 3 ran in FY27, after the year covered by this report.</p>
+
+    <p class="chart-title" style="margin-top:44px">Highlights</p>
+    <div class="steps">
+      <div class="step"><div class="t" style="color:var(--tan)">Global participation</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">The largest campaign of its kind</h4><p>Round 3 drew 11,700+ crowdfunding participants worldwide — on publicly available comparisons, the largest documented conservation quadratic-funding campaign by participation.</p></div>
+      <div class="step"><div class="t" style="color:var(--tan)">Aotearoa</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Punching above its weight</h4><p>26 New Zealand projects received more than US$315k (NZ$536k) — the highest concentration of funded projects of any country on the platform.</p><div class="barrow" style="margin:14px 0 0"><div class="top"><b style="font-size:12.5px">Aotearoa NZ · 14% of all Round 3 funding</b></div><div class="track"><i style="width:14%;background:var(--tan)"></i></div></div></div>
+      <div class="step"><div class="t" style="color:var(--tan)">An independent base</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Swiss foundation established</h4><p>Ma Earth Foundation is now a tax-exempt Swiss foundation in Zug. Ma Earth Labs AG, wholly owned by the Foundation, builds and runs the platform. Round 3's matching pool was backed by Biome Trust, Ma Earth Foundation, Naia Trust and Imaginal Seeds.</p></div>
+    </div>
+
+    <p class="chart-title" style="margin-top:44px">Funds distributed across funding rounds (USD)</p>
+    <div class="two-col">
+      <div class="panel pale">
+        <div class="barlist">
+          <div class="barrow"><div class="top"><b>Funding Round 1</b><span>$160,007</span></div><div class="track"><i style="width:7%;background:var(--tan)"></i></div></div>
+          <div class="barrow"><div class="top"><b>Funding Round 2</b><span>$231,543</span></div><div class="track"><i style="width:11%;background:var(--tan)"></i></div></div>
+          <div class="barrow"><div class="top"><b>Funding Round 3</b><span>$2,198,804</span></div><div class="track"><i style="width:100%;background:linear-gradient(90deg,var(--green-dark) 0 52%,#b9b878 52% 100%)"></i></div></div>
+        </div>
+      </div>
+      <div>
+        <p>Round 3 split roughly <strong>$1.15M matching pool</strong> and <strong>$1.05M crowdfunding</strong> — close to a dollar of new community money for every philanthropic dollar.</p>
+        <ul class="legend" style="margin-top:14px">
+          <li><i style="background:var(--green-dark)"></i><span>Matching pool</span></li>
+          <li><i style="background:#b9b878"></i><span>Crowdfunding raised</span></li>
+          <li><i style="background:var(--tan)"></i><span>Rounds 1–2 total</span></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ============ ENDOWMENT ============ -->
 <section class="band band-cream" id="endowment">
-  <div class="wrap two-col">
-    <div>
-      <p class="eyebrow">The capital behind the giving</p>
-      <h2>Stewarding our endowment</h2>
+  <div class="wrap">
+    <p class="eyebrow">Our endowment</p>
+    <h2>Stewarding our endowment</h2>
+    <p class="lede measure">We are transitioning our endowment from traditional investments into impact and values-aligned investing.</p>
+
+    <div class="two-col" style="margin-top:36px">
+      <div class="panel" style="background:var(--green-dark)">
+        <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:#fff">~$35M NZD</div>
+        <p style="font-size:14px;line-height:1.5;color:#cdd8cb;margin:12px 0 0">Biome Trust endowment at period end &mdash; primarily fixed interest, with a small and growing share in equities and impact funds</p>
+      </div>
+      <div class="panel" style="background:var(--green-dark)">
+        <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:#fff">~$76M NZD</div>
+        <p style="font-size:14px;line-height:1.5;color:#cdd8cb;margin:12px 0 0">Consolidated balance sheet, Biome Trust and Mangaroa Farms combined</p>
+      </div>
     </div>
-    <div class="measure">
-      <p class="lede"><span class="tk">[Placeholder — how the endowment is invested and the thinking behind it.]</span></p>
-      <p><span class="tk">[Placeholder — supporting detail, including the mission-aligned allocation split shown in Figma.]</span></p>
+    <p class="fine">Figures are indicative and stated in NZD, matching the consolidated accounts.</p>
+
+    <div class="steps" style="margin-top:34px">
+      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--tan)">Returns</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Generate returns for future impact</h4><p>Income and capital gains increase the resources available to support initiatives aligned with Biome Trust's purpose.</p></div>
+      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--tan)">Mangaroa Farms</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support Mangaroa Farms</h4><p>A cornerstone initiative wholly owned by Biome Trust. Its activities contribute directly to our impact, and the capital invested forms a significant asset on our consolidated balance sheet.</p></div>
+      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--tan)">Impact funds</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Invest in impact-focused funds</h4><p>Through international partners, part of the endowment is being deployed into funds aligned with our mission.</p><p style="margin-top:10px"><strong>Land and food:</strong> Mad Capital, Alder Point<br><strong>Nature and water:</strong> Superorganism, Burnt Island Ventures</p></div>
+      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--tan)">Environmental markets</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Explore environmental markets</h4><p>We are assessing carbon and other environmental instruments that could generate financial returns while supporting biodiversity and related outcomes.</p></div>
     </div>
+
+    <p class="chart-title" style="margin-top:46px">Observations</p>
+    <div class="obs">
+      <div class="ob"><h4>Liquidity vs deeper mission alignment</h4><p>Biome Trust intends to spend down its endowment over the coming years, favouring liquidity and lower risk. That preserves flexibility, but the most mission-aligned opportunities tend to be private and illiquid.</p></div>
+      <div class="ob"><h4>Learn before scaling private investment</h4><p>Private funds can run 10&ndash;12 years, and outcomes may take 5&ndash;10 years to assess. That slow feedback cycle is challenging for a spend-down endowment, so we scale commitments thoughtfully.</p></div>
+      <div class="ob"><h4>Think globally</h4><p>We manage the portfolio as a whole across fund holders and jurisdictions, seeking the best opportunities for meaningful impact rather than allocating capital by geography alone.</p></div>
+    </div>
+
+    <p class="chart-title" style="margin-top:46px">The wider portfolio</p>
+    <div class="two-col">
+      <div>
+        <p class="chart-title" style="color:var(--text-light)">Allocation</p>
+        <div class="donut-wrap">
+          <div class="donut" style="background:conic-gradient(var(--green-dark) 0 65.3%, var(--tan) 65.3% 100%)"></div>
+          <ul class="legend">
+            <li><i style="background:var(--green-dark)"></i><span><b>65.3%</b> Fixed interest</span></li>
+            <li><i style="background:var(--tan)"></i><span><b>34.7%</b> Land, commodities and crypto</span></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <p class="chart-title" style="color:var(--text-light)">Where the capital is held</p>
+        <div class="donut-wrap">
+          <div class="donut" style="background:conic-gradient(var(--green-dark) 0 52.9%, #b9b878 52.9% 93.6%, var(--tan) 93.6% 100%)"></div>
+          <ul class="legend">
+            <li><i style="background:var(--green-dark)"></i><span><b>52.9%</b> United States</span></li>
+            <li><i style="background:#b9b878"></i><span><b>40.7%</b> New Zealand</span></li>
+            <li><i style="background:var(--tan)"></i><span><b>6.4%</b> Switzerland</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="fine">These two charts cover the wider global endowment across all fund holders &mdash; The Gift Trust (NZ), Silicon Valley Community Foundation and ImpactAssets (US), TrustBridge (CH/US) and Ma Earth Foundation (CH). It is broader than Biome Trust Aotearoa alone.</p>
   </div>
 </section>
 
 <!-- ============ KAUPAPA (image band) ============ -->
 <section class="image-band" id="kaupapa">
   <div class="bg" style="background-image: url('img/kaupapa.jpg')"></div>
-  <div class="wrap measure">
-    <p class="eyebrow">Closing</p>
-    <h2>People, place, and kaupapa</h2>
-    <p class="lede"><span class="tk">[Placeholder — the closing statement that runs over the Aotearoa map in Figma.]</span></p>
+  <div class="wrap">
+    <p class="eyebrow">Gifts from FY26</p>
+    <h2>People, place<br>and kaupapa</h2>
+    <div class="place-lists">
+      <div class="place">
+        <h4>Around the motu</h4>
+        <ul>
+          <li>Garden to Table (HQ)<br><span>T&#257;maki Makaurau, Auckland</span></li>
+          <li>UNDERGROUND Festival<br><span>Waikato 2027</span></li>
+          <li>Tolaga Bay Heritage Trust<br><span>Tolaga Bay</span></li>
+          <li>The Learning Environment<br><span>Whanganui</span></li>
+          <li>Toru Education<br><span>Kapiti</span></li>
+        </ul>
+      </div>
+      <div class="place">
+        <h4>Wairarapa</h4>
+        <ul>
+          <li>Wairarapa Earth School<br><span>Carterton, Wairarapa</span></li>
+          <li>Ruam&#257;hanga Farm Foundation<br><span>Pirinoa, South Wairarapa</span></li>
+        </ul>
+      </div>
+      <div class="place">
+        <h4>Hutt Valley</h4>
+        <ul>
+          <li>Mangaroa Farms</li>
+          <li>Growing Sustainability NZ</li>
+          <li>Natural Leaders</li>
+          <li>Te &#256;ti Awa</li>
+        </ul>
+      </div>
+      <div class="place">
+        <h4>Nationwide</h4>
+        <ul>
+          <li>Permaculture in New Zealand</li>
+          <li>Soil Sage Collective</li>
+          <li>Kiwis in Climate</li>
+          <li>Centre for Strategic Philanthropy</li>
+          <li>The Gift Trust</li>
+          <li>House of Science</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
     <div>Biome Trust · Impact Report 2026</div>
-    <div><a href="https://biometrust.earth">biometrust.earth</a></div>
+    <div>Follow us <strong>@biometrust.earth</strong> · <a href="https://biometrust.earth">biometrust.earth</a></div>
   </div>
 </footer>
 
