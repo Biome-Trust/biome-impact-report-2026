@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rewilding Resources — Biome Trust Impact Report 2026</title>
+<meta name="description" content="Biome Trust Impact Report 2026 — how we back partners across Aotearoa, steward our endowment, and put resources back into living systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Tiempos Headline';
+  src: url('fonts/tiempos-headline.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --cream: #faf7f2;
+  --white: #ffffff;
+  --green-dark: #1e3a1f;
+  --green-mid: #2d5a2e;
+  --green-light: #4a7c4e;
+  --green-pale: #e8f0e8;
+  --tan: #c8a96e;
+  --tan-light: #f0e8d8;
+  --text-dark: #1a1a1a;
+  --text-mid: #444444;
+  --text-light: #777777;
+  --line: #e3ded4;
+  --serif: 'Tiempos Headline', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --gut: clamp(20px, 5vw, 64px);
+  --measure: 62ch;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text-dark);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; }
+
+a { color: inherit; }
+
+img { max-width: 100%; display: block; }
+
+/* ---- reading progress ---- */
+#progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0;
+  background: var(--tan); z-index: 999; transition: width 90ms linear;
+}
+
+/* ---- band system ----
+   Rhythm rule: never two full-bleed image bands back to back. An image band is
+   always separated by a light paper band or a solid deep band. */
+.band { padding: clamp(64px, 11vh, 132px) var(--gut); }
+.band-paper { background: var(--white); }
+.band-cream { background: var(--cream); }
+.band-deep  { background: var(--green-dark); color: #eef2ec; }
+.band-deep h2, .band-deep h3 { color: #fff; }
+
+.wrap { max-width: 1120px; margin: 0 auto; }
+.measure { max-width: var(--measure); }
+
+.eyebrow {
+  font-size: 12px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--green-light); margin: 0 0 18px;
+}
+.band-deep .eyebrow { color: var(--tan); }
+
+h2 { font-size: clamp(30px, 4.6vw, 52px); line-height: 1.1; margin: 0 0 22px; }
+h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
+
+.lede { font-size: clamp(18px, 1.9vw, 21px); line-height: 1.6; color: var(--text-mid); }
+.band-deep .lede { color: #cdd8cb; }
+
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); }
+
+/* ---- placeholder marker (§ never guess a fact) ---- */
+.tk {
+  background: rgba(200, 169, 110, .32);
+  padding: 0 5px; border-radius: 2px;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.note {
+  display: block; margin-top: 10px;
+  font-size: 13px; line-height: 1.5; color: var(--text-light);
+  border-left: 2px solid var(--tan); padding-left: 10px;
+}
+.band-deep .note { color: #a9b8a7; }
+
+/* ---- cover ---- */
+.cover {
+  position: relative; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: var(--gut); color: #fff; overflow: hidden;
+}
+.cover-bg {
+  position: absolute; inset: 0;
+  background-image: url('img/hero.jpg');
+  background-size: cover; background-position: center;
+}
+.cover-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15,28,16,.44) 0%, rgba(15,28,16,.30) 42%, rgba(15,28,16,.86) 100%);
+}
+.cover-inner { position: relative; max-width: 1120px; margin: 0 auto; width: 100%; padding-bottom: 4vh; }
+.cover h1 { font-size: clamp(46px, 9vw, 108px); line-height: .98; margin: 0 0 20px; }
+.cover .sub { font-size: clamp(15px, 1.7vw, 19px); letter-spacing: .04em; color: #dfe7dd; margin: 0; }
+.mark { width: 58px; margin-bottom: auto; padding-top: 2vh; position: relative; }
+
+/* ---- stat grid ---- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.13); margin-top: 44px; }
+.stat { background: var(--green-dark); padding: 26px 22px; }
+.stat .n { font-family: var(--serif); font-size: clamp(30px, 3.6vw, 42px); line-height: 1; color: #fff; }
+.stat .l { font-size: 12.5px; letter-spacing: .11em; text-transform: uppercase; color: #a9c0a8; margin-top: 10px; }
+.stat .src { font-size: 11.5px; color: #7e9a7d; margin-top: 7px; }
+
+/* ---- partner cards ---- */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(266px, 1fr)); gap: clamp(18px, 2.4vw, 30px); margin-top: 46px; }
+.card { background: var(--white); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+.card img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+.card-body { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
+.card h3 { font-family: var(--sans); font-size: 16.5px; font-weight: 600; margin: 0 0 7px; }
+.card p { font-size: 14.5px; line-height: 1.5; color: var(--text-mid); margin: 0 0 16px; }
+.card .meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-top: auto; }
+.pill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; letter-spacing: .04em; color: var(--green-mid); background: var(--green-pale); border-radius: 999px; padding: 4px 11px; }
+.card .site { font-size: 12.5px; font-weight: 500; color: var(--green-light); text-decoration: none; }
+.card .site:hover { text-decoration: underline; }
+
+/* ---- principle tiles ---- */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(16px, 2vw, 26px); margin-top: 44px; }
+.tile { background: var(--tan-light); border-radius: 4px; padding: 26px 24px; }
+.tile h3 { font-family: var(--sans); font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.tile p { font-size: 14.5px; line-height: 1.55; color: var(--text-mid); margin: 0; }
+
+/* ---- full-bleed image band ---- */
+.image-band { position: relative; padding: clamp(90px, 16vh, 190px) var(--gut); color: #fff; overflow: hidden; }
+.image-band .bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.image-band .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,28,16,.62), rgba(15,28,16,.80)); }
+.image-band .wrap { position: relative; }
+.image-band .lede { color: #d5e0d3; }
+
+/* ---- timeline ---- */
+.timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 40px; }
+.tl { background: var(--white); padding: 20px 18px; }
+.tl .y { font-family: var(--serif); font-size: 21px; color: var(--green-mid); }
+.tl .d { font-size: 13.5px; color: var(--text-mid); margin-top: 6px; line-height: 1.45; }
+
+footer { background: var(--green-dark); color: #9fb39e; padding: 54px var(--gut); font-size: 13.5px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; align-items: center; }
+footer a { color: var(--tan); }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .cover { min-height: 88svh; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ============ COVER ============ -->
+<header class="cover" id="cover">
+  <div class="cover-bg"></div>
+  <div class="mark">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Biome Trust">
+      <path d="M30 4c6 9 14 13 14 24 0 9-6 16-14 20-8-4-14-11-14-20C16 17 24 13 30 4z" stroke="#fff" stroke-width="1.6"/>
+      <path d="M30 16v28M30 24c-4-3-8-4-11-4M30 32c4-3 8-4 11-4" stroke="#fff" stroke-width="1.4"/>
+    </svg>
+  </div>
+  <div class="cover-inner">
+    <h1>Rewilding<br>Resources</h1>
+    <p class="sub">Biome Trust · Impact Report 2026</p>
+  </div>
+</header>
+
+<!-- ============ KIA ORA ============ -->
+<section class="band band-paper" id="kia-ora">
+  <div class="wrap two-col">
+    <div>
+      <p class="eyebrow">A word from the trustees</p>
+      <h2>Kia ora,</h2>
+    </div>
+    <div class="measure">
+      <p class="lede"><span class="tk">[Placeholder — opening paragraph from the Figma "Kia ora" letter.]</span></p>
+      <p><span class="tk">[Placeholder — body of the trustees' letter. Pull the approved copy from the DRAFT&nbsp;-&nbsp;LATEST page in Figma; do not paraphrase it here.]</span></p>
+      <p><span class="tk">[Placeholder — closing line and signature.]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GIVING BY NUMBERS (solid deep band — no image, by design) ============ -->
+<section class="band band-deep" id="numbers">
+  <div class="wrap">
+    <p class="eyebrow">The year in figures</p>
+    <h2>Giving by numbers</h2>
+    <p class="lede measure">A summary of what moved through the Trust this year, and where it landed.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="n"><span class="tk">$TK</span></div>
+        <div class="l">Total granted</div>
+        <div class="src">Verified by <span class="tk">TK</span></div>
+      </div>
+      <div class="stat">
+        <div class="n"><span class="tk">TK</span></div>
+        <div class="l">Partners backed</div>
+        <div class="src">Verified by <span class="tk">TK</span></div>
+      </div>
+      <div class="stat">
+        <div class="n"><span class="tk">TK</span></div>
+        <div class="l">Regions reached</div>
+        <div class="src">Verified by <span class="tk">TK</span></div>
+      </div>
+      <div class="stat">
+        <div class="n"><span class="tk">$TK</span></div>
+        <div class="l">Endowment at year end</div>
+        <div class="src">Verified by <span class="tk">TK</span></div>
+      </div>
+    </div>
+    <p class="note">Every figure above is a placeholder. Fill each from the "Giving by numbers" page in Figma, and either name the source in the "verified by" line or delete that line — a stat with no source carries none.</p>
+  </div>
+</section>
+
+<!-- ============ PARTNERS ============ -->
+<section class="band band-paper" id="partners">
+  <div class="wrap">
+    <p class="eyebrow">Where the money went</p>
+    <h2>Backing partners across Aotearoa</h2>
+    <p class="lede measure"><span class="tk">[Placeholder — the one-paragraph framing that sits above the partner grid in Figma.]</span></p>
+    <div class="grid">
+      <article class="card">
+        <img src="img/partner-01.jpg" alt="">
+        <div class="card-body">
+          <h3><span class="tk">Partner name</span></h3>
+          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <div class="meta">
+            <span class="pill">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              <span class="tk">Region</span>
+            </span>
+            <a class="site" href="#">Website →</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="img/partner-02.jpg" alt="">
+        <div class="card-body">
+          <h3><span class="tk">Partner name</span></h3>
+          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <div class="meta">
+            <span class="pill">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              <span class="tk">Region</span>
+            </span>
+            <a class="site" href="#">Website →</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="img/partner-03.jpg" alt="">
+        <div class="card-body">
+          <h3><span class="tk">Partner name</span></h3>
+          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <div class="meta">
+            <span class="pill">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              <span class="tk">Region</span>
+            </span>
+            <a class="site" href="#">Website →</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="img/partner-04.jpg" alt="">
+        <div class="card-body">
+          <h3><span class="tk">Partner name</span></h3>
+          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <div class="meta">
+            <span class="pill">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              <span class="tk">Region</span>
+            </span>
+            <a class="site" href="#">Website →</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="img/partner-05.jpg" alt="">
+        <div class="card-body">
+          <h3><span class="tk">Partner name</span></h3>
+          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <div class="meta">
+            <span class="pill">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              <span class="tk">Region</span>
+            </span>
+            <a class="site" href="#">Website →</a>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <img src="img/partner-06.jpg" alt="">
+        <div class="card-body">
+          <h3><span class="tk">Partner name</span></h3>
+          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <div class="meta">
+            <span class="pill">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              <span class="tk">Region</span>
+            </span>
+            <a class="site" href="#">Website →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="note">Six cards are stubbed as a pattern. The Figma giftee spread carries all FY26 partners across two pages — copy this card block once per partner, then drop each photo straight onto its image in the browser editor.</p>
+  </div>
+</section>
+
+<!-- ============ OUR APPROACH ============ -->
+<section class="band band-cream" id="approach">
+  <div class="wrap">
+    <p class="eyebrow">How we give</p>
+    <h2>Our approach</h2>
+    <p class="lede measure"><span class="tk">[Placeholder — the framing paragraph from the "Our Approach" page.]</span></p>
+    <div class="tiles">
+      <div class="tile">
+        <h3><span class="tk">Principle one</span></h3>
+        <p><span class="tk">Short explanation, two or three lines.</span></p>
+      </div>
+      <div class="tile">
+        <h3><span class="tk">Principle two</span></h3>
+        <p><span class="tk">Short explanation, two or three lines.</span></p>
+      </div>
+      <div class="tile">
+        <h3><span class="tk">Principle three</span></h3>
+        <p><span class="tk">Short explanation, two or three lines.</span></p>
+      </div>
+      <div class="tile">
+        <h3><span class="tk">Principle four</span></h3>
+        <p><span class="tk">Short explanation, two or three lines.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MANGAROA (image band) ============ -->
+<section class="image-band" id="mangaroa">
+  <div class="bg" style="background-image: url('img/mangaroa.jpg')"></div>
+  <div class="wrap">
+    <p class="eyebrow">The whenua</p>
+    <h2>Mangaroa Farms</h2>
+    <p class="lede measure"><span class="tk">[Placeholder — the two-column intro from the Mangaroa page: what the farm is, where it sits, and how it relates to the Trust.]</span></p>
+    <div class="stats">
+      <div class="stat">
+        <div class="n"><span class="tk">TK</span></div>
+        <div class="l">Hectares</div>
+      </div>
+      <div class="stat">
+        <div class="n"><span class="tk">TK</span></div>
+        <div class="l">Trees planted</div>
+      </div>
+      <div class="stat">
+        <div class="n"><span class="tk">TK</span></div>
+        <div class="l">People on the land</div>
+      </div>
+      <div class="stat">
+        <div class="n"><span class="tk">TK</span></div>
+        <div class="l">Hectares in restoration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MA EARTH ============ -->
+<section class="band band-paper" id="ma-earth">
+  <div class="wrap">
+    <p class="eyebrow">Regenerative investing</p>
+    <h2>Ma Earth</h2>
+    <p class="lede measure"><span class="tk">[Placeholder — what Ma Earth is and why the Trust backs it, from the Ma Earth page.]</span></p>
+    <div class="timeline">
+      <div class="tl"><div class="y">FY24</div><div class="d"><span class="tk">Milestone</span></div></div>
+      <div class="tl"><div class="y">FY25</div><div class="d"><span class="tk">Milestone</span></div></div>
+      <div class="tl"><div class="y">FY26</div><div class="d"><span class="tk">Milestone</span></div></div>
+      <div class="tl"><div class="y">FY27</div><div class="d"><span class="tk">Milestone</span></div></div>
+    </div>
+    <p class="note">The Figma page carries two bar charts — funds distributed and projects funded, pilot rounds vs Round 3. Those want rebuilding as web charts rather than flat images; leaving that until the copy is settled.</p>
+  </div>
+</section>
+
+<!-- ============ ENDOWMENT ============ -->
+<section class="band band-cream" id="endowment">
+  <div class="wrap two-col">
+    <div>
+      <p class="eyebrow">The capital behind the giving</p>
+      <h2>Stewarding our endowment</h2>
+    </div>
+    <div class="measure">
+      <p class="lede"><span class="tk">[Placeholder — how the endowment is invested and the thinking behind it.]</span></p>
+      <p><span class="tk">[Placeholder — supporting detail, including the mission-aligned allocation split shown in Figma.]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KAUPAPA (image band) ============ -->
+<section class="image-band" id="kaupapa">
+  <div class="bg" style="background-image: url('img/kaupapa.jpg')"></div>
+  <div class="wrap measure">
+    <p class="eyebrow">Closing</p>
+    <h2>People, place, and kaupapa</h2>
+    <p class="lede"><span class="tk">[Placeholder — the closing statement that runs over the Aotearoa map in Figma.]</span></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Biome Trust · Impact Report 2026</div>
+    <div><a href="https://biometrust.earth">biometrust.earth</a></div>
+  </div>
+</footer>
+
+<script>
+const bar = document.getElementById('progress');
+const onScroll = () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+};
+addEventListener('scroll', onScroll, { passive: true });
+addEventListener('resize', onScroll);
+onScroll();
+</script>
+
+</body>
+</html>
