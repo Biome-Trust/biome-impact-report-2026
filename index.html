@@ -105,7 +105,7 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 /* ---- cover ---- */
 .cover {
   position: relative; min-height: 100svh;
-  display: flex; flex-direction: column; justify-content: flex-end;
+  display: flex; flex-direction: column; justify-content: center;
   padding: var(--gut); color: #fff; overflow: hidden;
 }
 .cover-bg {
@@ -115,13 +115,13 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 }
 .cover-bg::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(15,28,16,.44) 0%, rgba(15,28,16,.30) 42%, rgba(15,28,16,.86) 100%);
+  background: linear-gradient(180deg, rgba(15,28,16,.42) 0%, rgba(15,28,16,.52) 46%, rgba(15,28,16,.62) 100%);
 }
-.cover-inner { position: relative; max-width: 1120px; margin: 0 auto; width: 100%; padding-bottom: 4vh; }
+.cover-inner { position: relative; max-width: 1120px; margin: 0 auto; width: 100%; }
 .cover h1 { font-size: clamp(46px, 9vw, 108px); line-height: .98; margin: 0 0 20px; }
 .cover h1 em { font-style: italic; }
 .cover .sub { font-size: clamp(15px, 1.7vw, 19px); letter-spacing: .04em; color: #dfe7dd; margin: 0; }
-.mark { width: clamp(128px, 13vw, 168px); margin-bottom: auto; padding-top: 2vh; position: relative; }
+.mark { width: clamp(128px, 13vw, 168px); margin: 0 0 26px; position: relative; }
 
 /* ---- stat grid ---- */
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.13); border-radius: 4px; overflow: hidden; margin-top: 44px; }
@@ -198,10 +198,10 @@ footer a { color: var(--tan); }
 <!-- ============ COVER ============ -->
 <header class="cover" id="cover">
   <div class="cover-bg"></div>
-  <div class="mark">
-    <img src="img/biome-trust-logo.png" alt="Biome Trust">
-  </div>
   <div class="cover-inner">
+    <div class="mark">
+      <img src="img/biome-trust-logo.png" alt="Biome Trust">
+    </div>
     <h1><em>Rewilding</em><br>Resources</h1>
     <p class="sub">Biome Trust · Impact Report 2026</p>
   </div>
