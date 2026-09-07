@@ -45,8 +45,13 @@ than inventing a source.
   so hand-written formatting survives and diffs stay small.
 - That server was patched here to `decodeURIComponent` the request path — impact's
   assets were all slugs, but Biome's asset filenames contain spaces.
-- `img/*.jpg` are generated placeholder plates, not photography. Swap them by dragging
-  real photos onto them in the browser editor (macOS `sips` does the conversion).
+- `img/hero-mangaroa-river.jpg` is real — the Mangaroa River aerial, same shot as the
+  Figma cover (and as `Biome background.png` in the reach reports, but from the
+  unprocessed original rather than the pre-darkened copy). The remaining `img/*.jpg` are
+  generated placeholder plates, not photography. Swap them by dragging
+  real photos onto them in the browser editor (macOS `sips` does the conversion). For hero-
+  scale images prefer PIL with `optimize=True, progressive=True` — on a dense aerial it beat
+  `sips` roughly 3:1 at matched dimensions.
 - After any browser editing pass, sweep for contenteditable artifacts: stray
   `contenteditable` attributes, `<div>` inside `<p>`, clipboard junk spans.
 - NZ English: programmes, totalling, recognise.

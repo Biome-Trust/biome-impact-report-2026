@@ -1,2 +1,6 @@
 copy-edit-failures.json
 .DS_Store
+
+# full-res photo sources — kept on disk, out of git
+*.png
+!fonts/*

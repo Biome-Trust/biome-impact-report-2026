@@ -19,9 +19,8 @@
 - [ ] **People, place, and kaupapa** — closing statement
 
 ## Next — assets
-- [ ] Replace 9 placeholder plates in `img/` with real photography
-- [ ] Cover photo: pick for texture, not subject — even, busy-free (canopy from above)
-      sits under a scrim with white type; golden-hour shots with focal buildings fight it
+- [x] Cover photo — Mangaroa River aerial, the same shot as the Figma cover
+- [ ] Replace remaining 8 placeholder plates in `img/` with real photography
 - [ ] Check each photo isn't already used elsewhere before assigning it
 - [ ] Biome mark in the cover is a placeholder SVG — swap for the official brand mark
 
