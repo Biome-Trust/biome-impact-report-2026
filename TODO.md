@@ -10,8 +10,10 @@
 ## Next — content pass (52 placeholders outstanding)
 - [ ] **Kia ora letter** — pull the approved copy from Figma verbatim, don't paraphrase
 - [ ] **Giving by numbers** — 4 stats + their "verified by" sources, or delete the source line
-- [ ] **Partner grid** — currently 6 stub cards; the Figma spread carries all FY26 partners
-      across two pages. One card block per partner, then drag each photo in.
+- [x] **Partner grid** — all 16 FY26 partners in, grouped Education / Land & community / Wider,
+      descriptors verbatim from the Figma
+- [ ] Partner photos — 2 of 16 in; the other 14 need pulling from the Figma spread
+- [ ] Partner website URLs — 3 of 16 known; the rest are visible placeholders, not guesses
 - [ ] **Our approach** — framing paragraph + 4 principle tiles
 - [ ] **Mangaroa** — intro + 4 stats (hectares, trees, people, hectares in restoration)
 - [ ] **Ma Earth** — intro + FY24–FY27 timeline milestones
@@ -20,9 +22,9 @@
 
 ## Next — assets
 - [x] Cover photo — Mangaroa River aerial, the same shot as the Figma cover
-- [ ] Replace remaining 8 placeholder plates in `img/` with real photography
+- [x] Cover logo — real horizontal white Biome Trust lockup, per the Figma cover
+- [ ] Replace remaining placeholder plates in `img/` with real photography
 - [ ] Check each photo isn't already used elsewhere before assigning it
-- [ ] Biome mark in the cover is a placeholder SVG — swap for the official brand mark
 
 ## Later
 - [ ] Ma Earth bar charts (funds distributed / projects funded) as web charts, not images
