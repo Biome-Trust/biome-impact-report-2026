@@ -123,7 +123,7 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .mark { width: 58px; margin-bottom: auto; padding-top: 2vh; position: relative; }
 
 /* ---- stat grid ---- */
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.13); margin-top: 44px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.13); border-radius: 4px; overflow: hidden; margin-top: 44px; }
 .stat { background: var(--green-dark); padding: 26px 22px; }
 .stat .n { font-family: var(--serif); font-size: clamp(30px, 3.6vw, 42px); line-height: 1; color: #fff; }
 .stat .l { font-size: 12.5px; letter-spacing: .11em; text-transform: uppercase; color: #a9c0a8; margin-top: 10px; }
@@ -134,6 +134,7 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .card { background: var(--white); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
 .card img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
 .card-body { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
+.card-tag { font-size: 10.5px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: var(--tan); margin: 0 0 9px; }
 .card h3 { font-family: var(--sans); font-size: 16.5px; font-weight: 600; margin: 0 0 7px; }
 .card p { font-size: 14.5px; line-height: 1.5; color: var(--text-mid); margin: 0 0 16px; }
 .card .meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-top: auto; }
@@ -155,7 +156,7 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .image-band .lede { color: #d5e0d3; }
 
 /* ---- timeline ---- */
-.timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 40px; }
+.timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; margin-top: 40px; }
 .tl { background: var(--white); padding: 20px 18px; }
 .tl .y { font-family: var(--serif); font-size: 21px; color: var(--green-mid); }
 .tl .d { font-size: 13.5px; color: var(--text-mid); margin-top: 6px; line-height: 1.45; }
@@ -241,94 +242,85 @@ footer a { color: var(--tan); }
   <div class="wrap">
     <p class="eyebrow">Where the money went</p>
     <h2>Backing partners across Aotearoa</h2>
-    <p class="lede measure"><span class="tk">[Placeholder — the one-paragraph framing that sits above the partner grid in Figma.]</span></p>
+    <p class="lede measure">A small number of deep, long-term relationships with people regenerating Aotearoa — and the wider circle of grassroots kaupapa we are proud to support.</p>
     <div class="grid">
       <article class="card">
-        <img src="img/partner-01.jpg" alt="">
+        <img src="img/partner-learning-environment.jpg" alt="The Learning Environment">
         <div class="card-body">
-          <h3><span class="tk">Partner name</span></h3>
-          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <p class="card-tag">Multi-year partner</p>
+          <h3>The Learning Environment</h3>
+          <p>Holistic Learning Experiences for Wellbeing</p>
           <div class="meta">
             <span class="pill">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-              <span class="tk">Region</span>
+              Manawatū-Whanganui
             </span>
-            <a class="site" href="#">Website →</a>
+            <a class="site" href="https://www.learningenvironment.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/partner-02.jpg" alt="">
+        <img src="img/partner-tiwaiwaka.jpg" alt="Tīwaiwaka">
         <div class="card-body">
-          <h3><span class="tk">Partner name</span></h3>
-          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <p class="card-tag">Multi-year partner</p>
+          <h3>Tīwaiwaka</h3>
+          <p>Restoring the Mauri of the Whenua</p>
           <div class="meta">
             <span class="pill">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-              <span class="tk">Region</span>
+              Bay of Plenty
             </span>
-            <a class="site" href="#">Website →</a>
+            <a class="site" href="https://www.tiwaiwaka.nz" target="_blank" rel="noopener">Website →</a>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/partner-03.jpg" alt="">
+        <img src="img/partner-papawhakaritorito.jpg" alt="Papawhakaritorito Trust">
         <div class="card-body">
-          <h3><span class="tk">Partner name</span></h3>
-          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <p class="card-tag">Multi-year partner</p>
+          <h3>Papawhakaritorito Trust</h3>
+          <p>Elevating Indigenous Seed, Soil and Food Sovereignty</p>
           <div class="meta">
             <span class="pill">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-              <span class="tk">Region</span>
+              Wellington
             </span>
-            <a class="site" href="#">Website →</a>
+            <a class="site" href="https://www.papawhakaritorito.com/" target="_blank" rel="noopener">Website →</a>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/partner-04.jpg" alt="">
+        <img src="img/partner-04.jpg" alt="Ruamāhanga Farm Foundation">
         <div class="card-body">
-          <h3><span class="tk">Partner name</span></h3>
-          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <p class="card-tag">Gifted 2025</p>
+          <h3>Ruamāhanga Farm Foundation</h3>
+          <p>Learning from Land, River and Community</p>
           <div class="meta">
             <span class="pill">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-              <span class="tk">Region</span>
+              Wairarapa
             </span>
-            <a class="site" href="#">Website →</a>
+            <a class="site" href="https://ruamahanga.org.nz" target="_blank" rel="noopener">Website →</a>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/partner-05.jpg" alt="">
+        <img src="img/partner-underground-festival.jpg" alt="UNDERGROUND Festival">
         <div class="card-body">
-          <h3><span class="tk">Partner name</span></h3>
-          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
+          <p class="card-tag">Multi-year partner</p>
+          <h3>UNDERGROUND Festival</h3>
+          <p>Festival Celebrating Soil, Food, and Farming</p>
           <div class="meta">
             <span class="pill">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-              <span class="tk">Region</span>
+              Canterbury / Waikato
             </span>
-            <a class="site" href="#">Website →</a>
-          </div>
-        </div>
-      </article>
-      <article class="card">
-        <img src="img/partner-06.jpg" alt="">
-        <div class="card-body">
-          <h3><span class="tk">Partner name</span></h3>
-          <p><span class="tk">One-line descriptor of the mahi, in the partner's own framing.</span></p>
-          <div class="meta">
-            <span class="pill">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-              <span class="tk">Region</span>
-            </span>
-            <a class="site" href="#">Website →</a>
+            <a class="site" href="https://www.undergroundfestival.co.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
         </div>
       </article>
     </div>
-    <p class="note">Six cards are stubbed as a pattern. The Figma giftee spread carries all FY26 partners across two pages — copy this card block once per partner, then drop each photo straight onto its image in the browser editor.</p>
+    <p class="note">Five partners here carry real detail, pulled from the live gifts site. The Figma spread lists all FY26 partners — the remaining ones still need adding, and Ruamāhanga still needs a photo.</p>
   </div>
 </section>
 
