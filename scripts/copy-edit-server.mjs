@@ -101,6 +101,52 @@ function swapImage({ oldUrl, name, dataB64, occurrence = 0, total = 1 }) {
   return { file, replaced: 1, of: positions.length };
 }
 
+
+// ── layout mode: spacing overrides + section order ──
+// Spacing is written as one <style id="le-overrides"> block rather than inline
+// styles, so the source markup stays clean and a bad pass can be undone by
+// deleting one block. Section order physically moves the <section> blocks.
+const OVERRIDE_OPEN = '<style id="le-overrides">';
+
+function writeOverrides(css) {
+  let file = readFileSync(SOURCE, 'utf8');
+  const block = OVERRIDE_OPEN + '\n/* spacing set in layout mode — safe to hand-edit or delete */\n'
+    + css.trim() + '\n</style>';
+  const at = file.indexOf(OVERRIDE_OPEN);
+  if (at === -1) {
+    file = file.replace('</head>', block + '\n</head>');
+  } else {
+    const end = file.indexOf('</style>', at) + '</style>'.length;
+    file = file.slice(0, at) + block + file.slice(end);
+  }
+  writeFileSync(SOURCE, file);
+}
+
+function reorderSections(order) {
+  const file = readFileSync(SOURCE, 'utf8');
+  // each block is the <section> plus the banner comment directly above it.
+  // sections are never nested here, so a non-greedy match to </section> is safe.
+  // each block owns its trailing blank lines, so re-joining preserves spacing
+  // exactly and a no-op reorder produces a byte-identical file
+  const re = /(?:[ \t]*<!-- =+[^\n]*-->\n)?[ \t]*<section\b[^>]*\bid="([^"]+)"[\s\S]*?<\/section>\n*/g;
+  const blocks = new Map();
+  let first = -1, last = -1, m;
+  while ((m = re.exec(file)) !== null) {
+    blocks.set(m[1], m[0]);
+    if (first === -1) first = m.index;
+    last = m.index + m[0].length;
+  }
+  const current = [...blocks.keys()];
+  if (!order.length || order.length !== current.length) {
+    throw new Error('order lists ' + order.length + ' sections, file has ' + current.length);
+  }
+  for (const id of order) if (!blocks.has(id)) throw new Error('unknown section: ' + id);
+  if (order.join() === current.join()) return 0;
+  const rebuilt = order.map(id => blocks.get(id)).join('');
+  writeFileSync(SOURCE, file.slice(0, first) + rebuilt + file.slice(last));
+  return order.filter((id, i) => id !== current[i]).length;
+}
+
 const EDITOR_JS = String.raw`
 (() => {
   const originals = new Map(); // el -> innerHTML at load (or at last save)
@@ -142,7 +188,7 @@ const EDITOR_JS = String.raw`
 
   const bar = document.createElement('div');
   bar.id = 'ce-bar';
-  bar.innerHTML = '<span id="ce-count"></span><button id="ce-save">Save</button>';
+  bar.innerHTML = '<span id="ce-count"></span><button id="ce-mode">Layout</button><button id="ce-save">Save</button>';
   const css = document.createElement('style');
   css.textContent = [
     '#ce-bar{position:fixed;bottom:18px;right:18px;z-index:99999;display:flex;gap:10px;align-items:center;',
@@ -150,6 +196,20 @@ const EDITOR_JS = String.raw`
     'box-shadow:0 4px 20px rgba(0,0,0,.4)}',
     '#ce-save{background:#4a7c59;color:#fff;border:0;padding:6px 16px;border-radius:999px;cursor:pointer;font-size:13px}',
     '#ce-save:disabled{background:#444;cursor:default}',
+    '#ce-mode{background:#333;color:#eee;border:0;padding:6px 14px;border-radius:999px;cursor:pointer;font-size:13px}',
+    '#ce-mode.on{background:#c9a227;color:#1b1b1b}',
+    'body.le-mode [contenteditable]{cursor:default}',
+    'body.le-mode .le-hot:hover{outline:1px dashed rgba(201,162,39,.85);outline-offset:2px}',
+    '#le-ov{position:absolute;z-index:99998;pointer-events:none;display:none;outline:1px solid rgba(201,162,39,.9)}',
+    '#le-ov .le-h{position:absolute;left:0;right:0;height:14px;pointer-events:auto;cursor:ns-resize;',
+    'background:rgba(201,162,39,.85);border-radius:3px}',
+    '#le-ov .le-top{top:-7px}  #le-ov .le-bot{bottom:-7px}',
+    '#le-ov .le-tag{position:absolute;right:0;top:-30px;background:#1b1b1b;color:#e9d9a4;font:11px/1.6 -apple-system,sans-serif;',
+    'padding:2px 8px;border-radius:4px;white-space:nowrap}',
+    '.le-grip{position:absolute;top:8px;left:8px;z-index:99997;display:none;align-items:center;gap:6px;',
+    'background:#1b1b1b;color:#e9d9a4;border:0;border-radius:999px;padding:5px 12px;font:11px/1.4 -apple-system,sans-serif;cursor:grab}',
+    'body.le-mode .le-grip{display:inline-flex}',
+    'section.le-dragging{opacity:.55;outline:2px dashed rgba(201,162,39,.9)}',
     '[contenteditable="true"]:hover{outline:1px dashed rgba(120,160,255,.6);outline-offset:2px}',
     '[contenteditable="true"]:focus{outline:2px solid rgba(120,160,255,.9);outline-offset:2px;cursor:text}',
   ].join('');
@@ -157,8 +217,18 @@ const EDITOR_JS = String.raw`
   document.body.appendChild(bar);
   const count = bar.querySelector('#ce-count');
   const saveBtn = bar.querySelector('#ce-save');
+  const modeBtn = bar.querySelector('#ce-mode');
 
   const refresh = () => {
+    if (LAYOUT) {
+      var n = spacing.size + (orderDirty ? 1 : 0);
+      count.textContent = n
+        ? (spacing.size ? spacing.size + ' spacing change' + (spacing.size > 1 ? 's' : '') : '')
+          + (spacing.size && orderDirty ? ' + ' : '') + (orderDirty ? 'section order' : '')
+        : 'layout mode — click an element, drag its gold bars';
+      saveBtn.disabled = !n;
+      return;
+    }
     count.textContent = dirty.size ? dirty.size + ' unsaved edit' + (dirty.size > 1 ? 's' : '') : 'copy-edit mode';
     saveBtn.disabled = !dirty.size;
   };
@@ -194,9 +264,9 @@ const EDITOR_JS = String.raw`
     refresh();
   }
 
-  saveBtn.addEventListener('click', save);
+  saveBtn.addEventListener('click', () => (LAYOUT ? saveLayout() : save()));
   window.addEventListener('keydown', e => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); save(); }
+    if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); LAYOUT ? saveLayout() : save(); }
   });
 
   // ── drag & drop photo swap ──
@@ -252,9 +322,209 @@ const EDITOR_JS = String.raw`
       flash(out.of > 1 ? 'photo swapped ✓ (this card only — ' + (out.of - 1) + ' other use' + (out.of > 2 ? 's' : '') + ' of the old image untouched)' : 'photo swapped ✓');
     } catch (err) { flash('swap failed: ' + err.message); }
   });
-  window.addEventListener('beforeunload', e => { if (dirty.size) e.preventDefault(); });
+  window.addEventListener('beforeunload', e => { if (dirty.size || spacing.size || orderDirty) e.preventDefault(); });
+
+
+  // ── layout mode: nudge spacing, reorder sections ──
+  // Spacing is expressed as margin on a generated CSS path, never as inline
+  // style, so the markup stays clean and the whole pass is one style block.
+  var LAYOUT = false, sel = null, orderDirty = false;
+  var spacing = new Map();   // selector -> {mt, mb}
+  var baseOrder = [];
+
+  var liveStyle = document.createElement('style');
+  liveStyle.id = 'le-live';
+  document.head.appendChild(liveStyle);
+
+  function secIds() {
+    return [].slice.call(document.querySelectorAll('body > section')).map(function (x) { return x.id; });
+  }
+
+  function cssPath(el) {
+    var parts = [], n = el;
+    while (n && n.nodeType === 1 && n !== document.body) {
+      if (n.id) { parts.unshift('#' + n.id); return parts.join(' > '); }
+      var par = n.parentElement; if (!par) break;
+      var i = Array.prototype.indexOf.call(par.children, n) + 1;
+      parts.unshift(n.tagName.toLowerCase() + ':nth-child(' + i + ')');
+      n = par;
+    }
+    parts.unshift('body');
+    return parts.join(' > ');
+  }
+
+  function buildCss() {
+    var out = [];
+    spacing.forEach(function (v, k) {
+      var d = [];
+      if (typeof v.mt === 'number') d.push('margin-top:' + Math.round(v.mt) + 'px');
+      if (typeof v.mb === 'number') d.push('margin-bottom:' + Math.round(v.mb) + 'px');
+      if (d.length) out.push(k + ' { ' + d.join('; ') + ' }');
+    });
+    return out.join('\n');
+  }
+  function renderLive() { liveStyle.textContent = buildCss(); }
+
+  var ov = document.createElement('div');
+  ov.id = 'le-ov';
+  ov.innerHTML = '<div class="le-h le-top"></div><div class="le-h le-bot"></div><div class="le-tag"></div>';
+  document.body.appendChild(ov);
+  var tag = ov.querySelector('.le-tag');
+
+  function placeOverlay() {
+    if (!sel) { ov.style.display = 'none'; return; }
+    var r = sel.getBoundingClientRect();
+    ov.style.display = 'block';
+    ov.style.top = (r.top + window.scrollY) + 'px';
+    ov.style.left = (r.left + window.scrollX) + 'px';
+    ov.style.width = r.width + 'px';
+    ov.style.height = r.height + 'px';
+    var cur = spacing.get(cssPath(sel)) || {};
+    var cs = getComputedStyle(sel);
+    var mt = typeof cur.mt === 'number' ? cur.mt : parseFloat(cs.marginTop) || 0;
+    var mb = typeof cur.mb === 'number' ? cur.mb : parseFloat(cs.marginBottom) || 0;
+    var cls = (typeof sel.className === 'string' ? sel.className : '').split(/\s+/)
+      .filter(function (c) { return c && c !== 'le-hot'; })[0];
+    tag.textContent = sel.tagName.toLowerCase() + (cls ? '.' + cls : '')
+      + '  ↑' + Math.round(mt) + '  ↓' + Math.round(mb);
+  }
+
+  function select(el) {
+    sel = el;
+    placeOverlay();
+    refresh();
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!LAYOUT) return;
+    if (e.target.closest('#ce-bar') || e.target.closest('#le-ov') || e.target.closest('.le-grip')) return;
+    e.preventDefault(); e.stopPropagation();
+    var el = e.target;
+    if (el === document.body || el.tagName === 'HTML') return;
+    select(el);
+  }, true);
+
+  // drag a handle: down = more space on that side
+  var drag = null;
+  ov.addEventListener('mousedown', function (e) {
+    var h = e.target.closest('.le-h');
+    if (!h || !sel) return;
+    e.preventDefault();
+    var key = cssPath(sel), cur = spacing.get(key) || {};
+    var cs = getComputedStyle(sel);
+    drag = {
+      side: h.classList.contains('le-top') ? 'mt' : 'mb',
+      y0: e.clientY, key: key,
+      base: h.classList.contains('le-top')
+        ? (typeof cur.mt === 'number' ? cur.mt : parseFloat(cs.marginTop) || 0)
+        : (typeof cur.mb === 'number' ? cur.mb : parseFloat(cs.marginBottom) || 0)
+    };
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!drag) return;
+    var v = Math.max(0, Math.round((drag.base + (e.clientY - drag.y0)) / 2) * 2);
+    var cur = spacing.get(drag.key) || {};
+    cur[drag.side] = v;
+    spacing.set(drag.key, cur);
+    renderLive(); placeOverlay();
+  });
+  window.addEventListener('mouseup', function () { if (drag) { drag = null; refresh(); } });
+
+  // arrow keys nudge the selected element's spacing
+  window.addEventListener('keydown', function (e) {
+    if (!LAYOUT || !sel || e.metaKey || e.ctrlKey) return;
+    if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+    e.preventDefault();
+    var step = e.shiftKey ? 10 : 2, key = cssPath(sel);
+    var cur = spacing.get(key) || {};
+    var cs = getComputedStyle(sel);
+    var base = typeof cur.mt === 'number' ? cur.mt : parseFloat(cs.marginTop) || 0;
+    cur.mt = Math.max(0, base + (e.key === 'ArrowDown' ? step : -step));
+    spacing.set(key, cur);
+    renderLive(); placeOverlay(); refresh();
+  });
+
+  // ── section reorder ──
+  function addGrips() {
+    var secs = document.querySelectorAll('body > section');
+    for (var i = 0; i < secs.length; i++) {
+      var s0 = secs[i];
+      if (s0.querySelector('.le-grip')) continue;
+      if (getComputedStyle(s0).position === 'static') s0.style.position = 'relative';
+      var g = document.createElement('button');
+      g.type = 'button';
+      g.className = 'le-grip';
+      g.textContent = '⁙ ' + (s0.id || 'section');
+      s0.insertBefore(g, s0.firstChild);
+    }
+  }
+
+  var dragSec = null;
+  document.addEventListener('mousedown', function (e) {
+    if (!LAYOUT) return;
+    var g = e.target.closest && e.target.closest('.le-grip');
+    if (!g) return;
+    e.preventDefault(); e.stopPropagation();
+    dragSec = g.closest('section');
+    dragSec.classList.add('le-dragging');
+    ov.style.display = 'none';
+  }, true);
+  window.addEventListener('mousemove', function (e) {
+    if (!dragSec) return;
+    var secs = [].slice.call(document.querySelectorAll('body > section'));
+    var di = secs.indexOf(dragSec);
+    for (var i = 0; i < secs.length; i++) {
+      if (i === di) continue;
+      var r = secs[i].getBoundingClientRect();
+      var mid = r.top + r.height / 2;
+      if (i < di && e.clientY < mid) { secs[i].parentNode.insertBefore(dragSec, secs[i]); orderDirty = true; break; }
+      if (i > di && e.clientY > mid) { secs[i].parentNode.insertBefore(dragSec, secs[i].nextSibling); orderDirty = true; break; }
+    }
+  });
+  window.addEventListener('mouseup', function () {
+    if (!dragSec) return;
+    dragSec.classList.remove('le-dragging');
+    dragSec = null;
+    refresh();
+  });
+
+  function setMode(on) {
+    LAYOUT = on;
+    document.body.classList.toggle('le-mode', on);
+    modeBtn.classList.toggle('on', on);
+    modeBtn.textContent = on ? 'Text' : 'Layout';
+    originals.forEach(function (_v, el) {
+      el.contentEditable = on ? 'false' : 'true';
+      el.classList.toggle('le-hot', on);
+    });
+    if (on) addGrips(); else { sel = null; ov.style.display = 'none'; }
+    refresh();
+  }
+
+  async function saveLayout() {
+    var order = secIds();
+    saveBtn.textContent = 'Saving…';
+    try {
+      var r = await fetch('/__layout', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ css: buildCss(), order: order })
+      });
+      var out = await r.json();
+      if (out.error) { saveBtn.textContent = 'Layout failed'; flash(out.error); }
+      else {
+        saveBtn.textContent = 'Saved ✓';
+        baseOrder = order; orderDirty = false;
+      }
+    } catch (err) { saveBtn.textContent = 'Save failed'; }
+    setTimeout(function () { saveBtn.textContent = 'Save'; refresh(); }, 1800);
+  }
+
+  modeBtn.addEventListener('click', () => setMode(!LAYOUT));
+  window.addEventListener('scroll', () => { if (LAYOUT && sel) placeOverlay(); }, { passive: true });
+  window.addEventListener('resize', () => { if (LAYOUT && sel) placeOverlay(); });
 
   mark();
+  baseOrder = secIds();
   refresh();
 })();
 `;
@@ -276,6 +546,24 @@ createServer((req, res) => {
     });
     return;
   }
+  if (req.method === 'POST' && url.pathname === '/__layout') {
+    let body = '';
+    req.on('data', d => (body += d));
+    req.on('end', () => {
+      try {
+        const { css, order } = JSON.parse(body);
+        if (typeof css === 'string') writeOverrides(css);
+        const moved = Array.isArray(order) && order.length ? reorderSections(order) : 0;
+        console.log('[layout] rules saved, ' + moved + ' section(s) moved');
+        res.writeHead(200, { 'Content-Type': 'application/json' }).end(JSON.stringify({ ok: true, moved }));
+      } catch (e) {
+        console.log('[layout] FAILED ' + e.message);
+        res.writeHead(500, { 'Content-Type': 'application/json' }).end(JSON.stringify({ error: String(e.message || e) }));
+      }
+    });
+    return;
+  }
+
   if (req.method === 'POST' && url.pathname === '/__save') {
     let body = '';
     req.on('data', c => (body += c));

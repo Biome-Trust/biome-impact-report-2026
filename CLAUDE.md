@@ -39,6 +39,27 @@ where a whole block is outstanding, a `.note` line saying what is needed. `grep 
 Stat cards carry a "verified by X" line where a source exists — delete the line rather
 than inventing a source.
 
+
+## Layout mode (in the browser editor)
+The pill has a **Layout / Text** toggle. Layout mode does two things and deliberately
+not a third:
+
+- **Spacing.** Click any element; drag the gold bar on its top or bottom edge to add or
+  remove space. Arrow keys nudge 2px, Shift+arrow 10px. Values snap to even numbers.
+- **Section order.** Every `<section>` gets a grip; drag it to reorder the report.
+- **Not free positioning.** Dragging elements to arbitrary coordinates would write absolute
+  pixel positions and break the responsive layout (this page is checked on mobile). Spacing
+  plus reorder covers the same intent and survives a window resize.
+
+Spacing is written to a single `<style id="le-overrides">` block in the head, keyed by a
+generated CSS path (`#cover > div:nth-child(2) > h1:nth-child(2)`). Two consequences worth
+knowing: a spacing pass is a ~4-line diff and can be undone by deleting that one block; but
+the selectors are positional, so if the markup around an element changes, its override can
+land on the wrong node — re-check spacing after structural edits.
+
+Section reorder physically moves the `<section>` blocks. Each block owns its trailing blank
+lines, so a no-op reorder is byte-identical (verified).
+
 ## Gotchas
 - Editing is done in the browser via `scripts/copy-edit-server.mjs` (ported from
   `Mangaroa-Farms/impact`). It writes exact-string replacements back into `index.html`,
