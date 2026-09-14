@@ -46,8 +46,15 @@ not a third:
 
 - **Spacing.** Click any element; drag the gold bar on its top or bottom edge to add or
   remove space. Arrow keys nudge 2px, Shift+arrow 10px. Values snap to even numbers.
-- **Text size.** With an element selected, drag the green **T** bar on its right edge (up =
-  larger), or press `+` / `-` (1px, 4px with Shift). Half-pixel precision.
+- **Size.** With an element selected, drag the green bar on its right edge (up = larger), or
+  press `+` / `-`. What it changes depends on the element: text gets **font-size** (1px steps,
+  4px with Shift); an image or any element with no text of its own gets **width** (4px steps,
+  20px with Shift) with `height:auto` so it keeps its aspect. The readout says `T` or `W` so
+  you can see which axis you are on.
+- **Scope: this one vs all.** The chip at the top-left of the selection toggles between the
+  clicked element and every element sharing its class — `all .eyebrow (17)`. Use it for
+  repeated furniture. Note it flattens deliberate local variation: the eyebrows are 15px,
+  12px and 10.5px in different contexts, and a global change makes them all one size.
 - **Section order.** Every `<section>` gets a grip; drag it to reorder the report.
 - **Watch the ⚠ pinned flag.** Most headings are sized with `clamp()` so they scale with the
   window. Overriding one writes a fixed px value, which pins it — it will then be oversized on
@@ -57,8 +64,11 @@ not a third:
   pixel positions and break the responsive layout (this page is checked on mobile). Spacing
   plus reorder covers the same intent and survives a window resize.
 
-Spacing is written to a single `<style id="le-overrides">` block in the head, keyed by a
-generated CSS path (`#cover > div:nth-child(2) > h1:nth-child(2)`). Two consequences worth
+Everything is written to a single `<style id="le-overrides">` block in the head, keyed either
+by a generated CSS path (`#cover > div:nth-child(2) > h1:nth-child(2)`) or by a class
+(`.eyebrow`) when scoped to all. **Every declaration carries `!important`** — it is an override
+layer and has to beat the page's own rules; a bare `.eyebrow` loses to `.imgstat .eyebrow`
+otherwise, which silently changes only some of the matches. Two consequences worth
 knowing: a spacing pass is a ~4-line diff and can be undone by deleting that one block; but
 the selectors are positional, so if the markup around an element changes, its override can
 land on the wrong node — re-check spacing after structural edits.

@@ -210,6 +210,9 @@ const EDITOR_JS = String.raw`
     'color:#fff;font:bold 10px/1 -apple-system,sans-serif}',
     '#le-ov .le-tag{position:absolute;right:0;top:-30px;background:#1b1b1b;color:#e9d9a4;font:11px/1.6 -apple-system,sans-serif;',
     'padding:2px 8px;border-radius:4px;white-space:nowrap}',
+    '#le-ov .le-scope{position:absolute;left:0;top:-30px;pointer-events:auto;cursor:pointer;border:0;',
+    'background:#4a7c59;color:#fff;font:11px/1.6 -apple-system,sans-serif;padding:2px 9px;border-radius:4px}',
+    '#le-ov .le-scope.all{background:#c9a227;color:#1b1b1b;font-weight:600}',
     '.le-grip{position:absolute;top:8px;left:8px;z-index:99997;display:none;align-items:center;gap:6px;',
     'background:#1b1b1b;color:#e9d9a4;border:0;border-radius:999px;padding:5px 12px;font:11px/1.4 -apple-system,sans-serif;cursor:grab}',
     'body.le-mode .le-grip{display:inline-flex}',
@@ -380,6 +383,38 @@ const EDITOR_JS = String.raw`
     return found;
   }
 
+  // The green handle means different things by element: text gets font-size,
+  // anything without its own text (images, logo wrappers, media) gets width —
+  // font-size on an <img> silently does nothing, which is the bug this fixes.
+  function sizesByWidth(el) {
+    if (/^(IMG|SVG|VIDEO|CANVAS|PICTURE)$/.test(el.tagName)) return true;
+    return ![].some.call(el.childNodes, function (n) {
+      return n.nodeType === 3 && n.textContent.trim();
+    });
+  }
+  function sizeOf(el, cur) {
+    if (sizesByWidth(el)) {
+      return typeof cur.w === 'number' ? cur.w : Math.round(el.getBoundingClientRect().width);
+    }
+    return typeof cur.fs === 'number' ? cur.fs : parseFloat(getComputedStyle(el).fontSize) || 16;
+  }
+
+  // A change can target just the clicked element (positional path) or every
+  // element of the same kind (its class, or failing that its tag). Scoping to a
+  // class is what you want for repeated furniture like .eyebrow.
+  var scopeAll = false;
+  function classOf(el) {
+    return (typeof el.className === 'string' ? el.className : '')
+      .split(/\s+/).filter(function (c) { return c && c !== 'le-hot'; })[0] || '';
+  }
+  function groupSel(el) {
+    var c = classOf(el);
+    return c ? '.' + c : el.tagName.toLowerCase();
+  }
+  function activeKey() {
+    return scopeAll ? groupSel(sel) : cssPath(sel);
+  }
+
   function buildCss() {
     var out = [];
     spacing.forEach(function (v, k) {
@@ -387,7 +422,10 @@ const EDITOR_JS = String.raw`
       if (typeof v.mt === 'number') d.push('margin-top:' + Math.round(v.mt) + 'px');
       if (typeof v.mb === 'number') d.push('margin-bottom:' + Math.round(v.mb) + 'px');
       if (typeof v.fs === 'number') d.push('font-size:' + (Math.round(v.fs * 10) / 10) + 'px');
-      if (d.length) out.push(k + ' { ' + d.join('; ') + ' }');
+      if (typeof v.w === 'number') d.push('width:' + Math.round(v.w) + 'px', 'max-width:none', 'height:auto');
+      // this is an override layer and has to beat the page's own rules — a bare
+      // .eyebrow loses to .imgstat .eyebrow, so every declaration is !important
+      if (d.length) out.push(k + ' { ' + d.map(function (x) { return x + ' !important'; }).join('; ') + ' }');
     });
     return out.join('\n');
   }
@@ -396,9 +434,32 @@ const EDITOR_JS = String.raw`
   var ov = document.createElement('div');
   ov.id = 'le-ov';
   ov.innerHTML = '<div class="le-h le-top"></div><div class="le-h le-bot"></div>'
-    + '<div class="le-size" title="drag up for larger text"></div><div class="le-tag"></div>';
+    + '<div class="le-size" title="drag up to enlarge (text size, or width for images)"></div>'
+    + '<button type="button" class="le-scope"></button><div class="le-tag"></div>';
   document.body.appendChild(ov);
   var tag = ov.querySelector('.le-tag');
+  var scopeBtn = ov.querySelector('.le-scope');
+
+  function paintScope() {
+    if (!sel) return;
+    var g = groupSel(sel);
+    var n = document.querySelectorAll(g).length;
+    scopeBtn.textContent = scopeAll ? ('all ' + g + ' (' + n + ')') : 'this one';
+    scopeBtn.classList.toggle('all', scopeAll);
+    scopeBtn.title = scopeAll
+      ? 'applying to every ' + g + ' on the page — click for this one only'
+      : 'applying to this element only — click to apply to all ' + n + ' ' + g;
+  }
+
+  scopeBtn.addEventListener('click', function (e) {
+    e.preventDefault(); e.stopPropagation();
+    if (!sel) return;
+    var from = activeKey();
+    scopeAll = !scopeAll;
+    var to = activeKey();
+    if (spacing.has(from) && from !== to) { spacing.set(to, spacing.get(from)); spacing.delete(from); }
+    renderLive(); placeOverlay(); refresh();
+  });
 
   function placeOverlay() {
     if (!sel) { ov.style.display = 'none'; return; }
@@ -408,21 +469,26 @@ const EDITOR_JS = String.raw`
     ov.style.left = (r.left + window.scrollX) + 'px';
     ov.style.width = r.width + 'px';
     ov.style.height = r.height + 'px';
-    var cur = spacing.get(cssPath(sel)) || {};
+    var cur = spacing.get(activeKey()) || {};
     var cs = getComputedStyle(sel);
     var mt = typeof cur.mt === 'number' ? cur.mt : parseFloat(cs.marginTop) || 0;
     var mb = typeof cur.mb === 'number' ? cur.mb : parseFloat(cs.marginBottom) || 0;
-    var fs = typeof cur.fs === 'number' ? cur.fs : parseFloat(cs.fontSize) || 0;
+    var byW = sizesByWidth(sel);
+    var sizeVal = sizeOf(sel, cur);
+    var pinned = !byW && typeof cur.fs === 'number' && isFluid(sel);
     var cls = (typeof sel.className === 'string' ? sel.className : '').split(/\s+/)
       .filter(function (c) { return c && c !== 'le-hot'; })[0];
     tag.textContent = sel.tagName.toLowerCase() + (cls ? '.' + cls : '')
       + '  ↑' + Math.round(mt) + '  ↓' + Math.round(mb)
-      + '  T' + (Math.round(fs * 10) / 10) + 'px'
-      + (typeof cur.fs === 'number' && isFluid(sel) ? '  ⚠ pinned' : '');
+      + (byW ? '  W' : '  T') + (Math.round(sizeVal * 10) / 10) + 'px'
+      + (pinned ? '  ⚠ pinned' : '');
+    paintScope();
   }
 
   function select(el) {
     sel = el;
+    // a fresh selection starts scoped to itself unless a group rule already exists
+    scopeAll = spacing.has(groupSel(el)) && !spacing.has(cssPath(el));
     placeOverlay();
     refresh();
   }
@@ -442,16 +508,16 @@ const EDITOR_JS = String.raw`
     var sz = e.target.closest('.le-size');
     if (sz && sel) {
       e.preventDefault();
-      var k0 = cssPath(sel), c0 = spacing.get(k0) || {};
-      drag = { side: 'fs', y0: e.clientY, key: k0,
-        base: typeof c0.fs === 'number' ? c0.fs : parseFloat(getComputedStyle(sel).fontSize) || 16 };
-      if (isFluid(sel)) flash('this text scales with the window — resizing pins it');
+      var k0 = activeKey(), c0 = spacing.get(k0) || {};
+      var byW0 = sizesByWidth(sel);
+      drag = { side: byW0 ? 'w' : 'fs', y0: e.clientY, key: k0, base: sizeOf(sel, c0) };
+      if (!byW0 && isFluid(sel)) flash('this text scales with the window — resizing pins it');
       return;
     }
     var h = e.target.closest('.le-h');
     if (!h || !sel) return;
     e.preventDefault();
-    var key = cssPath(sel), cur = spacing.get(key) || {};
+    var key = activeKey(), cur = spacing.get(key) || {};
     var cs = getComputedStyle(sel);
     drag = {
       side: h.classList.contains('le-top') ? 'mt' : 'mb',
@@ -464,9 +530,10 @@ const EDITOR_JS = String.raw`
   window.addEventListener('mousemove', function (e) {
     if (!drag) return;
     var cur = spacing.get(drag.key) || {};
-    var v = drag.side === 'fs'
-      ? Math.max(8, Math.round((drag.base - (e.clientY - drag.y0) / 3) * 2) / 2)
-      : Math.max(0, Math.round((drag.base + (e.clientY - drag.y0)) / 2) * 2);
+    var dy = e.clientY - drag.y0;
+    var v = drag.side === 'fs' ? Math.max(8, Math.round((drag.base - dy / 3) * 2) / 2)
+          : drag.side === 'w'  ? Math.max(16, Math.round(drag.base - dy))
+          : Math.max(0, Math.round((drag.base + dy) / 2) * 2);
     cur[drag.side] = v;
     spacing.set(drag.key, cur);
     renderLive(); placeOverlay();
@@ -478,18 +545,20 @@ const EDITOR_JS = String.raw`
     if (!LAYOUT || !sel || e.metaKey || e.ctrlKey) return;
     if (e.key === '+' || e.key === '=' || e.key === '-' || e.key === '_') {
       e.preventDefault();
-      var fstep = e.shiftKey ? 4 : 1;
-      var fk = cssPath(sel), fc = spacing.get(fk) || {};
-      var fbase = typeof fc.fs === 'number' ? fc.fs : parseFloat(getComputedStyle(sel).fontSize) || 16;
-      fc.fs = Math.max(8, fbase + ((e.key === '-' || e.key === '_') ? -fstep : fstep));
+      var fk = activeKey(), fc = spacing.get(fk) || {};
+      var byWk = sizesByWidth(sel);
+      var fstep = byWk ? (e.shiftKey ? 20 : 4) : (e.shiftKey ? 4 : 1);
+      var fbase = sizeOf(sel, fc);
+      var nv = fbase + ((e.key === '-' || e.key === '_') ? -fstep : fstep);
+      if (byWk) fc.w = Math.max(16, nv); else fc.fs = Math.max(8, nv);
       spacing.set(fk, fc);
-      if (isFluid(sel)) flash('this text scales with the window — resizing pins it');
+      if (!byWk && isFluid(sel)) flash('this text scales with the window — resizing pins it');
       renderLive(); placeOverlay(); refresh();
       return;
     }
     if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
     e.preventDefault();
-    var step = e.shiftKey ? 10 : 2, key = cssPath(sel);
+    var step = e.shiftKey ? 10 : 2, key = activeKey();
     var cur = spacing.get(key) || {};
     var cs = getComputedStyle(sel);
     var base = typeof cur.mt === 'number' ? cur.mt : parseFloat(cs.marginTop) || 0;
