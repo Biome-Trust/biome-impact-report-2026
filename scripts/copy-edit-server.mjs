@@ -110,7 +110,7 @@ const OVERRIDE_OPEN = '<style id="le-overrides">';
 
 function writeOverrides(css) {
   let file = readFileSync(SOURCE, 'utf8');
-  const block = OVERRIDE_OPEN + '\n/* spacing set in layout mode — safe to hand-edit or delete */\n'
+  const block = OVERRIDE_OPEN + '\n/* spacing and text size set in layout mode — safe to hand-edit or delete */\n'
     + css.trim() + '\n</style>';
   const at = file.indexOf(OVERRIDE_OPEN);
   if (at === -1) {
@@ -204,6 +204,10 @@ const EDITOR_JS = String.raw`
     '#le-ov .le-h{position:absolute;left:0;right:0;height:14px;pointer-events:auto;cursor:ns-resize;',
     'background:rgba(201,162,39,.85);border-radius:3px}',
     '#le-ov .le-top{top:-7px}  #le-ov .le-bot{bottom:-7px}',
+    '#le-ov .le-size{position:absolute;top:0;bottom:0;width:14px;right:-7px;pointer-events:auto;cursor:ns-resize;',
+    'background:rgba(74,124,89,.9);border-radius:3px}',
+    '#le-ov .le-size::after{content:"T";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);',
+    'color:#fff;font:bold 10px/1 -apple-system,sans-serif}',
     '#le-ov .le-tag{position:absolute;right:0;top:-30px;background:#1b1b1b;color:#e9d9a4;font:11px/1.6 -apple-system,sans-serif;',
     'padding:2px 8px;border-radius:4px;white-space:nowrap}',
     '.le-grip{position:absolute;top:8px;left:8px;z-index:99997;display:none;align-items:center;gap:6px;',
@@ -223,9 +227,9 @@ const EDITOR_JS = String.raw`
     if (LAYOUT) {
       var n = spacing.size + (orderDirty ? 1 : 0);
       count.textContent = n
-        ? (spacing.size ? spacing.size + ' spacing change' + (spacing.size > 1 ? 's' : '') : '')
+        ? (spacing.size ? spacing.size + ' layout change' + (spacing.size > 1 ? 's' : '') : '')
           + (spacing.size && orderDirty ? ' + ' : '') + (orderDirty ? 'section order' : '')
-        : 'layout mode — click an element, drag its gold bars';
+        : 'layout mode — click an element; gold bars = spacing, green T = text size';
       saveBtn.disabled = !n;
       return;
     }
@@ -353,12 +357,36 @@ const EDITOR_JS = String.raw`
     return parts.join(' > ');
   }
 
+  // a heading sized with clamp()/vw scales with the window; overriding it with a
+  // fixed px pins it, which shows up as oversized type on mobile. Detect and warn.
+  var fluidCache = new Map();
+  function isFluid(el) {
+    var key = cssPath(el);
+    if (fluidCache.has(key)) return fluidCache.get(key);
+    var found = false;
+    for (var i = 0; i < document.styleSheets.length && !found; i++) {
+      var rules;
+      try { rules = document.styleSheets[i].cssRules; } catch (err) { continue; }
+      if (!rules) continue;
+      for (var j = 0; j < rules.length; j++) {
+        var r = rules[j];
+        if (!r.selectorText || !r.style || !r.style.fontSize) continue;
+        var fsv = r.style.fontSize;
+        if (fsv.indexOf('clamp') === -1 && fsv.indexOf('vw') === -1) continue;
+        try { if (el.matches(r.selectorText)) { found = true; break; } } catch (err) {}
+      }
+    }
+    fluidCache.set(key, found);
+    return found;
+  }
+
   function buildCss() {
     var out = [];
     spacing.forEach(function (v, k) {
       var d = [];
       if (typeof v.mt === 'number') d.push('margin-top:' + Math.round(v.mt) + 'px');
       if (typeof v.mb === 'number') d.push('margin-bottom:' + Math.round(v.mb) + 'px');
+      if (typeof v.fs === 'number') d.push('font-size:' + (Math.round(v.fs * 10) / 10) + 'px');
       if (d.length) out.push(k + ' { ' + d.join('; ') + ' }');
     });
     return out.join('\n');
@@ -367,7 +395,8 @@ const EDITOR_JS = String.raw`
 
   var ov = document.createElement('div');
   ov.id = 'le-ov';
-  ov.innerHTML = '<div class="le-h le-top"></div><div class="le-h le-bot"></div><div class="le-tag"></div>';
+  ov.innerHTML = '<div class="le-h le-top"></div><div class="le-h le-bot"></div>'
+    + '<div class="le-size" title="drag up for larger text"></div><div class="le-tag"></div>';
   document.body.appendChild(ov);
   var tag = ov.querySelector('.le-tag');
 
@@ -383,10 +412,13 @@ const EDITOR_JS = String.raw`
     var cs = getComputedStyle(sel);
     var mt = typeof cur.mt === 'number' ? cur.mt : parseFloat(cs.marginTop) || 0;
     var mb = typeof cur.mb === 'number' ? cur.mb : parseFloat(cs.marginBottom) || 0;
+    var fs = typeof cur.fs === 'number' ? cur.fs : parseFloat(cs.fontSize) || 0;
     var cls = (typeof sel.className === 'string' ? sel.className : '').split(/\s+/)
       .filter(function (c) { return c && c !== 'le-hot'; })[0];
     tag.textContent = sel.tagName.toLowerCase() + (cls ? '.' + cls : '')
-      + '  ↑' + Math.round(mt) + '  ↓' + Math.round(mb);
+      + '  ↑' + Math.round(mt) + '  ↓' + Math.round(mb)
+      + '  T' + (Math.round(fs * 10) / 10) + 'px'
+      + (typeof cur.fs === 'number' && isFluid(sel) ? '  ⚠ pinned' : '');
   }
 
   function select(el) {
@@ -407,6 +439,15 @@ const EDITOR_JS = String.raw`
   // drag a handle: down = more space on that side
   var drag = null;
   ov.addEventListener('mousedown', function (e) {
+    var sz = e.target.closest('.le-size');
+    if (sz && sel) {
+      e.preventDefault();
+      var k0 = cssPath(sel), c0 = spacing.get(k0) || {};
+      drag = { side: 'fs', y0: e.clientY, key: k0,
+        base: typeof c0.fs === 'number' ? c0.fs : parseFloat(getComputedStyle(sel).fontSize) || 16 };
+      if (isFluid(sel)) flash('this text scales with the window — resizing pins it');
+      return;
+    }
     var h = e.target.closest('.le-h');
     if (!h || !sel) return;
     e.preventDefault();
@@ -422,8 +463,10 @@ const EDITOR_JS = String.raw`
   });
   window.addEventListener('mousemove', function (e) {
     if (!drag) return;
-    var v = Math.max(0, Math.round((drag.base + (e.clientY - drag.y0)) / 2) * 2);
     var cur = spacing.get(drag.key) || {};
+    var v = drag.side === 'fs'
+      ? Math.max(8, Math.round((drag.base - (e.clientY - drag.y0) / 3) * 2) / 2)
+      : Math.max(0, Math.round((drag.base + (e.clientY - drag.y0)) / 2) * 2);
     cur[drag.side] = v;
     spacing.set(drag.key, cur);
     renderLive(); placeOverlay();
@@ -433,6 +476,17 @@ const EDITOR_JS = String.raw`
   // arrow keys nudge the selected element's spacing
   window.addEventListener('keydown', function (e) {
     if (!LAYOUT || !sel || e.metaKey || e.ctrlKey) return;
+    if (e.key === '+' || e.key === '=' || e.key === '-' || e.key === '_') {
+      e.preventDefault();
+      var fstep = e.shiftKey ? 4 : 1;
+      var fk = cssPath(sel), fc = spacing.get(fk) || {};
+      var fbase = typeof fc.fs === 'number' ? fc.fs : parseFloat(getComputedStyle(sel).fontSize) || 16;
+      fc.fs = Math.max(8, fbase + ((e.key === '-' || e.key === '_') ? -fstep : fstep));
+      spacing.set(fk, fc);
+      if (isFluid(sel)) flash('this text scales with the window — resizing pins it');
+      renderLive(); placeOverlay(); refresh();
+      return;
+    }
     if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
     e.preventDefault();
     var step = e.shiftKey ? 10 : 2, key = cssPath(sel);

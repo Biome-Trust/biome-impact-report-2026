@@ -46,7 +46,13 @@ not a third:
 
 - **Spacing.** Click any element; drag the gold bar on its top or bottom edge to add or
   remove space. Arrow keys nudge 2px, Shift+arrow 10px. Values snap to even numbers.
+- **Text size.** With an element selected, drag the green **T** bar on its right edge (up =
+  larger), or press `+` / `-` (1px, 4px with Shift). Half-pixel precision.
 - **Section order.** Every `<section>` gets a grip; drag it to reorder the report.
+- **Watch the ⚠ pinned flag.** Most headings are sized with `clamp()` so they scale with the
+  window. Overriding one writes a fixed px value, which pins it — it will then be oversized on
+  mobile. The readout flags this the moment it happens. If a heading needs to be permanently
+  bigger, better to change its `clamp()` in the stylesheet than to pin it here.
 - **Not free positioning.** Dragging elements to arbitrary coordinates would write absolute
   pixel positions and break the responsive layout (this page is checked on mobile). Spacing
   plus reorder covers the same intent and survives a window resize.
