@@ -23,6 +23,8 @@ Run one editor server at a time, per repo.
 
 ## Publishing
 
-The repo is **private** and has no GitHub Pages site yet, by decision — it goes public
-when the report is ready to ship. To publish: flip visibility to public, then enable
-Pages on `main` / root. There is no build step; the file in the repo is the file served.
+**Live at https://biome-trust.github.io/biome-impact-report-2026/** (public since 2026-09-15).
+
+There is no build step: Pages serves `main` / root, so the file in the repo is the file
+served. A push to `main` republishes within a minute or two. Prove any prod question with
+a byte-diff: `diff <(curl -s https://biome-trust.github.io/biome-impact-report-2026/) index.html`

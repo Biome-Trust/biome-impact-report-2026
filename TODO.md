@@ -20,4 +20,4 @@ All copy is now in from the Figma. Only outstanding item:
 - [ ] Aotearoa map for the kaupapa section
 - [ ] Decide whether the report ships open or gated — the reach reports are currently
       plaintext on a public repo, which was a deliberate "temporary" call worth revisiting
-- [ ] Flip repo public + enable Pages at publish time
+- [x] Flip repo public + enable Pages — LIVE at https://biome-trust.github.io/biome-impact-report-2026/ (2026-09-15)

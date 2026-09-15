@@ -1,6 +1,7 @@
 copy-edit-failures.json
 .DS_Store
 
-# full-res photo sources — kept on disk, out of git
-*.png
-!fonts/*
+# full-res photo sources dropped in the repo root — kept on disk, out of git.
+# Scoped to the root on purpose: img/*.png are real page assets and MUST ship,
+# or the cover logo and Ma Earth wordmark 404 on the published site.
+/*.png
