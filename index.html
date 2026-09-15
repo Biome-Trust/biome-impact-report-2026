@@ -354,7 +354,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .title-band--tight { min-height: clamp(480px, 76vh, 800px); align-items: flex-end; padding-bottom: clamp(26px, 4vh, 48px); }
 .title-band--tight h2 { font-size: clamp(30px, 4.4vw, 58px); }
 .title-band--tight + .band { padding-top: clamp(38px, 5vh, 64px); }
-.title-band .eyebrow { color: var(--sage); }
+/* sage disappears into foliage on these photographs — measured at 1.8:1 at
+   worst against the endowment image. A light grey clears 4.5:1. */
+.title-band .eyebrow { color: #EDEEE9; }
 .title-band h2 { color: #fff; margin: 0; font-size: clamp(38px, 6.4vw, 86px); line-height: 1.02; }
 .title-band h2 em { font-style: italic; }
 
@@ -406,7 +408,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
    full band of air above it — half the usual top padding, and the first
    group label sits flush rather than adding its own 52px */
 #partners { padding-top: clamp(32px, 5.5vh, 66px); }
-#partners .group-label:first-of-type { margin-top: 0; }
+#partners .group-label:first-of-type, #partners-wider .group-label:first-of-type { margin-top: 0; }
 .deco-sunflowers {
   left: 0; right: 0; bottom: 0; width: 100%;
   /* fixed strip height: at full aspect this image is ~670px tall and would sit
@@ -608,6 +610,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 }
 .yr:hover { border-color: var(--green-light); }
 .yr.on { background: var(--green-dark); border-color: var(--green-dark); color: #fff; }
+/* ongoing relationships read as a separate kind of filter, not another year */
+.yr-active { border-style: dashed; color: var(--green-mid); }
+.yr-active.on { border-style: solid; }
 .card { position: relative; }
 .year-badge {
   position: absolute; top: 10px; right: 10px; z-index: 1;
@@ -933,6 +938,12 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         </div>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERS — the wider circle ============ -->
+<section class="band band-cream" id="partners-wider">
+  <div class="wrap">
     <h3 class="group-label">And the wider circle</h3>
     <p class="fine" style="margin-top:10px">Gifts made in FY26 (1 April 2025 – 31 March 2026) first. Badges show the most recent year each relationship was recorded on <a href="https://biometrust.earth/gifts" target="_blank" rel="noopener">biometrust.earth/gifts</a>.</p>
     <div class="giftfilter">
@@ -955,12 +966,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         <span class="gf-count" id="gf-count"></span>
       </div>
       <div class="gf-years">
+        <button type="button" class="yr" data-year="2026">2026</button>
+        <button type="button" class="yr" data-year="2025">2025</button>
+        <button type="button" class="yr" data-year="2024">2024</button>
+        <button type="button" class="yr" data-year="2023">2023</button>
+        <button type="button" class="yr" data-year="2022">2022</button>
         <button type="button" class="yr on" data-year="">All years</button>
-      <button type="button" class="yr" data-year="2026">2026</button>
-      <button type="button" class="yr" data-year="2025">2025</button>
-      <button type="button" class="yr" data-year="2024">2024</button>
-      <button type="button" class="yr" data-year="2023">2023</button>
-      <button type="button" class="yr" data-year="2022">2022</button>
+        <button type="button" class="yr yr-active" data-year="2027">2027 — Still active</button>
       </div>
     </div>
     <div class="grid">
@@ -1617,7 +1629,7 @@ addEventListener('load', () => setTimeout(() => {
   const theme = document.getElementById('gf-theme');
   const countEl = document.getElementById('gf-count');
   const years = [...document.querySelectorAll('.gf-years .yr')];
-  const cards = [...document.querySelectorAll('#partners .grid .card')];
+  const cards = [...document.querySelectorAll('#partners-wider .grid .card')];
   if (!q || !cards.length) return;
 
   let year = '';
@@ -1639,7 +1651,7 @@ addEventListener('load', () => setTimeout(() => {
       empty = document.createElement('p');
       empty.className = 'gf-empty';
       empty.textContent = 'No organisations match those filters.';
-      document.querySelector('#partners .grid').after(empty);
+      document.querySelector('#partners-wider .grid').after(empty);
     } else if (shown && empty) empty.remove();
   };
 
