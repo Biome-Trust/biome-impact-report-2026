@@ -422,6 +422,39 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .logo-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; }
 .logo-row img { height: 44px; width: auto; }
 
+
+/* ---- featured partners ----
+   A condensed take on the gifts-page feature: one main image, the essentials
+   beside it, and a strip of three landscape slots underneath. Half the detail
+   of the full gifts entry — no milestones, stats or pull quote. */
+.features { display: flex; flex-direction: column; gap: clamp(40px, 6vw, 72px); margin-top: 30px; }
+.feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  grid-template-areas: "main body" "strip strip";
+  gap: clamp(20px, 2.6vw, 34px);
+  align-items: start;
+}
+.feature-main { grid-area: main; }
+.feature-main img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; display: block; }
+.feature-body { grid-area: body; padding-top: 4px; }
+.feature-tag {
+  font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--tan); margin: 0 0 10px;
+}
+.feature-body h3 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(24px, 2.8vw, 34px); line-height: 1.12; margin: 0 0 10px; color: var(--green-dark);
+}
+.feature-sub { font-size: clamp(15px, 1.6vw, 17.5px); line-height: 1.55; color: var(--text-mid); margin: 0 0 20px; }
+.feature-body .meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.feature-strip { grid-area: strip; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1.4vw, 18px); }
+.feature-strip img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; display: block; }
+
+@media (max-width: 760px) {
+  .feature { grid-template-columns: 1fr; grid-template-areas: "main" "body" "strip"; }
+}
+
 /* ---- principle tiles ---- */
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(16px, 2vw, 26px); margin-top: 44px; }
 .tile { background: var(--tan-light); border-radius: 4px; padding: 26px 24px; }
@@ -614,76 +647,124 @@ footer a { color: var(--tan); }
     <h2>Backing partners <em>across Aotearoa</em></h2>
     <p class="lede measure">All 21 organisations we supported in the year ended 31 March 2026. A few of this year's deeper partnerships first.</p>
     <h3 class="group-label">A few of this year's deeper partnerships</h3>
-    <div class="grid grid-feature">
-        <article class="card card-feature">
+    <div class="features">
+      <article class="feature">
+        <div class="feature-main">
           <img src="img/partner-learning-environment.jpg" alt="The Learning Environment">
-          <div class="card-body">
-            <h3>The Learning Environment</h3>
-            <p>Holistic learning experiences for wellbeing</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Manawatū-Whanganui</span>
-              <a class="site" href="https://www.learningenvironment.nz/" target="_blank" rel="noopener">Website →</a>
-            </div>
+        </div>
+        <div class="feature-body">
+          <p class="feature-tag">Multi-year partner</p>
+          <h3>The Learning Environment</h3>
+          <p class="feature-sub">Holistic learning experiences for wellbeing</p>
+          <div class="meta">
+            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Manawatū-Whanganui</span>
+            <a class="site" href="https://www.learningenvironment.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
-        </article>
-        <article class="card card-feature">
+        </div>
+        <div class="feature-strip">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+        </div>
+      </article>
+      <article class="feature">
+        <div class="feature-main">
           <img src="img/partner-papawhakaritorito.jpg" alt="Papawhakaritorito Trust">
-          <div class="card-body">
-            <h3>Papawhakaritorito Trust</h3>
-            <p>Elevating Indigenous seed, soil and food sovereignty</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
-              <a class="site" href="https://www.papawhakaritorito.com/" target="_blank" rel="noopener">Website →</a>
-            </div>
+        </div>
+        <div class="feature-body">
+          <p class="feature-tag">Multi-year partner</p>
+          <h3>Papawhakaritorito Trust</h3>
+          <p class="feature-sub">Elevating Indigenous seed, soil and food sovereignty</p>
+          <div class="meta">
+            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+            <a class="site" href="https://www.papawhakaritorito.com/" target="_blank" rel="noopener">Website →</a>
           </div>
-        </article>
-        <article class="card card-feature">
+        </div>
+        <div class="feature-strip">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+        </div>
+      </article>
+      <article class="feature">
+        <div class="feature-main">
           <img src="img/partner-toru-education.jpg" alt="Toru Education">
-          <div class="card-body">
-            <h3>Toru Education</h3>
-            <p>Skills for sustainable living</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
-              <a class="site" href="https://www.toru.nz/" target="_blank" rel="noopener">Website →</a>
-            </div>
+        </div>
+        <div class="feature-body">
+          <p class="feature-tag">FY26 partner</p>
+          <h3>Toru Education</h3>
+          <p class="feature-sub">Skills for sustainable living</p>
+          <div class="meta">
+            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+            <a class="site" href="https://www.toru.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
-        </article>
-        <article class="card card-feature">
+        </div>
+        <div class="feature-strip">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+        </div>
+      </article>
+      <article class="feature">
+        <div class="feature-main">
           <img src="img/partner-centre-strategic-phil.jpg" alt="Centre for Strategic Philanthropy">
-          <div class="card-body">
-            <h3>Centre for Strategic Philanthropy</h3>
-            <p>Bringing together New Zealand givers</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Auckland</span>
-              <a class="site" href="https://cspnz.org.nz" target="_blank" rel="noopener">Website →</a>
-            </div>
+        </div>
+        <div class="feature-body">
+          <p class="feature-tag">FY26 partner</p>
+          <h3>Centre for Strategic Philanthropy</h3>
+          <p class="feature-sub">Bringing together New Zealand givers</p>
+          <div class="meta">
+            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Auckland</span>
+            <a class="site" href="https://cspnz.org.nz" target="_blank" rel="noopener">Website →</a>
           </div>
-        </article>
-        <article class="card card-feature">
+        </div>
+        <div class="feature-strip">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+        </div>
+      </article>
+      <article class="feature">
+        <div class="feature-main">
           <img src="img/partner-the-gift-trust.jpg" alt="The Gift Trust">
-          <div class="card-body">
-            <h3>The Gift Trust</h3>
-            <p>Facilitating giving to charitable causes</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
-              <a class="site" href="https://thegifttrust.org.nz/" target="_blank" rel="noopener">Website →</a>
-            </div>
+        </div>
+        <div class="feature-body">
+          <p class="feature-tag">FY26 partner</p>
+          <h3>The Gift Trust</h3>
+          <p class="feature-sub">Facilitating giving to charitable causes</p>
+          <div class="meta">
+            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+            <a class="site" href="https://thegifttrust.org.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
-        </article>
+        </div>
+        <div class="feature-strip">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+        </div>
+      </article>
+      <article class="feature">
+        <div class="feature-main">
+          <img src="img/partner-underground-festival.jpg" alt="UNDERGROUND Festival">
+        </div>
+        <div class="feature-body">
+          <p class="feature-tag">Multi-year partner</p>
+          <h3>UNDERGROUND Festival</h3>
+          <p class="feature-sub">Celebrating soil, food and farming</p>
+          <div class="meta">
+            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Canterbury / Waikato</span>
+            <a class="site" href="https://www.undergroundfestival.co.nz/" target="_blank" rel="noopener">Website →</a>
+          </div>
+        </div>
+        <div class="feature-strip">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+          <img src="img/slot.jpg" alt="">
+        </div>
+      </article>
     </div>
     <h3 class="group-label">And the wider circle</h3>
     <div class="grid">
-        <article class="card">
-          <img src="img/partner-underground-festival.jpg" alt="UNDERGROUND Festival">
-          <div class="card-body">
-            <h3>UNDERGROUND Festival</h3>
-            <p>Celebrating soil, food and farming</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Canterbury / Waikato</span>
-              <a class="site" href="https://www.undergroundfestival.co.nz/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
         <article class="card">
           <img src="img/partner-eco-index.jpg" alt="Eco-Index">
           <div class="card-body">
