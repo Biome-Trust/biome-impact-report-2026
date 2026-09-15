@@ -563,6 +563,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 }
 .feature-sub { font-size: clamp(15px, 1.6vw, 17.5px); line-height: 1.55; color: var(--text-mid); margin: 0 0 20px; }
 .feature-body .meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+/* .site was only sized inside .card, so here it was inheriting the 17px body */
+.feature-body .site { font-size: 15px; }
 
 .feature-points { list-style: none; margin: 0 0 20px; padding: 0; }
 .feature-points li {
@@ -650,6 +652,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
   body { font-size: 16px; }
   .cover { min-height: 88svh; }
 }
+</style>
+<style id="le-overrides">
+/* spacing and text size set in layout mode — safe to hand-edit or delete */
+#partners > div:nth-child(2) > div:nth-child(2) > article:nth-child(1) > div:nth-child(2) > div:nth-child(5) > a:nth-child(2) { font-size:15px !important }
 </style>
 </head>
 <body>
