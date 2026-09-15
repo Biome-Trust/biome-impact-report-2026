@@ -165,6 +165,24 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
   .mark, .cover h1, .cover .sub, .scroll-cue--hero { animation: none; }
 }
 
+
+/* ---- footer, after the email template ---- */
+footer { background: var(--green-dark); color: #b9c7b7; padding: clamp(52px, 8vh, 84px) var(--gut); }
+footer .wrap { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; }
+.foot-logo { width: clamp(150px, 17vw, 200px); height: auto; }
+.foot-nav { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.foot-nav a {
+  color: #fff; text-decoration: underline; text-underline-offset: 4px;
+  font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+}
+.foot-nav a:hover { color: var(--tan); }
+.foot-nav span { color: rgba(255,255,255,.35); }
+.foot-social { display: flex; gap: 20px; }
+.foot-social a { color: #cfdccd; }
+.foot-social a:hover { color: var(--tan); }
+.foot-addr { font-size: 13px; color: #9fb39e; margin: 0; }
+.foot-meta { font-size: 12.5px; color: #7e9a7d; margin: 0; }
+
 /* ---- scroll cue ---- */
 .scroll-cue {
   display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -259,12 +277,33 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
   .donut, .donut .mid, .track i, .bars .bar { transition: none; transform: none; }
 }
 
+
+/* ---- Aotearoa map ----
+   Both island outlines come from the Figma. They are placed with one shared
+   projection derived from each island's real geographic extent — the two agreed
+   to 45.1px per degree of latitude, which is why the pins land where they should. */
+.nzmap-wrap { position: relative; max-width: 560px; margin: 34px auto 10px; }
+.nzmap { width: 100%; height: auto; color: rgba(255,255,255,.55); display: block; }
+.nzmap .pin { cursor: pointer; outline: none; }
+.nzmap .halo { fill: var(--tan); opacity: 0; transition: opacity var(--beat) var(--ease); }
+.nzmap .dot { fill: var(--tan); transition: r var(--beat) var(--ease), fill var(--beat) var(--ease); }
+.nzmap .pin:hover .halo, .nzmap .pin:focus-visible .halo { opacity: .28; }
+.nzmap .pin:hover .dot, .nzmap .pin:focus-visible .dot { fill: #fff; r: 6; }
+.map-tip {
+  position: absolute; z-index: 4; pointer-events: none; max-width: 260px;
+  background: rgba(12, 22, 12, .94); color: #fff; border-radius: 4px;
+  padding: 10px 13px; font-size: 13px; line-height: 1.45;
+  transform: translate(-50%, calc(-100% - 14px));
+}
+.map-tip strong { display: block; color: var(--tan); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 5px; }
+@media (max-width: 640px) { .nzmap-wrap { max-width: 100%; } .map-tip { max-width: 200px; } }
+
 /* ---- full-bleed title band ----
    A section whose whole job is to carry a title over a photograph, the way the
    cover does. Scrim is weighted for white type at any crop. */
 .title-band {
   position: relative; overflow: hidden;
-  min-height: clamp(320px, 52vh, 560px);
+  min-height: clamp(640px, 104vh, 1120px);
   display: flex; align-items: center;
   padding: clamp(40px, 8vh, 90px) var(--gut);
   color: #fff;
@@ -274,10 +313,10 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(15,28,16,.30), rgba(15,28,16,.62));
 }
-.title-band .wrap { position: relative; z-index: 1; }
+.title-band .wrap { position: relative; z-index: 1; width: 100%; }
 /* tighter variant: shorter frame, title sitting low so it reads as a lead-in to
    the section directly beneath rather than a full-page cover */
-.title-band--tight { min-height: clamp(240px, 38vh, 400px); align-items: flex-end; padding-bottom: clamp(26px, 4vh, 48px); }
+.title-band--tight { min-height: clamp(480px, 76vh, 800px); align-items: flex-end; padding-bottom: clamp(26px, 4vh, 48px); }
 .title-band--tight h2 { font-size: clamp(30px, 4.4vw, 58px); }
 .title-band--tight + .band { padding-top: clamp(38px, 5vh, 64px); }
 .title-band .eyebrow { color: var(--tan); }
@@ -339,16 +378,15 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 /* the tui now enters from the left and sits higher, so the old right-hand
    clearance is gone and this note runs to a proper measure */
 #numbers > .wrap > .fine { max-width: 88ch; padding-right: 0; }
-#mangaroa { padding-bottom: clamp(160px, 24vh, 320px); }
+#mangaroa { padding-bottom: clamp(230px, 33vh, 420px); }
 #approach, #endowment { padding-bottom: clamp(180px, 27vh, 360px); }
 .deco-sunflowers {
   left: 0; right: 0; bottom: 0; width: 100%;
   /* fixed strip height: at full aspect this image is ~670px tall and would sit
-     behind two rows of stat cards */
-  height: clamp(130px, 20vh, 240px);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
-  opacity: .9;
+     behind two rows of stat cards. No mask — the sunflowers read at full
+     strength, with clear air above them instead of a fade. */
+  height: clamp(170px, 25vh, 300px);
+  opacity: 1;
 }
 .deco-sunflowers img { height: 100%; object-fit: cover; object-position: center bottom; }
 .deco-band {
@@ -410,14 +448,15 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .chart-title { font-size: 11.5px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--green-mid); margin: 0 0 14px; }
 
 .imgstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(14px, 1.8vw, 22px); margin-top: 22px; }
-.imgstat { position: relative; border-radius: 4px; overflow: hidden; min-height: 190px; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; color: #fff; }
-.imgstat img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.imgstat::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,28,16,.18), rgba(15,28,16,.82)); }
-.imgstat > * { position: relative; z-index: 1; }
-.imgstat .eyebrow { font-size: 10.5px; letter-spacing: .14em; color: #cbd8c9; margin: 0 0 6px; }
-.imgstat .n { font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); line-height: 1; }
-.imgstat .l { font-size: 13px; line-height: 1.45; color: #dbe4d9; margin-top: 8px; }
-.imgstat.tall { min-height: 240px; }
+.imgstat {
+  background: var(--white); border: 1px solid var(--line); border-radius: 4px;
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.imgstat img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.imgstat-body { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
+.imgstat .eyebrow { font-size: 11px; letter-spacing: .14em; color: var(--green-light); margin: 0 0 8px; }
+.imgstat .n { font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); line-height: 1; color: var(--green-dark); }
+.imgstat .l { font-size: 13.5px; line-height: 1.5; color: var(--text-mid); margin-top: 8px; }
 
 .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(14px, 1.8vw, 22px); margin-top: 34px; }
 .step { background: var(--white); border-radius: 4px; padding: 24px; }
@@ -560,9 +599,6 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .tl .y { font-family: var(--serif); font-size: 21px; color: var(--green-mid); }
 .tl .d { font-size: 13.5px; color: var(--text-mid); margin-top: 6px; line-height: 1.45; }
 
-footer { background: var(--green-dark); color: #9fb39e; padding: 54px var(--gut); font-size: 13.5px; }
-footer .wrap { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; align-items: center; }
-footer a { color: var(--tan); }
 
 @media (max-width: 640px) {
   body { font-size: 16px; }
@@ -1139,42 +1175,44 @@ footer a { color: var(--tan); }
         <p class="fine"><span class="pill">Mangaroa Valley, Upper Hutt</span>
           &nbsp; <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" class="site">Website →</a></p>
       </div>
-      <div class="panel">
-        <p class="kicker">Current land cover</p>
-        <div class="donut-wrap">
-          <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, var(--tan) 90% 100%)">
+      <div>
+        <div class="panel">
+          <p class="kicker">Current land cover</p>
+          <div class="donut-wrap">
+            <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, var(--tan) 90% 100%)">
+            </div>
+            <ul class="legend">
+              <li><i style="background:#2f5c33"></i><span><b>40%</b> Old-growth native forest</span></li>
+              <li><i style="background:#6f8f5a"></i><span><b>30%</b> Pine</span></li>
+              <li><i style="background:#c3c48a"></i><span><b>20%</b> Pasture</span></li>
+              <li><i style="background:var(--tan)"></i><span><b>10%</b> Peat, waterways, plantings &amp; homes</span></li>
+            </ul>
           </div>
-          <ul class="legend">
-            <li><i style="background:#2f5c33"></i><span><b>40%</b> Old-growth native forest</span></li>
-            <li><i style="background:#6f8f5a"></i><span><b>30%</b> Pine</span></li>
-            <li><i style="background:#c3c48a"></i><span><b>20%</b> Pasture</span></li>
-            <li><i style="background:var(--tan)"></i><span><b>10%</b> Peat, waterways, plantings &amp; homes</span></li>
-          </ul>
         </div>
+      <div class="panel" style="margin-top:18px">
+        <p class="kicker">Carbon stored</p>
+        <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:var(--green-dark)">~840,000 t</div>
+        <div class="track" style="margin-top:14px;background:var(--white)"><i style="width:90%;background:var(--tan)"></i></div>
+        <p style="font-size:13.5px;color:var(--text-mid);margin:10px 0 0">About 90% of it held in forest</p>
+      </div>
       </div>
     </div>
 
-    <div class="panel" style="margin-top:22px">
-      <p class="kicker">Carbon stored</p>
-      <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:var(--green-dark)">~840,000 t</div>
-      <div class="track" style="margin-top:14px;background:var(--white)"><i style="width:90%;background:var(--tan)"></i></div>
-      <p style="font-size:13.5px;color:var(--text-mid);margin:10px 0 0">About 90% of it held in forest</p>
-    </div>
 
     <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
     <div class="imgstats">
-      <div class="imgstat"><img src="img/mang-trees.jpg" alt=""><p class="eyebrow">Restoring the land</p><div class="n">8,546</div><div class="l">native trees planted across 3.3 ha. One third by volunteers</div></div>
-      <div class="imgstat"><img src="img/mang-predator.jpg" alt=""><p class="eyebrow">Predator control</p><div class="n">242</div><div class="l">predators removed across 78 monitored traps, plus 95 deer and goats</div></div>
-      <div class="imgstat"><img src="img/mang-kiwi.jpg" alt=""><p class="eyebrow">A first in a century</p><div class="n">1 Kiwi</div><div class="l">recorded in the Mangaroa catchment</div></div>
-      <div class="imgstat"><img src="img/mang-food.jpg" alt=""><p class="eyebrow">Growing healthy food</p><div class="n">7,012 m²</div><div class="l">of food landscape in cultivation; 48 families picked their own kai</div></div>
-      <div class="imgstat"><img src="img/mang-gate.jpg" alt=""><p class="eyebrow">Through the gate</p><div class="n">2,500+</div><div class="l">guests across 86 events</div></div>
-      <div class="imgstat"><img src="img/mang-learning.jpg" alt=""><p class="eyebrow">Hands-on learning</p><div class="n">536</div><div class="l">people through 41 hands-on sessions</div></div>
+      <div class="imgstat"><img src="img/mang-trees.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Restoring the land</p><div class="n">8,546</div><div class="l">native trees planted across 3.3 ha. One third by volunteers</div></div></div>
+      <div class="imgstat"><img src="img/mang-predator.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Predator control</p><div class="n">242</div><div class="l">predators removed across 78 monitored traps, plus 95 deer and goats</div></div></div>
+      <div class="imgstat"><img src="img/mang-kiwi.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">A first in a century</p><div class="n">1 Kiwi</div><div class="l">recorded in the Mangaroa catchment</div></div></div>
+      <div class="imgstat"><img src="img/mang-food.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Growing healthy food</p><div class="n">7,012 m²</div><div class="l">of food landscape in cultivation; 48 families picked their own kai</div></div></div>
+      <div class="imgstat"><img src="img/mang-gate.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Through the gate</p><div class="n">2,500+</div><div class="l">guests across 86 events</div></div></div>
+      <div class="imgstat"><img src="img/mang-learning.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Hands-on learning</p><div class="n">536</div><div class="l">people through 41 hands-on sessions</div></div></div>
     </div>
 
     <p class="chart-title" style="margin-top:46px">Beyond grantmaking</p>
     <div class="two-col">
-      <div class="imgstat tall"><img src="img/mang-fellows.jpg" alt=""><p class="eyebrow">Launched with Mangaroa Farms</p><div class="n">10 Earth Fellows</div><div class="l">Backed by 10 × NZ$10,000 in grants. An inaugural weekend retreat kicked off a year-long fellowship for regenerative leaders across land, food systems &amp; community housing.</div></div>
-      <div class="imgstat tall"><img src="img/mang-hui.jpg" alt=""><p class="eyebrow">Convened by Biome Trust</p><div class="n">Education Hui</div><div class="l">Education leaders from across Aotearoa gathered at Mangaroa Farms for a multi-day hui on alternative learning, AI and place-based education.</div></div>
+      <div class="imgstat"><img src="img/mang-fellows.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Launched with Mangaroa Farms</p><div class="n">10 Earth Fellows</div><div class="l">Backed by 10 × NZ$10,000 in grants. An inaugural weekend retreat kicked off a year-long fellowship for regenerative leaders across land, food systems &amp; community housing.</div></div></div>
+      <div class="imgstat"><img src="img/mang-hui.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Convened by Biome Trust</p><div class="n">Education Hui</div><div class="l">Education leaders from across Aotearoa gathered at Mangaroa Farms for a multi-day hui on alternative learning, AI and place-based education.</div></div></div>
     </div>
   </div>
 </section>
@@ -1206,10 +1244,10 @@ footer a { color: var(--tan); }
 
     <p class="chart-title" style="margin-top:46px">Funding Round 3</p>
     <div class="imgstats">
-      <div class="imgstat"><img src="img/me-projects.jpg" alt=""><div class="n">201</div><div class="l">nature projects funded</div></div>
-      <div class="imgstat"><img src="img/me-countries.jpg" alt=""><div class="n">56</div><div class="l">countries, across six continents</div></div>
-      <div class="imgstat"><img src="img/me-participants.jpg" alt=""><div class="n">11,700+</div><div class="l">crowdfunding participants</div></div>
-      <div class="imgstat"><img src="img/me-distributed.jpg" alt=""><div class="n">$2.19M</div><div class="l">distributed (USD)</div></div>
+      <div class="imgstat"><img src="img/me-projects.jpg" alt=""><div class="imgstat-body"><div class="n">201</div><div class="l">nature projects funded</div></div></div>
+      <div class="imgstat"><img src="img/me-countries.jpg" alt=""><div class="imgstat-body"><div class="n">56</div><div class="l">countries, across six continents</div></div></div>
+      <div class="imgstat"><img src="img/me-participants.jpg" alt=""><div class="imgstat-body"><div class="n">11,700+</div><div class="l">crowdfunding participants</div></div></div>
+      <div class="imgstat"><img src="img/me-distributed.jpg" alt=""><div class="imgstat-body"><div class="n">$2.19M</div><div class="l">distributed (USD)</div></div></div>
     </div>
     <p class="fine">All Ma Earth figures are USD; every other currency figure in this report is NZD. Round 3 ran in FY27, after the year covered by this report.</p>
 
@@ -1316,6 +1354,47 @@ footer a { color: var(--tan); }
   <div class="wrap">
     <p class="eyebrow">Gifts from FY26</p>
     <h2>People, place<br>and kaupapa</h2>
+    <div class="nzmap-wrap">
+      <svg class="nzmap" viewBox="0 0 470 610" role="img" aria-label="Map of Aotearoa showing where FY26 gifts landed">
+        <g class="islands" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+          <path transform="translate(224.4,18)" d="M72.0972 65.3061C69.2741 64.3922 66.5029 63.4782 63.7318 62.577C63.4196 63.0848 63.1073 63.5925 62.7951 64.0875C64.4083 65.1918 66.0346 66.2961 68.0511 67.6797C68.4935 72.8204 75.2326 83.7747 79.9943 86.1864C78.6543 90.0578 76.4686 93.9165 76.1824 97.9022C75.8961 101.85 77.5094 105.924 78.4721 110.938C76.6768 109.72 75.5839 108.996 73.8666 107.828C73.6194 109.402 73.4373 110.583 73.1771 112.296C77.5224 111.141 80.8139 111.522 84.0014 114.505C85.6667 116.053 88.9322 116.168 91.5211 116.548C94.7736 117.031 96.0356 119.062 96.6341 121.816C97.0504 123.695 97.2325 125.637 97.7789 127.49C98.5986 130.244 100.602 131.158 103.386 130.371C106.118 129.597 105.221 127.884 105.091 125.815C104.869 122.451 104.596 119.531 102.319 116.625C101.539 115.635 103.36 112.702 103.738 111.497C103.738 108.666 103.881 106.457 103.672 104.287C103.581 103.322 102.905 102.357 102.306 101.507C101.487 100.352 100.485 99.3238 98.9629 97.5341C103.165 97.2421 105.065 98.1814 106.105 101.355C106.925 103.881 108.577 106.14 109.8 108.399H116.318C116.383 108.755 116.448 109.123 116.5 109.478C114.614 110.976 112.714 112.474 110.828 113.972C111.01 114.188 111.205 114.403 111.387 114.619C112.845 114.378 114.978 113.451 115.616 114.048C116.891 115.228 117.84 117.209 118.022 118.948C118.4 122.362 120.546 125.954 117.567 129.254C119.844 135.576 119.883 142.151 120.455 148.726C120.611 150.528 124.059 154.463 128.535 152.254C129.484 151.785 131.423 152.813 132.711 153.498C139.476 157.141 146.189 160.899 152.902 164.63C154.867 165.722 156.857 166.763 158.757 167.956C165.028 171.878 172.196 171.078 177.218 165.811C177.894 165.1 178.519 164.351 179.169 163.615C182.578 159.82 185.752 156.291 191.035 154.133C195.185 152.432 198.854 150.934 203.277 151.328C204.11 151.404 205.163 151.201 205.749 151.607C208.962 153.854 212.059 156.253 215.311 158.69C208.546 165.151 207.297 174.163 204.526 182.464C203.368 185.955 202.926 189.763 202.743 193.444C202.47 198.864 197.279 199.676 194.287 202.456C193.454 203.23 190.969 202.316 190.02 202.253C189.057 205.274 188.432 207.914 187.366 210.389C185.518 214.705 185.987 218.462 189.786 221.864C188.237 223.869 186.767 225.773 185.297 227.677C184.894 227.652 184.49 227.614 184.087 227.589C183.983 225.9 183.281 223.958 183.892 222.575C184.92 220.227 184.321 219.059 182.084 218.602C173.848 216.914 165.691 216.736 158.249 221.28C156.558 222.308 155.426 224.25 154.151 225.862C153.475 226.713 153.267 228.325 152.46 228.629C148.141 230.267 149.168 233.529 149.572 236.651C150.131 241.018 150.534 241.602 155.062 244.242C152.759 248.977 150.365 253.724 148.141 258.547C147.516 259.893 147.568 261.543 146.957 262.901C146.137 264.703 145.304 267.407 143.86 267.864C138.786 269.463 139.073 274.35 136.744 277.562C136.367 278.082 136.549 279.047 136.119 279.466C133.673 281.865 131.501 284.848 128.548 286.32C122.628 289.265 120.768 294.723 117.931 299.787C116.435 302.453 114.08 304.662 112.012 306.997C110.464 308.749 108.785 310.399 107.068 311.998C105.481 313.471 103.842 314.905 102.098 316.187C100.641 317.253 99.0149 318.116 97.4277 318.98C94.2923 320.68 91.2349 322.546 87.9434 323.917C85.8358 324.793 83.7021 322.14 84.6388 319.665C85.4064 317.634 86.7075 315.464 84.1445 314.334C82.4142 313.572 79.8642 314.677 78.0038 314.042C73.7755 312.62 68.9618 311.44 65.8915 308.597C63.8099 306.667 67.2835 303.773 69.7424 302.351C70.9003 301.679 72.4225 301.615 72.7607 301.526C76.1303 296.716 78.6413 292.121 82.1279 288.389C88.3727 281.662 88.5158 273.817 87.0067 265.859C85.5756 258.281 80.8399 252.785 72.8908 250.855C66.4639 249.294 61.8324 245.829 58.0855 240.561C56.7455 238.67 53.8833 236.766 51.6586 236.702C43.6704 236.474 39.7414 231.803 36.8922 225.494C34.9928 221.305 38.6876 215.327 43.2541 214.096C46.7668 213.144 49.9673 211.113 53.3889 209.742C54.7679 209.183 56.4202 208.65 57.8123 208.891C61.8714 209.59 64.3043 207.648 66.1777 204.601C69.2871 199.562 70.3929 194.18 69.4302 188.29C69.118 186.361 69.6123 184.267 70.0026 182.299C70.6531 179.024 71.8891 175.826 72.2143 172.538C72.5005 169.708 73.3462 168.857 75.7791 170.456C78.6803 172.373 79.3698 170.583 80.2545 168.159C78.9535 167.994 77.8997 167.867 76.4165 167.677C77.5614 166.204 78.5632 164.922 79.552 163.653L79.0315 163.056C78.1339 163.45 77.2492 163.843 75.7661 164.491C75.7661 162.422 75.2717 160.391 75.9352 158.804C76.4035 157.687 78.329 156.799 79.7601 156.494C81.6335 156.1 83.6501 156.392 85.6016 156.392C85.6666 155.77 85.7317 155.148 85.7967 154.527C83.7672 154.171 81.7506 153.828 79.2137 153.384C77.4443 148.535 75.4278 142.976 75.3887 137.403C73.138 132.656 70.9784 128.087 68.5585 122.984C70.1848 122.641 71.2906 122.413 72.2534 122.21C73.034 124.52 73.6714 126.411 74.3089 128.29C74.6992 128.29 75.0765 128.29 75.4668 128.29C75.2457 123.809 77.5484 122.095 82.1409 121.842C79.9683 120.28 77.7956 118.719 75.0635 116.752C73.1771 117.818 70.5491 119.303 67.2966 121.143C66.7892 118.389 66.7761 116.104 65.9435 114.175C64.3563 110.532 62.3137 107.067 60.4143 103.563C59.0352 101.012 57.474 98.5622 56.225 95.9601C55.9258 95.3382 56.5633 94.2846 56.7715 93.4342C57.6041 93.7642 58.749 93.8531 59.2043 94.4496C61.0778 96.9248 62.7301 99.565 64.5905 102.319C67.3876 100.644 66.2688 98.5115 65.7614 96.2394C65.332 94.2592 65.6703 92.1141 65.6703 89.5755C64.9027 90.3624 64.2652 91.0225 63.4196 91.8983C62.1576 91.3017 60.7785 90.6544 58.4237 89.5374C61.39 88.4838 63.4586 87.7476 65.5272 87.0114C65.5532 86.5926 65.5922 86.1737 65.6183 85.7548C60.8696 87.6842 58.4758 85.0186 55.9128 82.1499C55.0021 81.1345 52.9725 81.0583 50.995 81.2741C52.1919 82.7592 53.6621 84.1047 54.5207 85.7675C55.1452 86.9733 55.0932 88.5854 55.0281 89.9943C55.0151 90.3244 53.2588 91.0225 52.9986 90.8067C52.0749 89.9816 51.3333 88.89 50.7088 87.8111C48.7833 84.4982 47.027 81.0837 45.0365 77.8216C43.2411 74.8894 41.3416 71.9954 39.26 69.2536C35.9945 64.9507 32.716 60.6477 29.1122 56.6112C25.8337 52.9556 26.5623 49.3253 31.0898 47.4594C32.4948 46.8755 33.4836 45.3016 34.6545 44.1846C34.3423 43.8292 34.03 43.4865 33.7308 43.1311C30.8686 44.9081 28.0064 46.6978 24.884 48.6399C22.1649 45.0985 18.7693 40.6813 15.3607 36.2513C20.1093 33.0019 21.4494 29.4986 18.301 25.0813C13.5783 18.4428 8.02306 12.3501 2.84508 6.00346C2.20759 5.21648 1.77827 4.27719 1.24486 3.41405C2.23362 3.22365 3.23538 3.03325 4.22414 2.85555C7.64576 2.24628 11.0804 1.637 14.9834 0.95157C14.7102 2.46206 14.476 3.70599 14.3329 4.48028C12.7587 5.10224 11.5488 5.57189 10.3518 6.04154C11.0284 7.13316 11.5488 8.3517 12.3944 9.291C14.424 11.5631 17.4163 13.4036 18.4701 16.0184C19.4718 18.5063 19.8491 20.956 22.23 22.8092C22.9325 23.3551 22.334 25.4875 22.334 26.8965C22.6983 27.1376 23.0626 27.3788 23.4139 27.6073C24.1554 26.5791 25.6516 25.4114 25.4955 24.5482C24.7929 20.791 27.5511 19.9533 29.6847 18.519L30.8686 19.2425C30.036 20.626 29.2163 22.0223 28.1105 23.8628C29.9058 25.0306 31.9094 26.3253 34.2642 27.8611C34.5634 26.8711 34.8106 26.0714 35.4221 24.0913C37.7509 26.0841 39.7024 27.7469 41.5888 29.3716C43.9957 26.2237 45.2316 26.4268 47.9767 30.5013C48.7443 31.631 50.5267 32.1387 51.8797 32.875C53.0246 33.4969 54.2345 34.0173 55.4054 34.5885C55.2753 34.9313 55.1582 35.274 55.0281 35.6167C53.7011 35.6928 52.3871 35.769 50.8389 35.8579C52.7904 38.7011 54.4687 41.1509 55.6786 42.928C58.2156 40.9605 60.2972 39.3358 61.7023 38.2442C64.6946 43.9942 67.6869 49.7315 70.6661 55.4688C70.471 55.4815 70.2758 55.4942 70.0807 55.5196C70.7702 58.9595 71.4597 62.412 72.0582 65.3695L72.0972 65.3061Z"/>
+          <path transform="translate(13.6,293.2)" d="M249.408 19.6393C249.824 19.6012 250.267 19.4616 250.67 19.525C252.986 19.9312 255.289 20.3882 258.034 20.9086C258.034 20.8578 257.865 21.7971 257.604 23.1299C258.788 22.5587 259.608 22.1652 261.052 21.4671C258.931 26.5571 256.642 30.5935 251.334 32.4594H259.894C260.428 33.0941 260.961 33.7414 261.481 34.3761C260.193 34.8711 258.671 36.077 257.683 35.7469C254.04 34.5284 253.923 37.6763 252.687 39.2503C250.436 42.1062 253.727 42.7917 254.872 44.4291C255.679 45.5588 255.822 47.2089 256.017 48.6559C256.199 50.0014 256.056 51.3849 256.056 52.8827C257.214 53.1747 258.372 53.4666 260.337 53.9617C257.448 57.9727 254.716 61.5522 252.231 65.3094C250.956 67.2261 250.228 69.4855 249.07 71.4783C248.419 72.5953 247.379 73.5092 246.507 74.4866C244.061 77.2283 241.576 79.9319 239.143 82.6864C238.701 83.1941 238.584 84.0953 238.063 84.4C230.791 88.6522 229.672 96.4077 226.758 103.148C224.481 108.441 220.487 112.376 215.127 114.267C211.458 115.562 208.882 117.415 207.373 120.703C204.823 126.237 205.109 131.847 207.23 137.407C206.111 138.295 204.914 139.235 203.717 140.174C203.847 140.478 203.977 140.796 204.107 141.1C208.505 139.615 212.798 138.663 216.688 142.078C218.496 143.664 219.368 148.018 217.911 149.783C216.246 151.814 214.19 151.09 211.718 147.282V152.664C209.363 151.382 207.646 150.493 205.968 149.529C204.901 148.919 203.756 147.498 202.871 147.65C197.85 148.513 192.529 148.996 187.988 151.027C181.015 154.149 174.627 158.516 167.901 162.197C163.126 164.799 159.444 168.162 158.078 173.519C157.844 174.458 157.766 175.677 157.115 176.223C152.172 180.361 153.538 185.654 154.123 190.794C154.643 195.288 153.225 199.235 150.753 202.929C148.594 206.166 146.226 209.301 144.353 212.703C143.533 214.175 143.728 216.181 143.455 217.945C143.169 219.76 143.312 221.791 142.479 223.314C140.944 226.17 138.589 228.595 137.067 231.451C136.247 232.999 136.455 235.068 136.208 236.896L137.405 237.074C136.755 238.038 136.104 239.003 135.467 239.955L135.935 240.514C136.911 240.006 137.887 239.485 138.979 238.914C139.162 239.257 139.578 239.727 139.461 239.917C138.784 241.097 138.251 242.773 137.184 243.217C135.428 243.953 133.294 243.725 131.382 244.169C126.802 245.261 123.706 247.546 122.782 252.636C122.392 254.781 119.881 256.621 118.176 258.462C115.366 261.495 109.095 261.445 109.85 267.702C110.045 269.276 103.761 273.706 101.927 273.757C101.511 273.757 100.86 273.643 100.73 273.833C97.6467 278.657 91.9613 276.841 87.655 278.555C85.4824 279.418 81.8135 279.266 80.0182 277.984C76.2713 275.306 73.1489 274.227 69.2849 277.362C68.7905 277.755 67.6717 277.413 66.4227 277.413C66.9822 276.448 67.3855 275.737 67.7888 275.039C67.5286 274.734 67.2684 274.417 67.0082 274.112C65.8243 275.001 64.6404 275.902 62.6498 277.4C62.3766 277.222 61.2057 276.486 59.7096 275.521C61.622 274.201 62.884 273.325 64.3802 272.272C62.6889 271.574 61.2057 271.396 60.4511 270.584C55.6505 265.367 55.4683 265.1 49.0934 267.588C45.6198 268.946 43.6292 267.626 43.0438 264.707C42.2632 260.835 39.3229 259.668 36.3046 258.614C35.2638 258.246 32.909 258.728 32.6618 259.376C30.5282 264.821 25.7665 261.711 22.3189 262.498C19.873 263.057 17.1279 262.308 14.5519 262.498C11.1303 262.739 8.3852 262.054 6.94109 258.906C8.05995 257.637 9.08774 256.482 10.1155 255.327H4.57327C6.83701 253.397 8.65841 251.836 10.4668 250.3C6.45972 245.959 5.47096 253.816 1.51592 252.217C1.35981 251.074 1.17767 249.5 0.904456 247.939C0.384056 245.02 1.3468 243.687 4.6123 243.446C7.56557 243.23 10.4538 242.164 14.4609 241.224C12.2492 239.879 11.2214 239.244 10.0245 238.521C12.2101 236.667 7.82577 231.819 13.381 231.006C11.7418 231.616 10.1025 232.238 8.45025 232.847C5.90029 229.052 6.87604 226.551 11.5076 225.167C8.81453 222.73 9.23085 219.291 12.1321 219.786C13.8494 220.078 15.4496 220.928 18.4029 222.007C14.0185 211.624 21.2781 206.242 25.9357 199.908C26.2349 199.502 27.5879 199.857 27.9912 199.857C28.6287 198.512 29.3183 197.039 30.0078 195.58C30.9445 196.1 31.8942 196.621 32.0373 196.709C33.0001 194.856 33.5595 192.343 35.1597 190.997C40.9622 186.06 41.0923 186.199 43.7723 187.304C41.4436 181.389 43.9675 176.375 49.0804 174.509C51.11 171.386 52.437 169.216 53.9071 167.121C54.6227 166.106 55.9627 165.395 56.379 164.316C58.7078 158.198 63.5866 157.678 69.337 157.817C71.5747 157.881 74.4109 156.472 76.0501 154.834C83.5829 147.358 91.7402 140.885 102.018 137.343C102.786 137.077 103.904 136.556 104.061 135.96C105.609 129.727 112.4 128.509 115.861 124.079C117.058 122.556 119.269 121.794 121.351 120.487C119.022 118.24 120.076 117.085 122.782 116.222C123.836 115.879 124.564 114.635 125.501 113.861C126.321 113.175 127.179 112.515 128.103 111.97C132.344 109.469 137.444 107.781 140.671 104.379C145.185 99.6191 148.854 93.8691 151.859 88.0429C154.331 83.2703 157.662 78.4595 156.777 72.481C156.621 71.4402 157.831 70.2724 158.182 69.092C159.002 66.3883 160.03 63.672 160.329 60.9048C161.031 54.4186 161.773 53.657 168.174 52.4512C170.412 52.0323 172.935 50.9788 174.458 49.4175C182.576 41.0908 186.687 31.0758 185.139 19.5631C184.553 15.222 185.841 12.5819 189.289 10.6017C192.06 9.00238 195.104 7.8473 197.889 6.27334C199.281 5.48637 200.634 4.38206 201.531 3.10004C203.73 0.0282914 210.782 -0.174798 215.816 3.51892C213.214 3.51892 211.302 3.20158 209.572 3.60776C207.711 4.03933 204.953 4.80093 204.524 6.05756C203.938 7.73306 204.589 10.6525 205.864 11.8837C207.243 13.2038 209.936 13.3054 212.109 13.6735C212.772 13.7877 213.605 13.0261 214.541 12.5819C216.61 15.1205 220.487 16.8722 216.597 20.9721C215.53 22.0891 219.355 32.3198 220.825 33.0687C223.388 34.3761 224.871 32.764 226.576 31.0758C229.23 28.4483 232.196 26.1128 235.149 23.8026C235.553 23.4853 236.671 24.1581 237.478 24.2088C239.456 24.3358 241.589 24.78 240.743 21.4036C240.574 20.7309 242.331 19.1696 243.476 18.7254C245.18 18.078 247.144 18.078 249.122 17.7861C249.096 18.243 249.057 18.7761 249.031 19.3219C247.001 20.2612 244.972 21.1879 242.929 22.1271C243.111 22.4445 243.293 22.7618 243.476 23.0791C244.738 22.7364 246 22.4064 247.053 22.1144C245.596 25.6812 244.217 29.0449 242.5 33.221C246.299 31.609 249.473 30.2635 252.947 28.7911C251.151 27.2171 247.092 30.365 247.73 25.732C248.979 25.5162 250.176 25.3004 251.659 25.0466C250.813 23.0664 250.072 21.3402 249.343 19.6012L249.408 19.6393Z"/>
+        </g>
+        <g class="pins">
+        <g class="pin" tabindex="0" role="button" transform="translate(297.8,128.5)" data-place="Tāmaki Makaurau, Auckland" data-orgs="Garden to Table (HQ)" aria-label="Tāmaki Makaurau, Auckland: Garden to Table (HQ)">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin" tabindex="0" role="button" transform="translate(316.2,171.4)" data-place="Waikato" data-orgs="UNDERGROUND Festival (2027)" aria-label="Waikato: UNDERGROUND Festival (2027)">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin" tabindex="0" role="button" transform="translate(418.2,197.1)" data-place="Tolaga Bay" data-orgs="Tolaga Bay Heritage Trust" aria-label="Tolaga Bay: Tolaga Bay Heritage Trust">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin" tabindex="0" role="button" transform="translate(275.4,239.0)" data-place="Taranaki" data-orgs="Roebuck Farms" aria-label="Taranaki: Roebuck Farms">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin" tabindex="0" role="button" transform="translate(307.7,267.4)" data-place="Whanganui" data-orgs="The Learning Environment" aria-label="Whanganui: The Learning Environment">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin" tabindex="0" role="button" transform="translate(306.0,311.2)" data-place="Kāpiti" data-orgs="Toru Education" aria-label="Kāpiti: Toru Education">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin" tabindex="0" role="button" transform="translate(308.4,321.1)" data-place="Greater Wellington" data-orgs="Mangaroa Farms · Growing Sustainability NZ · Papawhakaritorito Trust · Natural Leaders · Fundsorter · Te Āti Awa" aria-label="Greater Wellington: Mangaroa Farms · Growing Sustainability NZ · Papawhakaritorito Trust · Natural Leaders · Fundsorter · Te Āti Awa">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin" tabindex="0" role="button" transform="translate(323.7,316.6)" data-place="Carterton, Wairarapa" data-orgs="Wairarapa Earth School" aria-label="Carterton, Wairarapa: Wairarapa Earth School">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin" tabindex="0" role="button" transform="translate(317.9,333.7)" data-place="Pirinoa, South Wairarapa" data-orgs="Ruamāhanga Farm Foundation" aria-label="Pirinoa, South Wairarapa: Ruamāhanga Farm Foundation">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin" tabindex="0" role="button" transform="translate(176.8,381.1)" data-place="West Coast" data-orgs="Island Futures" aria-label="West Coast: Island Futures">
+          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        </g>
+      </svg>
+      <div class="map-tip" hidden><strong class="mt-place"></strong><span class="mt-orgs"></span></div>
+    </div>
     <div class="place-lists">
       <div class="place">
         <h4>Around the motu</h4>
@@ -1370,8 +1449,27 @@ footer a { color: var(--tan); }
 
 <footer>
   <div class="wrap">
-    <div>Biome Trust · Impact Report 2026</div>
-    <div>Follow us <strong>@biometrust.earth</strong> · <a href="https://biometrust.earth">biometrust.earth</a></div>
+    <img class="foot-logo" src="img/biome-trust-logo.png" alt="Biome Trust">
+    <nav class="foot-nav">
+      <a href="https://biometrust.earth/about" target="_blank" rel="noopener">About</a>
+      <span aria-hidden="true">|</span>
+      <a href="https://biometrust.earth/gifts" target="_blank" rel="noopener">Gifts</a>
+      <span aria-hidden="true">|</span>
+      <a href="https://biometrust.earth/contact" target="_blank" rel="noopener">Contact</a>
+    </nav>
+    <div class="foot-social">
+      <a href="https://www.instagram.com/biometrust.earth/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/biometrust/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 10.5v6M7.5 7.6v.1M11.5 16.5v-3.2a2 2 0 0 1 4 0v3.2"/></svg>
+      </a>
+      <a href="https://www.x.com/biometrust" target="_blank" rel="noopener" aria-label="X">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4l16 16M20 4L4 20"/></svg>
+      </a>
+    </div>
+    <p class="foot-addr">Biome Trust · 52 Mangaroa Valley Road, Upper Hutt, WLG 5371</p>
+    <p class="foot-meta">Impact Report 2026 · Year ended 31 March 2026</p>
   </div>
 </footer>
 
@@ -1407,6 +1505,33 @@ addEventListener('load', () => setTimeout(() => {
   sections.forEach(x => io.observe(x));
 })();
 
+
+
+// Map pins: hover or focus to see who sits there. Positioned against the
+// wrapper so the tip tracks the pin at any map size.
+(() => {
+  const wrap = document.querySelector('.nzmap-wrap');
+  if (!wrap) return;
+  const tip = wrap.querySelector('.map-tip');
+  const place = tip.querySelector('.mt-place');
+  const orgs = tip.querySelector('.mt-orgs');
+  const show = pin => {
+    place.textContent = pin.dataset.place;
+    orgs.textContent = pin.dataset.orgs;
+    const pr = pin.getBoundingClientRect(), wr = wrap.getBoundingClientRect();
+    tip.style.left = (pr.left + pr.width / 2 - wr.left) + 'px';
+    tip.style.top = (pr.top - wr.top) + 'px';
+    tip.hidden = false;
+  };
+  const hide = () => { tip.hidden = true; };
+  for (const pin of wrap.querySelectorAll('.pin')) {
+    pin.addEventListener('mouseenter', () => show(pin));
+    pin.addEventListener('focus', () => show(pin));
+    pin.addEventListener('mouseleave', hide);
+    pin.addEventListener('blur', hide);
+  }
+  wrap.addEventListener('mouseleave', hide);
+})();
 
 // Gift filtering: search, theme and year, matching the gifts page. Filters only
 // the wider-circle grid; the featured blocks above always stay put.
