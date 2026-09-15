@@ -8,8 +8,16 @@
 - [x] Render verified: fonts load, all images 200, band rhythm holds
 
 ## Next — content pass
-All copy is now in from the Figma. Only outstanding item:
-- [ ] Partner website URLs — 3 of 16 known; the other 13 are visible placeholders, not guesses
+All copy is now in from the Figma.
+- [x] Giftee directory pulled from biometrust.earth/gifts (2026-09-16): 68 orgs,
+      FY22–FY26, each with the site's own photo, blurb and website URL. Year
+      counts match the source exactly (45/23/20/12/8).
+- [ ] Region pills — only the 20 curated ones carry a region; the gifts page
+      does not publish region, so the rest show none
+- [ ] Milestone bullets for Toru Education, Centre for Strategic Philanthropy,
+      The Gift Trust — still visibly tagged as borrowed figures
+- [ ] Which partners run into FY27 — the 2027 chip still matches nothing
+- [ ] Forestry wording on the Mangaroa offerings row is ours, not Mangaroa's
 
 ## Next — assets
 - [x] Cover photo — Mangaroa River aerial, the same shot as the Figma cover
