@@ -185,6 +185,7 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 /* keep the closing footnote out from under the bird */
 #numbers .fine:last-of-type { max-width: min(100%, 62ch); padding-right: clamp(0px, 20vw, 300px); }
 #mangaroa { padding-bottom: clamp(160px, 24vh, 320px); }
+#approach, #endowment { padding-bottom: clamp(180px, 27vh, 360px); }
 .deco-sunflowers {
   left: 0; right: 0; bottom: 0; width: 100%;
   /* fixed strip height: at full aspect this image is ~670px tall and would sit
@@ -195,6 +196,14 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
   opacity: .9;
 }
 .deco-sunflowers img { height: 100%; object-fit: cover; object-position: center bottom; }
+.deco-band {
+  left: 0; right: 0; bottom: 0; width: 100%;
+  height: clamp(150px, 24vh, 300px);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 65%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 65%);
+}
+.deco-band img { height: 100%; object-fit: cover; object-position: center bottom; }
+
 @media (max-width: 900px) { .deco { display: none; } }
 
 /* ---- numbers, charts and tiles ---- */
@@ -714,6 +723,7 @@ footer a { color: var(--tan); }
 
 <!-- ============ OUR APPROACH ============ -->
 <section class="band band-cream" id="approach">
+  <div class="deco deco-band"><img src="img/band-approach.webp" alt=""></div>
   <div class="wrap">
     <p class="eyebrow">How we work</p>
     <h2>Our approach</h2>
@@ -864,6 +874,7 @@ footer a { color: var(--tan); }
 
 <!-- ============ ENDOWMENT ============ -->
 <section class="band band-cream" id="endowment">
+  <div class="deco deco-band"><img src="img/band-endowment.webp" alt=""></div>
   <div class="wrap">
     <p class="eyebrow">Our endowment</p>
     <h2>Stewarding our endowment</h2>
