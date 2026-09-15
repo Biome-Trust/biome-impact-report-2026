@@ -148,12 +148,40 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 @media (prefers-reduced-motion: reduce) { #sound.on .bars i { animation: none; height: 9px; } }
 @media (max-width: 640px) { #sound { left: 12px; bottom: 12px; padding: 8px 13px 8px 10px; } }
 
+/* ---- cover reveal ----
+   Staggered fade-and-rise on arrival. `both` fill keeps each element hidden
+   until its turn, so nothing flashes before the animation starts. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+.mark, .cover h1, .cover .sub, .scroll-cue--hero { animation: rise 1s var(--ease) both; }
+.mark            { animation-delay: .15s; }
+.cover h1        { animation-delay: .40s; }
+.cover .sub      { animation-delay: .70s; }
+.scroll-cue--hero { animation-delay: 1.0s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mark, .cover h1, .cover .sub, .scroll-cue--hero { animation: none; }
+}
+
 /* ---- scroll cue ---- */
 .scroll-cue {
-  position: absolute; left: 50%; bottom: clamp(18px, 4vh, 40px); transform: translateX(-50%);
-  z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
   color: #fff; text-decoration: none;
 }
+.scroll-cue--hero {
+  position: absolute; left: 50%; bottom: clamp(18px, 4vh, 40px); transform: translateX(-50%);
+  z-index: 2;
+}
+/* in-flow version for the foot of a light section */
+.scroll-cue--inline {
+  position: relative; z-index: 2;
+  width: max-content; margin: clamp(48px, 7vh, 88px) auto 0;
+  color: var(--green-mid);
+}
+.scroll-cue--inline span { opacity: .75; }
+.scroll-cue--inline:hover span, .scroll-cue--inline:hover svg { opacity: 1; }
 .scroll-cue span {
   font-size: 11px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase;
   opacity: .85;
@@ -397,7 +425,7 @@ footer a { color: var(--tan); }
     <h1><em>Rewilding</em><br>Resources</h1>
     <p class="sub">Impact Report - Year ended 31 March 2026</p>
   </div>
-  <a class="scroll-cue" href="#kia-ora" aria-label="Scroll to the report">
+  <a class="scroll-cue scroll-cue--hero" href="#kia-ora" aria-label="Scroll to the report">
     <span>Scroll</span>
     <svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
       <path d="M11 3v18M4 14l7 7 7-7"/>
@@ -427,6 +455,12 @@ footer a { color: var(--tan); }
       <p>We acknowledge tangata whenua and the wider people of Aotearoa New Zealand, and our shared interest in a healthy and flourishing society.</p>
       <p>We also thank our trustees, team, advisers, collaborators and community members for their care, skill and practical support. The progress reflected in this report is collective, and we are grateful to everyone who helped make it possible.</p>
     </div>
+    <a class="scroll-cue scroll-cue--inline" href="#numbers" aria-label="Scroll to Giving by numbers">
+      <span>Scroll</span>
+      <svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 3v18M4 14l7 7 7-7"/>
+      </svg>
+    </a>
   </div>
 </section>
 
@@ -1053,6 +1087,33 @@ footer a { color: var(--tan); }
 </footer>
 
 <script>
+// Failsafe for the cover reveal. The animation holds opacity:0 until its turn
+// (fill-mode both); if it never runs — an extension blocking animations, a
+// browser that ignores the keyframes — the cover would stay invisible. Worth
+// guarding on the one screen everybody sees.
+addEventListener('load', () => setTimeout(() => {
+  for (const el of document.querySelectorAll('.mark, .cover h1, .cover .sub, .scroll-cue--hero')) {
+    if (parseFloat(getComputedStyle(el).opacity) < 0.9) {
+      el.style.animation = 'none';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    }
+  }
+}, 3000));
+
+// Scroll cues: land the target section flush with the top of the viewport.
+// The default anchor jump is fine, but this also works if a sticky header is
+// ever added, and it honours a reduced-motion preference.
+document.addEventListener('click', e => {
+  const cue = e.target.closest && e.target.closest('.scroll-cue');
+  if (!cue) return;
+  const target = document.querySelector(cue.getAttribute('href'));
+  if (!target) return;
+  e.preventDefault();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+});
+
 // Ambient birdsong: opt-in only, remembered per visitor, faded rather than cut.
 (() => {
   const btn = document.getElementById('sound');
