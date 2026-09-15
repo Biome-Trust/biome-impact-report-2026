@@ -295,6 +295,22 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
   transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
 }
 .deco-tui.in { opacity: .92; transform: none; }
+
+/* a second tui perched left of the Kia ora heading, mirrored so he faces into
+   the page rather than off the edge */
+.deco-tui-kia {
+  /* no mirror: he already faces right, so at the left edge he looks into the
+     page. The mask keeps the bird and drops the branch before it reaches copy. */
+  left: -1%; top: 1%;
+  width: clamp(150px, 17vw, 260px);
+  transform: translateY(18px);
+  opacity: 0;
+  transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
+  -webkit-mask-image: linear-gradient(90deg, #000 24%, transparent 72%);
+  mask-image: linear-gradient(90deg, #000 24%, transparent 72%);
+}
+.in-view .deco-tui-kia { opacity: .9; transform: none; }
+@media (prefers-reduced-motion: reduce) { .deco-tui-kia { transition: none; } }
 @media (prefers-reduced-motion: reduce) { .deco-tui { transition: none; } }
 #numbers { padding-bottom: clamp(150px, 22vh, 300px); }
 /* the tui now enters from the left and sits higher, so the old right-hand
@@ -455,6 +471,38 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
   .feature { grid-template-columns: 1fr; grid-template-areas: "main" "body" "strip"; }
 }
 
+
+/* ---- gift filtering ---- */
+.giftfilter { margin: 22px 0 6px; }
+.gf-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.gf-search {
+  display: inline-flex; align-items: center; gap: 9px; flex: 1 1 280px;
+  background: var(--white); border: 1px solid var(--line); border-radius: 999px;
+  padding: 9px 16px; color: var(--text-light);
+}
+.gf-search input { border: 0; outline: 0; background: none; font: inherit; font-size: 14.5px; color: var(--text-dark); width: 100%; }
+#gf-theme {
+  border: 1px solid var(--line); border-radius: 999px; background: var(--white);
+  padding: 9px 14px; font: inherit; font-size: 14.5px; color: var(--text-dark); cursor: pointer;
+}
+.gf-count { font-size: 13.5px; color: var(--text-light); margin-left: auto; }
+.gf-years { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.yr {
+  border: 1px solid var(--line); background: var(--white); color: var(--text-mid);
+  border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 13px; cursor: pointer;
+  transition: background var(--beat) var(--ease), color var(--beat) var(--ease);
+}
+.yr:hover { border-color: var(--green-light); }
+.yr.on { background: var(--green-dark); border-color: var(--green-dark); color: #fff; }
+.card { position: relative; }
+.year-badge {
+  position: absolute; top: 10px; right: 10px; z-index: 1;
+  background: rgba(20, 30, 20, .72); color: #fff; font-size: 12px; letter-spacing: .04em;
+  border-radius: 999px; padding: 3px 10px; backdrop-filter: blur(4px);
+}
+.card[hidden] { display: none !important; }
+.gf-empty { font-size: 15px; color: var(--text-light); margin-top: 26px; }
+
 /* ---- principle tiles ---- */
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(16px, 2vw, 26px); margin-top: 44px; }
 .tile { background: var(--tan-light); border-radius: 4px; padding: 26px 24px; }
@@ -509,6 +557,7 @@ footer a { color: var(--tan); }
 <!-- ============ KIA ORA ============ -->
 <section class="band band-paper" id="kia-ora">
   <div class="deco deco-ponga"><img src="img/botanical-ponga.webp" alt=""></div>
+  <div class="deco deco-tui-kia"><img src="img/botanical-tui.webp" alt=""></div>
   <div class="wrap two-col">
     <div>
       <p class="eyebrow">A word from the trustees</p>
@@ -648,7 +697,7 @@ footer a { color: var(--tan); }
     <p class="lede measure">All 21 organisations we supported in the year ended 31 March 2026. A few of this year's deeper partnerships first.</p>
     <h3 class="group-label">A few of this year's deeper partnerships</h3>
     <div class="features">
-      <article class="feature">
+      <article class="feature" data-themes="education" data-years="2025 2023 2022" data-name="The Learning Environment">
         <div class="feature-main">
           <img src="img/partner-learning-environment.jpg" alt="The Learning Environment">
         </div>
@@ -667,7 +716,7 @@ footer a { color: var(--tan); }
           <img src="img/slot.jpg" alt="">
         </div>
       </article>
-      <article class="feature">
+      <article class="feature" data-themes="seed indigenous" data-years="2026 2025 2024" data-name="Papawhakaritorito Trust">
         <div class="feature-main">
           <img src="img/partner-papawhakaritorito.jpg" alt="Papawhakaritorito Trust">
         </div>
@@ -686,7 +735,7 @@ footer a { color: var(--tan); }
           <img src="img/slot.jpg" alt="">
         </div>
       </article>
-      <article class="feature">
+      <article class="feature" data-themes="education" data-years="2025 2024 2022" data-name="Toru Education">
         <div class="feature-main">
           <img src="img/partner-toru-education.jpg" alt="Toru Education">
         </div>
@@ -705,7 +754,7 @@ footer a { color: var(--tan); }
           <img src="img/slot.jpg" alt="">
         </div>
       </article>
-      <article class="feature">
+      <article class="feature" data-themes="finance" data-years="2026 2025 2024 2023 2022" data-name="Centre for Strategic Philanthropy">
         <div class="feature-main">
           <img src="img/partner-centre-strategic-phil.jpg" alt="Centre for Strategic Philanthropy">
         </div>
@@ -724,7 +773,7 @@ footer a { color: var(--tan); }
           <img src="img/slot.jpg" alt="">
         </div>
       </article>
-      <article class="feature">
+      <article class="feature" data-themes="finance" data-years="2025 2024 2023" data-name="The Gift Trust">
         <div class="feature-main">
           <img src="img/partner-the-gift-trust.jpg" alt="The Gift Trust">
         </div>
@@ -743,7 +792,7 @@ footer a { color: var(--tan); }
           <img src="img/slot.jpg" alt="">
         </div>
       </article>
-      <article class="feature">
+      <article class="feature" data-themes="regen community" data-years="2026 2025" data-name="UNDERGROUND Festival">
         <div class="feature-main">
           <img src="img/partner-underground-festival.jpg" alt="UNDERGROUND Festival">
         </div>
@@ -764,9 +813,38 @@ footer a { color: var(--tan); }
       </article>
     </div>
     <h3 class="group-label">And the wider circle</h3>
+    <div class="giftfilter">
+      <div class="gf-row">
+        <label class="gf-search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+          <input type="search" id="gf-q" placeholder="Search partners, regions, themes" aria-label="Search partners">
+        </label>
+        <select id="gf-theme" aria-label="Filter by theme">
+          <option value="">All themes</option>
+        <option value="conservation">Conservation</option>
+        <option value="regen">Regenerative food & farming</option>
+        <option value="seed">Seed & food sovereignty</option>
+        <option value="education">Education & rangatahi</option>
+        <option value="finance">Sustainable finance</option>
+        <option value="indigenous">Indigenous-led</option>
+        <option value="media">Storytelling & media</option>
+        <option value="community">Community & wellbeing</option>
+        </select>
+        <span class="gf-count" id="gf-count"></span>
+      </div>
+      <div class="gf-years">
+        <button type="button" class="yr on" data-year="">All years</button>
+      <button type="button" class="yr" data-year="2026">2026</button>
+      <button type="button" class="yr" data-year="2025">2025</button>
+      <button type="button" class="yr" data-year="2024">2024</button>
+      <button type="button" class="yr" data-year="2023">2023</button>
+      <button type="button" class="yr" data-year="2022">2022</button>
+      </div>
+    </div>
     <div class="grid">
-        <article class="card">
+        <article class="card" data-themes="conservation finance" data-years="2026 2024" data-name="Eco-Index">
           <img src="img/partner-eco-index.jpg" alt="Eco-Index">
+          <span class="year-badge">2026</span>
           <div class="card-body">
             <h3>Eco-Index</h3>
             <p>Guiding biodiversity investment in Aotearoa</p>
@@ -776,8 +854,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="regen education" data-years="2025" data-name="Ruamāhanga Farm Foundation">
           <img src="img/partner-ruamahanga.jpg" alt="Ruamāhanga Farm Foundation">
+          <span class="year-badge">2025</span>
           <div class="card-body">
             <h3>Ruamāhanga Farm Foundation</h3>
             <p>Learning from land, river and community</p>
@@ -787,8 +866,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="regen education" data-years="2026 2025" data-name="Permaculture in New Zealand">
           <img src="img/partner-permaculture-nz.jpg" alt="Permaculture in New Zealand">
+          <span class="year-badge">2026</span>
           <div class="card-body">
             <h3>Permaculture in New Zealand</h3>
             <p>Making permaculture more accessible</p>
@@ -798,8 +878,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="regen" data-years="2025" data-name="Soil Sage Collective">
           <img src="img/partner-soil-sage.jpg" alt="Soil Sage Collective">
+          <span class="year-badge">2025</span>
           <div class="card-body">
             <h3>Soil Sage Collective</h3>
             <p>Healthy soils, ecosystems and nutrient-dense food</p>
@@ -809,8 +890,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="community regen" data-years="2025" data-name="Growing Sustainability NZ">
           <img src="img/partner-growing-sustainability.jpg" alt="Growing Sustainability NZ">
+          <span class="year-badge">2025</span>
           <div class="card-body">
             <h3>Growing Sustainability NZ</h3>
             <p>Supporting Upper Hutt Food Week 2026</p>
@@ -820,8 +902,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="media" data-years="2025" data-name="Kiwis in Climate">
           <img src="img/partner-kiwis-in-climate.jpg" alt="Kiwis in Climate">
+          <span class="year-badge">2025</span>
           <div class="card-body">
             <h3>Kiwis in Climate</h3>
             <p>Climate solutions from Aotearoa</p>
@@ -831,8 +914,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="indigenous" data-years="2026 2025 2024" data-name="Waiwhetu Te Ati Awa">
           <img src="img/partner-waiwhetu-te-ati-awa.jpg" alt="Waiwhetu Te Ati Awa">
+          <span class="year-badge">2026</span>
           <div class="card-body">
             <h3>Waiwhetu Te Ati Awa</h3>
             <p>Supporting Te Rūnanganui o Te Āti Awa</p>
@@ -842,8 +926,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="conservation" data-years="2026" data-name="Island Futures">
           <img src="img/partner-island-futures.jpg" alt="Island Futures">
+          <span class="year-badge">2026</span>
           <div class="card-body">
             <h3>Island Futures</h3>
             <p>Securing islands as bastions of resilience</p>
@@ -853,8 +938,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="regen" data-years="2026" data-name="Roebuck Farms">
           <img src="img/partner-roebuck-farms.jpg" alt="Roebuck Farms">
+          <span class="year-badge">2026</span>
           <div class="card-body">
             <h3>Roebuck Farms</h3>
             <p>Innovating and elevating local food production</p>
@@ -864,8 +950,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="education regen" data-years="2025" data-name="Garden to Table Trust">
           <img src="img/partner-garden-to-table.jpg" alt="Garden to Table Trust">
+          <span class="year-badge">2025</span>
           <div class="card-body">
             <h3>Garden to Table Trust</h3>
             <p>Tamariki growing and preparing quality kai</p>
@@ -875,8 +962,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="education" data-years="2025 2024" data-name="House of Science NZ">
           <img src="img/partner-house-of-science.jpg" alt="House of Science NZ">
+          <span class="year-badge">2025</span>
           <div class="card-body">
             <h3>House of Science NZ</h3>
             <p>Hands-on science and STEM learning</p>
@@ -886,8 +974,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="education" data-years="2025" data-name="Te Kura o Papatuanuku Wairarapa Earth School">
           <img src="img/partner-te-kura-papatuanuku.jpg" alt="Te Kura o Papatuanuku Wairarapa Earth School">
+          <span class="year-badge">2025</span>
           <div class="card-body">
             <h3>Te Kura o Papatuanuku Wairarapa Earth School</h3>
             <p>Hands-on, garden-based learning</p>
@@ -897,8 +986,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="education community" data-years="2026 2025" data-name="Tolaga Bay Heritage Charitable Trust">
           <img src="img/partner-tolaga-bay.jpg" alt="Tolaga Bay Heritage Charitable Trust">
+          <span class="year-badge">2026</span>
           <div class="card-body">
             <h3>Tolaga Bay Heritage Charitable Trust</h3>
             <p>Innovation and grassroots entrepreneurship</p>
@@ -908,8 +998,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="finance" data-years="2026" data-name="Fundsorter">
           <img src="img/partner-fundsorter.jpg" alt="Fundsorter">
+          <span class="year-badge">2026</span>
           <div class="card-body">
             <h3>Fundsorter</h3>
             <p>Streamlining funding for charities and organisations</p>
@@ -919,8 +1010,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card">
+        <article class="card" data-themes="education community" data-years="2025 2024" data-name="Every Body Is a Treasure (Natural Leaders)">
           <img src="img/partner-every-body-treasure.jpg" alt="Every Body Is a Treasure (Natural Leaders)">
+          <span class="year-badge">2025</span>
           <div class="card-body">
             <h3>Every Body Is a Treasure (Natural Leaders)</h3>
             <p>Youth development through art and nature</p>
@@ -1247,6 +1339,50 @@ addEventListener('load', () => setTimeout(() => {
     }
   }, { threshold: 0.12 });
   sections.forEach(x => io.observe(x));
+})();
+
+
+// Gift filtering: search, theme and year, matching the gifts page. Filters only
+// the wider-circle grid; the featured blocks above always stay put.
+(() => {
+  const q = document.getElementById('gf-q');
+  const theme = document.getElementById('gf-theme');
+  const countEl = document.getElementById('gf-count');
+  const years = [...document.querySelectorAll('.gf-years .yr')];
+  const cards = [...document.querySelectorAll('#partners .grid .card')];
+  if (!q || !cards.length) return;
+
+  let year = '';
+  const apply = () => {
+    const term = q.value.trim().toLowerCase();
+    const th = theme.value;
+    let shown = 0;
+    for (const c of cards) {
+      const hay = (c.dataset.name + ' ' + c.textContent + ' ' + (c.dataset.themes || '')).toLowerCase();
+      const ok = (!term || hay.includes(term))
+        && (!th || (c.dataset.themes || '').split(' ').includes(th))
+        && (!year || (c.dataset.years || '').split(' ').includes(year));
+      c.hidden = !ok;
+      if (ok) shown++;
+    }
+    countEl.textContent = 'Showing ' + shown + (shown === 1 ? ' organisation' : ' organisations');
+    let empty = document.querySelector('.gf-empty');
+    if (!shown && !empty) {
+      empty = document.createElement('p');
+      empty.className = 'gf-empty';
+      empty.textContent = 'No organisations match those filters.';
+      document.querySelector('#partners .grid').after(empty);
+    } else if (shown && empty) empty.remove();
+  };
+
+  q.addEventListener('input', apply);
+  theme.addEventListener('change', apply);
+  years.forEach(b => b.addEventListener('click', () => {
+    years.forEach(x => x.classList.toggle('on', x === b));
+    year = b.dataset.year;
+    apply();
+  }));
+  apply();
 })();
 
 // Reveal the tui once his section comes into view, rather than on load — he is

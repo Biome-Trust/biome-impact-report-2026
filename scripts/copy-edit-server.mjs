@@ -155,8 +155,12 @@ const EDITOR_JS = String.raw`
   const mark = () => {
     for (const el of document.body.querySelectorAll('*')) {
       if (el.closest('#ce-bar') || ['SCRIPT', 'STYLE'].includes(el.tagName)) continue;
-      // leaf interactive controls (close buttons etc.) stay clickable, not editable
-      if (el.matches('button,[role="button"],input,select,textarea,summary') && el.textContent.trim().length <= 3) continue;
+      // interactive controls stay clickable, never editable. This used to only
+      // skip controls with <=3 characters, which made buttons like the gift
+      // filter's year chips ('2026', 'All years') contenteditable — and the
+      // capture-phase guard below then swallowed their clicks, so the filter
+      // looked broken in the editor while working fine on the published page.
+      if (el.matches('button,[role="button"],input,select,textarea,summary,label,option')) continue;
       // animated counters can never save correctly (their text is JS-driven) —
       // leave them read-only and say so
       if (el.matches('[data-count]') || el.querySelector('[data-count]')) {
