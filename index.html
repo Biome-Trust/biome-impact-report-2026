@@ -233,6 +233,32 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .gifts-cta:hover { background: #dde9dd; }
 
 
+/* ---- chart motion ----
+   Everything animates only once its section is in view, and every one of these
+   is disabled under prefers-reduced-motion. Bars use scaleX/scaleY rather than
+   width/height so the browser can composite them instead of reflowing. */
+.donut { transform: rotate(-165deg); transition: transform 1.5s var(--ease); }
+.donut .mid { transform: rotate(165deg); transition: transform 1.5s var(--ease); }
+.in-view .donut, .in-view .donut .mid { transform: none; }
+
+.track i { transform: scaleX(0); transform-origin: left center; transition: transform 1.2s var(--ease); }
+.in-view .track i { transform: scaleX(1); }
+.barrow:nth-child(2) .track i { transition-delay: .12s; }
+.barrow:nth-child(3) .track i { transition-delay: .24s; }
+
+.bars .bar { transform: scaleY(0); transform-origin: bottom center; transition: transform 1s var(--ease); }
+.in-view .bars .bar { transform: scaleY(1); }
+.bars .col:nth-child(1) .bar { transition-delay: 0s; }
+.bars .col:nth-child(2) .bar { transition-delay: .08s; }
+.bars .col:nth-child(3) .bar { transition-delay: .16s; }
+.bars .col:nth-child(4) .bar { transition-delay: .24s; }
+.bars .col:nth-child(5) .bar { transition-delay: .32s; }
+.bars .col:nth-child(6) .bar { transition-delay: .40s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .donut, .donut .mid, .track i, .bars .bar { transition: none; transform: none; }
+}
+
 /* ---- decorative botanicals (landscape edition) ----
    Absolutely positioned and pointer-events:none so they never intercept a click.
    Hidden below 900px: at phone widths they would crowd or sit under the type,
@@ -258,10 +284,22 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 #kia-ora .lede { font-weight: 500; }
 /* the landscape page has a clear right column for these; this layout does not,
    so each decorative element gets its own foot rather than sitting behind copy */
-.deco-tui { right: -2%; bottom: -4%; width: clamp(200px, 24vw, 360px); }
+/* tui: left-aligned and large, beak reaching toward the first stat box. He sits
+   behind the cards (z-index 0), so he reads between and around them. */
+.deco-tui {
+  /* the beak sits ~47% across the image, so to bring it up against the first
+     stat box at this size he has to enter from off the left edge */
+  left: -21%; top: 12%; right: auto; bottom: auto;
+  width: clamp(420px, 56vw, 900px);
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
+}
+.deco-tui.in { opacity: .92; transform: none; }
+@media (prefers-reduced-motion: reduce) { .deco-tui { transition: none; } }
 #numbers { padding-bottom: clamp(150px, 22vh, 300px); }
-/* keep the closing footnote out from under the bird */
-#numbers .fine:last-of-type { max-width: min(100%, 62ch); padding-right: clamp(0px, 20vw, 300px); }
+/* the tui now enters from the left and sits higher, so the old right-hand
+   clearance is gone and this note runs to a proper measure */
+#numbers > .wrap > .fine { max-width: 88ch; padding-right: 0; }
 #mangaroa { padding-bottom: clamp(160px, 24vh, 320px); }
 #approach, #endowment { padding-bottom: clamp(180px, 27vh, 360px); }
 .deco-sunflowers {
@@ -285,11 +323,11 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 @media (max-width: 900px) { .deco { display: none; } }
 
 /* ---- numbers, charts and tiles ---- */
-.numrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: clamp(14px, 1.8vw, 22px); margin-top: 42px; }
-.numcard { background: var(--tan-light); border-radius: 4px; padding: 26px 24px; }
+.numrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin-top: 42px; align-items: start; }
+.numcard { background: var(--tan-light); border-radius: 4px; padding: 20px 22px; }
 .numcard.pale { background: var(--green-pale); }
-.numcard .n { font-family: var(--serif); font-size: clamp(30px, 3.6vw, 42px); line-height: 1; color: var(--green-dark); }
-.numcard .l { font-size: 14px; line-height: 1.45; color: var(--text-mid); margin-top: 10px; }
+.numcard .n { font-family: var(--serif); font-size: clamp(40px, 5vw, 64px); line-height: .95; color: var(--green-dark); }
+.numcard .l { font-size: 14px; line-height: 1.4; color: var(--text-mid); margin-top: 8px; }
 .numcard .delta { display: inline-block; margin-top: 12px; font-size: 12.5px; line-height: 1.35; color: var(--green-mid); background: var(--white); border-radius: 4px; padding: 7px 10px; }
 
 .panel { background: var(--tan-light); border-radius: 4px; padding: 28px 26px; }
@@ -299,8 +337,9 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .band-deep .panel { background: rgba(255,255,255,.07); }
 .band-deep .panel h3 { color: #fff; }
 
-.donut-wrap { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; margin-top: 18px; }
-.donut { position: relative; width: 168px; height: 168px; border-radius: 50%; flex: none; }
+.donut-wrap { display: flex; align-items: center; gap: 22px; flex-wrap: nowrap; margin-top: 18px; }
+@media (max-width: 560px) { .donut-wrap { flex-wrap: wrap; } }
+.donut { position: relative; width: clamp(130px, 13vw, 160px); aspect-ratio: 1; height: auto; border-radius: 50%; flex: none; }
 .donut::after { content: ''; position: absolute; inset: 26%; background: var(--tan-light); border-radius: 50%; }
 .panel.pale .donut::after, .band-cream .donut::after { background: var(--green-pale); }
 .donut .mid { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; z-index: 1; }
@@ -323,7 +362,8 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .bars { display: flex; align-items: flex-end; gap: clamp(6px, 1.2vw, 16px); height: 160px; }
 .bars .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
 .bars .v { font-size: 12px; color: var(--text-mid); margin-bottom: 6px; white-space: nowrap; }
-.bars .bar { width: 100%; background: var(--tan); border-radius: 2px 2px 0 0; }
+.bars .bar { width: 100%; background: var(--tan); border-radius: 2px 2px 0 0;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, .22); }
 .bars .col.now .bar { background: var(--green-dark); }
 .bars .col.now .v { color: var(--green-dark); font-weight: 600; }
 .xaxis { display: flex; gap: clamp(6px, 1.2vw, 16px); margin-top: 8px; }
@@ -486,6 +526,10 @@ footer a { color: var(--tan); }
         <div class="n">16</div>
         <div class="l">different initiatives</div>
       </div>
+      <div class="numcard pale">
+        <div class="n">21</div>
+        <div class="l">organisations supported</div>
+      </div>
     </div>
 
     <div class="two-col" style="margin-top:26px">
@@ -554,6 +598,12 @@ footer a { color: var(--tan); }
     </div>
 
     <p class="fine">Charts include gifts made directly and through The Gift Trust, and exclude funding for Mangaroa Farms and Biome Trust-led initiatives. All figures in NZD.</p>
+    <a class="scroll-cue scroll-cue--inline" href="#partners" aria-label="Scroll to Backing partners">
+      <span>Scroll</span>
+      <svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 3v18M4 14l7 7 7-7"/>
+      </svg>
+    </a>
   </div>
 </section>
 
@@ -1100,6 +1150,35 @@ addEventListener('load', () => setTimeout(() => {
     }
   }
 }, 3000));
+
+// One observer for every scroll-triggered reveal: charts animate when their
+// section arrives, once, then the observer lets go.
+(() => {
+  const sections = document.querySelectorAll('section');
+  if (!('IntersectionObserver' in window)) {
+    sections.forEach(x => x.classList.add('in-view'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    for (const e of entries) if (e.isIntersecting) {
+      e.target.classList.add('in-view');
+      io.unobserve(e.target);
+    }
+  }, { threshold: 0.12 });
+  sections.forEach(x => io.observe(x));
+})();
+
+// Reveal the tui once his section comes into view, rather than on load — he is
+// well down the page and the arrival should be earned by scrolling.
+(() => {
+  const tui = document.querySelector('.deco-tui');
+  if (!tui) return;
+  if (!('IntersectionObserver' in window)) { tui.classList.add('in'); return; }
+  const io = new IntersectionObserver(entries => {
+    for (const e of entries) if (e.isIntersecting) { tui.classList.add('in'); io.disconnect(); }
+  }, { threshold: 0.15 });
+  io.observe(tui.closest('section'));
+})();
 
 // Scroll cues: land the target section flush with the top of the viewport.
 // The default anchor jump is fine, but this also works if a sticky header is
