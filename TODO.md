@@ -16,7 +16,17 @@ All copy is now in from the Figma.
       does not publish region, so the rest show none
 - [ ] Milestone bullets for Toru Education, Centre for Strategic Philanthropy,
       The Gift Trust — still visibly tagged as borrowed figures
-- [ ] Which partners run into FY27 — the 2027 chip still matches nothing
+- [x] Financial-year tagging (2026-09-16) — retagged from the gifts spreadsheet:
+      FY26 18 orgs, FY27 43. The gifts page groups by calendar year, which
+      straddles the financial year; the spreadsheet is the source of truth.
+- [ ] Confirm the 10 orgs inferred into FY27 (screenshot cut at row 182):
+      Earth Repair Fund, Eco-Index, Fundsorter, Mangarara Farm, Ocean Vision
+      Legal, Regenerative Earth, Regenerosity, Roebuck Farms, Tiwaiwaka
+      Collective, Wakatū Incorporation
+- [ ] 2025/2024/2023/2022 are still the gifts page's calendar-year groupings,
+      not financial years — they need the same treatment when the data exists
+- [ ] Wire the newsletter block to Klaviyo (account UZXSkU, form Xa8XP7); the
+      fields are inert and the page says so
 - [ ] Forestry wording on the Mangaroa offerings row is ours, not Mangaroa's
 
 ## Next — assets
