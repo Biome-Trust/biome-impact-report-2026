@@ -387,6 +387,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
   mask-image: linear-gradient(90deg, transparent 6%, rgba(0,0,0,.35) 38%, #000 72%);
 }
 #kia-ora, #closing { padding-bottom: clamp(150px, 22vh, 280px); --cue-pull: 0px; }
+/* the closing fern is bottom-anchored and sized by width, so pulling the cue
+   up moves the fern with the section rather than cropping it */
+#closing { --cue-pull: clamp(150px, 22vh, 280px); }
 /* thin rule between the letter and the acknowledgements */
 .ack { margin-top: 56px; padding-top: 44px; border-top: 1px solid var(--line); }
 /* the opening paragraph carries more weight than the body, as it does in the Figma */
@@ -421,13 +424,17 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
    group label sits flush rather than adding its own 52px */
 #partners { padding-top: clamp(32px, 5.5vh, 66px); }
 #partners .group-label:first-of-type, #partners-wider .group-label:first-of-type { margin-top: 0; }
-.deco-sunflowers {
+.deco-footstrip {
   left: 0; right: 0; bottom: 0; width: 100%;
-  /* fixed strip height: at full aspect this image is ~670px tall and would sit
-     behind two rows of stat cards. No mask — the sunflowers read at full
-     strength, with clear air above them instead of a fade. */
   height: clamp(170px, 25vh, 300px);
   opacity: 1;
+}
+.deco-footstrip img { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; }
+/* the strip arrives out of the band's own white rather than at a hard edge */
+.deco-footstrip::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 38%;
+  background: linear-gradient(180deg, var(--white) 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 1; pointer-events: none;
 }
 .deco-sunflowers img { height: 100%; object-fit: cover; object-position: center bottom; }
 .deco-band {
@@ -558,7 +565,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
    eyebrow above it — that offset is the eyebrow's line box plus its margin */
 .kaupapa-grid .nzmap-wrap { margin: 40px 0 0; max-width: 100%; }
 @media (max-width: 860px) { .kaupapa-grid { grid-template-columns: 1fr; } .kaupapa-grid .nzmap-wrap { margin-top: 20px; } }
-.place-lists { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.4vw, 28px); margin-top: 34px; }
+.place-lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: clamp(20px, 3vw, 38px); margin-top: 40px; }
 .place h4 { font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--sage); margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,.22); }
 .place ul { list-style: none; margin: 0; padding: 0; font-size: 14.5px; line-height: 1.7; }
 .place li span { color: #b9c7b7; font-size: 13px; }
@@ -680,6 +687,32 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
   background: linear-gradient(180deg, var(--fade-from, var(--cream)) 0%, rgba(250, 247, 242, 0) 100%);
   pointer-events: none;
 }
+
+/* ---- newsletter band ---- */
+/* anatomy borrowed from impact.mangaroa.org's sign-up block: photo ground,
+   gold eyebrow, one serif line, then the fields. The cover photo comes back
+   here on purpose, so the report opens and closes on the same river. */
+.nl-band { text-align: center; }
+.nl-band .bg::after { background: linear-gradient(180deg, rgba(15,28,16,.52), rgba(15,28,16,.62)); }
+.nl-band .eyebrow { color: var(--tan); }
+.nl-band h2 { font-size: clamp(30px, 4.4vw, 52px); margin: 0 0 18px; color: #fff; }
+.nl-band .lede { color: #dfe6dd; max-width: 46ch; margin: 0 auto 30px; }
+.nl-form { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 780px; margin: 0 auto; }
+.nl-form input {
+  flex: 1 1 220px; min-width: 0; padding: 17px 24px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.45); background: transparent; color: #fff;
+  font: inherit; font-size: 15px;
+}
+.nl-form input::placeholder { color: rgba(255,255,255,.72); }
+.nl-form input:focus { outline: 2px solid var(--tan); outline-offset: 2px; border-color: transparent; }
+.nl-btn {
+  flex: 0 0 auto; padding: 17px 34px; border-radius: 999px; border: 0;
+  background: var(--tan); color: #23331f; font: inherit; font-size: 15px; font-weight: 600;
+  text-decoration: none; display: inline-flex; align-items: center; cursor: pointer;
+}
+.nl-btn:hover { background: #d8bb7e; }
+.nl-band .note { color: #c2cfc0; max-width: 46ch; margin: 22px auto 0; text-align: left; }
+@media (max-width: 560px) { .nl-form { flex-direction: column; } .nl-btn { justify-content: center; } }
 
 /* ---- full-bleed image band ---- */
 .image-band { position: relative; padding: clamp(90px, 16vh, 190px) var(--gut); color: #fff; overflow: hidden; }
@@ -1914,7 +1947,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 
 <!-- ============ MANGAROA (solid deep band; the aerial runs as a banner inside it) ============ -->
 <section class="band band-paper" id="mangaroa">
-  <div class="deco deco-sunflowers"><img src="img/botanical-sunflower-band.webp" alt=""></div>
+  <div class="deco deco-footstrip"><img src="img/maearth-collage.jpg" alt=""></div>
   <div class="wrap">
     <img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air" style="width:100%;border-radius:4px;margin-bottom:34px">
     <p class="eyebrow">Our own initiatives</p>
@@ -2188,12 +2221,28 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <p>Placeholder. A final paragraph names the people and organisations the year depended on, and says plainly what Biome Trust intends to do next.</p>
       <p class="note">Placeholder copy &mdash; needs the real closing word before this page is shared.</p>
     </div>
-    <a class="scroll-cue scroll-cue--inline" href="#kaupapa" aria-label="Scroll to the next section">
+    <a class="scroll-cue scroll-cue--inline" href="#newsletter" aria-label="Scroll to the next section">
       <span>Scroll</span>
       <svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M11 3v18M4 14l7 7 7-7"/>
       </svg>
     </a>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="image-band nl-band" id="newsletter">
+  <div class="bg" style="background-image: url('img/hero-mangaroa-river.jpg')"></div>
+  <div class="wrap">
+    <p class="eyebrow">Stay close</p>
+    <h2>Follow the year as it happens.</h2>
+    <p class="lede">Join our monthly newsletter for stories and updates from Biome Trust and the projects we back.</p>
+    <div class="nl-form">
+      <input type="text" name="first" placeholder="First name" aria-label="First name" autocomplete="given-name">
+      <input type="email" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email">
+      <a class="nl-btn" href="https://biometrust.earth/newsletter" target="_blank" rel="noopener">Sign me up</a>
+    </div>
+    <p class="note">The button opens the sign-up form on biometrust.earth &mdash; these two fields are not wired to Klaviyo yet, so anything typed here is not sent anywhere.</p>
   </div>
 </section>
 
@@ -2205,50 +2254,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div class="kaupapa-col">
         <p class="eyebrow">Gifts from FY26</p>
     <h2>People, place and kaupapa</h2>
-<div class="place-lists">
-      <div class="place">
-        <h4>Around the motu</h4>
-        <ul>
-          <li>Garden to Table (HQ)<br><span>T&#257;maki Makaurau, Auckland</span></li>
-          <li>Roebuck Farms<br><span>Taranaki</span></li>
-          <li>Island Futures<br><span>West Coast</span></li>
-          <li>UNDERGROUND Festival<br><span>Waikato 2027</span></li>
-          <li>Tolaga Bay Heritage Trust<br><span>Tolaga Bay</span></li>
-          <li>The Learning Environment<br><span>Whanganui</span></li>
-          <li>Toru Education<br><span>Kapiti</span></li>
-        </ul>
-      </div>
-      <div class="place">
-        <h4>Wairarapa</h4>
-        <ul>
-          <li>Wairarapa Earth School<br><span>Carterton, Wairarapa</span></li>
-          <li>Ruam&#257;hanga Farm Foundation<br><span>Pirinoa, South Wairarapa</span></li>
-        </ul>
-      </div>
-      <div class="place">
-        <h4>Greater Wellington</h4>
-        <ul>
-          <li>Mangaroa Farms</li>
-          <li>Growing Sustainability NZ</li>
-          <li>Papawhakaritorito Trust</li>
-          <li>Natural Leaders</li>
-          <li>Fundsorter</li>
-          <li>Te &#256;ti Awa</li>
-        </ul>
-      </div>
-      <div class="place">
-        <h4>Nationwide</h4>
-        <ul>
-          <li>Permaculture in New Zealand</li>
-          <li>Soil Sage Collective</li>
-          <li>Kiwis in Climate</li>
-          <li>Centre for Strategic Philanthropy</li>
-          <li>The Gift Trust</li>
-          <li>House of Science</li>
-          <li>Eco-Index</li>
-        </ul>
-      </div>
-    </div>
       </div>
 <div class="nzmap-wrap">
       <svg class="nzmap" viewBox="0 0 470 610" role="img" aria-label="Map of Aotearoa showing where FY26 gifts landed">
@@ -2290,6 +2295,50 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         </g>
       </svg>
       <div class="map-tip" hidden><span class="mt-line"></span><strong class="mt-orgs"></strong><span class="mt-place"></span></div>
+    </div>
+    </div>
+    <div class="place-lists">
+    <div class="place">
+    <h4>Around the motu</h4>
+    <ul>
+      <li>Garden to Table (HQ)<br><span>T&#257;maki Makaurau, Auckland</span></li>
+      <li>Roebuck Farms<br><span>Taranaki</span></li>
+      <li>Island Futures<br><span>West Coast</span></li>
+      <li>UNDERGROUND Festival<br><span>Waikato 2027</span></li>
+      <li>Tolaga Bay Heritage Trust<br><span>Tolaga Bay</span></li>
+      <li>The Learning Environment<br><span>Whanganui</span></li>
+      <li>Toru Education<br><span>Kapiti</span></li>
+    </ul>
+    </div>
+    <div class="place">
+    <h4>Wairarapa</h4>
+    <ul>
+      <li>Wairarapa Earth School<br><span>Carterton, Wairarapa</span></li>
+      <li>Ruam&#257;hanga Farm Foundation<br><span>Pirinoa, South Wairarapa</span></li>
+    </ul>
+    </div>
+    <div class="place">
+    <h4>Greater Wellington</h4>
+    <ul>
+      <li>Mangaroa Farms</li>
+      <li>Growing Sustainability NZ</li>
+      <li>Papawhakaritorito Trust</li>
+      <li>Natural Leaders</li>
+      <li>Fundsorter</li>
+      <li>Te &#256;ti Awa</li>
+    </ul>
+    </div>
+    <div class="place">
+    <h4>Nationwide</h4>
+    <ul>
+      <li>Permaculture in New Zealand</li>
+      <li>Soil Sage Collective</li>
+      <li>Kiwis in Climate</li>
+      <li>Centre for Strategic Philanthropy</li>
+      <li>The Gift Trust</li>
+      <li>House of Science</li>
+      <li>Eco-Index</li>
+    </ul>
     </div>
     </div>
   </div>
