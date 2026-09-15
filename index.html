@@ -330,7 +330,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
    cover does. Scrim is weighted for white type at any crop. */
 .title-band {
   position: relative; overflow: hidden;
-  min-height: clamp(640px, 104vh, 1120px);
+  min-height: clamp(450px, 73vh, 785px);
   display: flex; align-items: center;
   padding: clamp(40px, 8vh, 90px) var(--gut);
   color: #fff;
@@ -338,8 +338,15 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .title-band .tb-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
 .title-band .tb-bg::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(15,28,16,.30), rgba(15,28,16,.62));
+  /* the lower gradient melts the photograph into whatever section follows, so
+     --fade-to is set per band to that section's own ground colour */
+  background:
+    linear-gradient(180deg, transparent 58%, var(--fade-to, #fff) 100%),
+    linear-gradient(180deg, rgba(15,28,16,.30), rgba(15,28,16,.55));
 }
+#partners-title  { --fade-to: var(--white); }
+#approach-title  { --fade-to: var(--cream); }
+#endowment-title { --fade-to: var(--cream); }
 .title-band .wrap { position: relative; z-index: 1; width: 100%; }
 /* tighter variant: shorter frame, title sitting low so it reads as a lead-in to
    the section directly beneath rather than a full-page cover */
@@ -388,12 +395,17 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .deco-tui.in { opacity: .92; transform: none; }
 
 @media (prefers-reduced-motion: reduce) { .deco-tui { transition: none; } }
-#numbers { padding-bottom: clamp(150px, 22vh, 300px); }
+#numbers { padding-bottom: clamp(105px, 15vh, 210px); }
 /* the tui now enters from the left and sits higher, so the old right-hand
    clearance is gone and this note runs to a proper measure */
 #numbers > .wrap > .fine { max-width: 88ch; padding-right: 0; }
 #mangaroa { padding-bottom: clamp(230px, 33vh, 420px); }
 #approach, #endowment { padding-bottom: clamp(180px, 27vh, 360px); }
+/* the title band already carries the heading, so the grid does not need a
+   full band of air above it — half the usual top padding, and the first
+   group label sits flush rather than adding its own 52px */
+#partners { padding-top: clamp(32px, 5.5vh, 66px); }
+#partners .group-label:first-of-type { margin-top: 0; }
 .deco-sunflowers {
   left: 0; right: 0; bottom: 0; width: 100%;
   /* fixed strip height: at full aspect this image is ~670px tall and would sit
@@ -417,7 +429,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .numrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin-top: 42px; align-items: start; }
 .numcard { background: var(--tan-light); border-radius: 4px; padding: 20px 22px; }
 .numcard.pale { background: var(--green-pale); }
-.numcard .n { font-family: var(--serif); font-size: clamp(40px, 5vw, 64px); line-height: .95; color: var(--green-dark); }
+.numcard .n {
+  font-family: var(--serif); font-size: clamp(34px, 4.4vw, 60px); line-height: .95;
+  color: var(--green-dark); white-space: nowrap;
+}
+/* the currency figure is the longest string in the row — let it sit a size
+   down rather than fold onto a second line */
+.numcard:first-child .n { font-size: clamp(30px, 3.6vw, 50px); }
 .numcard .l { font-size: 14px; line-height: 1.4; color: var(--text-mid); margin-top: 8px; }
 .numcard .delta { display: inline-block; margin-top: 12px; font-size: 12.5px; line-height: 1.35; color: var(--green-mid); background: var(--white); border-radius: 4px; padding: 7px 10px; }
 
@@ -430,12 +448,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 
 .donut-wrap { display: flex; align-items: center; gap: 22px; flex-wrap: nowrap; margin-top: 18px; }
 @media (max-width: 560px) { .donut-wrap { flex-wrap: wrap; } }
-.donut { position: relative; width: clamp(130px, 13vw, 160px); aspect-ratio: 1; height: auto; border-radius: 50%; flex: none; }
+.donut { position: relative; width: clamp(160px, 16vw, 200px); aspect-ratio: 1; height: auto; border-radius: 50%; flex: none; }
 .donut::after { content: ''; position: absolute; inset: 26%; background: var(--tan-light); border-radius: 50%; }
 .panel.pale .donut::after, .band-cream .donut::after { background: var(--green-pale); }
-.donut .mid { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; z-index: 1; }
-.donut .mid b { font-family: var(--serif); font-size: 26px; color: var(--green-dark); display: block; line-height: 1; }
-.donut .mid span { font-size: 11.5px; color: var(--text-mid); }
+/* keep the centre label inside the hole rather than spilling onto the ring */
+.donut .mid { position: absolute; inset: 26%; display: grid; place-content: center; text-align: center; z-index: 1; }
+.donut .mid b { font-family: var(--serif); font-size: clamp(21px, 2.3vw, 28px); color: var(--green-dark); display: block; line-height: 1; }
+.donut .mid span { font-size: 10px; letter-spacing: -.01em; color: var(--text-mid); display: block; margin-top: 3px; }
 .legend { list-style: none; margin: 0; padding: 0; font-size: 13.5px; line-height: 1.45; }
 .legend li { display: flex; gap: 9px; margin-bottom: 9px; align-items: flex-start; }
 .legend i { width: 9px; height: 9px; border-radius: 50%; margin-top: 6px; flex: none; }
@@ -523,7 +542,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .feature {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  grid-template-areas: "main body" "strip strip";
+  grid-template-areas: "main body";
   gap: clamp(20px, 2.6vw, 34px);
   align-items: start;
 }
@@ -551,11 +570,17 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
   width: 5px; height: 5px; border-radius: 50%; background: var(--tan);
 }
 .feature-points b { color: var(--text-dark); font-weight: 600; }
-.feature-strip { grid-area: strip; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1.4vw, 18px); }
-.feature-strip img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; display: block; }
+/* borrowed figures, held here only to test the shape — visibly not theirs */
+.ph-tag {
+  display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: #7a5c14; background: rgba(200,169,110,.28);
+  border-radius: 3px; padding: 3px 9px; margin: 0 0 10px;
+}
+.feature-points.is-placeholder { opacity: .62; }
+.feature-points.is-placeholder li::before { background: var(--text-light); }
 
 @media (max-width: 760px) {
-  .feature { grid-template-columns: 1fr; grid-template-areas: "main" "body" "strip"; }
+  .feature { grid-template-columns: 1fr; grid-template-areas: "main" "body"; }
 }
 
 
@@ -695,10 +720,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         <div class="n">16</div>
         <div class="l">different initiatives</div>
       </div>
-      <div class="numcard pale">
-        <div class="n">21</div>
-        <div class="l">organisations supported</div>
-      </div>
     </div>
 
     <div class="two-col" style="margin-top:26px">
@@ -810,11 +831,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             <a class="site" href="https://www.learningenvironment.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
         </div>
-        <div class="feature-strip">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
-        </div>
       </article>
       <article class="feature" data-themes="seed indigenous" data-years="2026 2025 2024" data-name="Papawhakaritorito Trust">
         <div class="feature-main">
@@ -834,11 +850,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             <a class="site" href="https://www.papawhakaritorito.com/" target="_blank" rel="noopener">Website →</a>
           </div>
         </div>
-        <div class="feature-strip">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
-        </div>
       </article>
       <article class="feature" data-themes="education" data-years="2025 2024 2022" data-name="Toru Education">
         <div class="feature-main">
@@ -848,15 +859,16 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
           <p class="feature-tag">FY26 partner</p>
           <h3>Toru Education</h3>
           <p class="feature-sub">Skills for sustainable living</p>
+          <p class="ph-tag">Placeholder — figures borrowed from Tīwaiwaka</p>
+          <ul class="feature-points is-placeholder">
+            <li><b>500+ native seedlings</b> raised and replanted</li>
+            <li><b>Rongoā wānanga</b> led on the whenua</li>
+            <li><b>Multiple maunga</b> under active native restoration</li>
+          </ul>
           <div class="meta">
             <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
             <a class="site" href="https://www.toru.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
-        </div>
-        <div class="feature-strip">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
         </div>
       </article>
       <article class="feature" data-themes="finance" data-years="2026 2025 2024 2023 2022" data-name="Centre for Strategic Philanthropy">
@@ -867,15 +879,16 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
           <p class="feature-tag">FY26 partner</p>
           <h3>Centre for Strategic Philanthropy</h3>
           <p class="feature-sub">Bringing together New Zealand givers</p>
+          <p class="ph-tag">Placeholder — figures borrowed from Ruamāhanga Farm Foundation</p>
+          <ul class="feature-points is-placeholder">
+            <li><b>4 conservation rounds</b> of tamariki days on the awa</li>
+            <li><b>River revival</b> led by young people</li>
+            <li><b>A working farm</b> doubling as an outdoor classroom</li>
+          </ul>
           <div class="meta">
             <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Auckland</span>
             <a class="site" href="https://cspnz.org.nz" target="_blank" rel="noopener">Website →</a>
           </div>
-        </div>
-        <div class="feature-strip">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
         </div>
       </article>
       <article class="feature" data-themes="finance" data-years="2025 2024 2023" data-name="The Gift Trust">
@@ -886,15 +899,16 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
           <p class="feature-tag">FY26 partner</p>
           <h3>The Gift Trust</h3>
           <p class="feature-sub">Facilitating giving to charitable causes</p>
+          <p class="ph-tag">Placeholder — figures borrowed from The Learning Environment</p>
+          <ul class="feature-points is-placeholder">
+            <li><b>87,000+ native trees</b> grown &amp; planted for forest and waterway restoration</li>
+            <li><b>28,000+ kg of kai</b> grown &amp; gifted to learners and community</li>
+            <li><b>89 education programmes</b> delivered · 10,000+ volunteer hours</li>
+          </ul>
           <div class="meta">
             <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
             <a class="site" href="https://thegifttrust.org.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
-        </div>
-        <div class="feature-strip">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
         </div>
       </article>
       <article class="feature" data-themes="regen community" data-years="2026 2025" data-name="UNDERGROUND Festival">
@@ -914,11 +928,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Canterbury / Waikato</span>
             <a class="site" href="https://www.undergroundfestival.co.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
-        </div>
-        <div class="feature-strip">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
-          <img src="img/slot.jpg" alt="">
         </div>
       </article>
     </div>
