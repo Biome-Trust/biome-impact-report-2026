@@ -131,6 +131,9 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .stat .src { font-size: 11.5px; color: #7e9a7d; margin-top: 7px; }
 
 /* ---- partner cards ---- */
+.grid-feature { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+.card-feature img { aspect-ratio: 16 / 10; }
+.card-feature h3 { font-size: 18.5px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(266px, 1fr)); gap: clamp(18px, 2.4vw, 30px); margin-top: 46px; }
 .card { background: var(--white); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
 .card img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
@@ -162,6 +165,37 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .gifts-cta .cta-body { font-size: 16px; line-height: 1.5; }
 .gifts-cta:hover { background: #dde9dd; }
 
+
+/* ---- decorative botanicals (landscape edition) ----
+   Absolutely positioned and pointer-events:none so they never intercept a click.
+   Hidden below 900px: at phone widths they would crowd or sit under the type,
+   and the report has to stay readable there first. */
+.band, .image-band { position: relative; overflow: hidden; }
+.band > .wrap, .image-band > .wrap { position: relative; z-index: 1; }
+.deco { position: absolute; z-index: 0; pointer-events: none; user-select: none; }
+.deco img { display: block; width: 100%; height: auto; }
+.deco-ponga { right: -5%; bottom: -6%; width: clamp(220px, 26vw, 380px); }
+/* the fern needs its own room — without the extra foot it lands on the
+   acknowledgements copy at desktop widths */
+#kia-ora { padding-bottom: clamp(150px, 22vh, 280px); }
+/* the landscape page has a clear right column for these; this layout does not,
+   so each decorative element gets its own foot rather than sitting behind copy */
+.deco-tui { right: -2%; bottom: -4%; width: clamp(200px, 24vw, 360px); }
+#numbers { padding-bottom: clamp(150px, 22vh, 300px); }
+/* keep the closing footnote out from under the bird */
+#numbers .fine:last-of-type { max-width: min(100%, 62ch); padding-right: clamp(0px, 20vw, 300px); }
+#mangaroa { padding-bottom: clamp(160px, 24vh, 320px); }
+.deco-sunflowers {
+  left: 0; right: 0; bottom: 0; width: 100%;
+  /* fixed strip height: at full aspect this image is ~670px tall and would sit
+     behind two rows of stat cards */
+  height: clamp(130px, 20vh, 240px);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 60%);
+  opacity: .9;
+}
+.deco-sunflowers img { height: 100%; object-fit: cover; object-position: center bottom; }
+@media (max-width: 900px) { .deco { display: none; } }
 
 /* ---- numbers, charts and tiles ---- */
 .numrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: clamp(14px, 1.8vw, 22px); margin-top: 42px; }
@@ -308,6 +342,7 @@ footer a { color: var(--tan); }
 
 <!-- ============ KIA ORA ============ -->
 <section class="band band-paper" id="kia-ora">
+  <div class="deco deco-ponga"><img src="img/botanical-ponga.webp" alt=""></div>
   <div class="wrap two-col">
     <div>
       <p class="eyebrow">A word from the trustees</p>
@@ -336,6 +371,7 @@ footer a { color: var(--tan); }
 
 <!-- ============ GIVING BY NUMBERS (solid deep band — no image, by design) ============ -->
 <section class="band band-cream" id="numbers">
+  <div class="deco deco-tui"><img src="img/botanical-tui.webp" alt=""></div>
   <div class="wrap">
     <p class="eyebrow">The year in figures</p>
     <h2>Giving by numbers</h2>
@@ -429,78 +465,34 @@ footer a { color: var(--tan); }
 <!-- ============ PARTNERS ============ -->
 <section class="band band-paper" id="partners">
   <div class="wrap">
-    <p class="eyebrow">Our giving</p>
+    <p class="eyebrow">Our giving — FY26</p>
     <h2>Backing partners <em>across Aotearoa</em></h2>
-    <p class="lede measure">Our partners span multiple areas of impact, grouped here under education, land &amp; community, and wider. In FY26 we made 22 gifts to 16 partners, with some backed more than once.</p>
-    <h3 class="group-label">Education</h3>
-    <div class="grid">
-        <article class="card">
-          <img src="img/partner-garden-to-table.jpg" alt="Garden to Table Trust">
+    <p class="lede measure">All 21 organisations we supported in the year ended 31 March 2026. A few of this year's deeper partnerships first.</p>
+    <h3 class="group-label">A few of this year's deeper partnerships</h3>
+    <div class="grid grid-feature">
+        <article class="card card-feature">
+          <img src="img/partner-learning-environment.jpg" alt="The Learning Environment">
           <div class="card-body">
-            <h3>Garden to Table Trust</h3>
-            <p>Tamariki growing and preparing quality kai</p>
+            <h3>The Learning Environment</h3>
+            <p>Holistic learning experiences for wellbeing</p>
             <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Auckland</span>
-              <a class="site" href="https://gardentotable.org.nz/" target="_blank" rel="noopener">Website →</a>
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Manawatū-Whanganui</span>
+              <a class="site" href="https://www.learningenvironment.nz/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
         </article>
-        <article class="card">
-          <img src="img/partner-house-of-science.jpg" alt="House of Science NZ">
+        <article class="card card-feature">
+          <img src="img/partner-papawhakaritorito.jpg" alt="Papawhakaritorito Trust">
           <div class="card-body">
-            <h3>House of Science NZ</h3>
-            <p>Hands-on science and STEM learning</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Bay of Plenty</span>
-              <a class="site" href="https://houseofscience.nz/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card">
-          <img src="img/partner-permaculture-nz.jpg" alt="Permaculture in New Zealand">
-          <div class="card-body">
-            <h3>Permaculture in New Zealand</h3>
-            <p>Making permaculture more accessible</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Aotearoa</span>
-              <a class="site" href="https://permaculture.org.nz/hui/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card">
-          <img src="img/partner-every-body-treasure.jpg" alt="Every Body Is a Treasure (Natural Leaders)">
-          <div class="card-body">
-            <h3>Every Body Is a Treasure (Natural Leaders)</h3>
-            <p>Youth development through art and nature</p>
+            <h3>Papawhakaritorito Trust</h3>
+            <p>Elevating Indigenous seed, soil and food sovereignty</p>
             <div class="meta">
               <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
-              <a class="site" href="https://everybodyisatreasure.org/" target="_blank" rel="noopener">Website →</a>
+              <a class="site" href="https://www.papawhakaritorito.com/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
         </article>
-        <article class="card">
-          <img src="img/partner-soil-sage.jpg" alt="Soil Sage Collective">
-          <div class="card-body">
-            <h3>Soil Sage Collective</h3>
-            <p>Healthy soils, ecosystems and nutrient-dense food</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
-              <a class="site" href="https://opencollective.com/soil-sage-collective" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card">
-          <img src="img/partner-te-kura-papatuanuku.jpg" alt="Te Kura o Papatuanuku Wairarapa Earth School">
-          <div class="card-body">
-            <h3>Te Kura o Papatuanuku Wairarapa Earth School</h3>
-            <p>Hands-on, garden-based learning</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wairarapa</span>
-              <a class="site" href="https://wairarapaearthschool.org/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card">
+        <article class="card card-feature">
           <img src="img/partner-toru-education.jpg" alt="Toru Education">
           <div class="card-body">
             <h3>Toru Education</h3>
@@ -511,8 +503,33 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
+        <article class="card card-feature">
+          <img src="img/partner-centre-strategic-phil.jpg" alt="Centre for Strategic Philanthropy">
+          <div class="card-body">
+            <h3>Centre for Strategic Philanthropy</h3>
+            <p>Bringing together New Zealand givers</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Auckland</span>
+              <a class="site" href="https://cspnz.org.nz" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card card-feature">
+          <img src="img/partner-the-gift-trust.jpg" alt="The Gift Trust">
+          <div class="card-body">
+            <h3>The Gift Trust</h3>
+            <p>Facilitating giving to charitable causes</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+              <a class="site" href="https://thegifttrust.org.nz/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+    </div>
+    <h3 class="group-label">And the wider circle</h3>
+    <div class="grid">
         <article class="card">
-          <img src="img/ngati-toa.jpg" alt="UNDERGROUND Festival">
+          <img src="img/partner-underground-festival.jpg" alt="UNDERGROUND Festival">
           <div class="card-body">
             <h3>UNDERGROUND Festival</h3>
             <p>Celebrating soil, food and farming</p>
@@ -522,17 +539,14 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-    </div>
-    <h3 class="group-label">Land &amp; community</h3>
-    <div class="grid">
         <article class="card">
-          <img src="img/partner-growing-sustainability.jpg" alt="Growing Sustainability NZ">
+          <img src="img/partner-eco-index.jpg" alt="Eco-Index">
           <div class="card-body">
-            <h3>Growing Sustainability NZ</h3>
-            <p>Supporting Upper Hutt Food Week 2026</p>
+            <h3>Eco-Index</h3>
+            <p>Guiding biodiversity investment in Aotearoa</p>
             <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
-              <a class="site" href="https://www.facebook.com/myupperhutt/posts/save-the-date-upper-hutt-a-bunch-of-awesome-locals-is-serving-up-something-speci/1338686998294614/" target="_blank" rel="noopener">Website →</a>
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Aotearoa</span>
+              <a class="site" href="https://eco-index.nz/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
         </article>
@@ -548,27 +562,35 @@ footer a { color: var(--tan); }
           </div>
         </article>
         <article class="card">
-          <img src="img/partner-learning-environment.jpg" alt="The Learning Environment">
+          <img src="img/partner-permaculture-nz.jpg" alt="Permaculture in New Zealand">
           <div class="card-body">
-            <h3>The Learning Environment</h3>
-            <p>Holistic learning experiences for wellbeing</p>
+            <h3>Permaculture in New Zealand</h3>
+            <p>Making permaculture more accessible</p>
             <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Manawatū-Whanganui</span>
-              <a class="site" href="https://www.learningenvironment.nz/" target="_blank" rel="noopener">Website →</a>
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Aotearoa</span>
+              <a class="site" href="https://permaculture.org.nz/hui/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
         </article>
-    </div>
-    <h3 class="group-label">Wider</h3>
-    <div class="grid">
         <article class="card">
-          <img src="img/partner-centre-strategic-phil.jpg" alt="Centre for Strategic Philanthropy">
+          <img src="img/partner-soil-sage.jpg" alt="Soil Sage Collective">
           <div class="card-body">
-            <h3>Centre for Strategic Philanthropy</h3>
-            <p>Bringing together New Zealand givers</p>
+            <h3>Soil Sage Collective</h3>
+            <p>Healthy soils, ecosystems and nutrient-dense food</p>
             <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Auckland</span>
-              <a class="site" href="https://cspnz.org.nz" target="_blank" rel="noopener">Website →</a>
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+              <a class="site" href="https://opencollective.com/soil-sage-collective" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/partner-growing-sustainability.jpg" alt="Growing Sustainability NZ">
+          <div class="card-body">
+            <h3>Growing Sustainability NZ</h3>
+            <p>Supporting Upper Hutt Food Week 2026</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+              <a class="site" href="https://www.facebook.com/myupperhutt/posts/save-the-date-upper-hutt-a-bunch-of-awesome-locals-is-serving-up-something-speci/1338686998294614/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
         </article>
@@ -595,13 +617,57 @@ footer a { color: var(--tan); }
           </div>
         </article>
         <article class="card">
-          <img src="img/partner-the-gift-trust.jpg" alt="The Gift Trust">
+          <img src="img/partner-island-futures.jpg" alt="Island Futures">
           <div class="card-body">
-            <h3>The Gift Trust</h3>
-            <p>Facilitating giving to charitable causes</p>
+            <h3>Island Futures</h3>
+            <p>Securing islands as bastions of resilience</p>
             <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
-              <a class="site" href="https://thegifttrust.org.nz/" target="_blank" rel="noopener">Website →</a>
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> West Coast</span>
+              <a class="site" href="https://www.islandfutures.earth/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/partner-roebuck-farms.jpg" alt="Roebuck Farms">
+          <div class="card-body">
+            <h3>Roebuck Farms</h3>
+            <p>Innovating and elevating local food production</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Taranaki</span>
+              <a class="site" href="https://www.roebuckfarm.com/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/partner-garden-to-table.jpg" alt="Garden to Table Trust">
+          <div class="card-body">
+            <h3>Garden to Table Trust</h3>
+            <p>Tamariki growing and preparing quality kai</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Auckland</span>
+              <a class="site" href="https://gardentotable.org.nz/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/partner-house-of-science.jpg" alt="House of Science NZ">
+          <div class="card-body">
+            <h3>House of Science NZ</h3>
+            <p>Hands-on science and STEM learning</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Bay of Plenty</span>
+              <a class="site" href="https://houseofscience.nz/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/partner-te-kura-papatuanuku.jpg" alt="Te Kura o Papatuanuku Wairarapa Earth School">
+          <div class="card-body">
+            <h3>Te Kura o Papatuanuku Wairarapa Earth School</h3>
+            <p>Hands-on, garden-based learning</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wairarapa</span>
+              <a class="site" href="https://wairarapaearthschool.org/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
         </article>
@@ -616,13 +682,34 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
+        <article class="card">
+          <img src="img/partner-fundsorter.jpg" alt="Fundsorter">
+          <div class="card-body">
+            <h3>Fundsorter</h3>
+            <p>Streamlining funding for charities and organisations</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+              <a class="site" href="https://www.fundsorter.com/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/partner-every-body-treasure.jpg" alt="Every Body Is a Treasure (Natural Leaders)">
+          <div class="card-body">
+            <h3>Every Body Is a Treasure (Natural Leaders)</h3>
+            <p>Youth development through art and nature</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+              <a class="site" href="https://everybodyisatreasure.org/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
     </div>
     <a class="gifts-cta" href="https://biometrust.earth/gifts" target="_blank" rel="noopener">
-      <span class="lbl">Learn more</span>
-      <span class="cta-body">See our entire ecosystem of giftees at <strong>biometrust.earth/gifts</strong></span>
+      <span class="lbl">See all giftees</span>
+      <span class="cta-body">See the full ecosystem at <strong>biometrust.earth/gifts</strong></span>
     </a>
-    <p class="note">All 16 FY26 partners are listed. Photos are in for two of them; the rest need pulling from the Figma spread, along with the website links still marked as placeholders.</p>
-  </div>
+      </div>
 </section>
 
 <!-- ============ OUR APPROACH ============ -->
@@ -661,6 +748,7 @@ footer a { color: var(--tan); }
 
 <!-- ============ MANGAROA (solid deep band; the aerial runs as a banner inside it) ============ -->
 <section class="band band-deep" id="mangaroa">
+  <div class="deco deco-sunflowers"><img src="img/botanical-sunflower-band.webp" alt=""></div>
   <div class="wrap">
     <img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air" style="width:100%;border-radius:4px;margin-bottom:34px">
     <p class="eyebrow">Our own initiatives</p>
@@ -669,7 +757,8 @@ footer a { color: var(--tan); }
       <div class="measure">
         <p class="lede">Wholly owned by Biome Trust, Mangaroa Farms is a charitable entity spanning 1,222 hectares in the Mangaroa river catchment, 40 minutes north of Wellington. With a growing team, this <em>living laboratory</em> focuses on ecological resilience, accessible kai and community education.</p>
         <p style="color:#cdd8cb">This year, Mangaroa Farms built its first ecological baseline, and measured the impact of a decade of work.</p>
-        <p class="fine">Learn more at <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" style="color:var(--tan)">impact.mangaroa.org</a></p>
+        <p class="fine"><span class="pill" style="background:rgba(255,255,255,.1);color:#dbe4d9">Mangaroa Valley, Upper Hutt</span>
+          &nbsp; <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" style="color:var(--tan)">Website →</a></p>
       </div>
       <div class="panel">
         <p class="kicker">Current land cover</p>
@@ -684,6 +773,13 @@ footer a { color: var(--tan); }
           </ul>
         </div>
       </div>
+    </div>
+
+    <div class="panel" style="margin-top:22px">
+      <p class="kicker">Carbon stored</p>
+      <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:#fff">~840,000 t</div>
+      <div class="track" style="margin-top:14px;background:rgba(255,255,255,.14)"><i style="width:90%;background:var(--tan)"></i></div>
+      <p style="font-size:13.5px;color:#cdd8cb;margin:10px 0 0">About 90% of it held in forest</p>
     </div>
 
     <p class="chart-title" style="color:var(--tan);margin-top:46px">FY26 at Mangaroa</p>
@@ -710,6 +806,8 @@ footer a { color: var(--tan); }
     <img src="img/maearth-band.jpg" alt="Ma Earth projects" style="width:100%;border-radius:4px;margin-bottom:34px">
     <p class="eyebrow">Our own initiatives</p>
     <div class="logo-row"><img src="img/ma-earth-logo.png" alt="Ma Earth"></div>
+    <p class="fine" style="margin-top:0"><span class="pill">Zug, Switzerland</span>
+      &nbsp; <a class="site" href="https://maearth.com" target="_blank" rel="noopener">Website →</a></p>
     <div class="two-col">
       <div>
         <p>Ma Earth grew out of Biome Trust's experience of a persistent funding gap: major funders struggle to find and confidently support high-quality grassroots nature regeneration and conservation projects, while those projects struggle to access major donors.</p>
@@ -783,7 +881,8 @@ footer a { color: var(--tan); }
     </div>
     <p class="fine">Figures are indicative and stated in NZD, matching the consolidated accounts.</p>
 
-    <div class="steps" style="margin-top:34px">
+    <p class="chart-title" style="margin-top:38px">Four pathways for creating impact</p>
+    <div class="steps">
       <div class="step" style="background:var(--white)"><div class="t" style="color:var(--tan)">Returns</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Generate returns for future impact</h4><p>Income and capital gains increase the resources available to support initiatives aligned with Biome Trust's purpose.</p></div>
       <div class="step" style="background:var(--white)"><div class="t" style="color:var(--tan)">Mangaroa Farms</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support Mangaroa Farms</h4><p>A cornerstone initiative wholly owned by Biome Trust. Its activities contribute directly to our impact, and the capital invested forms a significant asset on our consolidated balance sheet.</p></div>
       <div class="step" style="background:var(--white)"><div class="t" style="color:var(--tan)">Impact funds</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Invest in impact-focused funds</h4><p>Through international partners, part of the endowment is being deployed into funds aligned with our mission.</p><p style="margin-top:10px"><strong>Land and food:</strong> Mad Capital, Alder Point<br><strong>Nature and water:</strong> Superorganism, Burnt Island Ventures</p></div>
@@ -836,6 +935,8 @@ footer a { color: var(--tan); }
         <h4>Around the motu</h4>
         <ul>
           <li>Garden to Table (HQ)<br><span>T&#257;maki Makaurau, Auckland</span></li>
+          <li>Roebuck Farms<br><span>Taranaki</span></li>
+          <li>Island Futures<br><span>West Coast</span></li>
           <li>UNDERGROUND Festival<br><span>Waikato 2027</span></li>
           <li>Tolaga Bay Heritage Trust<br><span>Tolaga Bay</span></li>
           <li>The Learning Environment<br><span>Whanganui</span></li>
@@ -850,11 +951,13 @@ footer a { color: var(--tan); }
         </ul>
       </div>
       <div class="place">
-        <h4>Hutt Valley</h4>
+        <h4>Greater Wellington</h4>
         <ul>
           <li>Mangaroa Farms</li>
           <li>Growing Sustainability NZ</li>
+          <li>Papawhakaritorito Trust</li>
           <li>Natural Leaders</li>
+          <li>Fundsorter</li>
           <li>Te &#256;ti Awa</li>
         </ul>
       </div>
@@ -867,6 +970,7 @@ footer a { color: var(--tan); }
           <li>Centre for Strategic Philanthropy</li>
           <li>The Gift Trust</li>
           <li>House of Science</li>
+          <li>Eco-Index</li>
         </ul>
       </div>
     </div>
