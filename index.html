@@ -76,7 +76,7 @@ img { max-width: 100%; display: block; }
 .measure { max-width: var(--measure); }
 
 .eyebrow {
-  font-size: 12px; font-weight: 600; letter-spacing: .18em;
+  font-size: 14px; font-weight: 600; letter-spacing: .18em;
   text-transform: uppercase; color: var(--green-light); margin: 0 0 18px;
 }
 .band-deep .eyebrow { color: var(--tan); }
@@ -213,10 +213,19 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .band > .wrap, .image-band > .wrap { position: relative; z-index: 1; }
 .deco { position: absolute; z-index: 0; pointer-events: none; user-select: none; }
 .deco img { display: block; width: 100%; height: auto; }
-.deco-ponga { right: -5%; bottom: -6%; width: clamp(220px, 26vw, 380px); }
-/* the fern needs its own room — without the extra foot it lands on the
-   acknowledgements copy at desktop widths */
+/* the fern runs large and sits flush to the right edge, overlapping the text
+   column. It sits behind the copy (z-index 0 vs the wrap's 1) and is toned back
+   so the words stay first. */
+.deco-ponga {
+  right: 0; bottom: -4%; width: clamp(420px, 62vw, 1000px); opacity: .55;
+  /* strongest at the right edge, gone before it reaches the body column —
+     it still reaches into the text area, without sitting under whole lines */
+  -webkit-mask-image: linear-gradient(90deg, transparent 6%, rgba(0,0,0,.35) 38%, #000 72%);
+  mask-image: linear-gradient(90deg, transparent 6%, rgba(0,0,0,.35) 38%, #000 72%);
+}
 #kia-ora { padding-bottom: clamp(150px, 22vh, 280px); }
+/* thin rule between the letter and the acknowledgements */
+.ack { margin-top: 56px; padding-top: 44px; border-top: 1px solid var(--line); }
 /* the landscape page has a clear right column for these; this layout does not,
    so each decorative element gets its own foot rather than sitting behind copy */
 .deco-tui { right: -2%; bottom: -4%; width: clamp(200px, 24vw, 360px); }
@@ -409,16 +418,12 @@ footer a { color: var(--tan); }
       <p>We remain a learning organisation. In the year ahead, we will continue giving, listening and collaborating, while looking for places where Biome Trust can make a useful contribution to a healthier and more flourishing future.</p>
     </div>
   </div>
-  <div class="wrap" style="margin-top:56px">
+  <div class="wrap ack">
     <p class="eyebrow">Acknowledgements</p>
-    <div class="two-col">
-      <div>
-        <p>We are deeply grateful to the people and organisations who contributed to Biome Trust's work this year. In particular, we thank our partners for the work they lead, the knowledge and experience they share, and the trust that underpins our relationships.</p>
-        <p>We acknowledge tangata whenua and the wider people of Aotearoa New Zealand, and our shared interest in a healthy and flourishing society.</p>
-      </div>
-      <div>
-        <p>We also thank our trustees, team, advisers, collaborators and community members for their care, skill and practical support. The progress reflected in this report is collective, and we are grateful to everyone who helped make it possible.</p>
-      </div>
+    <div class="measure">
+      <p>We are deeply grateful to the people and organisations who contributed to Biome Trust's work this year. In particular, we thank our partners for the work they lead, the knowledge and experience they share, and the trust that underpins our relationships.</p>
+      <p>We acknowledge tangata whenua and the wider people of Aotearoa New Zealand, and our shared interest in a healthy and flourishing society.</p>
+      <p>We also thank our trustees, team, advisers, collaborators and community members for their care, skill and practical support. The progress reflected in this report is collective, and we are grateful to everyone who helped make it possible.</p>
     </div>
   </div>
 </section>
