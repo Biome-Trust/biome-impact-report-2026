@@ -278,6 +278,23 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 }
 
 
+
+/* ---- Mangaroa offerings ---- */
+.offers { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: clamp(18px, 2.4vw, 32px); margin-top: 26px; }
+.offer { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.offer-img { display: block; width: 100%; max-width: 190px; aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
+.offer-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 600ms var(--ease); }
+.offer-img:hover img { transform: scale(1.05); }
+.offer h4 { font-size: 16.5px; font-weight: 600; margin: 18px 0 8px; color: var(--text-dark); }
+.offer p { font-size: 14px; line-height: 1.5; color: var(--text-mid); margin: 0 0 16px; }
+.offer-btn {
+  margin-top: auto; display: inline-block; text-decoration: none;
+  background: var(--tan); color: #241d08; font-size: 13.5px; font-weight: 600;
+  border-radius: 3px; padding: 9px 20px;
+  transition: background var(--beat) var(--ease);
+}
+.offer-btn:hover { background: var(--gold-dark, #a8871f); color: #fff; }
+
 /* ---- Aotearoa map ----
    Both island outlines come from the Figma. They are placed with one shared
    projection derived from each island's real geographic extent — the two agreed
@@ -303,7 +320,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
    cover does. Scrim is weighted for white type at any crop. */
 .title-band {
   position: relative; overflow: hidden;
-  min-height: clamp(640px, 104vh, 1120px);
+  min-height: clamp(1280px, 208vh, 2240px);
   display: flex; align-items: center;
   padding: clamp(40px, 8vh, 90px) var(--gut);
   color: #fff;
@@ -505,7 +522,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
    A condensed take on the gifts-page feature: one main image, the essentials
    beside it, and a strip of three landscape slots underneath. Half the detail
    of the full gifts entry — no milestones, stats or pull quote. */
-.features { display: flex; flex-direction: column; gap: clamp(40px, 6vw, 72px); margin-top: 30px; }
+.features { display: flex; flex-direction: column; gap: clamp(20px, 3vw, 36px); margin-top: 30px; }
 .feature {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
@@ -1198,6 +1215,47 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       </div>
     </div>
 
+
+
+    <p class="chart-title" style="margin-top:52px">More about Mangaroa</p>
+    <div class="offers">
+      <article class="offer">
+        <a class="offer-img" href="https://mangaroa.org/upcoming-events" target="_blank" rel="noopener"><img src="img/mang-events.jpg" alt="Upcoming Events"></a>
+        <h4>Upcoming Events</h4>
+        <p>View our range of upcoming garden tours, open days, and wellness events in the Mangaroa Yurt &amp; Te Wharekai / Kitchen.</p>
+        <a class="offer-btn" href="https://mangaroa.org/upcoming-events" target="_blank" rel="noopener">View Events</a>
+      </article>
+      <article class="offer">
+        <a class="offer-img" href="https://mangaroa.org/book" target="_blank" rel="noopener"><img src="img/mang-venues.jpg" alt="Book Our Venues"></a>
+        <h4>Book Our Venues</h4>
+        <p>We offer premium event spaces &amp; accommodation options for those looking for a bespoke venue, grounded in nature.</p>
+        <a class="offer-btn" href="https://mangaroa.org/book" target="_blank" rel="noopener">More</a>
+      </article>
+      <article class="offer">
+        <a class="offer-img" href="https://mangaroa.org/visit-us" target="_blank" rel="noopener"><img src="img/mang-kai.jpg" alt="Fresh Veges  Meat"></a>
+        <h4>Fresh Veges &amp; Meat</h4>
+        <p>Our regenerative market gardens and pastures supply a range of fresh kai for our farm shop &amp; online deliveries.</p>
+        <a class="offer-btn" href="https://mangaroa.org/visit-us" target="_blank" rel="noopener">Visit Us</a>
+      </article>
+      <article class="offer">
+        <a class="offer-img" href="https://mangaroa.org/visit-us" target="_blank" rel="noopener"><img src="img/mang-shop.jpg" alt="Visit our Farm Shop"></a>
+        <h4>Visit our Farm Shop</h4>
+        <p>Our shop hosts a range of fresh produce, meats, &amp; a range of local artisan foods. 98 Whitemans Valley Road, Upper Hutt.</p>
+        <a class="offer-btn" href="https://mangaroa.org/visit-us" target="_blank" rel="noopener">Visit Us</a>
+      </article>
+      <article class="offer">
+        <a class="offer-img" href="https://mangaroa.org/stay" target="_blank" rel="noopener"><img src="img/mang-stay.jpg" alt="Stay with Us"></a>
+        <h4>Stay with Us</h4>
+        <p>Experience an eco-luxury stay blending farm-living with elegance, and a deep connection to the whenua surrounding us.</p>
+        <a class="offer-btn" href="https://mangaroa.org/stay" target="_blank" rel="noopener">Book Now</a>
+      </article>
+      <article class="offer">
+        <a class="offer-img" href="https://impact.mangaroa.org" target="_blank" rel="noopener"><img src="img/mang-forestry.jpg" alt="Forestry  Restoration"></a>
+        <h4>Forestry &amp; Restoration</h4>
+        <p>Pine, old-growth native forest and new planting sit side by side across the catchment. 8,546 natives went in this year, and roughly 90% of the farm&rsquo;s stored carbon is held in forest.</p>
+        <a class="offer-btn" href="https://impact.mangaroa.org" target="_blank" rel="noopener">Learn More</a>
+      </article>
+    </div>
 
     <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
     <div class="imgstats">
