@@ -259,6 +259,30 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
   .donut, .donut .mid, .track i, .bars .bar { transition: none; transform: none; }
 }
 
+/* ---- full-bleed title band ----
+   A section whose whole job is to carry a title over a photograph, the way the
+   cover does. Scrim is weighted for white type at any crop. */
+.title-band {
+  position: relative; overflow: hidden;
+  min-height: clamp(320px, 52vh, 560px);
+  display: flex; align-items: center;
+  padding: clamp(40px, 8vh, 90px) var(--gut);
+  color: #fff;
+}
+.title-band .tb-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.title-band .tb-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15,28,16,.30), rgba(15,28,16,.62));
+}
+.title-band .wrap { position: relative; z-index: 1; }
+/* tighter variant: shorter frame, title sitting low so it reads as a lead-in to
+   the section directly beneath rather than a full-page cover */
+.title-band--tight { min-height: clamp(240px, 38vh, 400px); align-items: flex-end; padding-bottom: clamp(26px, 4vh, 48px); }
+.title-band--tight h2 { font-size: clamp(30px, 4.4vw, 58px); }
+.title-band--tight + .band { padding-top: clamp(38px, 5vh, 64px); }
+.title-band .eyebrow { color: var(--tan); }
+.title-band h2 { color: #fff; margin: 0; font-size: clamp(38px, 6.4vw, 86px); line-height: 1.02; }
+
 /* ---- decorative botanicals (landscape edition) ----
    Absolutely positioned and pointer-events:none so they never intercept a click.
    Hidden below 900px: at phone widths they would crowd or sit under the type,
@@ -300,16 +324,15 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
    the page rather than off the edge */
 .deco-tui-kia {
   /* no mirror: he already faces right, so at the left edge he looks into the
-     page. The mask keeps the bird and drops the branch before it reaches copy. */
-  left: -1%; top: 1%;
-  width: clamp(150px, 17vw, 260px);
-  transform: translateY(18px);
+     page. Sized to match the tui in the section below, vertically centred, and
+     unmasked — he reads at full strength rather than fading out. */
+  left: -6%; top: 50%;
+  width: clamp(420px, 56vw, 900px);
+  transform: translateY(calc(-50% + 18px));
   opacity: 0;
   transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
-  -webkit-mask-image: linear-gradient(90deg, #000 24%, transparent 72%);
-  mask-image: linear-gradient(90deg, #000 24%, transparent 72%);
 }
-.in-view .deco-tui-kia { opacity: .9; transform: none; }
+.in-view .deco-tui-kia { opacity: 1; transform: translateY(-50%); }
 @media (prefers-reduced-motion: reduce) { .deco-tui-kia { transition: none; } }
 @media (prefers-reduced-motion: reduce) { .deco-tui { transition: none; } }
 #numbers { padding-bottom: clamp(150px, 22vh, 300px); }
@@ -464,6 +487,17 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 }
 .feature-sub { font-size: clamp(15px, 1.6vw, 17.5px); line-height: 1.55; color: var(--text-mid); margin: 0 0 20px; }
 .feature-body .meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+.feature-points { list-style: none; margin: 0 0 20px; padding: 0; }
+.feature-points li {
+  position: relative; padding-left: 16px; margin-bottom: 8px;
+  font-size: 14.5px; line-height: 1.5; color: var(--text-mid);
+}
+.feature-points li::before {
+  content: ''; position: absolute; left: 0; top: .6em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--tan);
+}
+.feature-points b { color: var(--text-dark); font-weight: 600; }
 .feature-strip { grid-area: strip; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1.4vw, 18px); }
 .feature-strip img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; display: block; }
 
@@ -497,8 +531,12 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .card { position: relative; }
 .year-badge {
   position: absolute; top: 10px; right: 10px; z-index: 1;
-  background: rgba(20, 30, 20, .72); color: #fff; font-size: 12px; letter-spacing: .04em;
-  border-radius: 999px; padding: 3px 10px; backdrop-filter: blur(4px);
+  background: var(--green-dark); color: #fff; font-size: 12px; font-weight: 600;
+  letter-spacing: .06em; border-radius: 999px; padding: 3px 10px;
+}
+/* a relationship that predates the reporting year reads quieter */
+.year-badge.prior {
+  background: rgba(20, 30, 20, .55); font-weight: 400; backdrop-filter: blur(4px);
 }
 .card[hidden] { display: none !important; }
 .gf-empty { font-size: 15px; color: var(--text-light); margin-top: 26px; }
@@ -705,6 +743,11 @@ footer a { color: var(--tan); }
           <p class="feature-tag">Multi-year partner</p>
           <h3>The Learning Environment</h3>
           <p class="feature-sub">Holistic learning experiences for wellbeing</p>
+          <ul class="feature-points">
+            <li><b>87,000+ native trees</b> grown &amp; planted for forest and waterway restoration</li>
+            <li><b>28,000+ kg of kai</b> grown &amp; gifted to learners, volunteers and community</li>
+            <li><b>4,300+ visitors</b> hosted and <b>1,500+ learners</b> through hands-on courses</li>
+          </ul>
           <div class="meta">
             <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Manawatū-Whanganui</span>
             <a class="site" href="https://www.learningenvironment.nz/" target="_blank" rel="noopener">Website →</a>
@@ -724,6 +767,11 @@ footer a { color: var(--tan); }
           <p class="feature-tag">Multi-year partner</p>
           <h3>Papawhakaritorito Trust</h3>
           <p class="feature-sub">Elevating Indigenous seed, soil and food sovereignty</p>
+          <ul class="feature-points">
+            <li><b>Heritage seed bank</b> rebuilt after the fire</li>
+            <li><b>Pātaka Kai</b> stocked year-round for the community</li>
+            <li><b>Seed &amp; soil wānanga</b> passing knowledge between generations</li>
+          </ul>
           <div class="meta">
             <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
             <a class="site" href="https://www.papawhakaritorito.com/" target="_blank" rel="noopener">Website →</a>
@@ -800,6 +848,11 @@ footer a { color: var(--tan); }
           <p class="feature-tag">Multi-year partner</p>
           <h3>UNDERGROUND Festival</h3>
           <p class="feature-sub">Celebrating soil, food and farming</p>
+          <ul class="feature-points">
+            <li><b>2 festivals</b> delivered across 2025–26</li>
+            <li><b>Thousands gathered</b> to celebrate soil, food and kai</li>
+            <li><b>Regenerative growers</b> showcased alongside music and kōrero</li>
+          </ul>
           <div class="meta">
             <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Canterbury / Waikato</span>
             <a class="site" href="https://www.undergroundfestival.co.nz/" target="_blank" rel="noopener">Website →</a>
@@ -813,6 +866,7 @@ footer a { color: var(--tan); }
       </article>
     </div>
     <h3 class="group-label">And the wider circle</h3>
+    <p class="fine" style="margin-top:10px">Gifts made in FY26 (1 April 2025 – 31 March 2026) first. Badges show the most recent year each relationship was recorded on <a href="https://biometrust.earth/gifts" target="_blank" rel="noopener">biometrust.earth/gifts</a>.</p>
     <div class="giftfilter">
       <div class="gf-row">
         <label class="gf-search">
@@ -844,7 +898,7 @@ footer a { color: var(--tan); }
     <div class="grid">
         <article class="card" data-themes="conservation finance" data-years="2026 2024" data-name="Eco-Index">
           <img src="img/partner-eco-index.jpg" alt="Eco-Index">
-          <span class="year-badge">2026</span>
+          <span class="year-badge">FY26</span>
           <div class="card-body">
             <h3>Eco-Index</h3>
             <p>Guiding biodiversity investment in Aotearoa</p>
@@ -854,21 +908,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card" data-themes="regen education" data-years="2025" data-name="Ruamāhanga Farm Foundation">
-          <img src="img/partner-ruamahanga.jpg" alt="Ruamāhanga Farm Foundation">
-          <span class="year-badge">2025</span>
-          <div class="card-body">
-            <h3>Ruamāhanga Farm Foundation</h3>
-            <p>Learning from land, river and community</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wairarapa</span>
-              <a class="site" href="https://ruamahanga.org.nz" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
         <article class="card" data-themes="regen education" data-years="2026 2025" data-name="Permaculture in New Zealand">
           <img src="img/partner-permaculture-nz.jpg" alt="Permaculture in New Zealand">
-          <span class="year-badge">2026</span>
+          <span class="year-badge">FY26</span>
           <div class="card-body">
             <h3>Permaculture in New Zealand</h3>
             <p>Making permaculture more accessible</p>
@@ -878,45 +920,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card" data-themes="regen" data-years="2025" data-name="Soil Sage Collective">
-          <img src="img/partner-soil-sage.jpg" alt="Soil Sage Collective">
-          <span class="year-badge">2025</span>
-          <div class="card-body">
-            <h3>Soil Sage Collective</h3>
-            <p>Healthy soils, ecosystems and nutrient-dense food</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
-              <a class="site" href="https://opencollective.com/soil-sage-collective" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card" data-themes="community regen" data-years="2025" data-name="Growing Sustainability NZ">
-          <img src="img/partner-growing-sustainability.jpg" alt="Growing Sustainability NZ">
-          <span class="year-badge">2025</span>
-          <div class="card-body">
-            <h3>Growing Sustainability NZ</h3>
-            <p>Supporting Upper Hutt Food Week 2026</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
-              <a class="site" href="https://www.facebook.com/myupperhutt/posts/save-the-date-upper-hutt-a-bunch-of-awesome-locals-is-serving-up-something-speci/1338686998294614/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card" data-themes="media" data-years="2025" data-name="Kiwis in Climate">
-          <img src="img/partner-kiwis-in-climate.jpg" alt="Kiwis in Climate">
-          <span class="year-badge">2025</span>
-          <div class="card-body">
-            <h3>Kiwis in Climate</h3>
-            <p>Climate solutions from Aotearoa</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Aotearoa</span>
-              <a class="site" href="https://www.kiwisinclimate.org/kic-book/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
         <article class="card" data-themes="indigenous" data-years="2026 2025 2024" data-name="Waiwhetu Te Ati Awa">
           <img src="img/partner-waiwhetu-te-ati-awa.jpg" alt="Waiwhetu Te Ati Awa">
-          <span class="year-badge">2026</span>
+          <span class="year-badge">FY26</span>
           <div class="card-body">
             <h3>Waiwhetu Te Ati Awa</h3>
             <p>Supporting Te Rūnanganui o Te Āti Awa</p>
@@ -928,7 +934,7 @@ footer a { color: var(--tan); }
         </article>
         <article class="card" data-themes="conservation" data-years="2026" data-name="Island Futures">
           <img src="img/partner-island-futures.jpg" alt="Island Futures">
-          <span class="year-badge">2026</span>
+          <span class="year-badge">FY26</span>
           <div class="card-body">
             <h3>Island Futures</h3>
             <p>Securing islands as bastions of resilience</p>
@@ -940,7 +946,7 @@ footer a { color: var(--tan); }
         </article>
         <article class="card" data-themes="regen" data-years="2026" data-name="Roebuck Farms">
           <img src="img/partner-roebuck-farms.jpg" alt="Roebuck Farms">
-          <span class="year-badge">2026</span>
+          <span class="year-badge">FY26</span>
           <div class="card-body">
             <h3>Roebuck Farms</h3>
             <p>Innovating and elevating local food production</p>
@@ -950,45 +956,9 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
-        <article class="card" data-themes="education regen" data-years="2025" data-name="Garden to Table Trust">
-          <img src="img/partner-garden-to-table.jpg" alt="Garden to Table Trust">
-          <span class="year-badge">2025</span>
-          <div class="card-body">
-            <h3>Garden to Table Trust</h3>
-            <p>Tamariki growing and preparing quality kai</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Auckland</span>
-              <a class="site" href="https://gardentotable.org.nz/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card" data-themes="education" data-years="2025 2024" data-name="House of Science NZ">
-          <img src="img/partner-house-of-science.jpg" alt="House of Science NZ">
-          <span class="year-badge">2025</span>
-          <div class="card-body">
-            <h3>House of Science NZ</h3>
-            <p>Hands-on science and STEM learning</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Bay of Plenty</span>
-              <a class="site" href="https://houseofscience.nz/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card" data-themes="education" data-years="2025" data-name="Te Kura o Papatuanuku Wairarapa Earth School">
-          <img src="img/partner-te-kura-papatuanuku.jpg" alt="Te Kura o Papatuanuku Wairarapa Earth School">
-          <span class="year-badge">2025</span>
-          <div class="card-body">
-            <h3>Te Kura o Papatuanuku Wairarapa Earth School</h3>
-            <p>Hands-on, garden-based learning</p>
-            <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wairarapa</span>
-              <a class="site" href="https://wairarapaearthschool.org/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
         <article class="card" data-themes="education community" data-years="2026 2025" data-name="Tolaga Bay Heritage Charitable Trust">
           <img src="img/partner-tolaga-bay.jpg" alt="Tolaga Bay Heritage Charitable Trust">
-          <span class="year-badge">2026</span>
+          <span class="year-badge">FY26</span>
           <div class="card-body">
             <h3>Tolaga Bay Heritage Charitable Trust</h3>
             <p>Innovation and grassroots entrepreneurship</p>
@@ -1000,7 +970,7 @@ footer a { color: var(--tan); }
         </article>
         <article class="card" data-themes="finance" data-years="2026" data-name="Fundsorter">
           <img src="img/partner-fundsorter.jpg" alt="Fundsorter">
-          <span class="year-badge">2026</span>
+          <span class="year-badge">FY26</span>
           <div class="card-body">
             <h3>Fundsorter</h3>
             <p>Streamlining funding for charities and organisations</p>
@@ -1010,9 +980,93 @@ footer a { color: var(--tan); }
             </div>
           </div>
         </article>
+        <article class="card" data-themes="regen education" data-years="2025" data-name="Ruamāhanga Farm Foundation">
+          <img src="img/partner-ruamahanga.jpg" alt="Ruamāhanga Farm Foundation">
+          <span class="year-badge prior">FY25</span>
+          <div class="card-body">
+            <h3>Ruamāhanga Farm Foundation</h3>
+            <p>Learning from land, river and community</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wairarapa</span>
+              <a class="site" href="https://ruamahanga.org.nz" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-themes="regen" data-years="2025" data-name="Soil Sage Collective">
+          <img src="img/partner-soil-sage.jpg" alt="Soil Sage Collective">
+          <span class="year-badge prior">FY25</span>
+          <div class="card-body">
+            <h3>Soil Sage Collective</h3>
+            <p>Healthy soils, ecosystems and nutrient-dense food</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+              <a class="site" href="https://opencollective.com/soil-sage-collective" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-themes="community regen" data-years="2025" data-name="Growing Sustainability NZ">
+          <img src="img/partner-growing-sustainability.jpg" alt="Growing Sustainability NZ">
+          <span class="year-badge prior">FY25</span>
+          <div class="card-body">
+            <h3>Growing Sustainability NZ</h3>
+            <p>Supporting Upper Hutt Food Week 2026</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+              <a class="site" href="https://www.facebook.com/myupperhutt/posts/save-the-date-upper-hutt-a-bunch-of-awesome-locals-is-serving-up-something-speci/1338686998294614/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-themes="media" data-years="2025" data-name="Kiwis in Climate">
+          <img src="img/partner-kiwis-in-climate.jpg" alt="Kiwis in Climate">
+          <span class="year-badge prior">FY25</span>
+          <div class="card-body">
+            <h3>Kiwis in Climate</h3>
+            <p>Climate solutions from Aotearoa</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Aotearoa</span>
+              <a class="site" href="https://www.kiwisinclimate.org/kic-book/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-themes="education regen" data-years="2025" data-name="Garden to Table Trust">
+          <img src="img/partner-garden-to-table.jpg" alt="Garden to Table Trust">
+          <span class="year-badge prior">FY25</span>
+          <div class="card-body">
+            <h3>Garden to Table Trust</h3>
+            <p>Tamariki growing and preparing quality kai</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Auckland</span>
+              <a class="site" href="https://gardentotable.org.nz/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-themes="education" data-years="2025 2024" data-name="House of Science NZ">
+          <img src="img/partner-house-of-science.jpg" alt="House of Science NZ">
+          <span class="year-badge prior">FY25</span>
+          <div class="card-body">
+            <h3>House of Science NZ</h3>
+            <p>Hands-on science and STEM learning</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Bay of Plenty</span>
+              <a class="site" href="https://houseofscience.nz/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-themes="education" data-years="2025" data-name="Te Kura o Papatuanuku Wairarapa Earth School">
+          <img src="img/partner-te-kura-papatuanuku.jpg" alt="Te Kura o Papatuanuku Wairarapa Earth School">
+          <span class="year-badge prior">FY25</span>
+          <div class="card-body">
+            <h3>Te Kura o Papatuanuku Wairarapa Earth School</h3>
+            <p>Hands-on, garden-based learning</p>
+            <div class="meta">
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wairarapa</span>
+              <a class="site" href="https://wairarapaearthschool.org/" target="_blank" rel="noopener">Website →</a>
+            </div>
+          </div>
+        </article>
         <article class="card" data-themes="education community" data-years="2025 2024" data-name="Every Body Is a Treasure (Natural Leaders)">
           <img src="img/partner-every-body-treasure.jpg" alt="Every Body Is a Treasure (Natural Leaders)">
-          <span class="year-badge">2025</span>
+          <span class="year-badge prior">FY25</span>
           <div class="card-body">
             <h3>Every Body Is a Treasure (Natural Leaders)</h3>
             <p>Youth development through art and nature</p>
@@ -1031,11 +1085,17 @@ footer a { color: var(--tan); }
 </section>
 
 <!-- ============ OUR APPROACH ============ -->
-<section class="band band-cream" id="approach">
-  <div class="deco deco-band"><img src="img/band-approach.webp" alt=""></div>
+<!-- ============ OUR APPROACH — title band ============ -->
+<section class="title-band" id="approach-title">
+  <div class="tb-bg" style="background-image: url('img/band-approach.webp')"></div>
   <div class="wrap">
     <p class="eyebrow">How we work</p>
-    <h2>Our approach</h2>
+    <h2>Our Approach</h2>
+  </div>
+</section>
+
+<section class="band band-cream" id="approach">
+  <div class="wrap">
     <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.2vw,26px);color:var(--green-dark);margin:0">Three ways we create impact</h3>
 
     <div class="steps">
@@ -1066,7 +1126,7 @@ footer a { color: var(--tan); }
 </section>
 
 <!-- ============ MANGAROA (solid deep band; the aerial runs as a banner inside it) ============ -->
-<section class="band band-deep" id="mangaroa">
+<section class="band band-paper" id="mangaroa">
   <div class="deco deco-sunflowers"><img src="img/botanical-sunflower-band.webp" alt=""></div>
   <div class="wrap">
     <img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air" style="width:100%;border-radius:4px;margin-bottom:34px">
@@ -1075,16 +1135,16 @@ footer a { color: var(--tan); }
     <div class="two-col" style="margin-top:8px">
       <div class="measure">
         <p class="lede">Wholly owned by Biome Trust, Mangaroa Farms is a charitable entity spanning 1,222 hectares in the Mangaroa river catchment, 40 minutes north of Wellington. With a growing team, this <em>living laboratory</em> focuses on ecological resilience, accessible kai and community education.</p>
-        <p style="color:#cdd8cb">This year, Mangaroa Farms built its first ecological baseline, and measured the impact of a decade of work.</p>
-        <p class="fine"><span class="pill" style="background:rgba(255,255,255,.1);color:#dbe4d9">Mangaroa Valley, Upper Hutt</span>
-          &nbsp; <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" style="color:var(--tan)">Website →</a></p>
+        <p>This year, Mangaroa Farms built its first ecological baseline, and measured the impact of a decade of work.</p>
+        <p class="fine"><span class="pill">Mangaroa Valley, Upper Hutt</span>
+          &nbsp; <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" class="site">Website →</a></p>
       </div>
       <div class="panel">
         <p class="kicker">Current land cover</p>
         <div class="donut-wrap">
           <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, var(--tan) 90% 100%)">
           </div>
-          <ul class="legend" style="color:#dbe4d9">
+          <ul class="legend">
             <li><i style="background:#2f5c33"></i><span><b>40%</b> Old-growth native forest</span></li>
             <li><i style="background:#6f8f5a"></i><span><b>30%</b> Pine</span></li>
             <li><i style="background:#c3c48a"></i><span><b>20%</b> Pasture</span></li>
@@ -1096,12 +1156,12 @@ footer a { color: var(--tan); }
 
     <div class="panel" style="margin-top:22px">
       <p class="kicker">Carbon stored</p>
-      <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:#fff">~840,000 t</div>
-      <div class="track" style="margin-top:14px;background:rgba(255,255,255,.14)"><i style="width:90%;background:var(--tan)"></i></div>
-      <p style="font-size:13.5px;color:#cdd8cb;margin:10px 0 0">About 90% of it held in forest</p>
+      <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:var(--green-dark)">~840,000 t</div>
+      <div class="track" style="margin-top:14px;background:var(--white)"><i style="width:90%;background:var(--tan)"></i></div>
+      <p style="font-size:13.5px;color:var(--text-mid);margin:10px 0 0">About 90% of it held in forest</p>
     </div>
 
-    <p class="chart-title" style="color:var(--tan);margin-top:46px">FY26 at Mangaroa</p>
+    <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
     <div class="imgstats">
       <div class="imgstat"><img src="img/mang-trees.jpg" alt=""><p class="eyebrow">Restoring the land</p><div class="n">8,546</div><div class="l">native trees planted across 3.3 ha. One third by volunteers</div></div>
       <div class="imgstat"><img src="img/mang-predator.jpg" alt=""><p class="eyebrow">Predator control</p><div class="n">242</div><div class="l">predators removed across 78 monitored traps, plus 95 deer and goats</div></div>
@@ -1111,7 +1171,7 @@ footer a { color: var(--tan); }
       <div class="imgstat"><img src="img/mang-learning.jpg" alt=""><p class="eyebrow">Hands-on learning</p><div class="n">536</div><div class="l">people through 41 hands-on sessions</div></div>
     </div>
 
-    <p class="chart-title" style="color:var(--tan);margin-top:46px">Beyond grantmaking</p>
+    <p class="chart-title" style="margin-top:46px">Beyond grantmaking</p>
     <div class="two-col">
       <div class="imgstat tall"><img src="img/mang-fellows.jpg" alt=""><p class="eyebrow">Launched with Mangaroa Farms</p><div class="n">10 Earth Fellows</div><div class="l">Backed by 10 × NZ$10,000 in grants. An inaugural weekend retreat kicked off a year-long fellowship for regenerative leaders across land, food systems &amp; community housing.</div></div>
       <div class="imgstat tall"><img src="img/mang-hui.jpg" alt=""><p class="eyebrow">Convened by Biome Trust</p><div class="n">Education Hui</div><div class="l">Education leaders from across Aotearoa gathered at Mangaroa Farms for a multi-day hui on alternative learning, AI and place-based education.</div></div>
@@ -1120,7 +1180,7 @@ footer a { color: var(--tan); }
 </section>
 
 <!-- ============ MA EARTH ============ -->
-<section class="band band-paper" id="ma-earth">
+<section class="band band-cream" id="ma-earth">
   <div class="wrap">
     <img src="img/maearth-band.jpg" alt="Ma Earth projects" style="width:100%;border-radius:4px;margin-bottom:34px">
     <p class="eyebrow">Our own initiatives</p>
@@ -1182,11 +1242,17 @@ footer a { color: var(--tan); }
 </section>
 
 <!-- ============ ENDOWMENT ============ -->
-<section class="band band-cream" id="endowment">
-  <div class="deco deco-band"><img src="img/band-endowment.webp" alt=""></div>
+<!-- ============ ENDOWMENT — title band ============ -->
+<section class="title-band title-band--tight" id="endowment-title">
+  <div class="tb-bg" style="background-image: url('img/band-endowment.webp')"></div>
   <div class="wrap">
     <p class="eyebrow">Our endowment</p>
     <h2>Stewarding our endowment</h2>
+  </div>
+</section>
+
+<section class="band band-cream" id="endowment">
+  <div class="wrap">
     <p class="lede measure">We are transitioning our endowment from traditional investments into impact and values-aligned investing.</p>
 
     <div class="two-col" style="margin-top:36px">
