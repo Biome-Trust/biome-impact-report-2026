@@ -592,8 +592,12 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 
 .fine { font-size: 12.5px; line-height: 1.5; color: var(--text-light); margin-top: 16px; }
 .band-deep .fine { color: #93a691; }
-.logo-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; }
-.logo-row img { height: 44px; width: auto; }
+.logo-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin: 34px 0 30px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.logo-row img { height: 57px; width: auto; }   /* 30% up on 44px */
+/* the Mangaroa lockup is two lines deep, so it is sized on width, not height */
+.logo-row--mang img { height: auto; width: clamp(190px, 22vw, 290px); }
+.logo-row--mang { margin-bottom: 26px; }
 
 
 /* ---- featured partners ----
@@ -1914,7 +1918,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
   <div class="wrap">
     <img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air" style="width:100%;border-radius:0 0 4px 4px;margin-bottom:34px;display:block">
     <p class="eyebrow">Our own initiatives</p>
-    <h2>Mangaroa Farms</h2>
+    <h2 class="vh">Mangaroa Farms</h2>
+    <div class="logo-row logo-row--mang"><img src="img/mangaroa-logo.png" alt="Mangaroa Farms"></div>
     <div class="two-col" style="margin-top:8px">
       <div class="measure">
         <p class="lede">Wholly owned by Biome Trust, Mangaroa Farms is a charitable entity spanning 1,222 hectares in the Mangaroa river catchment, 40 minutes north of Wellington. With a growing team, this <em>living laboratory</em> focuses on ecological resilience, accessible kai and community education.</p>
