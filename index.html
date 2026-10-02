@@ -380,13 +380,21 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
    column. It sits behind the copy (z-index 0 vs the wrap's 1) and is toned back
    so the words stay first. */
 .deco-ponga {
-  right: 0; bottom: -4%; width: clamp(420px, 62vw, 1000px); opacity: .55;
+  /* kept to the right half, as the Figma spread has it, so it sits beside the
+     letter rather than under it */
+  right: 0; bottom: -4%; width: clamp(360px, 44vw, 660px); opacity: .62;
   /* strongest at the right edge, gone before it reaches the body column —
      it still reaches into the text area, without sitting under whole lines */
   -webkit-mask-image: linear-gradient(90deg, transparent 6%, rgba(0,0,0,.35) 38%, #000 72%);
   mask-image: linear-gradient(90deg, transparent 6%, rgba(0,0,0,.35) 38%, #000 72%);
 }
 #kia-ora, #closing { padding-bottom: clamp(150px, 22vh, 280px); --cue-pull: 0px; }
+/* the opening letter: two columns of the same measure, the heading above both */
+.letter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(26px, 4vw, 64px); margin-top: 8px; }
+.letter p { max-width: 54ch; }
+.letter .lede { font-weight: 600; }
+.letter .signoff { margin-top: 26px; }
+@media (max-width: 760px) { .letter { grid-template-columns: 1fr; } }
 /* the closing fern is bottom-anchored and sized by width, so pulling the cue
    up moves the fern with the section rather than cropping it */
 #closing { --cue-pull: clamp(150px, 22vh, 280px); }
@@ -775,24 +783,20 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 <!-- ============ KIA ORA ============ -->
 <section class="band band-paper" id="kia-ora">
   <div class="deco deco-ponga"><img src="img/botanical-ponga.webp" alt=""></div>
-  <div class="wrap two-col">
-    <div>
-      <p class="eyebrow">A word from the trustees</p>
-      <h2>Kia ora,</h2>
-      <p class="lede">You are reading Biome Trust Aotearoa's first impact report. It shares some of the work we supported during the year ended 31 March 2026, and what we learned along the way.</p>
-    </div>
-    <div class="measure">
-      <p>This report reflects a year of continued evolution for Biome Trust Aotearoa: growing our giving, deepening relationships with the people and organisations we support, and becoming clearer about the role we can play beyond individual grants.</p>
-      <p>The year also marked an important transition for Ma Earth, which became an independent charitable foundation after growing out of Biome Trust's experience in grantmaking and land stewardship.</p>
-      <p>We remain a learning organisation. In the year ahead, we will continue giving, listening and collaborating, while looking for places where Biome Trust can make a useful contribution to a healthier and more flourishing future.</p>
-    </div>
-  </div>
-  <div class="wrap ack">
-    <p class="eyebrow">Acknowledgements</p>
-    <div class="measure">
-      <p>We are deeply grateful to the people and organisations who contributed to Biome Trust's work this year. In particular, we thank our partners for the work they lead, the knowledge and experience they share, and the trust that underpins our relationships.</p>
-      <p>We acknowledge tangata whenua and the wider people of Aotearoa New Zealand, and our shared interest in a healthy and flourishing society.</p>
-      <p>We also thank our trustees, team, advisers, collaborators and community members for their care, skill and practical support. The progress reflected in this report is collective, and we are grateful to everyone who helped make it possible.</p>
+  <div class="wrap">
+    <h2>Kia ora,</h2>
+    <div class="letter">
+      <div>
+        <p class="lede">Welcome to Biome Trust Aotearoa&rsquo;s first annual impact report, highlighting the work we supported during the year ended 31 March 2026, and our learning along the way.</p>
+        <p>We acknowledge the mana of the mountains, rivers, oceans, forests, creatures, and people of Aotearoa New Zealand, and our shared responsibility to support a healthy and flourishing world. In particular, we acknowledge te awa Mangaroa, the Remutaka Range, and ng&#257; mana whenua, Te &#256;ti Awa wh&#257;nau wh&#257;nui ki te Upoko o te Ika, as ancestral guardians of the whenua we call home.</p>
+        <p>This year, our giving grew, with more than 80% directed towards environmental purposes. We also invested in relationships and shared learning through initiatives including Earth Fellows, which supports and connects regenerative leaders, and the Education Hui, which brought education leaders together to share perspectives and explore opportunities for change.</p>
+        <p>Through our wholly owned subsidiary, Mangaroa Farms, we continued to steward a 1,222-hectare charitable farm and living laboratory, providing a place to explore and practise approaches to land stewardship, regeneration, and learning.</p>
+      </div>
+      <div>
+        <p>Ma Earth also reached an important milestone during the year, becoming an independent charitable foundation based in Switzerland. Building on more than a decade of experience in grantmaking and land stewardship, it has continued to develop beyond Biome. After the reporting period, it ran its third funding round &mdash; the first on its own platform &mdash; supporting nearly ten times the value of the previous round.</p>
+        <p>We feel fortunate to be on this journey alongside so many remarkable people. We especially want to acknowledge the people and organisations whose work we support. We deeply value our partnerships and are continually inspired by the care and commitment you bring to your work.</p>
+        <p class="signoff">Ng&#257; mihi aroha<br>Biome Trust</p>
+      </div>
     </div>
     <a class="scroll-cue scroll-cue--inline" href="#numbers" aria-label="Scroll to the next section">
       <span>Scroll</span>
@@ -800,7 +804,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         <path d="M11 3v18M4 14l7 7 7-7"/>
       </svg>
     </a>
-    </div>
+  </div>
 </section>
 
 <!-- ============ GIVING BY NUMBERS (solid deep band — no image, by design) ============ -->
