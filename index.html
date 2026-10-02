@@ -422,7 +422,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 /* the tui now enters from the left and sits higher, so the old right-hand
    clearance is gone and this note runs to a proper measure */
 .chartstack .fine { max-width: none; margin-top: 10px; }
-#mangaroa { padding-bottom: clamp(230px, 33vh, 420px); --cue-pull: 0px; }
+#mangaroa { padding-top: 0; padding-bottom: clamp(64px, 11vh, 132px); }
 #approach, #endowment { padding-bottom: clamp(180px, 27vh, 360px); --cue-pull: clamp(180px, 27vh, 360px); }
 /* the title band's fade already reads as air, so the content starts at half
    the usual band inset rather than a full one */
@@ -433,18 +433,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
    group label sits flush rather than adding its own 52px */
 #partners { padding-top: clamp(32px, 5.5vh, 66px); padding-bottom: clamp(34px, 5vh, 62px); }
 #partners .group-label:first-of-type, #partners-wider .group-label:first-of-type { margin-top: 0; }
-.deco-footstrip {
-  left: 0; right: 0; bottom: 0; width: 100%;
-  height: clamp(170px, 25vh, 300px);
-  opacity: 1;
-}
-.deco-footstrip img { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; }
-/* the strip arrives out of the band's own white rather than at a hard edge */
-.deco-footstrip::before {
-  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 38%;
-  background: linear-gradient(180deg, var(--white) 0%, rgba(255, 255, 255, 0) 100%);
-  z-index: 1; pointer-events: none;
-}
 .deco-sunflowers img { height: 100%; object-fit: cover; object-position: center bottom; }
 .deco-band {
   left: 0; right: 0; bottom: 0; width: 100%;
@@ -523,6 +511,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .imgstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(10px, 1.26vw, 15px); margin-top: 22px; }
 /* the three new initiatives read as one row, like the Figma spread */
 .imgstats--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.imgstats--2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* the frame pairs the land-cover donut with the new initiatives */
+.mang-row { display: grid; grid-template-columns: minmax(0, .42fr) minmax(0, 1fr); gap: clamp(18px, 2.4vw, 34px); margin-top: 46px; align-items: start; }
+@media (max-width: 900px) { .mang-row { grid-template-columns: 1fr; } }
 @media (max-width: 820px) { .imgstats--3 { grid-template-columns: 1fr; } }
 .imgstat {
   background: var(--white); border: 1px solid var(--line); border-radius: 4px;
@@ -532,6 +524,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .imgstat-body { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
 .imgstat .eyebrow { font-size: 11px; letter-spacing: .14em; color: var(--sage); margin: 0 0 8px; }
 .imgstat .n { font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); line-height: 1; color: var(--green-dark); }
+.imgstats--3 .n { font-size: clamp(15px, 1.35vw, 19px); white-space: nowrap; }
 .imgstat .l { font-size: 13.5px; line-height: 1.5; color: var(--text-mid); margin-top: 8px; }
 
 .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(11px, 1.44vw, 18px); margin-top: 34px; }
@@ -1918,46 +1911,18 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 
 <!-- ============ MANGAROA (solid deep band; the aerial runs as a banner inside it) ============ -->
 <section class="band band-paper" id="mangaroa">
-  <div class="deco deco-footstrip"><img src="img/maearth-collage.jpg" alt=""></div>
   <div class="wrap">
-    <img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air" style="width:100%;border-radius:4px;margin-bottom:34px">
+    <img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air" style="width:100%;border-radius:0 0 4px 4px;margin-bottom:34px;display:block">
     <p class="eyebrow">Our own initiatives</p>
     <h2>Mangaroa Farms</h2>
     <div class="two-col" style="margin-top:8px">
       <div class="measure">
         <p class="lede">Wholly owned by Biome Trust, Mangaroa Farms is a charitable entity spanning 1,222 hectares in the Mangaroa river catchment, 40 minutes north of Wellington. With a growing team, this <em>living laboratory</em> focuses on ecological resilience, accessible kai and community education.</p>
-        <p>This year, Mangaroa Farms built its first ecological baseline, and measured the impact of a decade of work.</p>
         <p class="fine"><span class="pill">Mangaroa Valley, Upper Hutt</span>
           &nbsp; <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" class="site">Website →</a></p>
-      </div>
-      <div>
-        <div class="panel">
-          <p class="kicker">Current land cover</p>
-          <div class="donut-wrap">
-            <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, var(--tan) 90% 100%)">
-            </div>
-            <ul class="legend">
-              <li><i style="background:#2f5c33"></i><span><b>40%</b> Old-growth native forest</span></li>
-              <li><i style="background:#6f8f5a"></i><span><b>30%</b> Pine</span></li>
-              <li><i style="background:#c3c48a"></i><span><b>20%</b> Pasture</span></li>
-              <li><i style="background:var(--tan)"></i><span><b>10%</b> Peat, waterways, plantings &amp; homes</span></li>
-            </ul>
-          </div>
-        </div>
-      <div class="panel" style="margin-top:18px">
-        <p class="kicker">Carbon stored</p>
-        <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:var(--green-dark)">~840,000 t</div>
-        <div class="track" style="margin-top:14px;background:var(--white)"><i style="width:90%;background:var(--tan)"></i></div>
-        <p style="font-size:13.5px;color:var(--text-mid);margin:10px 0 0">About 90% of it held in forest</p>
-      </div>
-      </div>
-    </div>
-
-
-
-
-    <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
-    <div class="imgstats">
+        <div>
+        <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
+        <div class="imgstats imgstats--2">
       <div class="imgstat"><img src="img/mang-trees.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Restoring the land</p><div class="n">8,546</div><div class="l">native trees planted across 3.3 ha. One third by volunteers</div></div></div>
       <div class="imgstat"><img src="img/mang-predator.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Predator control</p><div class="n">242</div><div class="l">predators removed across 78 monitored traps, plus 95 deer and goats</div></div></div>
       <div class="imgstat"><img src="img/mang-kiwi.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">A first in a century</p><div class="n">1 Kiwi</div><div class="l">recorded in the Mangaroa catchment</div></div></div>
@@ -1966,13 +1931,40 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div class="imgstat"><img src="img/mang-learning.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Hands-on learning</p><div class="n">536</div><div class="l">people through 41 hands-on sessions</div></div></div>
       <div class="imgstat"><img src="img/mang-farmshop.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Feeding the local bioregion</p><div class="n">263 kg</div><div class="l">of surplus kai kept from the waste stream; 101 Farm Shop suppliers, 54% of them from the region</div></div></div>
       <div class="imgstat"><img src="img/mang-cattle.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Regenerative agriculture</p><div class="n">220 cattle</div><div class="l">on virtual collars, up from 100 last year; pasture use lifted from 70% to 90%</div></div></div>
+        </div>
+      </div>
+    </div>
     </div>
 
-    <p class="chart-title" style="margin-top:46px">New initiatives</p>
-    <div class="imgstats imgstats--3">
+
+
+
+
+    <div class="mang-row">
+      <div>
+        <p class="chart-title" style="margin-top:0">Current land cover</p>
+          <div class="panel">
+            <p class="kicker">Current land cover</p>
+            <div class="donut-wrap">
+              <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, var(--tan) 90% 100%)">
+              </div>
+              <ul class="legend">
+                <li><i style="background:#2f5c33"></i><span><b>40%</b> Old-growth native forest</span></li>
+                <li><i style="background:#6f8f5a"></i><span><b>30%</b> Pine</span></li>
+                <li><i style="background:#c3c48a"></i><span><b>20%</b> Pasture</span></li>
+                <li><i style="background:var(--tan)"></i><span><b>10%</b> Peat, waterways, plantings &amp; homes</span></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+      <div>
+        <p class="chart-title" style="margin-top:0">New initiatives</p>
+        <div class="imgstats imgstats--3">
       <div class="imgstat"><img src="img/mang-fellows.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Launched with Mangaroa Farms</p><div class="n">10 Earth Fellows</div><div class="l">Backed by 10 × NZ$10,000 in grants. An inaugural weekend retreat kicked off a year-long fellowship for regenerative leaders across land, food systems &amp; community housing.</div></div></div>
       <div class="imgstat"><img src="img/mang-earth-school.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Hosted at Mangaroa Farms</p><div class="n">Earth School Aotearoa</div><div class="l">An independent learning community on the farm for children aged 5&ndash;12. 130 learners spent 4+ hours here, including visiting schools.</div></div></div>
       <div class="imgstat"><img src="img/mang-hui.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Convened by Biome Trust</p><div class="n">Education Hui</div><div class="l">Education leaders from across Aotearoa gathered at Mangaroa Farms for a multi-day hui on alternative learning, AI and place-based education.</div></div></div>
+        </div>
+      </div>
     </div>
     <a class="scroll-cue scroll-cue--inline" href="#ma-earth" aria-label="Scroll to the next section">
       <span>Scroll</span>
