@@ -20,13 +20,13 @@
 :root {
   --cream: #faf7f2;
   --white: #ffffff;
-  --green-dark: #1e3a1f;
+  --green-dark: #244B3A;   /* sampled from the Figma frames */
   --green-mid: #2d5a2e;
   --green-light: #4a7c4e;
-  --green-pale: #e8f0e8;
-  --tan: #c8a96e;
+  --green-pale: #E5E7D3;
+  --tan: #BEBE8A;   /* the doc has no gold: its accent is this olive */
   --sage: #849E8C;   /* label type; the tan is graphics only */
-  --tan-light: #f0e8d8;
+  --tan-light: #EEE4D5;
   --text-dark: #1a1a1a;
   --text-mid: #444444;
   --text-light: #777777;
@@ -409,8 +409,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .deco-tui {
   /* he enters from the right, as the Figma spread has him, mirrored so the beak
      still points into the page rather than off it */
-  right: -21%; top: 12%; left: auto; bottom: auto;
-  width: clamp(420px, 56vw, 900px);
+  right: -6%; top: 7%; left: auto; bottom: auto;
+  width: clamp(320px, 38vw, 580px);
   opacity: 0; transform: translateY(24px);
   transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
 }
@@ -431,7 +431,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 /* the title band already carries the heading, so the grid does not need a
    full band of air above it — half the usual top padding, and the first
    group label sits flush rather than adding its own 52px */
-#partners { padding-top: clamp(32px, 5.5vh, 66px); }
+#partners { padding-top: clamp(32px, 5.5vh, 66px); padding-bottom: clamp(34px, 5vh, 62px); }
 #partners .group-label:first-of-type, #partners-wider .group-label:first-of-type { margin-top: 0; }
 .deco-footstrip {
   left: 0; right: 0; bottom: 0; width: 100%;
@@ -503,6 +503,12 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .track i { display: block; height: 100%; border-radius: 2px; }
 
 .yearchart { margin-top: 12px; }
+/* frame 5: the purpose donut holds a narrow left column, the two bar charts
+   stack beside it */
+.numcharts { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 44px); align-items: start; }
+.chartstack { display: grid; gap: clamp(22px, 3vh, 38px); }
+.chartstack .yearchart:first-child { margin-top: 0; }
+@media (max-width: 820px) { .numcharts { grid-template-columns: 1fr; } }
 .bars { display: flex; align-items: flex-end; gap: clamp(6px, 1.2vw, 16px); height: 160px; }
 .bars .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
 .bars .v { font-size: 12px; color: var(--text-mid); margin-bottom: 6px; white-space: nowrap; }
@@ -529,7 +535,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .imgstat .l { font-size: 13.5px; line-height: 1.5; color: var(--text-mid); margin-top: 8px; }
 
 .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(11px, 1.44vw, 18px); margin-top: 34px; }
-.step { background: var(--white); border-radius: 4px; padding: 24px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
+.step { background: var(--tan-light); border-radius: 4px; padding: 24px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 .step .no { font-family: var(--serif); font-size: 27px; color: var(--sage); line-height: 1; }
 /* the funds tile lists its managers in two bulleted columns, as the Figma does */
 .fundcols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; margin-top: 14px; }
@@ -552,7 +558,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .principle.is-summary p { margin-top: 12px; }
 .principle h4 { font-size: 16px; font-weight: 600; margin: 12px 0 8px; }
 .principle p { font-size: 14px; line-height: 1.5; color: var(--text-mid); margin: 0; }
-.summary-band { background: #b9b878; border-radius: 4px; padding: 22px 26px; margin-top: 18px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
+.summary-band { background: #BEBE8A; border-radius: 4px; padding: 22px 26px; margin-top: 18px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 .summary-band .kicker { color: var(--green-dark); }
 .summary-band p { margin: 0; font-size: 14.5px; line-height: 1.55; color: #23331f; }
 
@@ -560,8 +566,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .purpose { padding-top: 0; }
 .purpose img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; display: block; margin-bottom: 14px; }
 .purpose .rule { display: block; height: 3px; background: var(--green-dark); margin-bottom: 16px; }
-.purpose.edu .rule { background: #8faa5c; }
-.purpose.health .rule { background: #b07d5a; }
+.purpose.edu .rule { background: #9E8F4B; }
+.purpose.health .rule { background: #9E7F61; }
 .purpose h4 { font-family: var(--serif); font-size: 20px; color: var(--green-dark); margin: 0 0 8px; font-weight: 400; }
 .purpose p { font-size: 14px; line-height: 1.55; color: var(--text-mid); margin: 0; }
 
@@ -831,44 +837,22 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       </div>
     </div>
 
-    <div class="two-col" style="margin-top:26px">
+    <div class="numcharts" style="margin-top:26px">
       <div class="panel">
         <p class="kicker">Gift value by charitable purpose</p>
         <h3>Environment at the heart</h3>
         <p style="font-size:14.5px;line-height:1.55;color:var(--text-mid);margin:0">More than 80% of value supported environmental outcomes</p>
         <div class="donut-wrap">
-          <div class="donut" style="background:conic-gradient(var(--green-dark) 0 80%, #b9b878 80% 100%)">
+          <div class="donut" style="background:conic-gradient(var(--green-dark) 0 80%, #BEBE8A 80% 100%)">
             <div class="mid"><b>80%+</b><span>environmental</span></div>
           </div>
           <ul class="legend">
             <li><i style="background:var(--green-dark)"></i><span><b>80%+</b> environment-related, including initiatives also advancing health and education</span></li>
-            <li><i style="background:#b9b878"></i><span><b>Under 20%</b> education or health only</span></li>
+            <li><i style="background:#BEBE8A"></i><span><b>Under 20%</b> education or health only</span></li>
           </ul>
         </div>
       </div>
-
-      <div class="panel">
-        <p class="kicker">Gift value by size of gift</p>
-        <h3>Ten gifts of $50,000 or more carried 83% of the value.</h3>
-        <div class="barlist">
-          <div class="barrow">
-            <div class="top"><b>$100,000 and over</b><span>$605k · 5 gifts</span></div>
-            <div class="track"><i style="width:100%;background:var(--green-dark)"></i></div>
-          </div>
-          <div class="barrow">
-            <div class="top"><b>$50,000 – 100,000</b><span>$292k · 5 gifts</span></div>
-            <div class="track"><i style="width:48%;background:#b9b878"></i></div>
-          </div>
-          <div class="barrow">
-            <div class="top"><b>Under $50,000</b><span>$183k · 12 gifts</span></div>
-            <div class="track"><i style="width:30%;background:var(--tan)"></i></div>
-          </div>
-        </div>
-        <p style="font-size:14px;line-height:1.55;color:var(--text-mid);margin:16px 0 0">Fewer, larger gifts reflect deepening relationships with partners we've backed before — and smaller gifts remain how new relationships usually begin.</p>
-      </div>
-    </div>
-
-    <div class="two-col" style="margin-top:44px">
+      <div class="chartstack">
       <div class="yearchart">
         <p class="chart-title">Number of gifts by year</p>
         <div class="bars">
@@ -893,8 +877,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         </div>
         <div class="xaxis"><span>FY21</span><span>FY22</span><span>FY23</span><span>FY24</span><span>FY25</span><span>FY26</span></div>
       </div>
+      </div>
     </div>
-
     <p class="fine">Giving includes gifts made directly by Biome Trust and through The Gift Trust, as well as a small number of payments made under services agreements that are gift-like in spirit and treated as gifts in this report. It excludes giving to Mangaroa Farms and Ma Earth, as well as international giving by Biome Trust or its philanthropic partners. All figures are in NZD.</p>
     <a class="scroll-cue scroll-cue--inline" href="#partners-title" aria-label="Scroll to the next section">
       <span>Scroll</span>
@@ -1019,12 +1003,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         </div>
       </article>
     </div>
-    <a class="scroll-cue scroll-cue--inline" href="#partners-wider" aria-label="Scroll to the next section">
-      <span>Scroll</span>
-      <svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M11 3v18M4 14l7 7 7-7"/>
-      </svg>
-    </a>
     </div>
 </section>
 
@@ -1925,9 +1903,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 
     <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.2vw,26px);color:var(--green-dark);margin:52px 0 0">Three charitable purposes</h3>
     <div class="purposes">
-      <div class="purpose"><img src="img/purpose-slot.jpg" alt=""><span class="rule"></span><h4>Environment</h4><p>Healthy land and waterways, biodiversity, regenerative food systems and thriving communities.</p></div>
-      <div class="purpose edu"><img src="img/purpose-slot.jpg" alt=""><span class="rule"></span><h4>Education</h4><p>Knowledge and practical skills through research, new ideas, hands-on learning and different ways of seeing the world.</p></div>
-      <div class="purpose health"><img src="img/purpose-slot.jpg" alt=""><span class="rule"></span><h4>Health</h4><p>Healthier communities through stronger connections between people, food, nature and culture, and places that help people thrive.</p></div>
+      <div class="purpose"><img src="img/purpose-environment.jpg" alt="Te Tauihu Environment Trust"><span class="rule"></span><h4>Environment</h4><p>Healthy land and waterways, biodiversity, regenerative food systems and thriving communities.</p></div>
+      <div class="purpose edu"><img src="img/purpose-education.jpg" alt="The Gift Trust"><span class="rule"></span><h4>Education</h4><p>Knowledge and practical skills through research, new ideas, hands-on learning and different ways of seeing the world.</p></div>
+      <div class="purpose health"><img src="img/purpose-health.jpg" alt="Kawakawa"><span class="rule"></span><h4>Health</h4><p>Healthier communities through stronger connections between people, food, nature and culture, and places that help people thrive.</p></div>
     </div>
     <a class="scroll-cue scroll-cue--inline" href="#mangaroa" aria-label="Scroll to the next section">
       <span>Scroll</span>
@@ -2062,12 +2040,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       </div>
     </div>
 
-    <div class="tl-row">
-      <div class="tl-item"><div class="y">FY2024</div><p>Started within Biome Trust; began educational activity</p></div>
-      <div class="tl-item"><div class="y">FY2025</div><p>Ran Funding Round 1 and Funding Round 2, both on a third-party platform (Gitcoin), administered by Biome Trust Aotearoa.</p></div>
-      <div class="tl-item"><div class="y">FY2026</div><p>Round 2; own funding platform and operating infrastructure built; Ma Earth Foundation established in Switzerland</p></div>
-      <div class="tl-item"><div class="y">FY2027</div><p>Funding Round 3 — the first round on Ma Earth's own platform</p></div>
-    </div>
 
     <p class="chart-title" style="margin-top:44px">FY2026 highlights</p>
     <div class="steps">
@@ -2094,14 +2066,14 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         <div class="barlist">
           <div class="barrow"><div class="top"><b>Funding Round 1</b><span>$160,000</span></div><div class="track"><i style="width:7%;background:var(--tan)"></i></div></div>
           <div class="barrow"><div class="top"><b>Funding Round 2</b><span>$232,000</span></div><div class="track"><i style="width:11%;background:var(--tan)"></i></div></div>
-          <div class="barrow"><div class="top"><b>Funding Round 3</b><span>$2,200,000</span></div><div class="track"><i style="width:100%;background:linear-gradient(90deg,var(--green-dark) 0 52%,#b9b878 52% 100%)"></i></div></div>
+          <div class="barrow"><div class="top"><b>Funding Round 3</b><span>$2,200,000</span></div><div class="track"><i style="width:100%;background:linear-gradient(90deg,var(--green-dark) 0 52%,#BEBE8A 52% 100%)"></i></div></div>
         </div>
       </div>
       <div>
         <p>Round 3 split roughly <strong>$1.15M matching pool</strong> and <strong>$1.05M crowdfunding</strong> — close to a dollar of new community money for every philanthropic dollar.</p>
         <ul class="legend" style="margin-top:14px">
           <li><i style="background:var(--green-dark)"></i><span>Matching pool</span></li>
-          <li><i style="background:#b9b878"></i><span>Crowdfunding raised</span></li>
+          <li><i style="background:#BEBE8A"></i><span>Crowdfunding raised</span></li>
           <li><i style="background:var(--tan)"></i><span>Rounds 1–2 total</span></li>
         </ul>
       </div>
@@ -2198,10 +2170,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div>
         <p class="chart-title" style="color:var(--text-light)">Where the capital is held</p>
         <div class="donut-wrap">
-          <div class="donut" style="background:conic-gradient(var(--green-dark) 0 52.9%, #b9b878 52.9% 93.6%, var(--tan) 93.6% 100%)"></div>
+          <div class="donut" style="background:conic-gradient(var(--green-dark) 0 52.9%, #BEBE8A 52.9% 93.6%, var(--tan) 93.6% 100%)"></div>
           <ul class="legend">
             <li><i style="background:var(--green-dark)"></i><span><b>52.9%</b> United States</span></li>
-            <li><i style="background:#b9b878"></i><span><b>40.7%</b> New Zealand</span></li>
+            <li><i style="background:#BEBE8A"></i><span><b>40.7%</b> New Zealand</span></li>
             <li><i style="background:var(--tan)"></i><span><b>6.4%</b> Switzerland</span></li>
           </ul>
         </div>
