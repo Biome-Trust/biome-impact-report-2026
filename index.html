@@ -311,15 +311,20 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 }
 .me-copy { max-width: 70ch; margin-top: 30px; }
 /* the four partners behind Round 3's matching pool, on their own white strip */
-.logostrip { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;
-  gap: clamp(22px, 4vw, 60px); background: var(--white); border-radius: 4px;
-  padding: clamp(20px, 3vh, 34px) clamp(22px, 4vw, 48px); margin-top: 22px;
+.logostrip { background: var(--white); border-radius: 4px;
+  padding: clamp(20px, 3vh, 32px) clamp(22px, 4vw, 48px); margin-top: 22px;
   box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
-.logostrip img { height: 42px; width: auto; opacity: .85; }
+.logostrip .eyebrow { margin: 0 0 18px; }
+.logostrip-row { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;
+  gap: clamp(22px, 4vw, 60px); }
+/* every mark reads at the same weight as Naia and Imaginal, which arrive grey */
+.logostrip img { height: 42px; width: auto; filter: grayscale(1); opacity: .5; }
+.logostrip img.me { height: 34px; }
 /* Naia and Imaginal stack their wordmark under the mark, so matching on height
    alone leaves them reading half the size of the two horizontal lockups */
-.logostrip img.tall { height: 68px; }
-@media (max-width: 560px) { .logostrip img { height: 30px; } .logostrip img.tall { height: 48px; } }
+.logostrip img.tall { height: 68px; opacity: .8; }
+.logostrip img.naia { height: 86px; }
+@media (max-width: 560px) { .logostrip img { height: 30px; } .logostrip img.me { height: 26px; } .logostrip img.tall { height: 48px; } .logostrip img.naia { height: 58px; } }
 .me-copy p + p { margin-top: 14px; }
 @media (max-width: 860px) { .me-head { grid-template-columns: 1fr; } .me-head-art { margin-right: 0; } }
 .title-band .tb-lede {
@@ -613,7 +618,15 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .ob-card { border-top: 0; background: var(--green-dark); border-radius: 4px; padding: 22px 20px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 .ob-card h4 { color: #fff; }
 .ob-card p { color: #c5d3c3; }
-.ob-card ul { margin: 14px 0 0; padding-left: 18px; font-size: 13.5px; line-height: 1.65; color: #d7e2d5; }
+.ob-card-link { margin-top: 18px !important; font-size: 13.5px; color: #cfdccd !important; }
+/* the five fund holders sit under the observations, pointed at by that card */
+.fundholders { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: clamp(20px, 4vw, 54px); margin-top: 26px; padding-right: clamp(0px, 26vw, 330px); }
+.fundholders img { height: 40px; width: auto; filter: grayscale(1); opacity: .55; }
+/* the Gift Trust mark stacks, so height alone leaves it reading half-size */
+.fundholders img.tall { height: 62px; }
+@media (max-width: 900px) { .fundholders { padding-right: 0; justify-content: space-around; } }
+@media (max-width: 560px) { .fundholders img { height: 28px; } .fundholders img.tall { height: 44px; } }
 
 .kaupapa-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 4vw, 70px); align-items: start; }
 /* the map's top edge lines up with the cap-height of the h2, not with the
@@ -2043,10 +2056,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     </div>
 
     <div class="logostrip">
-      <img src="img/logo-biome-trust.png" alt="Biome Trust">
-      <img src="img/logo-ma-earth.png" alt="Ma Earth">
-      <img class="tall" src="img/logo-naia-trust.png" alt="Naia Trust">
-      <img class="tall" src="img/logo-imaginal-seeds.png" alt="Imaginal Seeds">
+      <p class="eyebrow">Our matching pool partners</p>
+      <div class="logostrip-row">
+        <img src="img/logo-biome-trust.png" alt="Biome Trust">
+        <img class="me" src="img/logo-ma-earth.png" alt="Ma Earth">
+        <img class="tall naia" src="img/logo-naia-trust.png" alt="Naia Trust">
+        <img class="tall" src="img/logo-imaginal-seeds.png" alt="Imaginal Seeds">
+      </div>
     </div>
     <p class="chart-title" style="margin-top:46px">Funding Round 3</p>
     <div class="imgstats">
@@ -2095,26 +2111,26 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
   </div>
 </section>
 
-<section class="band band-cream" id="endowment">
+<section class="band band-paper" id="endowment">
   <div class="wrap">
 
     <div class="two-col" style="margin-top:36px">
-      <div class="panel" style="background:var(--green-dark)">
-        <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:#fff">~$35M NZD</div>
-        <p style="font-size:14px;line-height:1.5;color:#cdd8cb;margin:12px 0 0">Biome Trust endowment at period end &mdash; primarily fixed interest, with a small and growing share in equities and impact funds</p>
+      <div class="panel" style="background:var(--tan)">
+        <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:var(--green-dark)">~$35M NZD</div>
+        <p style="font-size:14px;line-height:1.5;color:#2c3a28;margin:12px 0 0">Biome Trust endowment at period end &mdash; primarily fixed interest, with a small and growing share in equities and impact funds</p>
       </div>
-      <div class="panel" style="background:var(--green-dark)">
-        <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:#fff">~$76M NZD</div>
-        <p style="font-size:14px;line-height:1.5;color:#cdd8cb;margin:12px 0 0">Consolidated balance sheet, Biome Trust and Mangaroa Farms combined</p>
+      <div class="panel" style="background:var(--tan)">
+        <div style="font-family:var(--serif);font-size:clamp(28px,3.4vw,38px);line-height:1;color:var(--green-dark)">~$76M NZD</div>
+        <p style="font-size:14px;line-height:1.5;color:#2c3a28;margin:12px 0 0">Consolidated balance sheet, Biome Trust and Mangaroa Farms combined</p>
       </div>
     </div>
     <p class="fine">Figures are indicative and stated in NZD, matching the consolidated accounts.</p>
 
     <p class="chart-title" style="margin-top:38px">Four pathways for creating impact</p>
     <div class="steps">
-      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Capital</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Extend our capital&rsquo;s impact</h4><p>By using approaches that can preserve, return or grow capital, we can redeploy resources and support more impact over time.</p></div>
-      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Mangaroa Farms</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support Mangaroa Farms</h4><p>A cornerstone initiative wholly owned by Biome Trust. Its activities contribute directly to our impact, and the capital invested forms a significant asset on our consolidated balance sheet.</p></div>
-      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Impact funds</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Invest in impact-focused funds</h4><p>Through international partners, part of the endowment is being deployed into funds aligned with our mission.</p>
+      <div class="step" style="background:var(--cream)"><div class="t" style="color:var(--sage)">Capital</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Extend our capital&rsquo;s impact</h4><p>By using approaches that can preserve, return or grow capital, we can redeploy resources and support more impact over time.</p></div>
+      <div class="step" style="background:var(--cream)"><div class="t" style="color:var(--sage)">Mangaroa Farms</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support Mangaroa Farms</h4><p>A cornerstone initiative wholly owned by Biome Trust. Its activities contribute directly to our impact, and the capital invested forms a significant asset on our consolidated balance sheet.</p></div>
+      <div class="step" style="background:var(--cream)"><div class="t" style="color:var(--sage)">Impact funds</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Invest in impact-focused funds</h4><p>Through international partners, part of the endowment is being deployed into funds aligned with our mission.</p>
         <div class="fundcols">
           <div>
             <h5>Land and food</h5>
@@ -2131,7 +2147,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             </ul>
           </div>
         </div></div>
-      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Environmental markets</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support environmental markets</h4><p>We are actively looking for ways to use environmental instruments to advance our ecological goals.</p></div>
+      <div class="step" style="background:var(--cream)"><div class="t" style="color:var(--sage)">Environmental markets</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support environmental markets</h4><p>We are actively looking for ways to use environmental instruments to advance our ecological goals.</p></div>
     </div>
 
     <p class="chart-title" style="margin-top:46px">Observations</p>
@@ -2142,41 +2158,17 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div class="ob ob-card">
         <h4>A connected endowment</h4>
         <p>Biome Trust connects internationally through a network of philanthropic partners. Together, they provide investment, grantmaking and geographic capabilities beyond what any single fund holder could offer, giving us greater flexibility in how we steward and deploy capital.</p>
-        <ul>
-          <li>Silicon Valley Community Foundation</li>
-          <li>Daffy</li>
-          <li>ImpactAssets</li>
-          <li>TrustBridge</li>
-          <li>The Gift Trust</li>
-        </ul>
+        <p class="ob-card-link">&larr; Our partners</p>
       </div>
     </div>
 
-    <p class="chart-title" style="margin-top:46px">The wider portfolio</p>
-    <div class="two-col">
-      <div>
-        <p class="chart-title" style="color:var(--text-light)">Allocation</p>
-        <div class="donut-wrap">
-          <div class="donut" style="background:conic-gradient(var(--green-dark) 0 65.3%, var(--tan) 65.3% 100%)"></div>
-          <ul class="legend">
-            <li><i style="background:var(--green-dark)"></i><span><b>65.3%</b> Fixed interest</span></li>
-            <li><i style="background:var(--tan)"></i><span><b>34.7%</b> Land, commodities and crypto</span></li>
-          </ul>
-        </div>
-      </div>
-      <div>
-        <p class="chart-title" style="color:var(--text-light)">Where the capital is held</p>
-        <div class="donut-wrap">
-          <div class="donut" style="background:conic-gradient(var(--green-dark) 0 52.9%, #BEBE8A 52.9% 93.6%, var(--tan) 93.6% 100%)"></div>
-          <ul class="legend">
-            <li><i style="background:var(--green-dark)"></i><span><b>52.9%</b> United States</span></li>
-            <li><i style="background:#BEBE8A"></i><span><b>40.7%</b> New Zealand</span></li>
-            <li><i style="background:var(--tan)"></i><span><b>6.4%</b> Switzerland</span></li>
-          </ul>
-        </div>
-      </div>
+    <div class="fundholders">
+      <img src="img/logo-svcf.png" alt="Silicon Valley Community Foundation">
+      <img src="img/logo-daffy.png" alt="Daffy">
+      <img src="img/logo-impactassets.png" alt="ImpactAssets">
+      <img src="img/logo-trustbridge.png" alt="TrustBridge global">
+      <img class="tall" src="img/logo-the-gift-trust.png" alt="The Gift Trust">
     </div>
-    <p class="fine">These two charts cover the wider global endowment across all fund holders &mdash; The Gift Trust (NZ), Silicon Valley Community Foundation and ImpactAssets (US), TrustBridge (CH/US) and Ma Earth Foundation (CH). It is broader than Biome Trust Aotearoa alone.</p>
     <a class="scroll-cue scroll-cue--inline" href="#closing" aria-label="Scroll to the next section">
       <span>Scroll</span>
       <svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
