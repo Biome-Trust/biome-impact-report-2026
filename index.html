@@ -294,7 +294,21 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 /* Ma Earth: the collage runs off the right edge beside the logo and intro */
 .me-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(20px, 3vw, 48px); align-items: center; }
 .me-head-art { margin-right: calc(var(--gut) * -1); }
-.me-head-art img { display: block; width: 100%; border-radius: 4px 0 0 4px; }
+.me-head-art img {
+  display: block; width: 100%;
+  /* feathered on all four edges so the collage dissolves into the band rather
+     than ending on a hard rectangle; two gradients intersected, since a single
+     mask cannot fade both axes */
+  --fade: 13%;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%),
+    linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%),
+    linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+  mask-composite: intersect;
+}
 .me-copy { max-width: 70ch; margin-top: 30px; }
 /* the four partners behind Round 3's matching pool, on their own white strip */
 .logostrip { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;
@@ -307,7 +321,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .logostrip img.tall { height: 68px; }
 @media (max-width: 560px) { .logostrip img { height: 30px; } .logostrip img.tall { height: 48px; } }
 .me-copy p + p { margin-top: 14px; }
-@media (max-width: 860px) { .me-head { grid-template-columns: 1fr; } .me-head-art { margin-right: 0; } .me-head-art img { border-radius: 4px; } }
+@media (max-width: 860px) { .me-head { grid-template-columns: 1fr; } .me-head-art { margin-right: 0; } }
 .title-band .tb-lede {
   font-size: clamp(16px, 1.8vw, 20px); line-height: 1.55; color: #e4ece2;
   max-width: 62ch; margin: 18px 0 0;
