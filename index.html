@@ -421,7 +421,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 #numbers { padding-bottom: clamp(105px, 15vh, 210px); --cue-pull: clamp(105px, 15vh, 210px); }
 /* the tui now enters from the left and sits higher, so the old right-hand
    clearance is gone and this note runs to a proper measure */
-#numbers > .wrap > .fine { max-width: 44ch; padding-right: 0; margin-top: 46px; }
+.chartstack .fine { max-width: none; margin-top: 10px; }
 #mangaroa { padding-bottom: clamp(230px, 33vh, 420px); --cue-pull: 0px; }
 #approach, #endowment { padding-bottom: clamp(180px, 27vh, 360px); --cue-pull: clamp(180px, 27vh, 360px); }
 /* the title band's fade already reads as air, so the content starts at half
@@ -457,7 +457,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 @media (max-width: 900px) { .deco { display: none; } }
 
 /* ---- numbers, charts and tiles ---- */
-.numrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin-top: 42px; align-items: start; }
+.numrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin-top: 42px; align-items: stretch; }
 .numcard { background: var(--tan-light); border-radius: 4px; padding: 20px 22px; }
 .numcard.pale { background: var(--green-pale); }
 .numcard .n {
@@ -877,9 +877,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         </div>
         <div class="xaxis"><span>FY21</span><span>FY22</span><span>FY23</span><span>FY24</span><span>FY25</span><span>FY26</span></div>
       </div>
+        <p class="fine">Giving includes gifts made directly by Biome Trust and through The Gift Trust, as well as a small number of payments made under services agreements that are gift-like in spirit and treated as gifts in this report. It excludes giving to Mangaroa Farms and Ma Earth, as well as international giving by Biome Trust or its philanthropic partners. All figures are in NZD.</p>
       </div>
     </div>
-    <p class="fine">Giving includes gifts made directly by Biome Trust and through The Gift Trust, as well as a small number of payments made under services agreements that are gift-like in spirit and treated as gifts in this report. It excludes giving to Mangaroa Farms and Ma Earth, as well as international giving by Biome Trust or its philanthropic partners. All figures are in NZD.</p>
     <a class="scroll-cue scroll-cue--inline" href="#partners-title" aria-label="Scroll to the next section">
       <span>Scroll</span>
       <svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
