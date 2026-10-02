@@ -486,7 +486,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 
 /* ---- numbers, charts and tiles ---- */
 .numrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin-top: 42px; align-items: stretch; }
-.numcard { background: var(--tan-light); border-radius: 4px; padding: 20px 22px; }
+.numcard { background: var(--tan-light); border-radius: 4px; padding: 20px 22px;
+  /* the cards stretch to a common height, so their contents sit centred in the
+     box rather than hugging the top */
+  display: flex; flex-direction: column; justify-content: center; }
 .numcard.pale { background: var(--green-pale); }
 .numcard .n {
   font-family: var(--serif); font-size: clamp(34px, 4.4vw, 60px); line-height: .95;
@@ -496,7 +499,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
    down rather than fold onto a second line */
 .numcard:first-child .n { font-size: clamp(30px, 3.6vw, 50px); }
 .numcard .l { font-size: 14px; line-height: 1.4; color: var(--text-mid); margin-top: 8px; }
-.numcard .delta { display: inline-block; margin-top: 12px; font-size: 12.5px; line-height: 1.35; color: var(--green-mid); background: var(--white); border-radius: 4px; padding: 7px 10px; }
+.numcard .delta { display: inline-block; align-self: flex-start; margin-top: 12px; font-size: 12.5px; line-height: 1.35; color: var(--green-mid); background: var(--white); border-radius: 4px; padding: 7px 10px; }
 
 .panel { background: var(--tan-light); border-radius: 4px; padding: 28px 26px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 .panel.pale { background: var(--green-pale); }
@@ -506,6 +509,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .band-deep .panel h3 { color: #fff; }
 
 .donut-wrap { display: flex; align-items: center; gap: 22px; flex-wrap: nowrap; margin-top: 18px; }
+/* frame 5 runs the purpose donut large and centred, with no legend beside it */
+.donut-wrap--solo { justify-content: center; margin-top: 30px; }
+.donut-wrap--solo .donut { width: min(330px, 78%); }
+
 @media (max-width: 560px) { .donut-wrap { flex-wrap: wrap; } }
 .donut { position: relative; width: clamp(160px, 16vw, 200px); aspect-ratio: 1; height: auto; border-radius: 50%; flex: none;
   /* same 1px inner rim the bar chart carries, so the two read as one family */
@@ -517,6 +524,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .donut .mid { position: absolute; inset: 26%; display: grid; place-content: center; text-align: center; z-index: 1; }
 .donut .mid b { font-family: var(--serif); font-size: clamp(21px, 2.3vw, 28px); color: var(--green-dark); display: block; line-height: 1; }
 .donut .mid span { font-size: 10px; letter-spacing: -.01em; color: var(--text-mid); display: block; margin-top: 3px; }
+.donut-wrap--solo .mid b { font-family: var(--sans); font-size: clamp(26px, 2.8vw, 34px); font-weight: 600; color: var(--text-dark); }
+.donut-wrap--solo .mid span { font-size: clamp(13px, 1.3vw, 16px); color: var(--text-mid); margin-top: 6px; }
 .legend { list-style: none; margin: 0; padding: 0; font-size: 13.5px; line-height: 1.45; }
 .legend li { display: flex; gap: 9px; margin-bottom: 9px; align-items: flex-start; }
 .legend i { width: 9px; height: 9px; border-radius: 50%; margin-top: 6px; flex: none; }
@@ -539,13 +548,12 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 @media (max-width: 820px) { .numcharts { grid-template-columns: 1fr; } }
 .bars { display: flex; align-items: flex-end; gap: clamp(6px, 1.2vw, 16px); height: 106px; }
 .bars .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
-.bars .v { font-size: 12px; color: var(--text-mid); margin-bottom: 6px; white-space: nowrap; }
-.bars .bar { width: 100%; background: var(--tan); border-radius: 2px 2px 0 0;
-  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, .22); }
+.bars .v { font-size: 14px; color: var(--text-dark); margin-bottom: 7px; white-space: nowrap; }
+.bars .bar { width: 78%; background: var(--tan); border-radius: 2px 2px 0 0; }
 .bars .col.now .bar { background: var(--green-dark); }
-.bars .col.now .v { color: var(--green-dark); font-weight: 600; }
+.bars .col.now .v { color: var(--text-dark); }
 .xaxis { display: flex; gap: clamp(6px, 1.2vw, 16px); margin-top: 8px; }
-.xaxis span { flex: 1; text-align: center; font-size: 12px; color: var(--text-light); }
+.xaxis span { flex: 1; text-align: center; font-size: 14px; color: var(--text-mid); }
 .chart-title { font-size: 13px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--green-mid); margin: 0 0 14px; }
 
 .imgstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(10px, 1.26vw, 15px); margin-top: 22px; }
@@ -841,7 +849,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div>
         <p class="lede">Welcome to Biome Trust Aotearoa&rsquo;s first annual impact report, highlighting the work we supported during the year ended 31 March 2026, and our learning along the way.</p>
         <p>We acknowledge the mana of the mountains, rivers, oceans, forests, creatures, and people of Aotearoa New Zealand, and our shared responsibility to support a healthy and flourishing world. In particular, we acknowledge te awa Mangaroa, the Remutaka Range, and ng&#257; mana whenua, Te &#256;ti Awa wh&#257;nau wh&#257;nui ki te Upoko o te Ika, as ancestral guardians of the whenua we call home.</p>
-        <p>This year, our giving grew, with more than 80% directed towards environmental purposes. We also invested in relationships and shared learning through initiatives including Earth Fellows, which supports and connects regenerative leaders, and the Education Hui, which brought education leaders together to share perspectives and explore opportunities for change.</p>
+        <p>This year, our giving grew, with more than 80% directed towards environmental purposes. We also invested in relationships and shared learning through initiatives including <i>Earth Fellows</i>, which supports and connects regenerative leaders, and the <i>Education Hui</i>, which brought education leaders together to share perspectives and explore opportunities for change.</p>
         <p>Through our wholly owned subsidiary, Mangaroa Farms, we continued to steward a 1,222-hectare charitable farm and living laboratory, providing a place to explore and practise approaches to land stewardship, regeneration, and learning.</p>
       </div>
       <div>
@@ -884,18 +892,14 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     </div>
 
     <div class="numcharts" style="margin-top:26px">
-      <div class="panel">
+      <div class="panel" style="background:var(--cream)">
         <p class="kicker">Gift value by charitable purpose</p>
         <h3>Environment at the heart</h3>
         <p style="font-size:14.5px;line-height:1.55;color:var(--text-mid);margin:0">More than 80% of value supported environmental outcomes</p>
-        <div class="donut-wrap">
+        <div class="donut-wrap donut-wrap--solo">
           <div class="donut" style="background:conic-gradient(var(--green-dark) 0 80%, #BEBE8A 80% 100%)">
             <div class="mid"><b>80%+</b><span>environmental</span></div>
           </div>
-          <ul class="legend">
-            <li><i style="background:var(--green-dark)"></i><span><b>80%+</b> environment-related, including initiatives also advancing health and education</span></li>
-            <li><i style="background:#BEBE8A"></i><span><b>Under 20%</b> education or health only</span></li>
-          </ul>
         </div>
       </div>
       <div class="chartstack">
@@ -919,7 +923,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
           <div class="col"><div class="v">$1.16m</div><div class="bar" style="height:97%"></div></div>
           <div class="col"><div class="v">$850k</div><div class="bar" style="height:71%"></div></div>
           <div class="col"><div class="v">$850k</div><div class="bar" style="height:71%"></div></div>
-          <div class="col now"><div class="v">$1.2m</div><div class="bar" style="height:100%"></div></div>
+          <div class="col now"><div class="v">$1.12m</div><div class="bar" style="height:100%"></div></div>
         </div>
         <div class="xaxis"><span>FY21</span><span>FY22</span><span>FY23</span><span>FY24</span><span>FY25</span><span>FY26</span></div>
       </div>
