@@ -387,6 +387,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .map-tip.flip { transform: translate(-100%, -50%); padding-left: 0; padding-right: 46px; text-align: right; }
 .map-tip .mt-line { position: absolute; left: 0; top: 50%; width: 38px; height: 1px; background: rgba(255,255,255,.7); }
 .map-tip.flip .mt-line { left: auto; right: 0; }
+/* stacked layout: the label drops under the map, full width, no leader line */
+.map-tip.below { transform: none; width: 100%; padding-left: 0; text-align: left; }
+.map-tip.below .mt-line { display: none; }
 .map-tip strong { display: block; font-weight: 600; }
 .map-tip .mt-place { display: block; color: #b9c7b7; font-size: 12.5px; margin-top: 2px; }
 @media (max-width: 640px) { .nzmap-wrap { max-width: 100%; } .map-tip { max-width: 200px; } }
@@ -2382,12 +2385,20 @@ addEventListener('load', () => setTimeout(() => {
     place.textContent = pin.dataset.place;
     orgs.textContent = pin.dataset.orgs;
     const pr = pin.getBoundingClientRect(), wr = wrap.getBoundingClientRect();
-    const x = pr.left + pr.width / 2 - wr.left;
-    // flip to the left when a label would otherwise run off the map
-    const flip = x + 46 + 260 > wr.width;
-    tip.classList.toggle('flip', flip);
-    tip.style.left = x + 'px';
-    tip.style.top = (pr.top + pr.height / 2 - wr.top) + 'px';
+    const y = pr.top + pr.height / 2 - wr.top;
+    // the label sits clear of the map rather than over it — over a dark
+    // coastline it was unreadable. Beside it when there is room on the left,
+    // underneath it when the grid has stacked.
+    const roomLeft = wr.left >= 300;
+    tip.classList.toggle('flip', roomLeft);
+    tip.classList.toggle('below', !roomLeft);
+    if (roomLeft) {
+      tip.style.left = '-22px';
+      tip.style.top = y + 'px';
+    } else {
+      tip.style.left = '0px';
+      tip.style.top = 'calc(100% + 14px)';
+    }
     tip.hidden = false;
   };
   const hide = () => { tip.hidden = true; };
