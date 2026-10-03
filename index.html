@@ -309,7 +309,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
   mask-composite: intersect;
 }
-.me-copy { max-width: 70ch; margin-top: 30px; }
+.me-copy { max-width: 48ch; margin-top: 30px; }
 /* the four partners behind Round 3's matching pool, on their own white strip */
 .logostrip { background: var(--white); border-radius: 4px;
   padding: clamp(20px, 3vh, 32px) clamp(22px, 4vw, 48px); margin-top: 22px;
@@ -318,13 +318,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .logostrip-row { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;
   gap: clamp(22px, 4vw, 60px); }
 /* every mark reads at the same weight as Naia and Imaginal, which arrive grey */
-.logostrip img { height: 42px; width: auto; filter: grayscale(1); opacity: .5; }
-.logostrip img.me { height: 34px; }
+.logostrip img { height: 48px; width: auto; filter: grayscale(1); opacity: .5; }
+.logostrip img.me { height: 39px; }
 /* Naia and Imaginal stack their wordmark under the mark, so matching on height
    alone leaves them reading half the size of the two horizontal lockups */
-.logostrip img.tall { height: 68px; opacity: .8; }
-.logostrip img.naia { height: 86px; }
-@media (max-width: 560px) { .logostrip img { height: 30px; } .logostrip img.me { height: 26px; } .logostrip img.tall { height: 48px; } .logostrip img.naia { height: 58px; } }
+.logostrip img.tall { height: 78px; opacity: .8; }
+.logostrip img.naia { height: 112px; }
+@media (max-width: 560px) { .logostrip img { height: 35px; } .logostrip img.me { height: 30px; } .logostrip img.tall { height: 55px; } .logostrip img.naia { height: 75px; } }
 .me-copy p + p { margin-top: 14px; }
 @media (max-width: 860px) { .me-head { grid-template-columns: 1fr; } .me-head-art { margin-right: 0; } }
 .title-band .tb-lede {
@@ -559,10 +559,22 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .imgstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(10px, 1.26vw, 15px); margin-top: 22px; }
 /* the three new initiatives read as one row, like the Figma spread */
 .imgstats--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.imgstats--2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* four across, full width — eight cards at a third of the column were too
+   narrow for the serif figures */
+.imgstats--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1000px) { .imgstats--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .imgstats--4 { grid-template-columns: 1fr; } }
 /* the frame pairs the land-cover donut with the new initiatives */
-.mang-row { display: grid; grid-template-columns: minmax(0, .42fr) minmax(0, 1fr); gap: clamp(18px, 2.4vw, 34px); margin-top: 46px; align-items: start; }
-@media (max-width: 900px) { .mang-row { grid-template-columns: 1fr; } }
+/* the description runs beside the land-cover card at the top of the section */
+.mang-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .78fr); gap: clamp(22px, 3vw, 48px); align-items: start; margin-top: 8px; }
+.mang-head .measure { max-width: none; }
+.mang-head .panel { padding: 22px 24px; }
+/* the donut and its key sit on one row and take only the width they need */
+.mang-head .donut-wrap { gap: 20px; align-items: center; margin-top: 14px; }
+.mang-head .donut { width: clamp(126px, 13vw, 160px); }
+.mang-head .legend { font-size: 13px; line-height: 1.4; }
+.mang-head .legend li { margin-bottom: 8px; }
+@media (max-width: 900px) { .mang-head { grid-template-columns: 1fr; } }
 @media (max-width: 820px) { .imgstats--3 { grid-template-columns: 1fr; } }
 .imgstat {
   background: var(--white); border: 1px solid var(--line); border-radius: 4px;
@@ -1972,14 +1984,28 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     <p class="eyebrow">Our own initiatives</p>
     <h2 class="vh">Mangaroa Farms</h2>
     <div class="logo-row logo-row--mang"><img src="img/mangaroa-logo.png" alt="Mangaroa Farms"></div>
-    <div class="two-col" style="margin-top:8px">
+    <div class="mang-head">
       <div class="measure">
         <p class="lede">Wholly owned by Biome Trust, Mangaroa Farms is a charitable entity spanning 1,222 hectares in the Mangaroa river catchment, 40 minutes north of Wellington. With a growing team, this <em>living laboratory</em> focuses on ecological resilience, accessible kai and community education.</p>
         <p class="fine"><span class="pill">Mangaroa Valley, Upper Hutt</span>
           &nbsp; <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" class="site">Website →</a></p>
-        <div>
-        <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
-        <div class="imgstats imgstats--2">
+      </div>
+        <div class="panel">
+          <p class="kicker">Current land cover</p>
+          <div class="donut-wrap">
+            <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, var(--tan) 90% 100%)">
+            </div>
+            <ul class="legend">
+              <li><i style="background:#2f5c33"></i><span><b>40%</b> Old-growth native forest</span></li>
+              <li><i style="background:#6f8f5a"></i><span><b>30%</b> Pine</span></li>
+              <li><i style="background:#c3c48a"></i><span><b>20%</b> Pasture</span></li>
+              <li><i style="background:var(--tan)"></i><span><b>10%</b> Peat, waterways, plantings &amp; homes</span></li>
+            </ul>
+          </div>
+        </div>
+    </div>
+    <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
+    <div class="imgstats imgstats--4">
       <div class="imgstat"><img src="img/mang-trees.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Restoring the land</p><div class="n">8,546</div><div class="l">native trees planted across 3.3 ha. One third by volunteers</div></div></div>
       <div class="imgstat"><img src="img/mang-predator.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Predator control</p><div class="n">242</div><div class="l">predators removed across 78 monitored traps, plus 95 deer and goats</div></div></div>
       <div class="imgstat"><img src="img/mang-kiwi.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">A first in a century</p><div class="n">1 Kiwi</div><div class="l">recorded in the Mangaroa catchment</div></div></div>
@@ -1988,40 +2014,17 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div class="imgstat"><img src="img/mang-learning.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Hands-on learning</p><div class="n">536</div><div class="l">people through 41 hands-on sessions</div></div></div>
       <div class="imgstat"><img src="img/mang-farmshop.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Feeding the local bioregion</p><div class="n">263 kg</div><div class="l">of surplus kai kept from the waste stream; 101 Farm Shop suppliers, 54% of them from the region</div></div></div>
       <div class="imgstat"><img src="img/mang-cattle.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Regenerative agriculture</p><div class="n">220 cattle</div><div class="l">on virtual collars, up from 100 last year; pasture use lifted from 70% to 90%</div></div></div>
-        </div>
-      </div>
-    </div>
     </div>
 
 
 
 
 
-    <div class="mang-row">
-      <div>
-        <p class="chart-title" style="margin-top:0">Current land cover</p>
-          <div class="panel">
-            <p class="kicker">Current land cover</p>
-            <div class="donut-wrap">
-              <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, var(--tan) 90% 100%)">
-              </div>
-              <ul class="legend">
-                <li><i style="background:#2f5c33"></i><span><b>40%</b> Old-growth native forest</span></li>
-                <li><i style="background:#6f8f5a"></i><span><b>30%</b> Pine</span></li>
-                <li><i style="background:#c3c48a"></i><span><b>20%</b> Pasture</span></li>
-                <li><i style="background:var(--tan)"></i><span><b>10%</b> Peat, waterways, plantings &amp; homes</span></li>
-              </ul>
-            </div>
-          </div>
-      </div>
-      <div>
-        <p class="chart-title" style="margin-top:0">New initiatives</p>
-        <div class="imgstats imgstats--3">
+    <p class="chart-title" style="margin-top:46px">New initiatives</p>
+    <div class="imgstats imgstats--3">
       <div class="imgstat"><img src="img/mang-fellows.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Launched with Mangaroa Farms</p><div class="n">10 Earth Fellows</div><div class="l">Backed by 10 × NZ$10,000 in grants. An inaugural weekend retreat kicked off a year-long fellowship for regenerative leaders across land, food systems &amp; community housing.</div></div></div>
       <div class="imgstat"><img src="img/mang-earth-school.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Hosted at Mangaroa Farms</p><div class="n">Earth School Aotearoa</div><div class="l">An independent learning community on the farm for children aged 5&ndash;12. 130 learners spent 4+ hours here, including visiting schools.</div></div></div>
       <div class="imgstat"><img src="img/mang-hui.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Convened by Biome Trust</p><div class="n">Education Hui</div><div class="l">Education leaders from across Aotearoa gathered at Mangaroa Farms for a multi-day hui on alternative learning, AI and place-based education.</div></div></div>
-        </div>
-      </div>
     </div>
     <a class="scroll-cue scroll-cue--inline" href="#ma-earth" aria-label="Scroll to the next section">
       <span>Scroll</span>
