@@ -327,6 +327,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .logostrip .eyebrow { margin: 0 0 18px; }
 .logostrip-row { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;
   gap: clamp(22px, 4vw, 60px); }
+.logostrip-row a { display: inline-flex; transition: opacity 240ms var(--ease); }
+.logostrip-row a:hover img { opacity: .8; }
 /* every mark reads at the same weight as Naia and Imaginal, which arrive grey */
 .logostrip img { height: 48px; width: auto; filter: grayscale(1); opacity: .5; }
 .logostrip img.me { height: 39px; }
@@ -609,7 +611,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .imgstat {
   background: var(--white); border: 1px solid var(--line); border-radius: 4px;
   overflow: hidden; display: flex; flex-direction: column; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10);
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
 }
+.imgstat:hover { transform: translateY(-4px); box-shadow: 2px 8px 18px rgba(30, 58, 31, .16); }
+@media (prefers-reduced-motion: reduce) { .imgstat { transition: none; } .imgstat:hover { transform: none; } }
 .imgstat img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 .imgstat-body { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
 .imgstat .eyebrow { font-size: 11px; letter-spacing: .14em; color: var(--sage); margin: 0 0 8px; }
@@ -621,7 +626,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .step { background: var(--tan-light); border-radius: 4px; padding: 24px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 .step .no { font-family: var(--serif); font-size: 27px; color: var(--sage); line-height: 1; }
 /* frame 9 names the managers inline in the sentence, not as a list */
-.fundlink { color: var(--green-mid); text-decoration: underline; text-underline-offset: 2px; }
+.fundlink { color: var(--green-mid); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
 .fundlink:hover { color: var(--green-dark); }
 .step .t { font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; margin: 12px 0 7px; }
 .step h4 { font-size: 16px; font-weight: 600; margin: 12px 0 8px; }
@@ -2077,7 +2082,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
           <p>Ma Earth grew out of a decade of experience in philanthropy and a persistent challenge: major funders and high-quality grassroots nature projects often struggled to find each other.</p>
           <p>The platform provides the infrastructure to bridge that gap: funders support vetted projects without one-to-one relationships, philanthropic matching amplifies crowdfunding, and projects retain control of their data.</p>
           <p>Built and launched this year, the platform hosted Ma Earth&rsquo;s third funding round &mdash; the first run on the new platform &mdash; in July 2026.</p>
-          <p class="fine" style="margin-top:22px"><span class="pill">Zug, Switzerland</span>
+          <p class="fine" style="margin-top:38px"><span class="pill">Zug, Switzerland</span>
             &nbsp; <a class="site" href="https://maearth.com" target="_blank" rel="noopener">Website →</a></p>
         </div>
       </div>
@@ -2096,10 +2101,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     <div class="logostrip">
       <p class="eyebrow">Our matching pool partners</p>
       <div class="logostrip-row">
-        <img src="img/logo-biome-trust.png" alt="Biome Trust">
-        <img class="me" src="img/logo-ma-earth.png" alt="Ma Earth">
-        <img class="tall naia" src="img/logo-naia-trust.png" alt="Naia Trust">
-        <img class="tall" src="img/logo-imaginal-seeds.png" alt="Imaginal Seeds">
+        <a href="https://biometrust.earth" target="_blank" rel="noopener"><img src="img/logo-biome-trust.png" alt="Biome Trust"></a>
+        <a href="https://maearth.com" target="_blank" rel="noopener"><img class="me" src="img/logo-ma-earth.png" alt="Ma Earth"></a>
+        <a href="https://naiatrust.com" target="_blank" rel="noopener"><img class="tall naia" src="img/logo-naia-trust.png" alt="Naia Trust"></a>
+        <a href="https://imaginalseeds.com" target="_blank" rel="noopener"><img class="tall" src="img/logo-imaginal-seeds.png" alt="Imaginal Seeds"></a>
       </div>
     </div>
     <p class="chart-title" style="margin-top:46px">Funding Round 3</p>
@@ -2185,11 +2190,11 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     <div class="logostrip logostrip--wide">
       <p class="eyebrow">Our partners</p>
       <div class="logostrip-row">
-        <img src="img/logo-svcf.png" alt="Silicon Valley Community Foundation">
-        <img src="img/logo-daffy.png" alt="Daffy">
-        <img src="img/logo-impactassets.png" alt="ImpactAssets">
-        <img src="img/logo-trustbridge.png" alt="TrustBridge global">
-        <img class="tall" src="img/logo-the-gift-trust.png" alt="The Gift Trust">
+        <a href="https://svcf.org" target="_blank" rel="noopener"><img src="img/logo-svcf.png" alt="Silicon Valley Community Foundation"></a>
+        <a href="https://daffy.org" target="_blank" rel="noopener"><img src="img/logo-daffy.png" alt="Daffy"></a>
+        <a href="https://impactassets.org" target="_blank" rel="noopener"><img src="img/logo-impactassets.png" alt="ImpactAssets"></a>
+        <a href="https://trustbridgeglobal.com" target="_blank" rel="noopener"><img src="img/logo-trustbridge.png" alt="TrustBridge global"></a>
+        <a href="https://thegifttrust.org.nz" target="_blank" rel="noopener"><img class="tall" src="img/logo-the-gift-trust.png" alt="The Gift Trust"></a>
       </div>
     </div>
     <a class="scroll-cue scroll-cue--inline" href="#newsletter" aria-label="Scroll to the next section">
