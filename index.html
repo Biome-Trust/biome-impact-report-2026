@@ -1019,9 +1019,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
           <h3>Papawhakaritorito Trust</h3>
           <p class="feature-sub">Elevating Indigenous seed, soil and food sovereignty</p>
           <ul class="feature-points">
-            <li><b>Heritage seed bank</b> rebuilt after the fire</li>
-            <li><b>Pātaka Kai</b> stocked year-round for the community</li>
-            <li><b>Seed &amp; soil wānanga</b> passing knowledge between generations</li>
+            <li><b>P&#257;taka Kai</b> &mdash; a new pukapuka on Indigenous food futures, from the trust&rsquo;s founders with Johnson Witehira and Yvonne Taura</li>
+            <li><b>Mana W&#257;hine Declaration</b> for Hineahuone, written with Dr Vandana Shiva and signed by 300+ at Navdanya in North India</li>
+            <li><b>Hua Parakore w&#257;nanga</b> &mdash; online courses in M&#257;ori organics and growing clean kai</li>
           </ul>
           <div class="meta">
             <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
@@ -2436,7 +2436,18 @@ addEventListener('load', () => setTimeout(() => {
         && (!th || (c.dataset.themes || '').split(' ').includes(th))
         && (!year || (c.dataset.years || '').split(' ').includes(year));
       c.hidden = !ok;
-      if (ok) shown++;
+      if (ok) {
+        shown++;
+        // the badge answers the question the filter is asking: with a year
+        // selected it names that year, otherwise the most recent one the
+        // organisation appears in
+        const badge = c.querySelector('.year-badge');
+        if (badge) {
+          const ys = (c.dataset.years || '').split(' ').filter(Boolean);
+          const y = year || (ys.length ? ys.reduce((a, b) => (a > b ? a : b)) : '');
+          if (y) badge.textContent = 'FY' + y.slice(2);
+        }
+      }
     }
     countEl.textContent = 'Showing ' + shown + (shown === 1 ? ' organisation' : ' organisations');
     let empty = document.querySelector('.gf-empty');
