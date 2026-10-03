@@ -326,6 +326,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .logostrip img.naia { height: 112px; }
 @media (max-width: 560px) { .logostrip img { height: 35px; } .logostrip img.me { height: 30px; } .logostrip img.tall { height: 55px; } .logostrip img.naia { height: 75px; } }
 .me-copy p + p { margin-top: 14px; }
+/* the aerial only needs softening on the side that meets the copy */
+.me-head-art--left img {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%);
+  -webkit-mask-composite: source-over;
+  mask-image: linear-gradient(90deg, transparent 0, #000 16%);
+  mask-composite: add;
+}
 @media (max-width: 860px) { .me-head { grid-template-columns: 1fr; } .me-head-art { margin-right: 0; } }
 .title-band .tb-lede {
   font-size: clamp(16px, 1.8vw, 20px); line-height: 1.55; color: #e4ece2;
@@ -663,7 +670,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .logo-row img { height: 57px; width: auto; }   /* 30% up on 44px */
 /* the Mangaroa lockup is two lines deep, so it is sized on width, not height */
-.logo-row--mang img { height: auto; width: clamp(220px, 26vw, 340px); }
+.logo-row--mang img { height: auto; width: clamp(132px, 15.6vw, 204px); }
 .logo-row--mang { margin: 46px 0 38px; }
 /* twice the air above and below the Ma Earth lockup */
 #ma-earth .logo-row { margin: 68px 0 60px; }
@@ -1987,7 +1994,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         <h2 class="vh">Mangaroa Farms</h2>
         <div class="logo-row logo-row--mang"><img src="img/mangaroa-logo.png" alt="Mangaroa Farms"></div>
           <div class="measure">
-            <p class="lede">Wholly owned by Biome Trust, Mangaroa Farms is a charitable entity spanning 1,222 hectares in the Mangaroa river catchment, 40 minutes north of Wellington. With a growing team, this <em>living laboratory</em> focuses on ecological resilience, accessible kai and community education.</p>
+            <p>Wholly owned by Biome Trust, Mangaroa Farms is a charitable entity spanning 1,222 hectares in the Mangaroa river catchment, 40 minutes north of Wellington. With a growing team, this <em>living laboratory</em> focuses on ecological resilience, accessible kai and community education.</p>
             <p class="fine"><span class="pill">Mangaroa Valley, Upper Hutt</span>
               &nbsp; <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" class="site">Website →</a></p>
           </div>
@@ -2005,7 +2012,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             </div>
           </div>
       </div>
-      <div class="me-head-art"><img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air"></div>
+      <div class="me-head-art me-head-art--left"><img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air"></div>
     </div>
     <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
     <div class="imgstats imgstats--4">
@@ -2045,12 +2052,12 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div class="me-head-text">
         <p class="eyebrow">Our own initiatives</p>
         <div class="logo-row"><img src="img/ma-earth-logo.png" alt="Ma Earth"></div>
-    <p class="fine" style="margin-top:0"><span class="pill">Zug, Switzerland</span>
-      &nbsp; <a class="site" href="https://maearth.com" target="_blank" rel="noopener">Website →</a></p>
         <div class="me-copy">
           <p>Ma Earth grew out of a decade of experience in philanthropy and a persistent challenge: major funders and high-quality grassroots nature projects often struggled to find each other.</p>
           <p>The platform provides the infrastructure to bridge that gap: funders support vetted projects without one-to-one relationships, philanthropic matching amplifies crowdfunding, and projects retain control of their data.</p>
           <p>Built and launched this year, the platform hosted Ma Earth&rsquo;s third funding round &mdash; the first run on the new platform &mdash; in July 2026.</p>
+          <p class="fine" style="margin-top:22px"><span class="pill">Zug, Switzerland</span>
+            &nbsp; <a class="site" href="https://maearth.com" target="_blank" rel="noopener">Website →</a></p>
         </div>
       </div>
       <div class="me-head-art"><img src="img/maearth-projects.jpg" alt="Projects funded through Ma Earth"></div>
