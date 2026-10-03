@@ -170,7 +170,7 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 /* ---- footer, after the email template ---- */
 footer { background: var(--green-dark); color: #b9c7b7; padding: clamp(52px, 8vh, 84px) var(--gut); }
 footer .wrap { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; }
-.foot-logo { width: clamp(150px, 17vw, 200px); height: auto; }
+.foot-logo { width: clamp(150px, 17vw, 200px); height: auto; margin-bottom: 22px; }
 .foot-nav { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
 .foot-nav a {
   color: #fff; text-decoration: underline; text-underline-offset: 4px;
@@ -338,13 +338,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .logostrip img.naia { height: 112px; }
 @media (max-width: 560px) { .logostrip img { height: 35px; } .logostrip img.me { height: 30px; } .logostrip img.tall { height: 55px; } .logostrip img.naia { height: 75px; } }
 .me-copy p + p { margin-top: 14px; }
-/* the aerial only needs softening on the side that meets the copy */
-.me-head-art--left img {
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%);
-  -webkit-mask-composite: source-over;
-  mask-image: linear-gradient(90deg, transparent 0, #000 16%);
-  mask-composite: add;
-}
 @media (max-width: 860px) { .me-head { grid-template-columns: 1fr; } .me-head-art { margin-right: 0; } }
 .title-band .tb-lede {
   font-size: clamp(16px, 1.8vw, 20px); line-height: 1.55; color: #e4ece2;
@@ -398,6 +391,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .map-tip .mt-orgs { display: block; font-weight: 600; }
 .map-tip .mt-orgs span { display: block; }
 .map-tip .mt-orgs span + span { margin-top: 3px; }
+/* the nationwide pin stands for a group rather than a place, so it reads a size up */
+.pin-wide .dot { opacity: .95; }
 @media (max-width: 640px) { .nzmap-wrap { max-width: 100%; } .map-tip { max-width: 200px; } }
 
 /* ---- full-bleed title band ----
@@ -497,7 +492,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 #approach, #endowment { padding-bottom: clamp(180px, 27vh, 360px); --cue-pull: clamp(180px, 27vh, 360px); }
 /* the title band's fade already reads as air, so the content starts at half
    the usual band inset rather than a full one */
-#endowment { padding-top: clamp(32px, 5.5vh, 66px); }
+#approach, #endowment { padding-top: clamp(32px, 5.5vh, 66px); }
 #endowment > .wrap > :first-child { margin-top: 18px; }
 /* the title band already carries the heading, so the grid does not need a
    full band of air above it — half the usual top padding, and the first
@@ -531,10 +526,12 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .numcard .l { font-size: 14px; line-height: 1.4; color: var(--text-mid); margin-top: 8px; }
 /* the change-on-last-year chip sits in the corner rather than in the stack,
    so the copy under it keeps clear of that corner */
-.numcard.has-delta .n { padding-right: 104px; }
+.numcard.has-delta .n { padding-right: 86px; }
 @media (max-width: 700px) { .numcard.has-delta .n { padding-right: 0; }
   .numcard .delta { position: static; align-self: flex-start; margin-top: 12px; } }
-.numcard .delta { position: absolute; top: 14px; right: 14px; font-size: 11.5px; line-height: 1.3; color: var(--green-mid); background: var(--white); border-radius: 4px; padding: 6px 9px; }
+.numcard .delta { position: absolute; top: 14px; right: 14px; font-size: 13.2px; line-height: 1.3;
+  color: var(--green-mid); background: var(--white); border-radius: 4px; padding: 7px 10px; text-align: center; }
+.numcard .delta strong { display: block; }
 
 .panel { background: var(--tan-light); border-radius: 4px; padding: 28px 26px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 .panel.pale { background: var(--green-pale); }
@@ -608,7 +605,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .me-head-text .measure { max-width: none; }
 /* the land-cover card sits under the aerial, in the right column */
 .mang-right { display: grid; gap: 26px; }
-.mang-right .me-head-art { margin-right: calc(var(--gut) * -1); }
+/* the aerial squares up with the land-cover card below it: no bleed, no mask */
+.mang-right .me-head-art { margin-right: 0; }
+.mang-right .me-head-art img { border-radius: 4px; -webkit-mask-image: none; mask-image: none; }
 .mang-right .panel { padding: 22px 24px; }
 /* the donut and its key sit on one row and take only the width they need */
 .mang-right .donut-wrap { gap: 20px; align-items: center; margin-top: 14px; }
@@ -619,10 +618,20 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .imgstat {
   background: var(--white); border: 1px solid var(--line); border-radius: 4px;
   overflow: hidden; display: flex; flex-direction: column; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10);
+}
+/* every card surface lifts on hover, the same amount everywhere */
+.imgstat, .card, .step, .principle, .panel, .ob-card, .numcard {
   transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
 }
-.imgstat:hover { transform: translateY(-4px); box-shadow: 2px 8px 18px rgba(30, 58, 31, .16); }
-@media (prefers-reduced-motion: reduce) { .imgstat { transition: none; } .imgstat:hover { transform: none; } }
+.imgstat:hover, .card:hover, .step:hover, .principle:hover, .panel:hover,
+.ob-card:hover, .numcard:hover {
+  transform: translateY(-4px); box-shadow: 2px 8px 18px rgba(30, 58, 31, .16);
+}
+@media (prefers-reduced-motion: reduce) {
+  .imgstat, .card, .step, .principle, .panel, .ob-card, .numcard { transition: none; }
+  .imgstat:hover, .card:hover, .step:hover, .principle:hover, .panel:hover,
+  .ob-card:hover, .numcard:hover { transform: none; }
+}
 .imgstat img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 .imgstat-body { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
 .imgstat .eyebrow { font-size: 11px; letter-spacing: .14em; color: var(--sage); margin: 0 0 8px; }
@@ -703,7 +712,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .logo-row img { height: 57px; width: auto; }   /* 30% up on 44px */
 /* the Mangaroa lockup is two lines deep, so it is sized on width, not height */
 .logo-row--mang img { height: auto; width: clamp(132px, 15.6vw, 204px); }
-.logo-row--mang { margin: 46px 0 38px; }
+.logo-row--mang { margin: 46px 0 56px; }
 /* twice the air above and below the Ma Earth lockup */
 #ma-earth .logo-row { margin: 68px 0 60px; }
 
@@ -829,7 +838,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .nl-band .eyebrow { color: #fff; }
 .nl-band h2 { font-size: clamp(30px, 4.4vw, 52px); margin: 0 0 18px; color: #fff; }
 .nl-band .lede { color: #dfe6dd; max-width: 46ch; margin: 0 auto 30px; }
-.nl-form { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 780px; margin: 0 auto; }
+.nl-form { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 780px; margin: 60px auto 0; }
 .nl-form input {
   flex: 1 1 220px; min-width: 0; padding: 17px 24px; border-radius: 999px;
   border: 1px solid rgba(255,255,255,.45); background: transparent; color: #fff;
@@ -1986,7 +1995,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 
 <section class="band band-cream" id="approach">
   <div class="wrap">
-    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.2vw,26px);color:var(--green-dark);margin:0">Three ways we create impact</h3>
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.2vw,26px);color:var(--green-dark);margin:0">Three charitable purposes</h3>
+    <div class="purposes">
+      <div class="purpose"><img src="img/purpose-environment.jpg" alt="Te Tauihu Environment Trust"><span class="rule"></span><h4>Environment</h4><p>Healthy land and waterways, biodiversity, regenerative food systems and thriving communities.</p></div>
+      <div class="purpose edu"><img src="img/purpose-education.jpg" alt="The Gift Trust"><span class="rule"></span><h4>Education</h4><p>Knowledge and practical skills through research, new ideas, hands-on learning and different ways of seeing the world.</p></div>
+      <div class="purpose health"><img src="img/purpose-health.jpg" alt="Kawakawa"><span class="rule"></span><h4>Health</h4><p>Healthier communities through stronger connections between people, food, nature and culture, and places that help people thrive.</p></div>
+    </div>
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.2vw,26px);color:var(--green-dark);margin:52px 0 0">Three ways we create impact</h3>
 
     <div class="steps">
       <div class="step"><div class="no">01</div><h4>Give</h4><p>to partners doing great work</p></div>
@@ -2004,12 +2019,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div class="principle is-summary"><div class="t">In summary</div><p>We believe good giving starts with trusting people close to the work. We give capable leaders room to lead, take risks on promising ideas, and keep learning together.</p></div>
     </div>
 
-    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.2vw,26px);color:var(--green-dark);margin:52px 0 0">Three charitable purposes</h3>
-    <div class="purposes">
-      <div class="purpose"><img src="img/purpose-environment.jpg" alt="Te Tauihu Environment Trust"><span class="rule"></span><h4>Environment</h4><p>Healthy land and waterways, biodiversity, regenerative food systems and thriving communities.</p></div>
-      <div class="purpose edu"><img src="img/purpose-education.jpg" alt="The Gift Trust"><span class="rule"></span><h4>Education</h4><p>Knowledge and practical skills through research, new ideas, hands-on learning and different ways of seeing the world.</p></div>
-      <div class="purpose health"><img src="img/purpose-health.jpg" alt="Kawakawa"><span class="rule"></span><h4>Health</h4><p>Healthier communities through stronger connections between people, food, nature and culture, and places that help people thrive.</p></div>
-    </div>
     <a class="scroll-cue scroll-cue--inline" href="#mangaroa" aria-label="Scroll to the next section">
       <span>Scroll</span>
       <svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -2034,7 +2043,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
           </div>
       </div>
       <div class="mang-right">
-        <div class="me-head-art me-head-art--left"><img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air"></div>
+        <div class="me-head-art"><img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air"></div>
           <div class="panel">
             <p class="kicker">Current land cover</p>
             <div class="donut-wrap">
@@ -2252,6 +2261,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         </g>
         <g class="pin" tabindex="0" role="button" transform="translate(316.2,171.4)" data-place="Waikato" data-orgs="UNDERGROUND Festival (2027)" aria-label="Waikato: UNDERGROUND Festival (2027)">
           <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
+        </g>
+        <g class="pin pin-wide" tabindex="0" role="button" transform="translate(342.5,211.5)" data-place="Nationwide" data-orgs="Permaculture in New Zealand · Soil Sage Collective · Kiwis in Climate · Centre for Strategic Philanthropy · The Gift Trust · House of Science · Eco-Index" aria-label="Nationwide: Permaculture in New Zealand · Soil Sage Collective · Kiwis in Climate · Centre for Strategic Philanthropy · The Gift Trust · House of Science · Eco-Index">
+          <circle class="halo" r="15"/><circle class="dot" r="5.5"/>
         </g>
         <g class="pin" tabindex="0" role="button" transform="translate(430.0,197.1)" data-place="Tolaga Bay" data-orgs="Tolaga Bay Heritage Trust" aria-label="Tolaga Bay: Tolaga Bay Heritage Trust">
           <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
