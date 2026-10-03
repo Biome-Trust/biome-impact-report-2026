@@ -567,7 +567,11 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .yearchart { margin-top: 12px; }
 /* frame 5: the purpose donut holds a narrow left column, the two bar charts
    stack beside it */
-.numcharts { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 44px); align-items: start; }
+.numcharts { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 44px); align-items: stretch; }
+/* the card runs the full height of the row, so it finishes level with the
+   footnote under the charts; the donut centres in whatever height that is */
+.numcharts .panel { display: flex; flex-direction: column; }
+.numcharts .donut-wrap--solo { flex: 1; }
 .chartstack { display: grid; gap: 24px; }
 .chartstack .yearchart:first-child { margin-top: 0; }
 @media (max-width: 820px) { .numcharts { grid-template-columns: 1fr; } }
