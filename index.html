@@ -596,12 +596,15 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 /* the frame pairs the land-cover donut with the new initiatives */
 /* the description runs beside the land-cover card at the top of the section */
 .me-head-text .measure { max-width: none; }
-.me-head-text .panel { padding: 22px 24px; margin-top: 30px; }
+/* the land-cover card sits under the aerial, in the right column */
+.mang-right { display: grid; gap: 26px; }
+.mang-right .me-head-art { margin-right: calc(var(--gut) * -1); }
+.mang-right .panel { padding: 22px 24px; }
 /* the donut and its key sit on one row and take only the width they need */
-.me-head-text .donut-wrap { gap: 20px; align-items: center; margin-top: 14px; }
-.me-head-text .donut { width: clamp(126px, 13vw, 160px); }
-.me-head-text .legend { font-size: 13px; line-height: 1.4; }
-.me-head-text .legend li { margin-bottom: 8px; }
+.mang-right .donut-wrap { gap: 20px; align-items: center; margin-top: 14px; }
+.mang-right .donut { width: clamp(126px, 13vw, 160px); }
+.mang-right .legend { font-size: 13px; line-height: 1.4; }
+.mang-right .legend li { margin-bottom: 8px; }
 @media (max-width: 820px) { .imgstats--3 { grid-template-columns: 1fr; } }
 .imgstat {
   background: var(--white); border: 1px solid var(--line); border-radius: 4px;
@@ -2014,6 +2017,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             <p class="fine"><span class="pill">Mangaroa Valley, Upper Hutt</span>
               &nbsp; <a href="https://impact.mangaroa.org" target="_blank" rel="noopener" class="site">Website →</a></p>
           </div>
+      </div>
+      <div class="mang-right">
+        <div class="me-head-art me-head-art--left"><img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air"></div>
           <div class="panel">
             <p class="kicker">Current land cover</p>
             <div class="donut-wrap">
@@ -2028,14 +2034,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             </div>
           </div>
       </div>
-      <div class="me-head-art me-head-art--left"><img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air"></div>
     </div>
     <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
     <div class="imgstats imgstats--4">
       <div class="imgstat"><img src="img/mang-trees.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Restoring the land</p><div class="n">8,546</div><div class="l">native trees planted across 3.3 ha. One third by volunteers</div></div></div>
       <div class="imgstat"><img src="img/mang-predator.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Predator control</p><div class="n">242</div><div class="l">predators removed across 78 monitored traps, plus 95 deer and goats</div></div></div>
       <div class="imgstat"><img src="img/mang-kiwi.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">A first in a century</p><div class="n">1 Kiwi</div><div class="l">recorded in the Mangaroa catchment</div></div></div>
-      <div class="imgstat"><img src="img/mang-food.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Growing healthy food</p><div class="n">7,012 m²</div><div class="l">of food landscape in cultivation; 48 families picked their own kai</div></div></div>
+      <div class="imgstat"><img src="img/mang-food.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Growing healthy food</p><div class="n">7,012 m²</div><div class="l">of market garden &amp; orchard under cultivation, 48 families picked their own kai</div></div></div>
       <div class="imgstat"><img src="img/mang-gate.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Through the gate</p><div class="n">2,500+</div><div class="l">guests across 86 events</div></div></div>
       <div class="imgstat"><img src="img/mang-learning.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Hands-on learning</p><div class="n">536</div><div class="l">people through 41 hands-on sessions</div></div></div>
       <div class="imgstat"><img src="img/mang-farmshop.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Feeding the local bioregion</p><div class="n">263 kg</div><div class="l">of surplus kai kept from the waste stream; 101 Farm Shop suppliers, 54% of them from the region</div></div></div>
