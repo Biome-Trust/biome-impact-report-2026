@@ -594,6 +594,21 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .chartstack { display: grid; gap: 24px; }
 .chartstack .yearchart:first-child { margin-top: 0; }
 @media (max-width: 820px) { .numcharts { grid-template-columns: 1fr; } }
+/* ---- Giving by numbers on a phone ---- */
+@media (max-width: 700px) {
+  /* the currency figure takes the full row; the two counts pair beneath it */
+  .numrow { grid-template-columns: 1fr 1fr; }
+  .numcard.has-delta { grid-column: 1 / -1; }
+  /* full width, the caption now runs under the chip's corner — hold it clear */
+  .numcard.has-delta .l { padding-right: 96px; }
+  /* the purpose heading comes up 30%, and the donut gets 60% more foot */
+  #numbers .panel h3 { font-size: 24.7px; }
+  #numbers .numcharts .panel { padding-bottom: 45px; }
+  /* and the bar charts get twice the air around and between them */
+  .numcharts { row-gap: 40px; }
+  .chartstack { gap: 48px; }
+  .chartstack .fine { margin-top: 20px; }
+}
 .bars { display: flex; align-items: flex-end; gap: clamp(4px, 0.7vw, 9px); height: 152px; }
 .bars .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
 .bars .v { font-size: 14px; color: var(--text-dark); margin-bottom: 7px; white-space: nowrap; }
