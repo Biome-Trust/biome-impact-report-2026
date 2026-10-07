@@ -124,9 +124,11 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 }
 .cover-inner { position: relative; max-width: 1120px; margin: 0 auto; width: 100%; text-align: center; }
 .cover h1 { font-size: clamp(46px, 9vw, 108px); line-height: .98; margin: 0 0 20px; }
+/* on a phone the title sets to the measure of the date line beneath it */
+@media (max-width: 560px) { .cover h1 { font-size: 20.2vw; } }
 .cover h1 em { font-style: italic; }
 .cover .sub { font-size: clamp(15px, 1.7vw, 19px); letter-spacing: .04em; color: #dfe7dd; margin: 0; }
-.mark { width: clamp(147px, 15vw, 193px); margin: 0 auto 52px; position: relative; }
+.mark { width: clamp(169px, 15vw, 193px); margin: 0 auto 52px; position: relative; }
 
 /* ---- ambient birdsong ----
    Hidden until the audio file actually loads, so the control never appears
@@ -460,12 +462,17 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
   mask-image: linear-gradient(90deg, transparent 6%, rgba(0,0,0,.35) 38%, #000 72%);
 }
 #kia-ora { padding-bottom: clamp(150px, 22vh, 280px); --cue-pull: 0px; }
+/* the ponga is hidden on a phone, so nothing needs that foot */
+@media (max-width: 900px) { #kia-ora { padding-bottom: clamp(56px, 9vh, 96px); } }
 /* the opening letter: two columns of the same measure, the heading above both */
 .letter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(26px, 4vw, 64px); margin-top: 8px; }
 .letter p { max-width: 54ch; }
 .letter .lede { font-weight: 600; }
 .letter .signoff { margin-top: 26px; }
-@media (max-width: 760px) { .letter { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .letter { grid-template-columns: 1fr; row-gap: 0; }
+  .letter > div + div > p:first-child { margin-top: 0; }
+}
 /* the closing fern is bottom-anchored and sized by width, so pulling the cue
    up moves the fern with the section rather than cropping it */
 /* thin rule between the letter and the acknowledgements */
