@@ -125,7 +125,7 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .cover-inner { position: relative; max-width: 1120px; margin: 0 auto; width: 100%; text-align: center; }
 .cover h1 { font-size: clamp(46px, 9vw, 108px); line-height: .98; margin: 0 0 20px; }
 /* on a phone the title sets to the measure of the date line beneath it */
-@media (max-width: 560px) { .cover h1 { font-size: 20.2vw; } }
+@media (max-width: 560px) { .cover h1 { font-size: 15.1vw; } }
 .cover h1 em { font-style: italic; }
 .cover .sub { font-size: clamp(15px, 1.7vw, 19px); letter-spacing: .04em; color: #dfe7dd; margin: 0; }
 .mark { width: clamp(169px, 15vw, 193px); margin: 0 auto 52px; position: relative; }
@@ -905,6 +905,25 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .tl .y { font-family: var(--serif); font-size: 21px; color: var(--green-mid); }
 .tl .d { font-size: 13.5px; color: var(--text-mid); margin-top: 6px; line-height: 1.45; }
 
+
+/* ---- section headings on a phone ----
+   One size for every section title, so the page reads with a single voice.
+   The ceiling is set by "Backing partners", which has to hold its own line
+   above the <br>: it needs 7.5x its font size, so the vw term keeps it inside
+   the column down to a 320px frame. */
+@media (max-width: 700px) {
+  h2, .title-band h2, .nl-band h2 { font-size: clamp(34px, 11.4vw, 44px); }
+  /* and the line under a band title runs to 80% of the page, not 60% of the column */
+  .title-band .tb-lede { max-width: 80vw; }
+  /* the change-on-last-year chip: one padding all round, which also carries its
+     left edge further in, since it is anchored to the card's right */
+  .numcard .delta { padding: 12px; margin: 0; top: 16px; right: 16px; }
+  /* twice the air under a featured giftee, between its location badge and the
+     photograph that opens the next one */
+  .features { gap: 40px; }
+  /* and a fifth off the foot "All Giftees" stands on */
+  #partners-wider { padding-top: clamp(51px, 8.8vh, 106px); }
+}
 
 @media (max-width: 640px) {
   body { font-size: 16px; }
