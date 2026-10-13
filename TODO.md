@@ -14,8 +14,10 @@ All copy is now in from the Figma.
       counts match the source exactly (45/23/20/12/8).
 - [ ] Region pills — only the 20 curated ones carry a region; the gifts page
       does not publish region, so the rest show none
-- [ ] Milestone bullets for Toru Education, Centre for Strategic Philanthropy,
-      The Gift Trust — still visibly tagged as borrowed figures
+- [x] Milestone bullets for Toru Education, Centre for Strategic Philanthropy,
+      The Gift Trust (2026-10-13) — the Centre's came from G; no feature on the
+      page carries the placeholder tag any more. The .ph-tag / .is-placeholder
+      CSS is kept for the next one that needs it.
 - [x] Financial-year tagging (2026-09-16) — retagged from the gifts spreadsheet:
       FY26 18 orgs, FY27 43. The gifts page groups by calendar year, which
       straddles the financial year; the spreadsheet is the source of truth.
