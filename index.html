@@ -938,6 +938,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
   /* the change-on-last-year chip: one padding all round, which also carries its
      left edge further in, since it is anchored to the card's right */
   .numcard .delta { padding: 12px; margin: 0; top: 16px; right: 16px; }
+  /* the chip is three lines on a phone, so the card has to be tall enough to
+     leave the same 16px under it as above it */
+  .numcard.has-delta { min-height: 108px; }
   /* twice the air under a featured giftee, between its location badge and the
      photograph that opens the next one */
   .features { gap: 40px; }
@@ -1015,8 +1018,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     <div class="numrow">
       <div class="numcard has-delta">
         <div class="n">NZ$1.1m</div>
-        <div class="l">given to external partners in FY26</div>
-        <div class="delta"><strong>+31%</strong> on FY25</div>
+        <div class="l">given to partners in FY26</div>
+        <div class="delta"><strong>+31%</strong> by value<br>on FY25</div>
       </div>
       <div class="numcard pale">
         <div class="n">25</div>
