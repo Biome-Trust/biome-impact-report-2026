@@ -731,7 +731,9 @@ footer .wrap { display: block; text-align: left; }
 /* the aerial squares up with the land-cover card below it: no bleed, no mask */
 .mang-right .me-head-art { margin-right: 0; }
 .mang-right .me-head-art img { border-radius: 4px; -webkit-mask-image: none; mask-image: none; }
-.mang-right .panel { padding: 22px 24px; }
+/* half the width it was, sitting to the right of its column */
+.mang-right .panel { padding: 22px 24px; max-width: 50%; margin-left: auto; }
+@media (max-width: 860px) { .mang-right .panel { max-width: none; margin-left: 0; } }
 /* the donut and its key sit on one row and take only the width they need */
 /* the land-cover donut stacks above its legend rather than sitting beside it */
 .mang-right .donut-wrap { flex-direction: column; align-items: center; gap: 20px; margin-top: 16px; }
