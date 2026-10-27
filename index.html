@@ -1098,7 +1098,10 @@ footer .nl-status.is-error { color: #f0c9b4; }
 @media (max-width: 700px) {
   h2, .title-band h2, .nl-band h2 { font-size: clamp(34px, 11.4vw, 44px); }
   /* and the line under a band title runs to 80% of the page, not 60% of the column */
-  .title-band .tb-lede { max-width: 80vw; }
+  /* 80% of the page, but never wider than the headline above it: the h2 caps
+     at 44px, which puts "Backing partners" at about 330px, while an
+     unbounded 80vw keeps growing past it on a larger phone */
+  .title-band .tb-lede { max-width: min(80vw, 330px); }
   /* the change-on-last-year chip: one padding all round, which also carries its
      left edge further in, since it is anchored to the card's right */
   .numcard .delta { padding: 12px; margin: 0; top: 16px; right: 16px; }
@@ -1288,7 +1291,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
           <p class="feature-sub">Elevating Indigenous seed, soil and food sovereignty</p>
           <ul class="feature-points">
             <li><b>P&#257;taka Kai</b> &mdash; a new pukapuka on Indigenous food futures, from the trust&rsquo;s founders with Johnson Witehira and Yvonne Taura</li>
-            <li><b>Mana W&#257;hine Declaration</b> for Hineahuone, written with Dr Vandana Shiva and signed by 300+ at Navdanya in North India</li>
+            <li><b><a class="fundlink" href="https://www.papawhakaritorito.com/mana-wahine-declaration-for-hineahuone-signing-page" target="_blank" rel="noopener">Mana W&#257;hine Declaration</a></b> for Hineahuone, written with Dr Vandana Shiva and signed by 300+ at Navdanya in North India</li>
             <li><b><a class="fundlink" href="https://open.spotify.com/show/1fHW2OFLfaM3j1xsvCKjrP" target="_blank" rel="noopener">Seeding Hope</a></b> &mdash; a podcast of k&#333;rero with M&#257;ori growers, activists, poets and healers, hosted by Dr Jessica Hutchings in collaboration with Ma Earth</li>
           </ul>
           <div class="meta">
