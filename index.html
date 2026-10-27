@@ -481,6 +481,8 @@ footer .wrap { display: block; text-align: left; }
 }
 #partners-title  { --fade-to: var(--white); }
 #approach-title  { --fade-to: var(--cream); }
+/* the two bands carrying no lede centre their titles */
+#approach-title .wrap, #mangaroa-title .wrap { text-align: center; }
 #endowment-title { --fade-to: var(--white); }
 #mangaroa-title  { --fade-to: var(--white); }
 .title-band .wrap { position: relative; z-index: 1; width: 100%; }
@@ -881,7 +883,7 @@ footer .wrap { display: block; text-align: left; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .logo-row img { height: 57px; width: auto; }   /* 30% up on 44px */
 /* the Mangaroa lockup is two lines deep, so it is sized on width, not height */
-.logo-row--mang img { height: auto; width: clamp(152px, 17.9vw, 235px); }
+.logo-row--mang img { height: auto; width: clamp(182px, 21.5vw, 282px); }
 .logo-row--mang { margin: 46px 0 56px; }
 /* twice the air above and below the Ma Earth lockup, and the lockup itself
    15% up on the shared 57px */
