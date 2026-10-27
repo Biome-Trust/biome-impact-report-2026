@@ -715,6 +715,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
   .numcharts { row-gap: 40px; }
   .chartstack { gap: 48px; }
   .chartstack .fine { margin-top: 20px; }
+
 }
 .bars { display: flex; align-items: flex-end; gap: clamp(4px, 0.7vw, 9px); height: 152px; }
 .bars .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
@@ -857,6 +858,8 @@ footer .nl-status.is-error { color: #f0c9b4; }
 @media (max-width: 900px) {
   .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
   .principles > .principle, .principles > .principle:nth-child(4) { grid-column: auto; }
+  /* five into two leaves the last one alone, so it takes the row */
+  .principles > .principle:nth-child(5) { grid-column: 1 / -1; }
 }
 @media (max-width: 520px) { .principles { grid-template-columns: 1fr; } }
 /* the three ways stay centred, their copy being one line each. The principles
@@ -886,6 +889,12 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .purpose { text-align: center; }
 .purpose h4 { font-family: var(--serif); font-size: 28px; color: var(--green-dark); margin: 0 0 8px; font-weight: 400; }
 .purpose p { font-size: 14px; line-height: 1.55; color: var(--text-mid); margin: 0; }
+/* on a phone the purposes stack, so each gets a shorter measure under its
+   circle and three times the air before the next one */
+@media (max-width: 700px) {
+  .purposes { gap: 60px; }
+  .purpose p { max-width: 268px; margin: 0 auto; }
+}
 
 .tl-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: clamp(16px, 2.4vw, 30px); margin-top: 30px; }
 .tl-item { border-top: 2px solid var(--tan); padding-top: 12px; }
