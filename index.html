@@ -796,11 +796,11 @@ footer .nl-status.is-error { color: #f0c9b4; }
   #mangaroa .mang-right { order: 2; }
   #mangaroa .logo-row--mang { justify-content: center; margin: 0 0 90px; }
   /* 15% up on the 182px the clamp floors at on a phone */
-  #mangaroa .logo-row--mang img { width: clamp(209px, 24.7vw, 282px); }
+  #mangaroa .logo-row--mang img { width: clamp(251px, 29.6vw, 338px); }
   /* the land-cover card: more lead-in once it sits under the copy, a centred
      label and a donut with room to read. All id-prefixed, since the plain
      .mang-right rules sit further down the sheet and would otherwise win. */
-  #mangaroa .mang-right { margin-top: 44px; }
+  #mangaroa .mang-right { margin-top: 44px; margin-bottom: 52px; }
   #mangaroa .mang-right .panel .kicker { text-align: center; }
   #mangaroa .mang-right .donut { width: 210px; }
   /* the card comes in to 80% of the column and takes deeper top and bottom
@@ -970,7 +970,13 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .ob-card { border-top: 0; background: var(--green-dark); border-radius: 4px; padding: 22px 20px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 /* stacked on a phone it follows a paragraph rather than sitting beside one, so
    it needs its own lead-in. On desktop it shares a row and must stay level. */
-@media (max-width: 700px) { .ob-card { margin-top: 24px; } }
+@media (max-width: 700px) {
+  .ob-card { margin-top: 24px; }
+  /* stacked, each observation needs room from the one above rather than the
+     20px the grid clamp floors at */
+  .obs { gap: 44px; }
+  .ob { padding-top: 18px; }
+}
 .ob-card h4 { color: #fff; }
 .ob-card p { color: #c5d3c3; }
 /* the five fund holders get the same treatment as Ma Earth's matching pool:
@@ -1000,6 +1006,8 @@ footer .nl-status.is-error { color: #f0c9b4; }
   .logostrip--wide img { height: 38px; }
   .logostrip--wide img.tall { height: 58px; }
   .logostrip .eyebrow { margin-bottom: 48px; }
+  /* five into two columns leaves the Gift Trust alone, so it takes the row */
+  .logostrip--wide .logostrip-row > a:last-child { grid-column: 1 / -1; }
 }
 
 .kaupapa-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 4vw, 70px); align-items: start; }
