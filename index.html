@@ -790,7 +790,15 @@ footer .nl-status.is-error { color: #f0c9b4; }
   #mangaroa .me-head { grid-template-columns: 1fr; }
   #mangaroa .me-head-text { order: 1; }
   #mangaroa .mang-right { order: 2; }
-  #mangaroa .logo-row--mang { justify-content: center; margin: 0 0 30px; }
+  #mangaroa .logo-row--mang { justify-content: center; margin: 0 0 90px; }
+  /* 15% up on the 182px the clamp floors at on a phone */
+  #mangaroa .logo-row--mang img { width: clamp(209px, 24.7vw, 282px); }
+  /* the land-cover card: more lead-in once it sits under the copy, a centred
+     label and a donut with room to read. All id-prefixed, since the plain
+     .mang-right rules sit further down the sheet and would otherwise win. */
+  #mangaroa .mang-right { margin-top: 44px; }
+  #mangaroa .mang-right .panel .kicker { text-align: center; }
+  #mangaroa .mang-right .donut { width: 210px; }
 }
 /* the donut and its key sit on one row and take only the width they need */
 /* the land-cover donut stacks above its legend rather than sitting beside it */
@@ -831,6 +839,17 @@ footer .nl-status.is-error { color: #f0c9b4; }
   margin: 86px 0 0;
 }
 #endowment .impact-band { margin-top: 0; }
+/* on a phone it stops being a card: full bleed, no radius, meeting the title
+   band above. The band fades to white there rather than to the section cream. */
+@media (max-width: 700px) {
+  #endowment-title { --fade-to: var(--white); }
+  #endowment { padding-top: 0; }
+  #endowment .impact-band {
+    margin: 0 calc(var(--gut) * -1);
+    border-radius: 0;
+    padding: clamp(36px, 6vh, 56px) var(--gut) clamp(42px, 6vh, 64px);
+  }
+}
 .impact-band {
   padding: clamp(36px, 5vh, 56px) clamp(20px, 2.6vw, 38px) clamp(42px, 5.6vh, 64px);
 }
@@ -953,14 +972,23 @@ footer .nl-status.is-error { color: #f0c9b4; }
 /* the Gift Trust mark stacks, so height alone leaves it reading half-size */
 .logostrip--wide img.tall { height: 68px; }
 @media (max-width: 900px) { .logostrip--wide .logostrip-row { justify-content: space-around; } }
-/* both strips stack on a phone, one logo per row with room between. Side by
-   side at this width the marks were down to a third of their desktop size. */
+@media (max-width: 560px) { .logostrip--wide img { height: 30px; } .logostrip--wide img.tall { height: 46px; } }
+/* both strips go two per row on a phone, every mark a size up on the old
+   wrapped layout. Ma Earth keeps its height: it is a wide horizontal lockup,
+   so it already reads largest of the set. Placed last so it beats the 560px
+   sizes above. */
 @media (max-width: 700px) {
   .logostrip-row, .logostrip--wide .logostrip-row {
-    flex-direction: column; align-items: center; justify-content: center; gap: 44px;
+    display: grid; grid-template-columns: 1fr 1fr; place-items: center;
+    gap: 40px 18px;
   }
+  .logostrip img { height: 44px; }
+  .logostrip img.me, .logostrip--wide img.me { height: 30px; }
+  .logostrip img.tall { height: 69px; }
+  .logostrip img.naia { height: 94px; }
+  .logostrip--wide img { height: 38px; }
+  .logostrip--wide img.tall { height: 58px; }
 }
-@media (max-width: 560px) { .logostrip--wide img { height: 30px; } .logostrip--wide img.tall { height: 46px; } }
 
 .kaupapa-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 4vw, 70px); align-items: start; }
 /* the map's top edge lines up with the cap-height of the h2, not with the
@@ -2481,7 +2509,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
     </div>
     </div>
 
-    <p class="chart-title" style="margin-top:46px">Four pathways for creating impact</p>
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(33px,3.6vw,40px);color:var(--green-dark);margin:46px 0 0">Four pathways for creating impact</h3>
     <div class="steps">
       <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Capital</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Extend our capital&rsquo;s impact</h4><p>By using approaches that can preserve, return or grow capital, we can redeploy resources and support more impact over time.</p></div>
       <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Mangaroa Farms</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support Mangaroa Farms</h4><p>A cornerstone initiative wholly owned by Biome Trust. Its activities contribute directly to our impact, and the capital invested forms a significant asset on our consolidated balance sheet.</p></div>
@@ -2489,7 +2517,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
       <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Environmental markets</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support environmental markets</h4><p>We are actively looking for ways to use environmental instruments to advance our ecological goals.</p></div>
     </div>
 
-    <p class="chart-title" style="margin-top:46px">Observations</p>
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(33px,3.6vw,40px);color:var(--green-dark);margin:52px 0 0">Observations</h3>
     <div class="obs">
       <div class="ob"><h4>Liquidity vs deeper mission alignment</h4><p>As Biome Trust continues giving away its endowment capital, we prioritise liquidity and lower risk to preserve flexibility. This limits how much we can allocate to highly mission-aligned investments that lock up capital for long periods.</p></div>
       <div class="ob"><h4>Learn before scaling private investment</h4><p>Private funds can run for 10&ndash;12 years, with outcomes often taking 5&ndash;10 years to assess. This slow feedback cycle makes it challenging to move quickly and confidently.</p></div>
