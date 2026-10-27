@@ -366,6 +366,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .title-band .tb-lede {
   font-size: clamp(16px, 1.8vw, 20px); line-height: 1.55; color: #e4ece2;
   max-width: min(60%, 62ch); margin: 18px 0 0;
+  /* the lede sits where the band starts fading to the next section's ground,
+     so it carries its own halo rather than the whole photo being darkened */
+  text-shadow: 0 1px 12px rgba(15, 28, 16, .62), 0 1px 3px rgba(15, 28, 16, .45);
 }
 
 /* ---- Mangaroa offerings ---- */
@@ -608,6 +611,15 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 /* the funding rounds carry their split on hover rather than in a third legend
    key: the whole row is the target, since the crowdfunding slice on rounds 1
    and 2 is only a few pixels wide */
+/* the true matching/crowdfunding split, with the crowdfunding end held to a
+   7px minimum so it stays visible: on round 1 it is only 3.5px to scale, which
+   read as nothing. The row's hover tooltip and the copy carry the exact
+   figures, so the bar is a summary rather than the source. */
+#ma-earth .barlist .track i {
+  background:
+    linear-gradient(90deg, #BEBE8A, #BEBE8A) right center / 7px 100% no-repeat,
+    linear-gradient(90deg, var(--green-dark) 0 var(--split), #BEBE8A var(--split) 100%);
+}
 #ma-earth .barlist .barrow { position: relative; }
 #ma-earth .barlist .barrow[data-tip]::after {
   content: attr(data-tip);
@@ -2262,9 +2274,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     <div class="two-col">
       <div class="panel" style="background:var(--cream)">
         <div class="barlist">
-          <div class="barrow" tabindex="0" data-tip="Matching pool $145,000 · Crowdfunding raised $20,000"><div class="top"><b>Funding Round 1</b><span>$165,000</span></div><div class="track"><i style="width:7.5%;background:linear-gradient(90deg,var(--green-dark) 0 87.9%,#BEBE8A 87.9% 100%)"></i></div></div>
-          <div class="barrow" tabindex="0" data-tip="Matching pool $200,000 · Crowdfunding raised $32,000"><div class="top"><b>Funding Round 2</b><span>$232,000</span></div><div class="track"><i style="width:10.5%;background:linear-gradient(90deg,var(--green-dark) 0 86.2%,#BEBE8A 86.2% 100%)"></i></div></div>
-          <div class="barrow" tabindex="0" data-tip="Matching pool $1,200,000 · Crowdfunding raised $1,000,000"><div class="top"><b>Funding Round 3</b><span>$2,200,000</span></div><div class="track"><i style="width:100%;background:linear-gradient(90deg,var(--green-dark) 0 54.5%,#BEBE8A 54.5% 100%)"></i></div></div>
+          <div class="barrow" tabindex="0" data-tip="Matching pool $145,000 · Crowdfunding raised $20,000"><div class="top"><b>Funding Round 1</b><span>$165,000</span></div><div class="track"><i style="width:7.5%;--split:87.9%"></i></div></div>
+          <div class="barrow" tabindex="0" data-tip="Matching pool $200,000 · Crowdfunding raised $32,000"><div class="top"><b>Funding Round 2</b><span>$232,000</span></div><div class="track"><i style="width:10.5%;--split:86.2%"></i></div></div>
+          <div class="barrow" tabindex="0" data-tip="Matching pool $1,200,000 · Crowdfunding raised $1,000,000"><div class="top"><b>Funding Round 3</b><span>$2,200,000</span></div><div class="track"><i style="width:100%;--split:54.5%"></i></div></div>
         </div>
       </div>
       <div>
@@ -2289,7 +2301,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 <section class="title-band" id="endowment-title">
   <div class="tb-bg" style="background-image: url('img/band-endowment.webp')"></div>
   <div class="wrap">
-    <p class="eyebrow">Our endowment</p>
     <h2>Stewarding<br>our endowment</h2>
     <p class="tb-lede">We are transitioning our endowment from traditional investments into impact and values-aligned investing.</p>
   </div>
