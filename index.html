@@ -738,7 +738,7 @@ footer .wrap { display: block; text-align: left; }
    The narrower column lands the panel near 335px, which is the width its
    legend needs to stay on one line, so no max-width is needed on the panel
    itself. Below 860 the grid stacks and the copy leads again. */
-#mangaroa .me-head { grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr); }
+#mangaroa .me-head { grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr); }
 #mangaroa .mang-right { order: 1; }
 #mangaroa .me-head-text { order: 2; }
 @media (max-width: 860px) {
@@ -826,9 +826,11 @@ footer .wrap { display: block; text-align: left; }
 /* six columns, each card spanning two, so the fifth principle leaves the last
    row one card short and the pair can start half a card in. Card 4 opening at
    column 2 puts the two of them under the middle of the three above. */
-/* the row is inset to 75% and sits flush left; cards 4 and 5 still centre
-   under the three above via the span rules below */
-.principles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin: 48px 0 0; max-width: 75%; }
+/* flush left, and wide enough that every title holds one line. The longest,
+   "Value place and depth of impact", needs 249px plus 40px of padding, so a
+   card has to clear 289px and the row 3x that plus two gaps. The 1000px cap
+   keeps a little inset on wide screens without taking the cards under it. */
+.principles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin: 48px 0 0; max-width: min(100%, 1000px); }
 .principles > .principle { grid-column: span 2; }
 .principles > .principle:nth-child(4) { grid-column: 2 / span 2; }
 @media (max-width: 900px) {
@@ -843,11 +845,19 @@ footer .wrap { display: block; text-align: left; }
 .principle .no { font-size: 24px; font-weight: 700; color: #9E7F61; line-height: 1; }
 .principle h4 { font-size: 16px; font-weight: 600; color: var(--green-dark); margin: 12px 0 8px; }
 .principle p { font-size: 14px; line-height: 1.5; color: var(--text-mid); margin: 0; }
+/* between 900 and 1050 the row is already full width and the cards still land
+   under the 289px the longest title needs, so the title gives up 2px and the
+   cards 4px of side padding to hold one line */
+@media (min-width: 901px) and (max-width: 1050px) {
+  .principle { padding: 22px 16px; }
+  .principle h4 { font-size: 14px; }
+}
+
 .summary-band { background: #BEBE8A; border-radius: 4px; padding: 22px 26px; margin-top: 18px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 .summary-band .kicker { color: var(--green-dark); }
 .summary-band p { margin: 0; font-size: 14.5px; line-height: 1.55; color: #23331f; }
 
-.purposes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(20px, 3vw, 40px); margin-top: 30px; }
+.purposes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(20px, 3vw, 40px); margin-top: 60px; }
 .purpose { padding-top: 0; }
 /* trying the purposes as circles (was 3/2 at a 4px radius). One line back
    to rectangles: aspect-ratio 3 / 2 and border-radius 4px. */
@@ -2226,6 +2236,8 @@ footer .wrap { display: block; text-align: left; }
           <a href="https://www.instagram.com/mangaroafarms/" target="_blank" rel="noopener" aria-label="Mangaroa Farms on Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
           <a href="https://www.facebook.com/mangaroafarms" target="_blank" rel="noopener" aria-label="Mangaroa Farms on Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M15.2 8.4h-1.4a1.8 1.8 0 0 0-1.8 1.8v1.6h3l-.45 3h-2.55V21"/></svg></a>
           <a href="https://x.com/mangaroafarms" target="_blank" rel="noopener" aria-label="Mangaroa Farms on X"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
+          <a href="https://bsky.app/profile/mangaroa.org" target="_blank" rel="noopener" aria-label="Mangaroa Farms on Bluesky"><svg width="17" height="17" viewBox="0 0 568 501" fill="currentColor" aria-hidden="true"><path d="M123.121 33.664C188.241 82.553 258.281 181.681 284 234.873c25.719-53.192 95.759-152.32 160.879-201.209C491.866-1.612 568-28.906 568 57.946c0 17.345-9.945 145.713-15.778 166.555-20.275 72.453-94.155 90.933-159.875 79.748 114.875 19.551 144.097 84.311 80.986 149.071-119.86 122.992-172.272-30.859-185.702-70.281-2.462-7.227-3.614-10.608-3.631-7.733-.017-2.875-1.169.506-3.631 7.733-13.43 39.422-65.842 193.273-185.702 70.281-63.111-64.76-33.889-129.52 80.986-149.071-65.72 11.185-139.6-7.295-159.875-79.748C9.945 203.659 0 75.291 0 57.946 0-28.906 76.134-1.612 123.121 33.664Z"/></svg></a>
+          <a href="https://nz.linkedin.com/company/mangaroafarms" target="_blank" rel="noopener" aria-label="Mangaroa Farms on LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M7.6 11v6"/><circle cx="7.6" cy="7.6" r=".9"/><path d="M11.4 17v-6"/><path d="M11.4 13.9a2.5 2.5 0 0 1 5 0V17"/></svg></a>
         </div>
           </div>
       </div>
@@ -2369,7 +2381,8 @@ footer .wrap { display: block; text-align: left; }
 <section class="band band-paper" id="endowment">
   <div class="wrap">
 
-    <div class="two-col two-col--three" style="margin-top:36px">
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(33px,3.6vw,40px);color:var(--green-dark);margin:0">What We Steward</h3>
+    <div class="two-col two-col--three" style="margin-top:30px">
       <div class="panel" style="background:var(--tan)">
         <div style="font-family:var(--sans);font-size:clamp(26px,3vw,34px);font-weight:700;line-height:1.1;color:var(--green-dark)">~$35M NZD</div>
         <p style="font-size:14px;line-height:1.5;color:#2c3a28;margin:12px 0 0">Biome Trust Aotearoa endowment &mdash; primarily NZ bonds, with a small and growing share in equities and impact funds</p>
