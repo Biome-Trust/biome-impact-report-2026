@@ -447,6 +447,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 #partners-title  { --fade-to: var(--white); }
 #approach-title  { --fade-to: var(--cream); }
 #endowment-title { --fade-to: var(--white); }
+#mangaroa-title  { --fade-to: var(--white); }
 .title-band .wrap { position: relative; z-index: 1; width: 100%; }
 /* tighter variant: shorter frame, title sitting low so it reads as a lead-in to
    the section directly beneath rather than a full-page cover */
@@ -671,9 +672,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 @media (max-width: 560px) { .imgstats--4 { grid-template-columns: 1fr; } }
 /* the frame pairs the land-cover donut with the new initiatives */
 /* the description runs beside the land-cover card at the top of the section */
-/* the Mangaroa copy drops 30px so it finishes level with the image and the
-   land-cover panel stacked beside it; the two columns differ by exactly that */
-#mangaroa .me-head-text { padding-top: 30px; }
+/* with the aerial lifted out into its own title band, the right column is just
+   the land-cover panel, so it centres against the copy rather than sitting at
+   the top of a column half again its height */
+#mangaroa .mang-right { align-self: center; }
 .me-head-text .measure { max-width: none; }
 #mangaroa .measure .fine { margin-top: 24px; }
 /* each organisation's own channels, under its location badge */
@@ -757,7 +759,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 /* trying the purposes as circles (was 3/2 at a 4px radius). One line back
    to rectangles: aspect-ratio 3 / 2 and border-radius 4px. */
 .purpose img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; display: block; margin-bottom: 18px; }
-.purpose h4 { font-family: var(--serif); font-size: 20px; color: var(--green-dark); margin: 0 0 8px; font-weight: 400; }
+.purpose { text-align: center; }
+.purpose h4 { font-family: var(--serif); font-size: 24px; color: var(--green-dark); margin: 0 0 8px; font-weight: 400; }
 .purpose p { font-size: 14px; line-height: 1.55; color: var(--text-mid); margin: 0; }
 
 .tl-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: clamp(16px, 2.4vw, 30px); margin-top: 30px; }
@@ -2076,7 +2079,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div class="purpose edu"><img src="img/purpose-education.jpg" alt="Examining pollen and pollinators in the polyculture paddock"><h4>Education</h4><p>Knowledge and practical skills through research, new ideas, hands-on learning and different ways of seeing the world.</p></div>
       <div class="purpose health"><img src="img/purpose-health.jpg" alt="Kawakawa"><h4>Health</h4><p>Healthier communities through stronger connections between people, food, nature and culture, and places that help people thrive.</p></div>
     </div>
-    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(23px,2.6vw,30px);color:var(--green-dark);margin:52px 0 0;text-align:center">Three ways we create impact</h3>
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(23px,2.6vw,30px);color:var(--green-dark);margin:86px 0 0;text-align:center">Three ways we create impact</h3>
 
     <div class="steps">
       <div class="step"><div class="no">01</div><h4>Give</h4><p>to partners doing great work</p></div>
@@ -2093,7 +2096,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div class="principle"><div class="no">05</div><h4>Value place and depth of impact</h4><p>We often support work grounded in a particular place, recognising the value of deep, lasting impact alongside broad reach.</p></div>
     </div>
 
-    <a class="scroll-cue scroll-cue--inline" href="#mangaroa" aria-label="Scroll to the next section">
+    <a class="scroll-cue scroll-cue--inline" href="#mangaroa-title" aria-label="Scroll to the next section">
       <span>Scroll</span>
       <svg width="22" height="26" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M11 3v18M4 14l7 7 7-7"/>
@@ -2102,12 +2105,20 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     </div>
 </section>
 
-<!-- ============ MANGAROA (solid deep band; the aerial runs as a banner inside it) ============ -->
+<!-- ============ MANGAROA — title band ============ -->
+<section class="title-band" id="mangaroa-title">
+  <div class="tb-bg" style="background-image: url('img/mangaroa-aerial.jpg')"></div>
+  <div class="wrap">
+    <p class="eyebrow">Our own initiatives</p>
+    <h2>A Living Laboratory</h2>
+  </div>
+</section>
+
+<!-- ============ MANGAROA ============ -->
 <section class="band band-paper" id="mangaroa">
   <div class="wrap">
     <div class="me-head">
       <div class="me-head-text">
-        <p class="eyebrow">Our own initiatives</p>
         <h2 class="vh">Mangaroa Farms</h2>
         <div class="logo-row logo-row--mang"><img src="img/mangaroa-logo.png" alt="Mangaroa Farms"></div>
           <div class="measure">
@@ -2122,7 +2133,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
           </div>
       </div>
       <div class="mang-right">
-        <div class="me-head-art"><img src="img/mangaroa-aerial.jpg" alt="Mangaroa Farms from the air"></div>
           <div class="panel">
             <p class="kicker">Current land cover</p>
             <div class="donut-wrap">
