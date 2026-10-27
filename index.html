@@ -524,7 +524,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
 #approach-title  { --fade-to: var(--cream); }
 /* the two bands carrying no lede centre their titles */
 #approach-title .wrap, #mangaroa-title .wrap { text-align: center; }
-#endowment-title { --fade-to: var(--cream); }
+#endowment-title { --fade-to: var(--white); }
 #mangaroa-title  { --fade-to: var(--white); }
 .title-band .wrap { position: relative; z-index: 1; width: 100%; }
 /* tighter variant: shorter frame, title sitting low so it reads as a lead-in to
@@ -799,6 +799,9 @@ footer .nl-status.is-error { color: #f0c9b4; }
   #mangaroa .mang-right { margin-top: 44px; }
   #mangaroa .mang-right .panel .kicker { text-align: center; }
   #mangaroa .mang-right .donut { width: 210px; }
+  /* the card comes in to 80% of the column and takes deeper top and bottom
+     padding. 80% of 335 leaves 220px inside, and the donut is 210. */
+  #mangaroa .mang-right .panel { max-width: 80%; margin-inline: auto; padding: 42px 24px 38px; }
 }
 /* the donut and its key sit on one row and take only the width they need */
 /* the land-cover donut stacks above its legend rather than sitting beside it */
@@ -838,17 +841,19 @@ footer .nl-status.is-error { color: #f0c9b4; }
   background: var(--white); border-radius: 4px;
   margin: 86px 0 0;
 }
-#endowment .impact-band { margin-top: 0; }
-/* on a phone it stops being a card: full bleed, no radius, meeting the title
-   band above. The band fades to white there rather than to the section cream. */
+/* "What We Steward" is a white section rather than a card: it runs the full
+   width of the page, meets the title band above (which fades to white for it)
+   and hands back to the section's cream at "Four pathways". The negative
+   margins take it out past the 1120px wrap; the side padding puts the content
+   back on that measure. */
+#endowment { padding-top: 0; overflow-x: clip; }
+#endowment .impact-band {
+  margin: 0 calc(50% - 50vw);
+  border-radius: 0;
+  padding: clamp(44px, 7vh, 84px) calc((100vw - min(1120px, 100vw - var(--gut) * 2)) / 2) clamp(64px, 9vh, 110px);
+}
 @media (max-width: 700px) {
-  #endowment-title { --fade-to: var(--white); }
-  #endowment { padding-top: 0; }
-  #endowment .impact-band {
-    margin: 0 calc(var(--gut) * -1);
-    border-radius: 0;
-    padding: clamp(36px, 6vh, 56px) var(--gut) clamp(42px, 6vh, 64px);
-  }
+  #endowment .impact-band { padding-top: clamp(36px, 6vh, 56px); padding-bottom: clamp(48px, 7vh, 72px); }
 }
 .impact-band {
   padding: clamp(36px, 5vh, 56px) clamp(20px, 2.6vw, 38px) clamp(42px, 5.6vh, 64px);
@@ -988,6 +993,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
   .logostrip img.naia { height: 94px; }
   .logostrip--wide img { height: 38px; }
   .logostrip--wide img.tall { height: 58px; }
+  .logostrip .eyebrow { margin-bottom: 48px; }
 }
 
 .kaupapa-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 4vw, 70px); align-items: start; }
@@ -1006,7 +1012,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .logo-row img { height: 57px; width: auto; }   /* 30% up on 44px */
 /* the Mangaroa lockup is two lines deep, so it is sized on width, not height */
-.logo-row--mang img { height: auto; width: clamp(182px, 21.5vw, 282px); }
+.logo-row--mang img { height: auto; width: clamp(218px, 25.8vw, 338px); }
 .logo-row--mang { margin: 46px 0 56px; }
 /* twice the air above and below the Ma Earth lockup, and the lockup itself
    15% up on the shared 57px */
