@@ -810,8 +810,16 @@ footer .wrap { display: block; text-align: left; }
 #approach .steps h4 { font-size: 13px; letter-spacing: .13em; text-transform: uppercase; color: var(--green-dark); margin: 11px 0 8px; }
 .step p { font-size: 14px; line-height: 1.5; color: var(--text-mid); margin: 0; }
 
-.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin-top: 30px; }
-@media (max-width: 900px) { .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* six columns, each card spanning two, so the fifth principle leaves the last
+   row one card short and the pair can start half a card in. Card 4 opening at
+   column 2 puts the two of them under the middle of the three above. */
+.principles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin-top: 48px; }
+.principles > .principle { grid-column: span 2; }
+.principles > .principle:nth-child(4) { grid-column: 2 / span 2; }
+@media (max-width: 900px) {
+  .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .principles > .principle, .principles > .principle:nth-child(4) { grid-column: auto; }
+}
 @media (max-width: 520px) { .principles { grid-template-columns: 1fr; } }
 .principle { background: var(--green-pale); border-radius: 4px; padding: 22px 20px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 .principle .no { font-size: 24px; font-weight: 700; color: #9E7F61; line-height: 1; }
@@ -1235,7 +1243,7 @@ footer .wrap { display: block; text-align: left; }
             <li><b>Hua Parakore w&#257;nanga</b> &mdash; online courses in M&#257;ori organics and growing clean kai</li>
           </ul>
           <div class="meta">
-            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Greater Wellington</span>
             <a class="site" href="https://www.papawhakaritorito.com/" target="_blank" rel="noopener">Website →</a>
           </div>
         </div>
@@ -1254,7 +1262,7 @@ footer .wrap { display: block; text-align: left; }
             <li><b>Adult workshops</b> in permaculture, bread-making, composting &amp; more</li>
           </ul>
           <div class="meta">
-            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+            <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Greater Wellington</span>
             <a class="site" href="https://www.toru.nz/" target="_blank" rel="noopener">Website →</a>
           </div>
         </div>
@@ -1583,7 +1591,7 @@ footer .wrap { display: block; text-align: left; }
             <h3>Papawhakaritorito Trust</h3>
             <p>Elevating Indigenous Seed, Soil and Food Sovereignty</p>
             <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Greater Wellington</span>
               <a class="site" href="https://www.papawhakaritorito.com/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
@@ -1775,7 +1783,7 @@ footer .wrap { display: block; text-align: left; }
             <h3>Toru Education</h3>
             <p>Enhancing Skills for Sustainable Living</p>
             <div class="meta">
-              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Greater Wellington</span>
               <a class="site" href="https://www.toru.nz/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
