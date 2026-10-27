@@ -324,6 +324,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .me-head-art { margin-right: calc(var(--gut) * -1); }
 /* the collage drops to the foot of the row so it finishes level with the copy */
 #ma-earth .me-head-art { align-self: end; }
+/* and stands 10% taller, growing upward into the space above it since the
+   foot is pinned. 848/618 is the file's own ratio; dividing it by 1.1 adds
+   the height without stretching, trimming ~25px off each feathered side */
+#ma-earth .me-head-art img { aspect-ratio: 1.2476; height: auto; object-fit: cover; }
 .me-head-art img {
   display: block; width: 100%;
   /* feathered on all four edges so the collage dissolves into the band rather
