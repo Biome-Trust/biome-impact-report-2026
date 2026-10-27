@@ -826,9 +826,9 @@ footer .wrap { display: block; text-align: left; }
 /* six columns, each card spanning two, so the fifth principle leaves the last
    row one card short and the pair can start half a card in. Card 4 opening at
    column 2 puts the two of them under the middle of the three above. */
-/* the row is inset to 75%, which takes each card to about three quarters of
-   the width it had while keeping the gaps and the centring */
-.principles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin: 48px auto 0; max-width: 75%; }
+/* the row is inset to 75% and sits flush left; cards 4 and 5 still centre
+   under the three above via the span rules below */
+.principles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin: 48px 0 0; max-width: 75%; }
 .principles > .principle { grid-column: span 2; }
 .principles > .principle:nth-child(4) { grid-column: 2 / span 2; }
 @media (max-width: 900px) {
