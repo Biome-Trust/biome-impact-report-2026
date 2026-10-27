@@ -501,7 +501,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
 #approach-title  { --fade-to: var(--cream); }
 /* the two bands carrying no lede centre their titles */
 #approach-title .wrap, #mangaroa-title .wrap { text-align: center; }
-#endowment-title { --fade-to: var(--white); }
+#endowment-title { --fade-to: var(--cream); }
 #mangaroa-title  { --fade-to: var(--white); }
 .title-band .wrap { position: relative; z-index: 1; width: 100%; }
 /* tighter variant: shorter frame, title sitting low so it reads as a lead-in to
@@ -795,11 +795,14 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .imgstats--3 .n { font-size: clamp(19px, 1.66vw, 23px); white-space: nowrap; }
 .imgstat .l { font-size: 13.5px; line-height: 1.5; color: var(--text-mid); margin-top: 8px; }
 
-/* the three ways stand on their own lighter ground, white against the
-   section's cream */
-#approach .impact-band {
+/* a block standing on its own lighter ground, white against the section's
+   cream. Used by "Three ways we create impact" and by "What We Steward". */
+.impact-band {
   background: var(--white); border-radius: 4px;
   margin: 86px 0 0;
+}
+#endowment .impact-band { margin-top: 0; }
+.impact-band {
   padding: clamp(36px, 5vh, 56px) clamp(20px, 2.6vw, 38px) clamp(42px, 5.6vh, 64px);
 }
 /* and rise into place one after another as the reader reaches them. The
@@ -2396,10 +2399,11 @@ footer .nl-status.is-error { color: #f0c9b4; }
   </div>
 </section>
 
-<section class="band band-paper" id="endowment">
+<section class="band band-cream" id="endowment">
   <div class="wrap">
 
-    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(33px,3.6vw,40px);color:var(--green-dark);margin:0">What We Steward</h3>
+    <div class="impact-band">
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(33px,3.6vw,40px);color:var(--green-dark);margin:0;text-align:center">What We Steward</h3>
     <div class="two-col two-col--three" style="margin-top:30px">
       <div class="panel" style="background:var(--tan)">
         <div style="font-family:var(--sans);font-size:clamp(26px,3vw,34px);font-weight:700;line-height:1.1;color:var(--green-dark)">~$35M NZD</div>
@@ -2410,13 +2414,14 @@ footer .nl-status.is-error { color: #f0c9b4; }
         <p style="font-size:14px;line-height:1.5;color:#2c3a28;margin:12px 0 0">Consolidated balance sheet for Biome Trust and Mangaroa Farms, including the estimated value of land assets</p>
       </div>
     </div>
+    </div>
 
-    <p class="chart-title" style="margin-top:38px">Four pathways for creating impact</p>
+    <p class="chart-title" style="margin-top:46px">Four pathways for creating impact</p>
     <div class="steps">
-      <div class="step" style="background:var(--cream)"><div class="t" style="color:var(--sage)">Capital</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Extend our capital&rsquo;s impact</h4><p>By using approaches that can preserve, return or grow capital, we can redeploy resources and support more impact over time.</p></div>
-      <div class="step" style="background:var(--cream)"><div class="t" style="color:var(--sage)">Mangaroa Farms</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support Mangaroa Farms</h4><p>A cornerstone initiative wholly owned by Biome Trust. Its activities contribute directly to our impact, and the capital invested forms a significant asset on our consolidated balance sheet.</p></div>
-      <div class="step" style="background:var(--cream)"><div class="t" style="color:var(--sage)">Impact funds</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Invest in impact-focused funds</h4><p>We invest in a range of mission-aligned funds, including <a class="fundlink" href="https://madcapital.com" target="_blank" rel="noopener">Mad Capital</a>, <a class="fundlink" href="https://alderpoint.com" target="_blank" rel="noopener">Alder Point</a>, <a class="fundlink" href="https://superorganism.com" target="_blank" rel="noopener">Superorganism</a> and <a class="fundlink" href="https://burntislandventures.com" target="_blank" rel="noopener">Burnt Island Ventures</a>.</p></div>
-      <div class="step" style="background:var(--cream)"><div class="t" style="color:var(--sage)">Environmental markets</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support environmental markets</h4><p>We are actively looking for ways to use environmental instruments to advance our ecological goals.</p></div>
+      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Capital</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Extend our capital&rsquo;s impact</h4><p>By using approaches that can preserve, return or grow capital, we can redeploy resources and support more impact over time.</p></div>
+      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Mangaroa Farms</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support Mangaroa Farms</h4><p>A cornerstone initiative wholly owned by Biome Trust. Its activities contribute directly to our impact, and the capital invested forms a significant asset on our consolidated balance sheet.</p></div>
+      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Impact funds</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Invest in impact-focused funds</h4><p>We invest in a range of mission-aligned funds, including <a class="fundlink" href="https://madcapital.com" target="_blank" rel="noopener">Mad Capital</a>, <a class="fundlink" href="https://alderpoint.com" target="_blank" rel="noopener">Alder Point</a>, <a class="fundlink" href="https://superorganism.com" target="_blank" rel="noopener">Superorganism</a> and <a class="fundlink" href="https://burntislandventures.com" target="_blank" rel="noopener">Burnt Island Ventures</a>.</p></div>
+      <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Environmental markets</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support environmental markets</h4><p>We are actively looking for ways to use environmental instruments to advance our ecological goals.</p></div>
     </div>
 
     <p class="chart-title" style="margin-top:46px">Observations</p>
@@ -2510,9 +2515,6 @@ footer .nl-status.is-error { color: #f0c9b4; }
         <g class="pin" tabindex="0" role="button" transform="translate(317.9,333.7)" data-place="Pirinoa, South Wairarapa" data-orgs="Ruamāhanga Farm Foundation" aria-label="Pirinoa, South Wairarapa: Ruamāhanga Farm Foundation">
           <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
         </g>
-        <g class="pin" tabindex="0" role="button" transform="translate(176.8,381.1)" data-place="West Coast" data-orgs="Island Futures" aria-label="West Coast: Island Futures">
-          <circle class="halo" r="13"/><circle class="dot" r="4.5"/>
-        </g>
         </g>
       </svg>
       <div class="map-tip" hidden><span class="mt-line"></span><span class="mt-place"></span><span class="mt-orgs"></span></div>
@@ -2524,7 +2526,6 @@ footer .nl-status.is-error { color: #f0c9b4; }
     <ul>
       <li>Garden to Table (HQ)<br><span>T&#257;maki Makaurau, Auckland</span></li>
       <li>Roebuck Farms<br><span>Taranaki</span></li>
-      <li>Island Futures<br><span>West Coast</span></li>
       <li>UNDERGROUND Festival<br><span>Waikato 2027</span></li>
       <li>Tolaga Bay Heritage Trust<br><span>Tolaga Bay</span></li>
       <li>The Learning Environment<br><span>Whanganui</span></li>
