@@ -105,6 +105,16 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 .band-deep .lede { color: #cdd8cb; }
 
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); }
+/* the two endowment figures sit on the same grid as the four pathway cards
+   below, spanning three of them rather than the full width. A 4-column row of
+   gap g inside width W puts the third card's right edge at .75W - .25g. */
+.two-col--three {
+  --g: clamp(11px, 1.44vw, 18px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--g);
+  max-width: calc(75% - 0.25 * var(--g));
+}
+@media (max-width: 760px) { .two-col--three { max-width: none; grid-template-columns: 1fr; } }
 
 /* ---- placeholder marker (§ never guess a fact) ---- */
 .tk {
@@ -187,9 +197,26 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
 
 
 /* ---- footer, after the email template ---- */
-footer { background: #2b2b2b; color: #b4b4b4; padding: clamp(52px, 8vh, 84px) var(--gut); }
-footer .wrap { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; }
-.foot-logo { width: clamp(150px, 17vw, 200px); height: auto; margin-bottom: 22px; }
+footer { background: #1c1c1c; color: #b4b4b4; padding: clamp(52px, 8vh, 84px) var(--gut); }
+/* laid out like Ma Earth's: the mark and the social buttons on the left, the
+   links in a column on the right, a hairline above the address line */
+footer .wrap { display: block; text-align: left; }
+.foot-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 6vw, 90px); align-items: start; }
+.foot-logo { width: clamp(150px, 17vw, 200px); height: auto; margin: 0 0 30px; display: block; }
+.foot-cols { display: flex; gap: clamp(36px, 6vw, 86px); }
+.foot-col { display: flex; flex-direction: column; gap: 12px; }
+.foot-col h3 { font-size: 14px; font-weight: 600; color: #fff; margin: 0 0 4px; }
+.foot-col a { font-size: 14.5px; color: #b4b4b4; text-decoration: none; transition: color 200ms var(--ease); }
+.foot-col a:hover { color: var(--sage); }
+.foot-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 28px;
+  margin-top: clamp(38px, 6vh, 62px); padding-top: clamp(22px, 3vh, 30px);
+  border-top: 1px solid rgba(255, 255, 255, .12);
+}
+@media (max-width: 640px) {
+  .foot-top { grid-template-columns: 1fr; }
+  .foot-bottom { flex-direction: column; }
+}
 .foot-nav { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
 .foot-nav a {
   color: #fff; text-decoration: underline; text-underline-offset: 4px;
@@ -197,9 +224,14 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 }
 .foot-nav a:hover { color: var(--sage); }
 .foot-nav span { color: rgba(255,255,255,.35); }
-.foot-social { display: flex; gap: 20px; }
-.foot-social a { color: #d0d0d0; }
-.foot-social a:hover { color: var(--sage); }
+.foot-social { display: flex; gap: 12px; }
+.foot-social a {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, .07); color: #d0d0d0;
+  transition: background 200ms var(--ease), color 200ms var(--ease);
+}
+.foot-social a:hover { background: rgba(255, 255, 255, .15); color: #fff; }
 .foot-addr { font-size: 13px; color: #a8a8a8; margin: 0; }
 .foot-meta { font-size: 12.5px; color: #8a8a8a; margin: 0; }
 
@@ -346,9 +378,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .me-copy { max-width: 48ch; margin-top: 22px; }
 /* the four partners behind Round 3's matching pool, on their own white strip */
 .logostrip { background: var(--white); border-radius: 4px;
-  padding: clamp(20px, 3vh, 32px) clamp(22px, 4vw, 48px); margin-top: 22px;
+  padding: clamp(40px, 6.5vh, 68px) clamp(36px, 5.5vw, 72px); margin-top: 22px;
   box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
-.logostrip .eyebrow { margin: 0 0 18px; text-align: center; }
+.logostrip .eyebrow { margin: 0 0 30px; text-align: center; }
 .logostrip-row { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap;
   gap: clamp(22px, 4vw, 60px); }
 .logostrip-row a { display: inline-flex; transition: opacity 240ms var(--ease); }
@@ -398,8 +430,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .nzmap .pin { cursor: pointer; outline: none; }
 .nzmap .halo { fill: var(--tan); opacity: 0; transition: opacity var(--beat) var(--ease); }
 .nzmap .dot { fill: var(--tan); transition: r var(--beat) var(--ease), fill var(--beat) var(--ease); }
-.nzmap .pin:hover .halo, .nzmap .pin:focus-visible .halo { opacity: .28; }
-.nzmap .pin:hover .dot, .nzmap .pin:focus-visible .dot { fill: #fff; r: 6; }
+.nzmap .pin:hover .halo, .nzmap .pin:focus-visible .halo, .nzmap .pin.is-auto .halo { opacity: .28; }
+.nzmap .pin:hover .dot, .nzmap .pin:focus-visible .dot, .nzmap .pin.is-auto .dot { fill: #fff; r: 6; }
 /* leader line out to a label, as the printed map does */
 .map-tip {
   position: absolute; z-index: 4; pointer-events: none;
@@ -793,7 +825,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .purpose { padding-top: 0; }
 /* trying the purposes as circles (was 3/2 at a 4px radius). One line back
    to rectangles: aspect-ratio 3 / 2 and border-radius 4px. */
-.purpose img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; display: block; margin-bottom: 18px; }
+.purpose img { width: 85%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; display: block; margin: 0 auto 18px; }
 .purpose { text-align: center; }
 .purpose h4 { font-family: var(--serif); font-size: 24px; color: var(--green-dark); margin: 0 0 8px; font-weight: 400; }
 .purpose p { font-size: 14px; line-height: 1.55; color: var(--text-mid); margin: 0; }
@@ -814,7 +846,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 /* the five fund holders get the same treatment as Ma Earth's matching pool:
    a titled white box running the full width of the column */
 .logostrip--wide { margin-top: 34px; }
-.logostrip--wide .logostrip-row { justify-content: space-between; }
+/* space-between spreads them anyway, so the gap is a floor. The larger strip
+   padding took the row under the five logos' combined width at 1024. */
+.logostrip--wide .logostrip-row { justify-content: space-between; gap: clamp(16px, 2.2vw, 40px); }
 .logostrip--wide img { height: 44px; }
 /* the Gift Trust mark stacks, so height alone leaves it reading half-size */
 .logostrip--wide img.tall { height: 68px; }
@@ -2309,7 +2343,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 <section class="band band-paper" id="endowment">
   <div class="wrap">
 
-    <div class="two-col" style="margin-top:36px">
+    <div class="two-col two-col--three" style="margin-top:36px">
       <div class="panel" style="background:var(--tan)">
         <div style="font-family:var(--sans);font-size:clamp(26px,3vw,34px);font-weight:700;line-height:1.1;color:var(--green-dark)">~$35M NZD</div>
         <p style="font-size:14px;line-height:1.5;color:#2c3a28;margin:12px 0 0">Biome Trust Aotearoa endowment &mdash; primarily NZ bonds, with a small and growing share in equities and impact funds</p>
@@ -2363,7 +2397,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
   <div class="bg" style="background-image: url('img/hero-mangaroa-river.jpg')"></div>
   <div class="wrap">
     <p class="eyebrow">Receive our monthly newsletter</p>
-    <h2>Receive updates from the Biome ecosystem.</h2>
+    <h2>Get updates from the Biome ecosystem.</h2>
     <form class="nl-form" id="nl-form" novalidate>
       <input type="text" name="first" placeholder="First name" aria-label="First name" autocomplete="given-name">
       <input type="email" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email" required>
@@ -2481,15 +2515,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 
 <footer>
   <div class="wrap">
-    <img class="foot-logo" src="img/biome-trust-logo.png" alt="Biome Trust">
-    <nav class="foot-nav">
-      <a href="https://biometrust.earth/about" target="_blank" rel="noopener">About</a>
-      <span aria-hidden="true">|</span>
-      <a href="https://biometrust.earth/gifts" target="_blank" rel="noopener">Gifts</a>
-      <span aria-hidden="true">|</span>
-      <a href="https://biometrust.earth/contact" target="_blank" rel="noopener">Contact</a>
-    </nav>
-    <div class="foot-social">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img class="foot-logo" src="img/biome-trust-logo.png" alt="Biome Trust">
+        <div class="foot-social">
       <a href="https://www.instagram.com/biometrust.earth/" target="_blank" rel="noopener" aria-label="Instagram">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
       </a>
@@ -2502,9 +2531,21 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <a href="https://bsky.app/profile/biometrust.bsky.social" target="_blank" rel="noopener" aria-label="Bluesky">
         <svg width="19" height="19" viewBox="0 0 568 501" fill="currentColor" aria-hidden="true"><path d="M123.121 33.664C188.241 82.553 258.281 181.681 284 234.873c25.719-53.192 95.759-152.32 160.879-201.209C491.866-1.612 568-28.906 568 57.946c0 17.345-9.945 145.713-15.778 166.555-20.275 72.453-94.155 90.933-159.875 79.748 114.875 19.551 144.097 84.311 80.986 149.071-119.86 122.992-172.272-30.859-185.702-70.281-2.462-7.227-3.614-10.608-3.631-7.733-.017-2.875-1.169.506-3.631 7.733-13.43 39.422-65.842 193.273-185.702 70.281-63.111-64.76-33.889-129.52 80.986-149.071-65.72 11.185-139.6-7.295-159.875-79.748C9.945 203.659 0 75.291 0 57.946 0-28.906 76.134-1.612 123.121 33.664Z"/></svg>
       </a>
+        </div>
+      </div>
+      <nav class="foot-cols">
+        <div class="foot-col">
+          <h3>Explore</h3>
+          <a href="https://biometrust.earth/about" target="_blank" rel="noopener">About</a>
+          <a href="https://biometrust.earth/gifts" target="_blank" rel="noopener">Gifts</a>
+          <a href="https://biometrust.earth/contact" target="_blank" rel="noopener">Contact</a>
+        </div>
+      </nav>
     </div>
-    <p class="foot-addr">Biome Trust · 52 Mangaroa Valley Road, Upper Hutt, WLG 5371</p>
-    <p class="foot-meta">Impact Report 2026 · Year ended 31 March 2026</p>
+    <div class="foot-bottom">
+      <p class="foot-addr">Biome Trust &middot; 52 Mangaroa Valley Road, Upper Hutt, WLG 5371</p>
+      <p class="foot-meta">Impact Report 2026 &middot; Year ended 31 March 2026</p>
+    </div>
   </div>
 </footer>
 
@@ -2639,6 +2680,27 @@ addEventListener('load', () => setTimeout(() => {
     pin.addEventListener('blur', hide);
   }
   wrap.addEventListener('mouseleave', hide);
+
+  // One pin reads as selected the first time the map comes into view, so the
+  // label is legible without a hover. The reader's own hover or focus takes
+  // over from it immediately.
+  const auto = wrap.querySelector('.pin[data-orgs*="UNDERGROUND"]');
+  if (auto && 'IntersectionObserver' in window) {
+    const clearAuto = () => auto.classList.remove('is-auto');
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) if (e.isIntersecting) {
+        auto.classList.add('is-auto');
+        show(auto);
+        io.disconnect();
+      }
+    }, { threshold: 0.4 });
+    io.observe(wrap);
+    wrap.addEventListener('mouseenter', clearAuto);
+    for (const pin of wrap.querySelectorAll('.pin')) {
+      pin.addEventListener('mouseenter', clearAuto);
+      pin.addEventListener('focus', clearAuto);
+    }
+  }
 })();
 
 // Gift filtering: search, theme and year, matching the gifts page. Filters only
