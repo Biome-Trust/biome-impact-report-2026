@@ -224,7 +224,11 @@ footer .nl-form input:focus { outline: 2px solid var(--sage); outline-offset: 1p
 footer .nl-btn { padding: 13px 24px; border-radius: 4px; font-size: 14.5px; }
 footer .nl-status { color: #b4b4b4; font-size: 13.5px; margin: 12px 0 0; max-width: 420px; min-height: 0; }
 footer .nl-status.is-error { color: #f0c9b4; }
-@media (max-width: 560px) { footer .nl-form { flex-direction: column; } }
+@media (max-width: 560px) {
+  footer .nl-form { flex-direction: column; }
+  footer .nl-form input { flex: 0 0 auto; width: 100%; }
+  footer .nl-btn { justify-content: center; text-align: center; }
+}
 
 .foot-bottom {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 28px;
@@ -413,6 +417,21 @@ footer .nl-status.is-error { color: #f0c9b4; }
 @media (max-width: 560px) { .logostrip img { height: 35px; } .logostrip img.me { height: 30px; } .logostrip img.tall { height: 55px; } .logostrip img.naia { height: 75px; } }
 .me-copy p + p { margin-top: 14px; }
 @media (max-width: 860px) { .me-head { grid-template-columns: 1fr; } .me-head-art { margin-right: 0; } }
+/* on a phone the Ma Earth collage runs off the right edge rather than feathering
+   into it: the horizontal mask fades in from the left only, and the art keeps
+   the negative gutter margin it gives up at this width elsewhere. Desktop is
+   untouched, still feathered on all four edges. */
+@media (max-width: 860px) {
+  #ma-earth .me-head-art { margin-right: calc(var(--gut) * -1); }
+  #ma-earth .me-head-art img {
+    -webkit-mask-image:
+      linear-gradient(90deg, transparent 0, #000 var(--fade), #000 100%),
+      linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+    mask-image:
+      linear-gradient(90deg, transparent 0, #000 var(--fade), #000 100%),
+      linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+  }
+}
 .title-band .tb-lede {
   font-size: clamp(16px, 1.8vw, 20px); line-height: 1.55; color: #e4ece2;
   max-width: min(60%, 62ch); margin: 18px 0 0;
@@ -761,8 +780,13 @@ footer .nl-status.is-error { color: #f0c9b4; }
 #mangaroa .mang-right { order: 1; }
 #mangaroa .me-head-text { order: 2; }
 @media (max-width: 860px) {
+  /* the id selector was beating the generic .me-head stack rule, so Mangaroa
+     stayed two up on a phone. It reads in one column here: logo, then the
+     copy with its badges, then the land-cover card. */
+  #mangaroa .me-head { grid-template-columns: 1fr; }
   #mangaroa .me-head-text { order: 1; }
   #mangaroa .mang-right { order: 2; }
+  #mangaroa .logo-row--mang { justify-content: center; margin: 0 0 30px; }
 }
 /* the donut and its key sit on one row and take only the width they need */
 /* the land-cover donut stacks above its legend rather than sitting beside it */
@@ -821,6 +845,9 @@ footer .nl-status.is-error { color: #f0c9b4; }
   #approach .steps .step { opacity: 1; translate: none; transition: none; transition-delay: 0s; }
 }
 .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(11px, 1.44vw, 18px); margin-top: 34px; }
+/* one card per row on a phone: at 210px minimum these go two up around 500px,
+   where three and four lines of copy each leave them too narrow to read */
+@media (max-width: 700px) { .steps { grid-template-columns: 1fr; } }
 .step { background: var(--tan-light); border-radius: 4px; padding: 24px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 /* the frame sets the numerals in bold sans, in the terracotta, not serif sage */
 .step .no { font-size: 24px; font-weight: 700; color: #9E7F61; line-height: 1; }
@@ -907,6 +934,9 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .ob p { font-size: 14px; line-height: 1.55; color: var(--text-mid); margin: 0; }
 /* the fourth cell in that row is a solid card, as the Figma has it */
 .ob-card { border-top: 0; background: var(--green-dark); border-radius: 4px; padding: 22px 20px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
+/* stacked on a phone it follows a paragraph rather than sitting beside one, so
+   it needs its own lead-in. On desktop it shares a row and must stay level. */
+@media (max-width: 700px) { .ob-card { margin-top: 24px; } }
 .ob-card h4 { color: #fff; }
 .ob-card p { color: #c5d3c3; }
 /* the five fund holders get the same treatment as Ma Earth's matching pool:
@@ -919,6 +949,13 @@ footer .nl-status.is-error { color: #f0c9b4; }
 /* the Gift Trust mark stacks, so height alone leaves it reading half-size */
 .logostrip--wide img.tall { height: 68px; }
 @media (max-width: 900px) { .logostrip--wide .logostrip-row { justify-content: space-around; } }
+/* both strips stack on a phone, one logo per row with room between. Side by
+   side at this width the marks were down to a third of their desktop size. */
+@media (max-width: 700px) {
+  .logostrip-row, .logostrip--wide .logostrip-row {
+    flex-direction: column; align-items: center; justify-content: center; gap: 44px;
+  }
+}
 @media (max-width: 560px) { .logostrip--wide img { height: 30px; } .logostrip--wide img.tall { height: 46px; } }
 
 .kaupapa-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 4vw, 70px); align-items: start; }
@@ -1083,7 +1120,13 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .nl-status { color: #e4ece2; font-size: 14.5px; min-height: 1.4em; margin: 18px auto 0; max-width: 46ch; }
 .nl-status.is-error { color: #f0c9b4; }
 .nl-form button[disabled] { opacity: .6; cursor: default; }
-@media (max-width: 560px) { .nl-form { flex-direction: column; } .nl-btn { justify-content: center; } }
+/* stacked, the inputs' `flex: 1 1 220px` basis applies to height, not width,
+   which blew them up to 220px+ tall. Reset the basis and take the full width. */
+@media (max-width: 560px) {
+  .nl-form { flex-direction: column; }
+  .nl-form input { flex: 0 0 auto; width: 100%; }
+  .nl-btn { justify-content: center; }
+}
 
 /* ---- full-bleed image band ---- */
 .image-band { position: relative; padding: clamp(90px, 16vh, 190px) var(--gut); color: #fff; overflow: hidden; }
