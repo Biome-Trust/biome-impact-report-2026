@@ -689,7 +689,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .mang-right .me-head-art img { border-radius: 4px; -webkit-mask-image: none; mask-image: none; }
 .mang-right .panel { padding: 22px 24px; }
 /* the donut and its key sit on one row and take only the width they need */
-.mang-right .donut-wrap { gap: 20px; align-items: center; margin-top: 14px; }
+/* the land-cover donut stacks above its legend rather than sitting beside it */
+.mang-right .donut-wrap { flex-direction: column; align-items: center; gap: 20px; margin-top: 16px; }
+.mang-right .legend { align-self: center; }
 .mang-right .donut { width: clamp(126px, 13vw, 160px); }
 .mang-right .legend { font-size: 13px; line-height: 1.4; }
 .mang-right .legend li { margin-bottom: 8px; }
@@ -718,6 +720,27 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 .imgstats--3 .n { font-size: clamp(19px, 1.66vw, 23px); white-space: nowrap; }
 .imgstat .l { font-size: 13.5px; line-height: 1.5; color: var(--text-mid); margin-top: 8px; }
 
+/* the three ways stand on their own lighter ground, white against the
+   section's cream */
+#approach .impact-band {
+  background: var(--white); border-radius: 4px;
+  margin: 86px 0 0;
+  padding: clamp(36px, 5vh, 56px) clamp(20px, 2.6vw, 38px) clamp(42px, 5.6vh, 64px);
+}
+/* and rise into place one after another as the reader reaches them. The
+   reveal drives `translate`, not `transform`, so the hover lift keeps its own
+   260ms rather than inheriting the slower reveal timing. */
+#approach .steps .step {
+  opacity: 0; translate: 0 14px;
+  transition: opacity 700ms var(--ease), translate 700ms var(--ease),
+              transform 260ms var(--ease), box-shadow 260ms var(--ease);
+}
+#approach .steps .step.is-shown { opacity: 1; translate: 0 0; }
+#approach .steps .step:nth-child(2) { transition-delay: .12s; }
+#approach .steps .step:nth-child(3) { transition-delay: .24s; }
+@media (prefers-reduced-motion: reduce) {
+  #approach .steps .step { opacity: 1; translate: none; transition: none; transition-delay: 0s; }
+}
 .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(11px, 1.44vw, 18px); margin-top: 34px; }
 .step { background: var(--tan-light); border-radius: 4px; padding: 24px; box-shadow: 2px 2px 4px rgba(30, 58, 31, .10); }
 /* the frame sets the numerals in bold sans, in the terracotta, not serif sage */
@@ -2079,15 +2102,17 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
       <div class="purpose edu"><img src="img/purpose-education.jpg" alt="The Gift Trust"><h4>Education</h4><p>Knowledge and practical skills through research, new ideas, hands-on learning and different ways of seeing the world.</p></div>
       <div class="purpose health"><img src="img/purpose-health.jpg" alt="Kawakawa"><h4>Health</h4><p>Healthier communities through stronger connections between people, food, nature and culture, and places that help people thrive.</p></div>
     </div>
-    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(29px,3.2vw,36px);color:var(--green-dark);margin:86px 0 0;text-align:center">Three ways we create impact</h3>
+    <div class="impact-band">
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(29px,3.2vw,36px);color:var(--green-dark);margin:0;text-align:center">Three ways we create impact</h3>
 
     <div class="steps">
       <div class="step"><div class="no">01</div><h4>Give</h4><p>to partners doing great work</p></div>
       <div class="step"><div class="no">02</div><h4>Develop</h4><p>initiatives we help create and lead</p></div>
       <div class="step"><div class="no">03</div><h4>Invest</h4><p>our endowment to advance our mission</p></div>
     </div>
+    </div>
 
-    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(29px,3.2vw,36px);color:var(--green-dark);margin:52px 0 0;text-align:center">Five principles that guide our giving</h3>
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(29px,3.2vw,36px);color:var(--green-dark);margin:92px 0 0;text-align:center">Five principles that guide our giving</h3>
     <div class="principles">
       <div class="principle"><div class="no">01</div><h4>Back capable leadership</h4><p>We back capable leaders and give them room to lead.</p></div>
       <div class="principle"><div class="no">02</div><h4>Trust people close to the work</h4><p>We favour long-term relationships built on trust.</p></div>
@@ -2136,13 +2161,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
           <div class="panel">
             <p class="kicker">Current land cover</p>
             <div class="donut-wrap">
-              <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, var(--tan) 90% 100%)">
+              <div class="donut" style="background:conic-gradient(#2f5c33 0 40%, #6f8f5a 40% 70%, #c3c48a 70% 90%, #9E7F61 90% 100%)">
               </div>
               <ul class="legend">
                 <li><i style="background:#2f5c33"></i><span><b>40%</b> Old-growth native forest</span></li>
                 <li><i style="background:#6f8f5a"></i><span><b>30%</b> Pine</span></li>
                 <li><i style="background:#c3c48a"></i><span><b>20%</b> Pasture</span></li>
-                <li><i style="background:var(--tan)"></i><span><b>10%</b> Peat, waterways, plantings &amp; homes</span></li>
+                <li><i style="background:#9E7F61"></i><span><b>10%</b> Peat, waterways, plantings &amp; homes</span></li>
               </ul>
             </div>
           </div>
@@ -2216,7 +2241,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
     </div>
 
     <div class="logostrip">
-      <p class="eyebrow">Our matching pool partners</p>
+      <p class="eyebrow">Matching pool partners</p>
       <div class="logostrip-row">
         <a href="https://biometrust.earth" target="_blank" rel="noopener"><img src="img/logo-biome-trust.png" alt="Biome Trust"></a>
         <a href="https://maearth.com" target="_blank" rel="noopener"><img class="me" src="img/logo-ma-earth.png" alt="Ma Earth"></a>
