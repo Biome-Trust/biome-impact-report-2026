@@ -113,6 +113,7 @@ h3 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 10px; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--g);
   max-width: calc(75% - 0.25 * var(--g));
+  margin-inline: auto;
 }
 @media (max-width: 760px) { .two-col--three { max-width: none; grid-template-columns: 1fr; } }
 
@@ -600,7 +601,10 @@ footer .nl-status.is-error { color: #f0c9b4; }
 /* the title band's fade already reads as air, so the content starts at half
    the usual band inset rather than a full one */
 #approach, #endowment { padding-top: clamp(32px, 5.5vh, 66px); }
-#endowment > .wrap > :first-child { margin-top: 18px; }
+/* the white "What We Steward" block leads the section now and meets the band
+   above, so the old 18px lead-in on the first child has to go. It outranked
+   #endowment .impact-band, which is why the margin would not zero. */
+#endowment > .wrap > :first-child { margin-top: 0; }
 /* the title band already carries the heading, so the grid does not need a
    full band of air above it — half the usual top padding, and the first
    group label sits flush rather than adding its own 52px */
@@ -849,6 +853,8 @@ footer .nl-status.is-error { color: #f0c9b4; }
 #endowment { padding-top: 0; overflow-x: clip; }
 #endowment .impact-band {
   margin: 0 calc(50% - 50vw);
+  margin-top: 0;
+  margin-bottom: 0;
   border-radius: 0;
   padding: clamp(44px, 7vh, 84px) calc((100vw - min(1120px, 100vw - var(--gut) * 2)) / 2) clamp(64px, 9vh, 110px);
 }
@@ -907,7 +913,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
    "Value place and depth of impact", needs 249px plus 40px of padding, so a
    card has to clear 289px and the row 3x that plus two gaps. The 1000px cap
    keeps a little inset on wide screens without taking the cards under it. */
-.principles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin: 48px 0 0; max-width: min(100%, 1000px); }
+.principles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin: 48px auto 0; max-width: min(100%, 1000px); }
 .principles > .principle { grid-column: span 2; }
 .principles > .principle:nth-child(4) { grid-column: 2 / span 2; }
 @media (max-width: 900px) {
