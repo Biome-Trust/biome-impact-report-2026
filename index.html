@@ -522,6 +522,10 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
 @media (max-width: 900px) { .deco { display: none; } }
 
 /* ---- numbers, charts and tiles ---- */
+/* a shorter drop under the Giving by numbers heading: the h2 margin and the
+   lede margin collapse, so both are set rather than just one */
+#numbers h2 { margin-bottom: 0; }
+#numbers h2 + .lede { margin-top: 15px; }
 .numrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: clamp(12px, 1.4vw, 18px); margin-top: 42px; align-items: stretch; }
 .numcard { position: relative; background: var(--tan-light); border-radius: 4px; padding: 20px 22px;
   /* the cards stretch to a common height, so their contents sit centred in the
