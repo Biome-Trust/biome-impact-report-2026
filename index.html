@@ -13,11 +13,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Klim's licensed Tiempos Headline, roman and italic. The file this replaced
+   was Klim's trial cut: 67 codepoints, no macron vowels, no curly apostrophe,
+   no em dash, no & $ %. Every one of those fell back to Georgia mid-word, so
+   "Ruamāhanga" and "Ngā mihi" broke. These carry 401 codepoints each, and
+   the italic means real italics instead of a browser-slanted roman. */
 @font-face {
   font-family: 'Tiempos Headline';
-  src: url('fonts/tiempos-headline.woff2') format('woff2');
-  font-weight: 100 900;
+  src: url('fonts/tiempos-headline-roman.woff2') format('woff2');
+  font-weight: 300 900;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tiempos Headline';
+  src: url('fonts/tiempos-headline-italic.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: italic;
   font-display: swap;
 }
 
