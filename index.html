@@ -236,7 +236,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
   border-top: 1px solid rgba(255, 255, 255, .12);
 }
 @media (max-width: 640px) {
-  .foot-top { grid-template-columns: 1fr; }
+  .foot-top { grid-template-columns: 1fr; row-gap: 56px; }
   .foot-bottom { flex-direction: column; }
 }
 .foot-nav { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
@@ -1162,6 +1162,11 @@ footer .nl-status.is-error { color: #f0c9b4; }
 
 /* ---- full-bleed image band ---- */
 .image-band { position: relative; padding: clamp(90px, 16vh, 190px) var(--gut); color: #fff; overflow: hidden; }
+/* 15% more side padding on the newsletter band on a phone. Below .image-band,
+   whose padding shorthand would otherwise override these longhands. */
+@media (max-width: 700px) {
+  .nl-band { padding-left: calc(var(--gut) * 1.15); padding-right: calc(var(--gut) * 1.15); }
+}
 .image-band .bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
 .image-band .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,28,16,.62), rgba(15,28,16,.80)); }
 .image-band .wrap { position: relative; }
