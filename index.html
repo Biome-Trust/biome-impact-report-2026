@@ -432,11 +432,11 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
      --fade-to is set per band to that section's own ground colour */
   background:
     linear-gradient(180deg,
-      transparent 38%,
-      color-mix(in srgb, var(--fade-to, #fff) 12%, transparent) 55%,
-      color-mix(in srgb, var(--fade-to, #fff) 32%, transparent) 68%,
-      color-mix(in srgb, var(--fade-to, #fff) 58%, transparent) 79%,
-      color-mix(in srgb, var(--fade-to, #fff) 82%, transparent) 89%,
+      transparent 50%,
+      color-mix(in srgb, var(--fade-to, #fff) 8%, transparent) 68%,
+      color-mix(in srgb, var(--fade-to, #fff) 22%, transparent) 76%,
+      color-mix(in srgb, var(--fade-to, #fff) 55%, transparent) 85%,
+      color-mix(in srgb, var(--fade-to, #fff) 82%, transparent) 93%,
       var(--fade-to, #fff) 99%),
     linear-gradient(180deg, rgba(15,28,16,.30), rgba(15,28,16,.55));
 }
@@ -1248,13 +1248,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
         <span class="gf-count" id="gf-count"></span>
       </div>
       <div class="gf-years">
+        <button type="button" class="yr yr-active" data-year="2027">2027 — Still active</button>
         <button type="button" class="yr on" data-year="2026">2026</button>
         <button type="button" class="yr" data-year="2025">2025</button>
         <button type="button" class="yr" data-year="2024">2024</button>
         <button type="button" class="yr" data-year="2023">2023</button>
         <button type="button" class="yr" data-year="2022">2022</button>
         <button type="button" class="yr" data-year="">All years</button>
-        <button type="button" class="yr yr-active" data-year="2027">2027 — Still active</button>
       </div>
     </div>
     <div class="grid">
@@ -1315,18 +1315,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             <div class="meta">
               <span></span>
               <a class="site" href="https://www.deliciousrevolution.nz/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card" data-themes="conservation education finance" data-years="2027" data-name="Earth Repair Fund">
-          <img src="img/gifts/earth-repair-fund.jpg" alt="Earth Repair Fund" loading="lazy">
-          <span class="year-badge">FY27</span>
-          <div class="card-body">
-            <h3>Earth Repair Fund</h3>
-            <p>Educational Videos that Fund Land Restoration Projects</p>
-            <div class="meta">
-              <span></span>
-              <a class="site" href="https://www.earthrepair.fund/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
         </article>
@@ -1534,30 +1522,6 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             </div>
           </div>
         </article>
-        <article class="card" data-themes="regen" data-years="2027" data-name="Regenerative Earth">
-          <img src="img/gifts/regenerative-earth.jpg" alt="Regenerative Earth" loading="lazy">
-          <span class="year-badge">FY27</span>
-          <div class="card-body">
-            <h3>Regenerative Earth</h3>
-            <p>Preserving Biological Diversity and Indigenous Wisdom in Keystone Ecosystems</p>
-            <div class="meta">
-              <span></span>
-              <a class="site" href="https://regenerativeearth.org/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
-        <article class="card" data-themes="regen" data-years="2027" data-name="Regenerosity">
-          <img src="img/gifts/regenerosity.jpg" alt="Regenerosity" loading="lazy">
-          <span class="year-badge">FY27</span>
-          <div class="card-body">
-            <h3>Regenerosity</h3>
-            <p>Resourcing Grassroots Leaders and Organizations Regenerating Our Planet</p>
-            <div class="meta">
-              <span></span>
-              <a class="site" href="https://www.regenerosity.world/" target="_blank" rel="noopener">Website →</a>
-            </div>
-          </div>
-        </article>
         <article class="card" data-themes="regen community" data-years="2027" data-name="Richmond Community Garden Trust">
           <img src="img/gifts/richmond-community-garden-trust.jpg" alt="Richmond Community Garden Trust" loading="lazy">
           <span class="year-badge">FY27</span>
@@ -1733,7 +1697,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             <h3>Toru Education</h3>
             <p>Enhancing Skills for Sustainable Living</p>
             <div class="meta">
-              <span></span>
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Wellington</span>
               <a class="site" href="https://www.toru.nz/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>
@@ -1745,7 +1709,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; text-
             <h3>UNDERGROUND Festival</h3>
             <p>Festival Celebrating Soil, Food, and Farming</p>
             <div class="meta">
-              <span></span>
+              <span class="pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> Canterbury</span>
               <a class="site" href="https://www.undergroundfestival.co.nz/" target="_blank" rel="noopener">Website →</a>
             </div>
           </div>

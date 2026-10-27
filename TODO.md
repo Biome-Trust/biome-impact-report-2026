@@ -43,6 +43,16 @@ All copy is now in from the Figma.
 - [ ] Still untouched at phone width: Mangaroa head, Ma Earth head, the kaupapa
       map and its hover labels, the 68-card giftee grid, the endowment four-up
 
+## Off the page, kept on file (2026-10-27, G's call)
+Removed from the All Giftees grid. All three were FY27-only, so the FY26
+"19 organisations" count is unchanged. Images are still in `img/gifts/`.
+
+| Org | Years | Themes | Line | Site |
+|---|---|---|---|---|
+| Earth Repair Fund | 2027 | conservation education finance | Educational Videos that Fund Land Restoration Projects | https://www.earthrepair.fund/ |
+| Regenerative Earth | 2027 | regen | Preserving Biological Diversity and Indigenous Wisdom in Keystone Ecosystems | https://regenerativeearth.org/ |
+| Regenerosity | 2027 | regen | Resourcing Grassroots Leaders and Organizations Regenerating Our Planet | https://www.regenerosity.world/ |
+
 ## Next — assets
 - [x] Cover photo — Mangaroa River aerial, the same shot as the Figma cover
 - [x] Cover logo — real horizontal white Biome Trust lockup, per the Figma cover
