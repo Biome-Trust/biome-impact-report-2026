@@ -255,6 +255,8 @@ footer .nl-status.is-error { color: #f0c9b4; }
   transition: background 200ms var(--ease), color 200ms var(--ease);
 }
 .foot-social a:hover { background: rgba(255, 255, 255, .15); color: #fff; }
+.foot-left { display: flex; flex-direction: column; gap: 6px; }
+.foot-copy { font-size: 13px; color: #a8a8a8; margin: 0; }
 .foot-addr { font-size: 13px; color: #a8a8a8; margin: 0; }
 .foot-meta { font-size: 12.5px; color: #8a8a8a; margin: 0; }
 
@@ -801,8 +803,9 @@ footer .nl-status.is-error { color: #f0c9b4; }
   #mangaroa .me-head-text { order: 1; }
   #mangaroa .mang-right { order: 2; }
   #mangaroa .logo-row--mang { justify-content: center; margin: 0 0 90px; }
-  /* 15% up on the 182px the clamp floors at on a phone */
-  #mangaroa .logo-row--mang img { width: clamp(251px, 29.6vw, 338px); }
+  /* stepped up twice from the 182px the clamp floored at; max-width keeps it
+     inside the gutters on the narrowest phones */
+  #mangaroa .logo-row--mang img { width: clamp(289px, 34vw, 389px); max-width: 100%; }
   /* the land-cover card: more lead-in once it sits under the copy, a centred
      label and a donut with room to read. All id-prefixed, since the plain
      .mang-right rules sit further down the sheet and would otherwise win. */
@@ -1032,7 +1035,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .logo-row img { height: 57px; width: auto; }   /* 30% up on 44px */
 /* the Mangaroa lockup is two lines deep, so it is sized on width, not height */
-.logo-row--mang img { height: auto; width: clamp(218px, 25.8vw, 338px); }
+.logo-row--mang img { height: auto; width: clamp(185px, 21.9vw, 287px); }  /* 15% down; the phone size is the id-prefixed rule above */
 .logo-row--mang { margin: 46px 0 56px; }
 /* twice the air above and below the Ma Earth lockup, and the lockup itself
    15% up on the shared 57px */
@@ -2527,7 +2530,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
     </div>
     </div>
 
-    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(33px,3.6vw,40px);color:var(--green-dark);margin:46px 0 0">Four pathways for creating impact</h3>
+    <h3 style="font-family:var(--serif);font-style:italic;font-size:clamp(33px,3.6vw,40px);color:var(--green-dark);margin:46px 0 0;text-align:center">Four pathways for creating impact</h3>
     <div class="steps">
       <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Capital</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Extend our capital&rsquo;s impact</h4><p>By using approaches that can preserve, return or grow capital, we can redeploy resources and support more impact over time.</p></div>
       <div class="step" style="background:var(--white)"><div class="t" style="color:var(--sage)">Mangaroa Farms</div><h4 style="font-size:16.5px;font-weight:600;margin:0 0 8px">Support Mangaroa Farms</h4><p>A cornerstone initiative wholly owned by Biome Trust. Its activities contribute directly to our impact, and the capital invested forms a significant asset on our consolidated balance sheet.</p></div>
@@ -2727,17 +2730,28 @@ footer .nl-status.is-error { color: #f0c9b4; }
           <h3>Our Initiatives</h3>
           <a href="#mangaroa-title">Mangaroa Farms</a>
           <a href="#ma-earth">Ma Earth</a>
+          <a href="https://impact.biometrust.earth/">Impact</a>
         </div>
       </nav>
     </div>
     <div class="foot-bottom">
-      <p class="foot-addr">Biome Trust &middot; 52 Mangaroa Valley Road, Upper Hutt, WLG 5371</p>
+      <div class="foot-left">
+        <p class="foot-copy">&copy; <span id="foot-year">2026</span> Biome Trust. All rights reserved.</p>
+        <p class="foot-addr">Biome Trust &middot; 52 Mangaroa Valley Road, Upper Hutt, WLG 5371</p>
+      </div>
       <p class="foot-meta">Impact Report 2026 &middot; Year ended 31 March 2026</p>
     </div>
   </div>
 </footer>
 
 <script>
+// The footer copyright year rolls over on its own. The 2026 in the markup is
+// the fallback for anyone without JavaScript.
+(() => {
+  const el = document.getElementById('foot-year');
+  if (el) el.textContent = new Date().getFullYear();
+})();
+
 // Failsafe for the cover reveal. The animation holds opacity:0 until its turn
 // (fill-mode both); if it never runs — an extension blocking animations, a
 // browser that ignores the keyframes — the cover would stay invisible. Worth
