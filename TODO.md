@@ -53,6 +53,39 @@ Removed from the All Giftees grid. All three were FY27-only, so the FY26
 | Regenerative Earth | 2027 | regen | Preserving Biological Diversity and Indigenous Wisdom in Keystone Ecosystems | https://regenerativeearth.org/ |
 | Regenerosity | 2027 | regen | Resourcing Grassroots Leaders and Organizations Regenerating Our Planet | https://www.regenerosity.world/ |
 
+## Location badges (2026-10-28)
+55 of the 65 giftee cards now carry one. Each was read off the
+organisation's own site; the notable sources:
+
+- KNECT: 32 mentions of Buller, 7 of Westport, so West Coast
+- Kōanga Institute: Wairoa, so Hawke's Bay
+- Wild Waikawa: 43 mentions of Marlborough, 14 of Picton
+- Rites of Passage: 11 mentions of Golden Bay
+- Te Tauihu Environment Trust: Te Tauihu, with Motueka named five times
+- Ocean Vision Legal: "Queenstown, New Zealand" verbatim
+- Eat New Zealand: "Canterbury, Aotearoa" verbatim
+- Natural Leaders: Upper Hutt on their site, and Biome's own kaupapa map
+  already groups them under Hutt Valley
+- Takapūwāhia Marae: Takapūwāhia is in Porirua
+- Nationwide bodies take "Aotearoa", matching how Eco-Index and The Gift
+  Trust are badged: Bio Dynamic Association, Conservation Volunteers NZ,
+  NZ Native Forests Restoration Trust, Organics Aotearoa, Rewiring
+  Aotearoa, Te Tira Whakamātaki
+
+### Still unbadged, could not source (10)
+| Org | Why |
+|---|---|
+| Corals for Conservation | site names no country; Pacific context only |
+| Richmond Community Garden Trust | "Richmond" everywhere, never which one |
+| Future Whenua | no place on the site |
+| Happen Films | "Aotearoa New Zealand" only |
+| Regenerative Finance Foundation | regenerative.fi does not resolve |
+| Globaïa | "Made in Canada & Aotearoa", so not one place |
+| Aspen Institute NZ | no place on the site |
+| Common Unity | commonunityproject.org.nz returns 18 bytes |
+| Inspiring Stories | JS shell, no readable content |
+| Spacebase | JS shell, no readable content |
+
 ## Next — assets
 - [x] Cover photo — Mangaroa River aerial, the same shot as the Figma cover
 - [x] Cover logo — real horizontal white Biome Trust lockup, per the Figma cover
