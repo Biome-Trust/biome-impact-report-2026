@@ -41,20 +41,26 @@ All copy is now in from the Figma.
 - [x] +31% chip: 12px padding all round, inset 16px top and right
 - [x] Twice the air under a featured giftee; a fifth off the "All Giftees" foot
 - [ ] Still untouched at phone width: Mangaroa head, Ma Earth head, the kaupapa
-      map and its hover labels, the 68-card giftee grid, the endowment four-up
+      map and its hover labels, the 64-card giftee grid, the endowment four-up
 
-## Off the page, kept on file (2026-10-27, G's call)
-Removed from the All Giftees grid. All three were FY27-only, so the FY26
-"19 organisations" count is unchanged. Images are still in `img/gifts/`.
+## Off the page, kept on file (G's call)
+Removed from the All Giftees grid. Images are still in `img/gifts/`, so any of
+these can be put back with the row below.
+
+The first three went on 2026-10-27 and were FY27-only, so they did not touch the
+FY26 count. Regenerative Finance Foundation went on 2026-10-28: it is a global
+gift, and G wants a **"Global Gifts" tab** built later to hold it alongside the
+other three rather than mixing them into the year filters.
 
 | Org | Years | Themes | Line | Site |
 |---|---|---|---|---|
 | Earth Repair Fund | 2027 | conservation education finance | Educational Videos that Fund Land Restoration Projects | https://www.earthrepair.fund/ |
 | Regenerative Earth | 2027 | regen | Preserving Biological Diversity and Indigenous Wisdom in Keystone Ecosystems | https://regenerativeearth.org/ |
 | Regenerosity | 2027 | regen | Resourcing Grassroots Leaders and Organizations Regenerating Our Planet | https://www.regenerosity.world/ |
+| Regenerative Finance Foundation | 2025 | regen finance | Accelerating Regenerative Economies | https://www.regenerative.fi/ (does not resolve) |
 
 ## Location badges (2026-10-28)
-55 of the 65 giftee cards now carry one. Each was read off the
+54 of the 64 giftee cards now carry one. Each was read off the
 organisation's own site; the notable sources:
 
 - KNECT: 32 mentions of Buller, 7 of Westport, so West Coast
@@ -79,7 +85,6 @@ organisation's own site; the notable sources:
 | Richmond Community Garden Trust | "Richmond" everywhere, never which one |
 | Future Whenua | no place on the site |
 | Happen Films | "Aotearoa New Zealand" only |
-| Regenerative Finance Foundation | regenerative.fi does not resolve |
 | Globaïa | "Made in Canada & Aotearoa", so not one place |
 | Aspen Institute NZ | no place on the site |
 | Common Unity | commonunityproject.org.nz returns 18 bytes |
