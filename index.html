@@ -730,8 +730,9 @@ footer .nl-status.is-error { color: #f0c9b4; }
 @media (max-width: 820px) {
   .numcharts { grid-template-columns: 1fr; }
   /* once the two columns stack, the first bar chart sits straight under the
-     donut panel, so it needs air of its own on top of the 40px row gap */
-  .chartstack { margin-top: 36px; }
+     donut panel, so it needs air of its own on top of the 40px row gap.
+     112 + 40 puts 152px above the title, double what it was. */
+  .chartstack { margin-top: 112px; }
 }
 /* ---- Giving by numbers on a phone ---- */
 @media (max-width: 700px) {
