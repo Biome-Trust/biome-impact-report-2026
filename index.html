@@ -472,8 +472,8 @@ footer .nl-status.is-error { color: #f0c9b4; }
 }
 .nzmap .halo { fill: var(--tan); opacity: 0; transition: opacity var(--beat) var(--ease); }
 .nzmap .dot { fill: var(--tan); transition: r var(--beat) var(--ease), fill var(--beat) var(--ease); }
-.nzmap .pin:hover .halo, .nzmap .pin:focus-visible .halo, .nzmap .pin.is-auto .halo { opacity: .28; }
-.nzmap .pin:hover .dot, .nzmap .pin:focus-visible .dot, .nzmap .pin.is-auto .dot { fill: #fff; r: 6; }
+.nzmap .pin:hover .halo, .nzmap .pin:focus-visible .halo { opacity: .28; }
+.nzmap .pin:hover .dot, .nzmap .pin:focus-visible .dot { fill: #fff; r: 6; }
 /* leader line out to a label, as the printed map does */
 .map-tip {
   position: absolute; z-index: 4; pointer-events: none;
@@ -2398,7 +2398,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
     </div>
     <p class="chart-title" style="margin-top:46px">FY26 at Mangaroa</p>
     <div class="imgstats imgstats--4">
-      <div class="imgstat"><img src="img/mang-trees.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Restoring the land</p><div class="n">8,546</div><div class="l">native trees planted across 3.3 ha. One third by volunteers</div></div></div>
+      <div class="imgstat"><img src="img/mang-trees.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Restoring the land</p><div class="n">8,546</div><div class="l">native trees planted across 3.3 ha, one third by volunteers</div></div></div>
       <div class="imgstat"><img src="img/mang-predator.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Predator control</p><div class="n">242</div><div class="l">predators removed across 78 monitored traps, plus 95 deer and goats</div></div></div>
       <div class="imgstat"><img src="img/mang-kiwi.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">A first in a century</p><div class="n">1 Kiwi</div><div class="l">recorded in the Mangaroa catchment</div></div></div>
       <div class="imgstat"><img src="img/mang-food.jpg" alt=""><div class="imgstat-body"><p class="eyebrow">Growing healthy food</p><div class="n">7,012 m²</div><div class="l">of market garden &amp; orchard under cultivation, 48 families picked their own kai</div></div></div>
@@ -2838,8 +2838,8 @@ addEventListener('load', () => setTimeout(() => {
 (() => {
   const wrap = document.querySelector('.nzmap-wrap');
   if (!wrap) return;
-  // On a phone the map is a picture: no pre-selected pin, no hover, nothing to
-  // focus. The label needs room beside the map that a phone does not have.
+  // On a phone the map is a picture: no hover, nothing to focus. The label
+  // needs room beside the map that a phone does not have.
   if (window.matchMedia('(max-width: 700px)').matches) {
     for (const pin of wrap.querySelectorAll('.pin')) {
       pin.removeAttribute('tabindex');
@@ -2887,26 +2887,6 @@ addEventListener('load', () => setTimeout(() => {
   }
   wrap.addEventListener('mouseleave', hide);
 
-  // One pin reads as selected the first time the map comes into view, so the
-  // label is legible without a hover. The reader's own hover or focus takes
-  // over from it immediately.
-  const auto = wrap.querySelector('.pin[data-orgs*="UNDERGROUND"]');
-  if (auto && 'IntersectionObserver' in window) {
-    const clearAuto = () => auto.classList.remove('is-auto');
-    const io = new IntersectionObserver(entries => {
-      for (const e of entries) if (e.isIntersecting) {
-        auto.classList.add('is-auto');
-        show(auto);
-        io.disconnect();
-      }
-    }, { threshold: 0.4 });
-    io.observe(wrap);
-    wrap.addEventListener('mouseenter', clearAuto);
-    for (const pin of wrap.querySelectorAll('.pin')) {
-      pin.addEventListener('mouseenter', clearAuto);
-      pin.addEventListener('focus', clearAuto);
-    }
-  }
 })();
 
 // Gift filtering: search, theme and year, matching the gifts page. Filters only
