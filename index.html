@@ -724,7 +724,9 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .yearchart { margin-top: 12px; }
 /* frame 5: the purpose donut holds a narrow left column, the two bar charts
    stack beside it */
-.numcharts { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 44px); align-items: stretch; }
+/* the charts block sits under the number cards. This was an inline 26px,
+   which beat every rule below and left the first chart title crowded. */
+.numcharts { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 44px); align-items: stretch; margin-top: clamp(72px, 8vh, 104px); }
 /* the card runs the full height of the row, so it finishes level with the
    footnote under the charts; the donut centres in whatever height that is */
 .numcharts .panel { display: flex; flex-direction: column; }
@@ -1328,7 +1330,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
       </div>
     </div>
 
-    <div class="numcharts" style="margin-top:26px">
+    <div class="numcharts">
       <div class="panel" style="background:var(--cream)">
         <p class="kicker">Gift value by charitable purpose</p>
         <h3>Environment at the heart</h3>
