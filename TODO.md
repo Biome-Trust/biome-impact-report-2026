@@ -41,16 +41,19 @@ All copy is now in from the Figma.
 - [x] +31% chip: 12px padding all round, inset 16px top and right
 - [x] Twice the air under a featured giftee; a fifth off the "All Giftees" foot
 - [ ] Still untouched at phone width: Mangaroa head, Ma Earth head, the kaupapa
-      map and its hover labels, the 63-card giftee grid, the endowment four-up
+      map and its hover labels, the 61-card giftee grid, the endowment four-up
 
 ## Off the page, kept on file (G's call)
 Removed from the All Giftees grid. Images are still in `img/gifts/`, so any of
 these can be put back with the row below.
 
 The first three went on 2026-10-27 and were FY27-only, so they did not touch the
-FY26 count. Regenerative Finance Foundation went on 2026-10-28: it is a global
-gift, and G wants a **"Global Gifts" tab** built later to hold it alongside the
-other three rather than mixing them into the year filters.
+FY26 count. Regenerative Finance Foundation went on 2026-10-28 and Island Futures
+on 2026-10-29, both as international gifts. G wants a **"Global Gifts" tab**
+built later to hold all five rather than mixing them into the year filters.
+
+Island Futures carried a "West Coast" badge, so if it comes back the badge needs
+a rethink alongside the international framing.
 
 | Org | Years | Themes | Line | Site |
 |---|---|---|---|---|
@@ -58,6 +61,7 @@ other three rather than mixing them into the year filters.
 | Regenerative Earth | 2027 | regen | Preserving Biological Diversity and Indigenous Wisdom in Keystone Ecosystems | https://regenerativeearth.org/ |
 | Regenerosity | 2027 | regen | Resourcing Grassroots Leaders and Organizations Regenerating Our Planet | https://www.regenerosity.world/ |
 | Regenerative Finance Foundation | 2025 | regen finance | Accelerating Regenerative Economies | https://www.regenerative.fi/ (does not resolve) |
+| Island Futures | 2027 | conservation | Securing Islands as Bastions of Human Resilience. | https://www.islandfutures.earth/ | 
 
 ## Location badges, second pass (2026-10-29)
 Nine cards had no badge. Five now do, each read off the organisation's own site:
@@ -116,7 +120,7 @@ accurate, so say if either should surface on the merged card.
 Grid is now 63 cards. FY26 still counts 18, so the band lede is unchanged.
 
 ## Location badges (2026-10-28)
-53 of the 63 giftee cards now carry one. Each was read off the
+58 of the 61 giftee cards now carry one. Each was read off the
 organisation's own site; the notable sources:
 
 - KNECT: 32 mentions of Buller, 7 of Westport, so West Coast
