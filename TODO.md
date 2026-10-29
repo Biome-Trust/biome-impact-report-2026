@@ -72,18 +72,18 @@ Nine cards had no badge. Five now do, each read off the organisation's own site:
 
 **Four still bare, each for a different reason:**
 
-- **Common Unity** — the site only ever writes "Te Awakairangi ki Tai" and names The
-  ReMakery, Te Puni School and Epuni. No English city name, no street address
-  anywhere, contact page is a bare form. That is Lower Hutt, but only from
-  outside knowledge, not from the site. Awaiting G: "Lower Hutt", the te reo
-  name, or leave bare.
+- **Common Unity** — badged **Lower Hutt** on G's call. Note the source: the site
+  itself only ever writes "Te Awakairangi ki Tai" and names The ReMakery, Te Puni
+  School and Epuni, with no English city name or street address anywhere. The
+  Lower Hutt reading comes from G, not from the site.
 - **Future Whenua** — genuinely no base on the site. The only NZ place named is
   the FY27 summit venue (Mangaroa Farms, Upper Hutt), and the site says the
   summit deliberately moves around the country. Venue is not a base.
-- **Inspiring Stories** — **their website is down.** inspiringstories.org.nz now
+- **Inspiring Stories** — **their website is down.** inspiringstories.org.nz
   serves a cPanel "Default Web Site Page" with a server-misconfiguration notice.
-  That also means the card's "Website →" link is effectively dead. Worth telling
-  the client.
+  On G's call the card's "Website →" link has been removed, along with the whole
+  meta row since it had no badge either. Put it back if the site returns. Still
+  worth telling the client that their giftee's site is broken.
 - **SpaceBase** — spacebase.co sits behind Cloudflare bot verification. Returns
   403 to a plain fetch and an interstitial in a browser. Not worked around.
 
