@@ -59,6 +59,34 @@ other three rather than mixing them into the year filters.
 | Regenerosity | 2027 | regen | Resourcing Grassroots Leaders and Organizations Regenerating Our Planet | https://www.regenerosity.world/ |
 | Regenerative Finance Foundation | 2025 | regen finance | Accelerating Regenerative Economies | https://www.regenerative.fi/ (does not resolve) |
 
+## Location badges, second pass (2026-10-29)
+Nine cards had no badge. Five now do, each read off the organisation's own site:
+
+| Org | Badge | Evidence |
+|---|---|---|
+| Aspen Institute | Queenstown | Homepage: "Based in Queenstown". No region stated, so none used. |
+| Richmond Community Garden Trust | Christchurch | 235 River Road, Richmond + Eco-Hub at 46a Vogel St. Confirmed as the Christchurch Richmond (not Nelson) by Christchurch City Council funding, CCC Heritage Parks, LINZ red-zone leases, Ōtākaro/Avon projects, and "Canterbury's seventh" parkrun. |
+| Corals for Conservation | Fiji | "Corals for Conservation - Fiji"; staff listed as "Site Manager (Fiji)". No city anywhere on the site. |
+| Globaïa | Canada & Aotearoa | Footer on every page: "Made in Canada & Aotearoa". Team spans many countries; no single office stated. |
+| Happen Films | Upper Moutere | Privacy policy: "Our registered office is at 324 Wills Road, Upper Moutere, 7175." Caveat: that page is a filled-in template with other placeholders left unfilled, but the company number and address are specifics. |
+
+**Four still bare, each for a different reason:**
+
+- **Common Unity** — the site only ever writes "Te Awakairangi ki Tai" and names The
+  ReMakery, Te Puni School and Epuni. No English city name, no street address
+  anywhere, contact page is a bare form. That is Lower Hutt, but only from
+  outside knowledge, not from the site. Awaiting G: "Lower Hutt", the te reo
+  name, or leave bare.
+- **Future Whenua** — genuinely no base on the site. The only NZ place named is
+  the FY27 summit venue (Mangaroa Farms, Upper Hutt), and the site says the
+  summit deliberately moves around the country. Venue is not a base.
+- **Inspiring Stories** — **their website is down.** inspiringstories.org.nz now
+  serves a cPanel "Default Web Site Page" with a server-misconfiguration notice.
+  That also means the card's "Website →" link is effectively dead. Worth telling
+  the client.
+- **SpaceBase** — spacebase.co sits behind Cloudflare bot verification. Returns
+  403 to a plain fetch and an interstitial in a browser. Not worked around.
+
 ## Merged giftees (2026-10-29, G's call)
 The giving dashboard lists one recipient, "Every Body Is a Treasure / Natural
 Leaders", but the grid carried two cards. Merged into one.
