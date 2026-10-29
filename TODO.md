@@ -41,7 +41,7 @@ All copy is now in from the Figma.
 - [x] +31% chip: 12px padding all round, inset 16px top and right
 - [x] Twice the air under a featured giftee; a fifth off the "All Giftees" foot
 - [ ] Still untouched at phone width: Mangaroa head, Ma Earth head, the kaupapa
-      map and its hover labels, the 64-card giftee grid, the endowment four-up
+      map and its hover labels, the 63-card giftee grid, the endowment four-up
 
 ## Off the page, kept on file (G's call)
 Removed from the All Giftees grid. Images are still in `img/gifts/`, so any of
@@ -59,8 +59,36 @@ other three rather than mixing them into the year filters.
 | Regenerosity | 2027 | regen | Resourcing Grassroots Leaders and Organizations Regenerating Our Planet | https://www.regenerosity.world/ |
 | Regenerative Finance Foundation | 2025 | regen finance | Accelerating Regenerative Economies | https://www.regenerative.fi/ (does not resolve) |
 
+## Merged giftees (2026-10-29, G's call)
+The giving dashboard lists one recipient, "Every Body Is a Treasure / Natural
+Leaders", but the grid carried two cards. Merged into one.
+
+**Survivor:** `Every Body Is a Treasure (Natural Leaders)` — keeps
+`every-body-is-a-treasure.jpg`, "Wellbeing Rooted in Connection to Place",
+the Wellington badge and everybodyisatreasure.org. Its years
+(2027 2026 2025 2024) and themes (education community) already covered the
+removed card's, so neither attribute changed.
+
+**Removed card, kept here in case it is wanted back:**
+
+| Field | Value |
+|---|---|
+| Name | Natural Leaders |
+| Years | 2027 2025 |
+| Themes | community |
+| Line | Outdoor Leadership for Years 6-13+ |
+| Badge | Hutt Valley |
+| Site | https://naturalleaders.nz/ (resolves, 200) |
+| Image | `img/gifts/natural-leaders.jpg`, still on disk, now unused |
+
+Two things this loses: the naturalleaders.nz link, since a card shows only one
+website, and the "Outdoor Leadership for Years 6-13+" line. Both are live and
+accurate, so say if either should surface on the merged card.
+
+Grid is now 63 cards. FY26 still counts 18, so the band lede is unchanged.
+
 ## Location badges (2026-10-28)
-54 of the 64 giftee cards now carry one. Each was read off the
+53 of the 63 giftee cards now carry one. Each was read off the
 organisation's own site; the notable sources:
 
 - KNECT: 32 mentions of Buller, 7 of Westport, so West Coast
