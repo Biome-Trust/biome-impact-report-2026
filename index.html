@@ -1038,6 +1038,17 @@ footer .nl-status.is-error { color: #f0c9b4; }
   .logostrip--wide img { height: 38px; }
   .logostrip--wide img.tall { height: 58px; }
   .logostrip .eyebrow { margin-bottom: 48px; }
+  /* matching pool, one per row: the two horizontal lockups are sized by width
+     so Biome and Ma Earth read as one measure, the stacked marks come up to
+     sit with them, and Biome's tall emblem gets extra air beneath it */
+  .logostrip:not(.logostrip--wide) img,
+  .logostrip:not(.logostrip--wide) img.me { width: min(210px, 80%); height: auto; }
+  .logostrip:not(.logostrip--wide) .logostrip-row > a { width: 100%; justify-content: center; }
+  .logostrip:not(.logostrip--wide) .logostrip-row > a:first-child { margin-bottom: 16px; }
+  .logostrip:not(.logostrip--wide) img.tall { width: auto; height: 86px; }
+  .logostrip:not(.logostrip--wide) img.naia { height: 118px; }
+  /* the five partners, one per row, get 60% more air between them */
+  .logostrip--wide .logostrip-row { row-gap: 64px; }
 }
 
 .kaupapa-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 4vw, 70px); align-items: start; }
