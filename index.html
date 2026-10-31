@@ -386,10 +386,14 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .me-head-art { margin-right: calc(var(--gut) * -1); }
 /* the collage drops to the foot of the row so it finishes level with the copy */
 #ma-earth .me-head-art { align-self: end; }
-/* and stands 10% taller, growing upward into the space above it since the
-   foot is pinned. 848/618 is the file's own ratio; dividing it by 1.1 adds
-   the height without stretching, trimming ~25px off each feathered side */
-#ma-earth .me-head-art img { aspect-ratio: 1.2476; height: auto; object-fit: cover; }
+/* the volunteers collage sits its photos 7-11% in from each edge on a beige
+   ground, so a 6% feather softens that ground into the band and stops short
+   of the photographs */
+#ma-earth .me-head-art img { height: auto; --fade: 6%;
+  /* the file's lower half is pure white, which read as a pale box on the cream
+     band; multiply turns white into the band's own colour and leaves the
+     photographs all but untouched (cream is 98% white) */
+  mix-blend-mode: multiply; }
 .me-head-art img {
   display: block; width: 100%;
   /* feathered on all four edges so the collage dissolves into the band rather
@@ -425,20 +429,10 @@ footer .nl-status.is-error { color: #f0c9b4; }
 @media (max-width: 560px) { .logostrip img { height: 35px; } .logostrip img.me { height: 30px; } .logostrip img.tall { height: 55px; } .logostrip img.naia { height: 75px; } }
 .me-copy p + p { margin-top: 14px; }
 @media (max-width: 860px) { .me-head { grid-template-columns: 1fr; } .me-head-art { margin-right: 0; } }
-/* on a phone the Ma Earth collage runs off the right edge rather than feathering
-   into it: the horizontal mask fades in from the left only, and the art keeps
-   the negative gutter margin it gives up at this width elsewhere. Desktop is
-   untouched, still feathered on all four edges. */
+/* on a phone the Ma Earth collage opens the section, above the eyebrow and
+   logo, and sits inside the column feathered on all four edges as on desktop */
 @media (max-width: 860px) {
-  #ma-earth .me-head-art { margin-right: calc(var(--gut) * -1); }
-  #ma-earth .me-head-art img {
-    -webkit-mask-image:
-      linear-gradient(90deg, transparent 0, #000 var(--fade), #000 100%),
-      linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
-    mask-image:
-      linear-gradient(90deg, transparent 0, #000 var(--fade), #000 100%),
-      linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
-  }
+  #ma-earth .me-head-art { order: -1; align-self: auto; margin: 0 0 12px; }
 }
 .title-band .tb-lede {
   font-size: clamp(16px, 1.8vw, 20px); line-height: 1.55; color: #e4ece2;
@@ -2454,7 +2448,7 @@ footer .nl-status.is-error { color: #f0c9b4; }
           </div>
         </div>
       </div>
-      <div class="me-head-art"><img src="img/maearth-projects.jpg" alt="Projects funded through Ma Earth"></div>
+      <div class="me-head-art"><img src="img/maearth-volunteers.webp" alt="Volunteers fencing, gardening and planting a wetland edge"></div>
     </div>
 
 
