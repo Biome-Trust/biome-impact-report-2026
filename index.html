@@ -266,7 +266,10 @@ footer .nl-status.is-error { color: #f0c9b4; }
   color: #fff; text-decoration: none;
 }
 .scroll-cue--hero {
-  position: absolute; left: 50%; bottom: clamp(18px, 4vh, 40px); transform: translateX(-50%);
+  /* centred with auto margins, not translateX(-50%): the `rise` reveal animates
+     transform and its `both` fill would leave it at `none`, un-centring the cue */
+  position: absolute; left: 0; right: 0; bottom: clamp(18px, 4vh, 40px);
+  width: max-content; margin-inline: auto;
   z-index: 2;
 }
 /* in-flow version for the foot of a light section */
@@ -286,6 +289,8 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .scroll-cue span {
   font-size: 11px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase;
   opacity: .85;
+  /* letter-spacing trails the last letter; balance it so the word sits over the arrow */
+  padding-left: .26em;
 }
 .scroll-cue svg { display: block; opacity: .85; animation: cue 2.4s var(--ease) infinite; }
 @keyframes cue { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
@@ -1006,14 +1011,14 @@ footer .nl-status.is-error { color: #f0c9b4; }
 .logostrip--wide img.tall { height: 68px; }
 @media (max-width: 900px) { .logostrip--wide .logostrip-row { justify-content: space-around; } }
 @media (max-width: 560px) { .logostrip--wide img { height: 30px; } .logostrip--wide img.tall { height: 46px; } }
-/* both strips go two per row on a phone, every mark a size up on the old
-   wrapped layout. Ma Earth keeps its height: it is a wide horizontal lockup,
+/* both strips stack one mark per row on a phone, every mark a size up on the
+   old wrapped layout. Ma Earth keeps its height: it is a wide horizontal lockup,
    so it already reads largest of the set. Placed last so it beats the 560px
    sizes above. */
 @media (max-width: 700px) {
   .logostrip-row, .logostrip--wide .logostrip-row {
-    display: grid; grid-template-columns: 1fr 1fr; place-items: center;
-    gap: 40px 18px;
+    display: grid; grid-template-columns: 1fr; place-items: center;
+    gap: 40px;
   }
   .logostrip img { height: 44px; }
   .logostrip img.me, .logostrip--wide img.me { height: 30px; }
@@ -1022,8 +1027,6 @@ footer .nl-status.is-error { color: #f0c9b4; }
   .logostrip--wide img { height: 38px; }
   .logostrip--wide img.tall { height: 58px; }
   .logostrip .eyebrow { margin-bottom: 48px; }
-  /* five into two columns leaves the Gift Trust alone, so it takes the row */
-  .logostrip--wide .logostrip-row > a:last-child { grid-column: 1 / -1; }
 }
 
 .kaupapa-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 4vw, 70px); align-items: start; }
@@ -1239,6 +1242,8 @@ footer .nl-status.is-error { color: #f0c9b4; }
      at 44px, which puts "Backing partners" at about 330px, while an
      unbounded 80vw keeps growing past it on a larger phone */
   .title-band .tb-lede { max-width: min(80vw, 330px); }
+  /* the endowment heading is centred, so its lede follows it on a phone */
+  #endowment-title .tb-lede { text-align: center; margin-inline: auto; }
   /* the change-on-last-year chip: one padding all round, which also carries its
      left edge further in, since it is anchored to the card's right */
   .numcard .delta { padding: 12px; margin: 0; top: 16px; right: 16px; }
