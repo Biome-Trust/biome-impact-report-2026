@@ -1047,7 +1047,8 @@ footer .nl-status.is-error { color: #f0c9b4; }
   .logostrip:not(.logostrip--wide) img,
   .logostrip:not(.logostrip--wide) img.me { width: min(168px, 64%); height: auto; }
   .logostrip:not(.logostrip--wide) .logostrip-row > a { width: 100%; justify-content: center; }
-  .logostrip:not(.logostrip--wide) .logostrip-row > a:first-child { margin-bottom: 16px; }
+  /* Biome closes the list on a phone, with its tall emblem's extra air above it */
+  .logostrip:not(.logostrip--wide) .logostrip-row > a:first-child { order: 1; margin-top: 16px; }
   .logostrip:not(.logostrip--wide) img.tall { width: auto; height: 86px; }
   .logostrip:not(.logostrip--wide) img.naia { height: 118px; }
   /* the five partners, one per row, get 60% more air between them */
